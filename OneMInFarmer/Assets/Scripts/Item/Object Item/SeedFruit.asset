@@ -25,3 +25,4 @@ MonoBehaviour:
   - {fileID: -8709406779607625839, guid: c91296ee2af1d8e4ab38dc90b100e61b, type: 3}
   - {fileID: -8097741200915394387, guid: c91296ee2af1d8e4ab38dc90b100e61b, type: 3}
   countHarvest: 3
+  waterNeed: 3

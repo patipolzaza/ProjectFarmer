@@ -6,12 +6,19 @@ public class PlotManager : MonoBehaviour
 {
     [SerializeField] Plot[] plots;
 
+
+
     public void nextDay()
     {
-        foreach(Plot plot in plots)
+        foreach (Plot plot in plots)
         {
-            if(plot.isPlanted)
-            plot.Grow();
+            if (plot.isPlanted)
+            {
+                plot.Grow();
+                plot.Dring();
+            }
         }
     }
+
+
 }

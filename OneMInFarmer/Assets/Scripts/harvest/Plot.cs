@@ -7,15 +7,17 @@ public class Plot : MonoBehaviour
     public bool isPlanted = false;
     public SpriteRenderer plant;
 
+    [SerializeField] WateringPot pot;
+
     public Seed seed;
     int plantStage = 0;
     int countHarvest;
     int agePlant = 0;
+    int dehydration = 0;
+    bool isDry = true;
 
     private void OnMouseDown()
     {
-        Debug.Log("Click");
-
         if (isPlanted)
         {
             if (plantStage >= seed.plantStages.Length - 1)
@@ -27,11 +29,11 @@ public class Plot : MonoBehaviour
         {
             Plant();
         }
+        pot.WateringOnPlot(this);
     }
 
     void Harvest()
     {
-        Debug.Log("Harvest");
         if (countHarvest > 1)
         {
             countHarvest--;
@@ -50,39 +52,74 @@ public class Plot : MonoBehaviour
 
     void Plant()
     {
-        Debug.Log("Plant");
         isPlanted = true;
         plantStage = 0;
         agePlant = 0;
         countHarvest = seed.countHarvest;
+        dehydration = 0;
         UpdatePlant();
         plant.gameObject.SetActive(true);
     }
+
+    public void Watering()
+    {
+        isDry = false;
+        UpdatePlant();
+    }
+    public void Dring()
+    {
+        isDry = true;
+        UpdatePlant();
+    }
+
     public void Grow()
     {
-        Debug.Log("Grow");
-        agePlant++;
-        if (plantStage >= seed.plantStages.Length-1)
+        if (!isDry)
         {
-            if (agePlant >= 1 + seed.plantStages.Length + seed.countHarvest)
+            dehydration = 0;
+            agePlant++;
+            if (plantStage >= seed.plantStages.Length - 1)
+            {
+                if (agePlant >= 1 + seed.plantStages.Length + seed.countHarvest)
+                {
+                    Wither();
+                }
+                return;
+            }
+            plantStage++;
+            UpdatePlant();
+        }
+        else
+        {
+            dehydration++;
+
+            if (dehydration >= 2)
             {
                 Wither();
             }
-            return;
         }
-        plantStage++;
-        UpdatePlant();
+
+
     }
 
     void UpdatePlant()
     {
-        Debug.Log("UpdatePlant");
-        plant.sprite = seed.plantStages[plantStage];
+        if (isDry)
+        {
+            GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = new Color32(102, 102, 102, 255);
+        }
+        if (isPlanted)
+        {
+            plant.sprite = seed.plantStages[plantStage];
+        }
     }
 
     void Wither()
     {
-        Debug.Log("Wither");
         seed = null;
         isPlanted = false;
         plant.gameObject.SetActive(false);
