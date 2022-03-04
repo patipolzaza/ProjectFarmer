@@ -15,6 +15,7 @@ public class Plot : MonoBehaviour
     int agePlant = 0;
     int dehydration = 0;
     bool isDry = true;
+    bool isWither = false;
 
     private void OnMouseDown()
     {
@@ -23,6 +24,10 @@ public class Plot : MonoBehaviour
             if (plantStage >= seed.plantStages.Length - 1)
             {
                 Harvest();
+            }
+            else if (isWither)
+            {
+                Uproot();
             }
         }
         else
@@ -115,13 +120,28 @@ public class Plot : MonoBehaviour
         if (isPlanted)
         {
             plant.sprite = seed.plantStages[plantStage];
+            if (isWither)
+            {
+                plant.GetComponent<SpriteRenderer>().color = new Color32(188, 146, 0, 255);
+            }
+            else
+            {
+                plant.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+            }
         }
     }
 
     void Wither()
     {
+        isWither = true;
+        UpdatePlant();
+    }
+
+    void Uproot()
+    {
         seed = null;
         isPlanted = false;
+        isWither = false;
         plant.gameObject.SetActive(false);
         plantStage = 0;
     }
