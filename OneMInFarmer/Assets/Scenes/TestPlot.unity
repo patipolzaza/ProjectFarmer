@@ -3437,7 +3437,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.1722358
+  orthographic size: 1.3740171
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4339,6 +4339,30 @@ PrefabInstance:
     - target: {fileID: 2462687588505583701, guid: 5cda5f61ce5dc7a4c8baceb00640c76d, type: 3}
       propertyPath: m_Name
       value: Plot
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751305652198048849, guid: 5cda5f61ce5dc7a4c8baceb00640c76d, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751305652198048849, guid: 5cda5f61ce5dc7a4c8baceb00640c76d, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751305652198048849, guid: 5cda5f61ce5dc7a4c8baceb00640c76d, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3515325481904339622, guid: 5cda5f61ce5dc7a4c8baceb00640c76d, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3515325481904339622, guid: 5cda5f61ce5dc7a4c8baceb00640c76d, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3515325481904339622, guid: 5cda5f61ce5dc7a4c8baceb00640c76d, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6105938317978640753, guid: 5cda5f61ce5dc7a4c8baceb00640c76d, type: 3}
       propertyPath: pot
