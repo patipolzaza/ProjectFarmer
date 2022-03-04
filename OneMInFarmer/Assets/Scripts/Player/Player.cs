@@ -5,11 +5,16 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class Player : MonoBehaviour
 {
-    public float moveSpeed { get; private set; } = 250;
+    public float moveSpeed { get; private set; } = 1.75f;
     private Vector2 moveInput;
 
+    [SerializeField] private Transform interactableDetector;
+    [SerializeField] private float interactableDetectRange;
+    [SerializeField] private LayerMask interactableLayerMask;
+
     public Item inHandItem { get; private set; }
-    public Item targetItem { get; private set; }
+    public Interactable targetInteractable { get; private set; }
+    private bool isDetectInteractable = false;
 
     public float facingDirection { get; private set; }
 
@@ -40,9 +45,14 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        isDetectInteractable = CheckInteractableInRange();
         CheckMoveInput();
-
         Move();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Interact();
+        }
     }
 
     private void FixedUpdate()
@@ -72,8 +82,8 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        float velocityX = moveInput.x * moveSpeed * Time.deltaTime;
-        float velocityY = moveInput.y * moveSpeed * Time.deltaTime;
+        float velocityX = moveInput.x * moveSpeed;
+        float velocityY = moveInput.y * moveSpeed;
 
         velocityWorkspace.Set(velocityX, velocityY);
 
@@ -88,40 +98,40 @@ public class Player : MonoBehaviour
 
     private void Interact()
     {
-        if (inHandItem)
+        if (targetInteractable)
         {
-
-        }
-        else if (targetItem)
-        {
-            //TODO: 
+            targetInteractable.Interact();
         }
     }
 
-    private void PickupItem()
+    private bool CheckInteractableInRange()
     {
-        if (targetItem)
+        Collider2D hit = Physics2D.OverlapCircle(interactableDetector.position, interactableDetectRange, interactableLayerMask);
+        if (hit)
         {
-            if (!inHandItem)
+            Interactable interactable = hit.GetComponent<Interactable>();
+            if (targetInteractable && interactable != targetInteractable)
             {
-                //GameObject targetObject;
+                targetInteractable.HideObjectHighlight();
             }
-            else
-            {
-                DropItem();
-            }
-        }
-    }
 
-    private void DropItem()
-    {
-        if (inHandItem)
-        {
-
+            interactable.ShowObjectHighlight();
+            targetInteractable = interactable;
+            return true;
         }
         else
         {
-            PickupItem();
+            if (targetInteractable)
+            {
+                targetInteractable.HideObjectHighlight();
+            }
+            return false;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(interactableDetector.position, interactableDetectRange);
     }
 }
