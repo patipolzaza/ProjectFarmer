@@ -7,7 +7,7 @@ using UnityEditor;
 
 public class Item: MonoBehaviour
 {
-    
+    public ItemData ItemData;
 
 
 }
