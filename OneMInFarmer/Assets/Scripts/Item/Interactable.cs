@@ -14,7 +14,7 @@ public class Interactable : MonoBehaviour
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
-        sr.color = defaultColor;
+        defaultColor = sr.color;
     }
 
     public void Interact()
