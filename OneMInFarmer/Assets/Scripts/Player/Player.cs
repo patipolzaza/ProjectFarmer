@@ -12,9 +12,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float interactableDetectRange;
     [SerializeField] private LayerMask interactableLayerMask;
 
-    public Item inHandItem { get; private set; }
+    public Item holdingItem { get; private set; }
     public Interactable targetInteractable { get; private set; }
     private bool isDetectInteractable = false;
+
+    [SerializeField] private Transform itemHolderTransform;
 
     public float facingDirection { get; private set; }
 
@@ -49,15 +51,35 @@ public class Player : MonoBehaviour
         CheckMoveInput();
         Move();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.J))
         {
             Interact();
+        }
+        else if (Input.GetKeyDown(KeyCode.K))
+        {
+            DropItem();
         }
     }
 
     private void FixedUpdate()
     {
 
+    }
+
+    public void SetHoldingItem(Item item)
+    {
+        holdingItem = item;
+        Transform itemTransform = item.transform;
+        if (item)
+        {
+            itemTransform.SetParent(itemHolderTransform);
+            itemTransform.position = Vector2.zero;
+        }
+        else
+        {
+            itemTransform.SetParent(null);
+            itemTransform.position = transform.position;
+        }
     }
 
     private void CheckMoveInput()
@@ -98,12 +120,19 @@ public class Player : MonoBehaviour
 
     private void Interact()
     {
-        if (targetInteractable)
+        if (isDetectInteractable && targetInteractable)
         {
-            targetInteractable.Interact();
+            targetInteractable.Interact(this);
         }
     }
 
+    private void DropItem()
+    {
+        if (holdingItem)
+        {
+            holdingItem.Drop(this);
+        }
+    }
     private bool CheckInteractableInRange()
     {
         Collider2D hit = Physics2D.OverlapCircle(interactableDetector.position, interactableDetectRange, interactableLayerMask);
