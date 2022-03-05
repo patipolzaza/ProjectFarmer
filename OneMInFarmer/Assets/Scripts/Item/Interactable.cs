@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
+    public bool isInteractable { get; private set; }
     [SerializeField] protected UnityEvent<Player> interactEvent;
     protected SpriteRenderer sr;
 
@@ -15,6 +16,7 @@ public class Interactable : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         defaultColor = sr.color;
+        isInteractable = true;
     }
 
     protected virtual void Start()
@@ -22,14 +24,25 @@ public class Interactable : MonoBehaviour
 
     }
 
+    public void SetInteractable(bool isInteractable)
+    {
+        this.isInteractable = isInteractable;
+    }
+
     public virtual void Interact(Player interactor)
     {
-        interactEvent?.Invoke(interactor);
+        if (isInteractable)
+        {
+            interactEvent?.Invoke(interactor);
+        }
     }
 
     public virtual void ShowObjectHighlight()
     {
-        sr.color = highlightColor;
+        if (isInteractable)
+        {
+            sr.color = highlightColor;
+        }
     }
 
     public virtual void HideObjectHighlight()
