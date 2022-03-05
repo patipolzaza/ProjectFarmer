@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     private bool isDetectInteractable = false;
 
     [SerializeField] private Transform itemHolderTransform;
+    [SerializeField] private Transform itemDropTransform;
 
     public float facingDirection { get; private set; }
 
@@ -68,17 +69,34 @@ public class Player : MonoBehaviour
 
     public void SetHoldingItem(Item item)
     {
-        holdingItem = item;
-        Transform itemTransform = item.transform;
+        Transform itemTransform;
+        Vector2 newPosition = new Vector2();
+
         if (item)
         {
+            if (holdingItem)
+            {
+                holdingItem.Drop(this);
+            }
+
+            item.SetInteractable(false);
+            itemTransform = item.transform;
+            newPosition.Set(itemHolderTransform.position.x, itemHolderTransform.position.y + itemTransform.localScale.y / 2);
             itemTransform.SetParent(itemHolderTransform);
-            itemTransform.position = Vector2.zero;
+            itemTransform.position = newPosition;
+            holdingItem = item;
         }
         else
         {
-            itemTransform.SetParent(null);
-            itemTransform.position = transform.position;
+            if (holdingItem)
+            {
+                itemTransform = holdingItem.transform;
+                newPosition.Set(itemDropTransform.position.x, itemDropTransform.position.y + itemTransform.localScale.y / 2);
+                holdingItem.SetInteractable(true);
+                itemTransform.SetParent(null);
+                itemTransform.position = newPosition;
+                holdingItem = null;
+            }
         }
     }
 
@@ -133,6 +151,7 @@ public class Player : MonoBehaviour
             holdingItem.Drop(this);
         }
     }
+
     private bool CheckInteractableInRange()
     {
         Collider2D hit = Physics2D.OverlapCircle(interactableDetector.position, interactableDetectRange, interactableLayerMask);
