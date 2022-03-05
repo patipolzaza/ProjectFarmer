@@ -23,7 +23,7 @@ public class Plot : MonoBehaviour
         {
             if (plantStage >= seed.plantStages.Length - 1)
             {
-                Harvest();
+                Harvest();//return Harvest();
             }
             else if (isWither)
             {
@@ -32,7 +32,7 @@ public class Plot : MonoBehaviour
         }
         else
         {
-            Plant();
+            Plant();//Plant(seedItem);
         }
         pot.WateringOnPlot(this);
     }
@@ -55,6 +55,25 @@ public class Plot : MonoBehaviour
         }
     }
 
+    /*Item Harvest()
+    {
+        Item product = seed.product;
+        if (countHarvest > 1)
+        {
+            countHarvest--;
+            plantStage--;
+            UpdatePlant();
+            return product;
+        }
+        else
+        {
+            isPlanted = false;
+            seed = null;
+            plant.gameObject.SetActive(false);
+            return product;
+        }
+    }*/
+
     void Plant()
     {
         isPlanted = true;
@@ -65,6 +84,20 @@ public class Plot : MonoBehaviour
         UpdatePlant();
         plant.gameObject.SetActive(true);
     }
+    /*void Plant(Item seedItem)
+    {
+        if (this.seed == null)
+        {
+            this.seed = (Seed)seedItem.ItemData;
+            isPlanted = true;
+            plantStage = 0;
+            agePlant = 0;
+            countHarvest = seed.countHarvest;
+            dehydration = 0;
+            UpdatePlant();
+            plant.gameObject.SetActive(true);
+        }
+    }*/
 
     public void Watering()
     {
