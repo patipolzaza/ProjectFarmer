@@ -5,29 +5,34 @@ using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
-    [SerializeField] private UnityEvent<Player> interactEvent;
-    private SpriteRenderer sr;
+    [SerializeField] protected UnityEvent<Player> interactEvent;
+    protected SpriteRenderer sr;
 
-    private Color defaultColor;
-    [SerializeField] private Color highlightColor;
+    protected Color defaultColor;
+    [SerializeField] protected Color highlightColor;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         defaultColor = sr.color;
     }
 
-    public void Interact(Player interactor)
+    protected virtual void Start()
+    {
+
+    }
+
+    public virtual void Interact(Player interactor)
     {
         interactEvent?.Invoke(interactor);
     }
 
-    public void ShowObjectHighlight()
+    public virtual void ShowObjectHighlight()
     {
         sr.color = highlightColor;
     }
 
-    public void HideObjectHighlight()
+    public virtual void HideObjectHighlight()
     {
         sr.color = defaultColor;
     }

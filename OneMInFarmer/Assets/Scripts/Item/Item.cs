@@ -5,9 +5,16 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public class Item : MonoBehaviour
+public class Item : Interactable
 {
     public ItemData ItemData;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        interactEvent.AddListener(PickUp);
+    }
 
     public void PickUp(Player player)
     {
@@ -18,4 +25,5 @@ public class Item : MonoBehaviour
     {
         player.SetHoldingItem(null);
     }
+
 }
