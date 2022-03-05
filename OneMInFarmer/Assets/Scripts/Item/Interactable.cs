@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
-    [SerializeField] private UnityEvent interactEvent;
+    [SerializeField] private UnityEvent<Player> interactEvent;
     private SpriteRenderer sr;
 
     private Color defaultColor;
@@ -17,9 +17,9 @@ public class Interactable : MonoBehaviour
         defaultColor = sr.color;
     }
 
-    public void Interact()
+    public void Interact(Player interactor)
     {
-        interactEvent?.Invoke();
+        interactEvent?.Invoke(interactor);
     }
 
     public void ShowObjectHighlight()
