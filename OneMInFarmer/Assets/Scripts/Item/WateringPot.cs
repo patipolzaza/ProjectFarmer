@@ -11,6 +11,14 @@ public class WateringPot : Item
     float RefillPerSeconds = 4;
     public bool isRefill = false;
 
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        interactEvent.AddListener(PickUp);
+    }
+
     public void WateringOnPlot(Plot plot)
     {
         if (plot.seed != null)
