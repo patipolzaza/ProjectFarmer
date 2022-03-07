@@ -12,4 +12,5 @@ public class Seed : ItemData
     [Min(1)]
     public int waterNeed;
     public Item product;
+
 }

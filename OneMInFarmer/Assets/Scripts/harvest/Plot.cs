@@ -83,6 +83,7 @@ public class Plot : Interactable
         if (this.seed == null)
         {
             this.seed = (Seed)seedItem.ItemData;
+            seedItem.UseItemStacks(1);
             isPlanted = true;
             plantStage = 0;
             agePlant = 0;
