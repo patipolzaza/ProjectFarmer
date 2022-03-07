@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float interactableDetectRange;
     [SerializeField] private LayerMask interactableLayerMask;
 
-    public Item holdingItem { get; private set; }
+    public PickableObject holdingObject { get; private set; }
     public Interactable targetInteractable { get; private set; }
     private bool isDetectInteractable = false;
 
@@ -54,7 +54,19 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.J))
         {
-            Interact();
+            if (targetInteractable)
+            {
+                if (holdingObject is Item)
+                {
+                    if (holdingObject is AnimalFood && targetInteractable is Animal)
+                    {
+                        UseItem();
+                        return;
+                    }
+                }
+
+                Interact();
+            }
         }
         else if (Input.GetKeyDown(KeyCode.K))
         {
@@ -67,7 +79,7 @@ public class Player : MonoBehaviour
 
     }
 
-    public void SetHoldingItem(Item item)
+    public void SetHoldingItem(PickableObject item)
     {
         Transform itemTransform;
         Collider2D itemCollider;
@@ -75,9 +87,9 @@ public class Player : MonoBehaviour
 
         if (item)
         {
-            if (holdingItem)
+            if (holdingObject)
             {
-                holdingItem.Drop(this);
+                holdingObject.Drop(this);
             }
 
             item.SetInteractable(false);
@@ -85,24 +97,24 @@ public class Player : MonoBehaviour
             itemTransform = item.transform;
             itemCollider = item.objectCollider;
 
-            newPosition.Set(itemHolderTransform.position.x, itemHolderTransform.position.y + itemCollider.bounds.size.y / 2);
+            newPosition.Set(0, itemCollider.bounds.extents.y - itemCollider.offset.y);
             itemTransform.SetParent(itemHolderTransform);
-            itemTransform.position = newPosition;
-            holdingItem = item;
+            itemTransform.localPosition = newPosition;
+            holdingObject = item;
         }
         else
         {
-            if (holdingItem)
+            if (holdingObject)
             {
-                itemTransform = holdingItem.transform;
-                itemCollider = holdingItem.objectCollider;
+                itemTransform = holdingObject.transform;
+                itemCollider = holdingObject.objectCollider;
 
-                newPosition.Set(itemDropTransform.position.x, itemDropTransform.position.y + itemCollider.bounds.size.y / 2);
-                holdingItem.SetInteractable(true);
-                holdingItem.HideObjectHighlight();
+                newPosition.Set(itemDropTransform.position.x, itemDropTransform.position.y + itemCollider.bounds.extents.y);
+                holdingObject.SetInteractable(true);
+                holdingObject.HideObjectHighlight();
                 itemTransform.SetParent(null);
                 itemTransform.position = newPosition;
-                holdingItem = null;
+                holdingObject = null;
             }
         }
     }
@@ -125,6 +137,15 @@ public class Player : MonoBehaviour
         }
 
         moveInput.Set(inputX, inputY);
+    }
+
+    public void UseItem()
+    {
+        if (holdingObject is Item)
+        {
+            Item useableItem = holdingObject as Item;
+            useableItem.Use(targetInteractable);
+        }
     }
 
     private void Move()
@@ -153,9 +174,9 @@ public class Player : MonoBehaviour
 
     private void DropItem()
     {
-        if (holdingItem)
+        if (holdingObject)
         {
-            holdingItem.Drop(this);
+            holdingObject.Drop(this);
         }
     }
 
@@ -167,13 +188,14 @@ public class Player : MonoBehaviour
             foreach (var hit in hits)
             {
                 Interactable interactable = hit.GetComponent<Interactable>();
+
                 if (interactable && interactable.isInteractable)
                 {
                     if (targetInteractable)
                     {
                         float distanceBetweenOldTarget = Vector2.Distance(transform.position, targetInteractable.objectCollider.bounds.center);
                         float distanceBetweenNewTarget = Vector2.Distance(transform.position, interactable.objectCollider.bounds.center);
-                        
+
                         if (distanceBetweenNewTarget < distanceBetweenOldTarget)
                         {
                             if (interactable != targetInteractable)
