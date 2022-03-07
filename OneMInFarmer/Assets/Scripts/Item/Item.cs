@@ -7,11 +7,13 @@ using TMPro;
 using UnityEditor;
 #endif
 
-public class Item : Interactable
+public class Item : PickableObject
 {
     public ItemData ItemData;
     public TextMeshProUGUI DisplayStacks;
     public int CurrentItemStacks = 1 ;
+    public bool isUseable;
+    public bool isSellable;
 
     private void Update()
     {
@@ -34,10 +36,9 @@ public class Item : Interactable
     }
 
     protected override void Awake()
+    public virtual void Use(Interactable targetToUse)
     {
-        base.Awake();
 
-        interactEvent.AddListener(PickUp);
     }
 
     public void UseItemStacks(int num)
@@ -46,16 +47,6 @@ public class Item : Interactable
         {
             CurrentItemStacks -= num;
         }
-    }
-
-    public void PickUp(Player player)
-    {
-        player.SetHoldingItem(this);
-    }
-
-    public void Drop(Player player)
-    {
-        player.SetHoldingItem(null);
     }
 
 }
