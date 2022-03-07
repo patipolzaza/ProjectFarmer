@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Plot : MonoBehaviour
+public class Plot : Interactable
 {
     public bool isPlanted = false;
     public SpriteRenderer plant;
 
-    [SerializeField] WateringPot pot;
+    [SerializeField] Sprite SpriteDry;
+    [SerializeField] Sprite SpriteWet;
 
     public Seed seed;
     int plantStage = 0;
@@ -17,37 +18,57 @@ public class Plot : MonoBehaviour
     bool isDry = true;
     bool isWither = false;
 
-    private void OnMouseDown()
+    protected override void Awake()
+    {
+        base.Awake();
+
+        interactEvent.AddListener(PlayerInteract);
+    }
+
+    public void PlayerInteract(Player player)
     {
         if (isPlanted)
         {
+
             if (plantStage >= seed.plantStages.Length - 1)
             {
-                Harvest();//return Harvest();
+                Harvest(player);//return Harvest();
             }
             else if (isWither)
             {
                 Uproot();
             }
+            else if (player.holdingItem is WateringPot)
+            {
+                Debug.Log("U have WateringPot");
+                player.holdingItem.GetComponent<WateringPot>().WateringOnPlot(this);
+            }
         }
         else
         {
-            Plant();//Plant(seedItem);
+            if (player.holdingItem.ItemData is Seed)
+            {
+                Debug.Log("U have Seed");
+                Plant(player.holdingItem);
+            }
         }
-        pot.WateringOnPlot(this);
+
+
     }
 
-    void Harvest()
+    void Harvest(Player player)
     {
         if (countHarvest > 1)
         {
             countHarvest--;
             plantStage--;
             UpdatePlant();
+            player.SetHoldingItem(Instantiate(seed.product, new Vector3(0, 0, 0), Quaternion.identity));
             return;
         }
         else
         {
+            player.SetHoldingItem(Instantiate(seed.product, new Vector3(0, 0, 0), Quaternion.identity));
             isPlanted = false;
             seed = null;
             plant.gameObject.SetActive(false);
@@ -55,37 +76,10 @@ public class Plot : MonoBehaviour
         }
     }
 
-    /*Item Harvest()
-    {
-        Item product = seed.product;
-        if (countHarvest > 1)
-        {
-            countHarvest--;
-            plantStage--;
-            UpdatePlant();
-            return product;
-        }
-        else
-        {
-            isPlanted = false;
-            seed = null;
-            plant.gameObject.SetActive(false);
-            return product;
-        }
-    }*/
 
-    void Plant()
+    void Plant(Item seedItem)
     {
-        isPlanted = true;
-        plantStage = 0;
-        agePlant = 0;
-        countHarvest = seed.countHarvest;
-        dehydration = 0;
-        UpdatePlant();
-        plant.gameObject.SetActive(true);
-    }
-    /*void Plant(Item seedItem)
-    {
+        Debug.Log("Plant");
         if (this.seed == null)
         {
             this.seed = (Seed)seedItem.ItemData;
@@ -97,7 +91,7 @@ public class Plot : MonoBehaviour
             UpdatePlant();
             plant.gameObject.SetActive(true);
         }
-    }*/
+    }
 
     public void Watering()
     {
@@ -144,11 +138,12 @@ public class Plot : MonoBehaviour
     {
         if (isDry)
         {
-            GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+            GetComponent<SpriteRenderer>().sprite = SpriteDry;
         }
         else
         {
-            GetComponent<SpriteRenderer>().color = new Color32(102, 102, 102, 255);
+            Debug.Log("Update not Dry");
+            GetComponent<SpriteRenderer>().sprite = SpriteWet;
         }
         if (isPlanted)
         {
