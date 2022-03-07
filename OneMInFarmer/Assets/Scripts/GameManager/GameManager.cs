@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
     public int dayPlayed { get; private set; }
     public float defaultTimePerDay { get; private set; } = 15;
     public float timeForNextDay { get; private set; }
@@ -12,6 +14,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         timeForNextDay = defaultTimePerDay;
     }
 
