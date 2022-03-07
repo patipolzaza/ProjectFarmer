@@ -38,18 +38,19 @@ public class Plot : Interactable
             {
                 Uproot();
             }
-            else if (player.holdingItem is WateringPot)
+            else if (player.holdingObject is WateringPot)
             {
                 Debug.Log("U have WateringPot");
-                player.holdingItem.GetComponent<WateringPot>().WateringOnPlot(this);
+                player.holdingObject.GetComponent<WateringPot>().WateringOnPlot(this);
             }
         }
         else
         {
-            if (player.holdingItem.ItemData is Seed)
+            Item holdingItem = player.holdingObject as Item;
+            if (holdingItem.ItemData is Seed)
             {
                 Debug.Log("U have Seed");
-                Plant(player.holdingItem);
+                Plant(holdingItem);
             }
         }
 
