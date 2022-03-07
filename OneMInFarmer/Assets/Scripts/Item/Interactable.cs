@@ -5,8 +5,9 @@ using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
-    public bool isInteractable { get; private set; }
+    public bool isInteractable { get; protected set; }
     [SerializeField] protected UnityEvent<Player> interactEvent;
+    [SerializeField] protected GameObject interactableObject;
     public Collider2D objectCollider { get; protected set; }
     protected SpriteRenderer sr;
 
@@ -15,7 +16,7 @@ public class Interactable : MonoBehaviour
 
     protected virtual void Awake()
     {
-        sr = GetComponent<SpriteRenderer>();
+        sr = interactableObject.GetComponent<SpriteRenderer>();
         objectCollider = GetComponent<Collider2D>();
 
         defaultColor = sr.color;
