@@ -7,6 +7,7 @@ public class Interactable : MonoBehaviour
 {
     public bool isInteractable { get; private set; }
     [SerializeField] protected UnityEvent<Player> interactEvent;
+    public Collider2D objectCollider { get; protected set; }
     protected SpriteRenderer sr;
 
     protected Color defaultColor;
@@ -15,6 +16,8 @@ public class Interactable : MonoBehaviour
     protected virtual void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
+        objectCollider = GetComponent<Collider2D>();
+
         defaultColor = sr.color;
         isInteractable = true;
     }
@@ -27,6 +30,7 @@ public class Interactable : MonoBehaviour
     public void SetInteractable(bool isInteractable)
     {
         this.isInteractable = isInteractable;
+        //objectCollider.enabled = isInteractable;
     }
 
     public virtual void Interact(Player interactor)
@@ -42,6 +46,10 @@ public class Interactable : MonoBehaviour
         if (isInteractable)
         {
             sr.color = highlightColor;
+        }
+        else
+        {
+            sr.color = defaultColor;
         }
     }
 

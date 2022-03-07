@@ -70,6 +70,7 @@ public class Player : MonoBehaviour
     public void SetHoldingItem(Item item)
     {
         Transform itemTransform;
+        Collider2D itemCollider;
         Vector2 newPosition = new Vector2();
 
         if (item)
@@ -80,8 +81,11 @@ public class Player : MonoBehaviour
             }
 
             item.SetInteractable(false);
+            item.HideObjectHighlight();
             itemTransform = item.transform;
-            newPosition.Set(itemHolderTransform.position.x, itemHolderTransform.position.y + itemTransform.localScale.y / 2);
+            itemCollider = item.objectCollider;
+
+            newPosition.Set(itemHolderTransform.position.x, itemHolderTransform.position.y + itemCollider.bounds.size.y / 2);
             itemTransform.SetParent(itemHolderTransform);
             itemTransform.position = newPosition;
             holdingItem = item;
@@ -91,8 +95,11 @@ public class Player : MonoBehaviour
             if (holdingItem)
             {
                 itemTransform = holdingItem.transform;
-                newPosition.Set(itemDropTransform.position.x, itemDropTransform.position.y + itemTransform.localScale.y / 2);
+                itemCollider = holdingItem.objectCollider;
+
+                newPosition.Set(itemDropTransform.position.x, itemDropTransform.position.y + itemCollider.bounds.size.y / 2);
                 holdingItem.SetInteractable(true);
+                holdingItem.HideObjectHighlight();
                 itemTransform.SetParent(null);
                 itemTransform.position = newPosition;
                 holdingItem = null;
@@ -154,27 +161,36 @@ public class Player : MonoBehaviour
 
     private bool CheckInteractableInRange()
     {
-        Collider2D hit = Physics2D.OverlapCircle(interactableDetector.position, interactableDetectRange, interactableLayerMask);
-        if (hit)
+        Collider2D[] hits = Physics2D.OverlapCircleAll(interactableDetector.position, interactableDetectRange, interactableLayerMask);
+
+        if (hits.Length > 0)
         {
-            Interactable interactable = hit.GetComponent<Interactable>();
-            if (targetInteractable && interactable != targetInteractable)
+            foreach (var hit in hits)
             {
-                targetInteractable.HideObjectHighlight();
+                Interactable interactable = hit.GetComponent<Interactable>();
+                if (interactable && interactable.isInteractable)
+                {
+                    if (targetInteractable && interactable != targetInteractable)
+                    {
+                        targetInteractable.HideObjectHighlight();
+                    }
+
+                    interactable.ShowObjectHighlight();
+                    targetInteractable = interactable;
+                    return true;
+                }
             }
 
-            interactable.ShowObjectHighlight();
-            targetInteractable = interactable;
-            return true;
+
         }
-        else
+
+        if (targetInteractable)
         {
-            if (targetInteractable)
-            {
-                targetInteractable.HideObjectHighlight();
-            }
-            return false;
+            targetInteractable.HideObjectHighlight();
+            targetInteractable = null;
         }
+
+        return false;
     }
 
     private void OnDrawGizmos()
