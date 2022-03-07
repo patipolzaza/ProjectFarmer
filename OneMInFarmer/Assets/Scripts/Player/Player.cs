@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class Player : MonoBehaviour
 {
-    public float moveSpeed { get; private set; } = 1.75f;
+    [SerializeField] private float moveSpeed = 800;
     private Vector2 moveInput;
 
     [SerializeField] private Transform interactableDetector;
@@ -129,8 +129,8 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        float velocityX = moveInput.x * moveSpeed;
-        float velocityY = moveInput.y * moveSpeed;
+        float velocityX = moveInput.x * moveSpeed * Time.deltaTime;
+        float velocityY = moveInput.y * moveSpeed * Time.deltaTime;
 
         velocityWorkspace.Set(velocityX, velocityY);
 
@@ -162,7 +162,6 @@ public class Player : MonoBehaviour
     private bool CheckInteractableInRange()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(interactableDetector.position, interactableDetectRange, interactableLayerMask);
-
         if (hits.Length > 0)
         {
             foreach (var hit in hits)
@@ -170,18 +169,33 @@ public class Player : MonoBehaviour
                 Interactable interactable = hit.GetComponent<Interactable>();
                 if (interactable && interactable.isInteractable)
                 {
-                    if (targetInteractable && interactable != targetInteractable)
+                    if (targetInteractable)
                     {
-                        targetInteractable.HideObjectHighlight();
-                    }
+                        float distanceBetweenOldTarget = Vector2.Distance(transform.position, targetInteractable.objectCollider.bounds.center);
+                        float distanceBetweenNewTarget = Vector2.Distance(transform.position, interactable.objectCollider.bounds.center);
+                        
+                        if (distanceBetweenNewTarget < distanceBetweenOldTarget)
+                        {
+                            if (interactable != targetInteractable)
+                            {
+                                targetInteractable.HideObjectHighlight();
+                            }
 
-                    interactable.ShowObjectHighlight();
-                    targetInteractable = interactable;
-                    return true;
+                            targetInteractable = interactable;
+                        }
+                    }
+                    else
+                    {
+                        targetInteractable = interactable;
+                    }
                 }
             }
 
-
+            if (targetInteractable)
+            {
+                targetInteractable.ShowObjectHighlight();
+                return true;
+            }
         }
 
         if (targetInteractable)
