@@ -49,7 +49,6 @@ public class Animal : PickableObject
 
         showTextCoroutine = StartCoroutine(ShowText("Yummy :)"));
         isHungry = false;
-        SetInteractable(false);
         return true;
     }
 
@@ -62,7 +61,6 @@ public class Animal : PickableObject
 
     public void ResetAnimalStatus()
     {
-        isInteractable = true;
-        isHungry = false;
+        isHungry = true;
     }
 }
