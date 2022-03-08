@@ -36,6 +36,9 @@ public class Item : PickableObject
     }
 
     protected override void Awake()
+    {
+
+    }
     public virtual void Use(Interactable targetToUse)
     {
 
