@@ -38,7 +38,7 @@ public class Plot : Interactable
             {
                 Uproot();
             }
-            else if (player.holdingObject is WateringPot)
+            else if (player.holdingObject is WateringPot && player.holdingObject != null)
             {
                 Debug.Log("U have WateringPot");
                 player.holdingObject.GetComponent<WateringPot>().WateringOnPlot(this);
@@ -46,9 +46,9 @@ public class Plot : Interactable
         }
         else
         {
-            Item holdingItem = player.holdingObject as Item;
-            if (holdingItem.ItemData is Seed)
+            if (player.holdingObject.GetComponent<ItemStack>().GetItemData() is Seed)
             {
+                ItemStack holdingItem = player.holdingObject as ItemStack;
                 Debug.Log("U have Seed");
                 Plant(holdingItem);
             }
@@ -78,12 +78,12 @@ public class Plot : Interactable
     }
 
 
-    void Plant(Item seedItem)
+    void Plant(ItemStack seedItem)
     {
         Debug.Log("Plant");
         if (this.seed == null)
         {
-            this.seed = (Seed)seedItem.ItemData;
+            this.seed = (Seed)seedItem.GetItemData();
             seedItem.UseItemStacks(1);
             isPlanted = true;
             plantStage = 0;

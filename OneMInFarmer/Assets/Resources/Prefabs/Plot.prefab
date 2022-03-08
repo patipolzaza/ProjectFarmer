@@ -182,6 +182,7 @@ MonoBehaviour:
   interactEvent:
     m_PersistentCalls:
       m_Calls: []
+  interactableObject: {fileID: 2462687588505583701}
   highlightColor: {r: 0.4248605, g: 1, b: 0.3066038, a: 1}
   isPlanted: 0
   plant: {fileID: 3515325481904339622}

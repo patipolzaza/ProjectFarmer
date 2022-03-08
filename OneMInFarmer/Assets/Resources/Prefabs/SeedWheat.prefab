@@ -245,7 +245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4467573919479020219}
-  - component: {fileID: 113953989033923694}
+  - component: {fileID: 6593423575085449357}
   - component: {fileID: 1709446539754123528}
   - component: {fileID: 1206766504574694377}
   m_Layer: 0
@@ -270,7 +270,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &113953989033923694
+--- !u!114 &6593423575085449357
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -279,16 +279,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 6967064389572889453}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c0e11d5f60d95545b239fac52ef89b8, type: 3}
+  m_Script: {fileID: 11500000, guid: e2417a5c2366f784e9ee39a39ab0a218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactEvent:
     m_PersistentCalls:
       m_Calls: []
+  interactableObject: {fileID: 6967064389572889453}
   highlightColor: {r: 0.42352942, g: 1, b: 0.30588236, a: 1}
   ItemData: {fileID: 11400000, guid: d0aba83bd09ff70438dd6ec1d27c575f, type: 2}
+  isUseable: 0
+  isSellable: 0
   DisplayStacks: {fileID: 2795866924089225511}
-  CurrentItemStacks: 1
 --- !u!212 &1709446539754123528
 SpriteRenderer:
   m_ObjectHideFlags: 0
