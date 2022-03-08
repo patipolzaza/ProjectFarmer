@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 800;
     private Vector2 moveInput;
+
+    [SerializeField] private GameObject characterObject;
 
     [SerializeField] private Transform interactableDetector;
     [SerializeField] private float interactableDetectRange;
@@ -42,7 +44,7 @@ public class Player : MonoBehaviour
 
         if (!anim)
         {
-            anim = GetComponent<Animator>();
+            anim = characterObject.GetComponent<Animator>();
         }
     }
 
@@ -91,6 +93,8 @@ public class Player : MonoBehaviour
             {
                 holdingObject.Drop(this);
             }
+
+            ChangeTargetInteractable(null);
 
             item.SetInteractable(false);
             item.HideObjectHighlight();
@@ -161,7 +165,7 @@ public class Player : MonoBehaviour
     private void Flip()
     {
         facingDirection *= -1;
-        transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+        characterObject.transform.localScale = new Vector2(-characterObject.transform.localScale.x, characterObject.transform.localScale.y);
     }
 
     private void Interact()
@@ -183,11 +187,17 @@ public class Player : MonoBehaviour
     private bool CheckInteractableInRange()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(interactableDetector.position, interactableDetectRange, interactableLayerMask);
+
         if (hits.Length > 0)
         {
             foreach (var hit in hits)
             {
                 Interactable interactable = hit.GetComponent<Interactable>();
+
+                if (interactable.Equals(holdingObject) || interactable.Equals(targetInteractable))
+                {
+                    continue;
+                }
 
                 if (interactable && interactable.isInteractable)
                 {
@@ -198,35 +208,45 @@ public class Player : MonoBehaviour
 
                         if (distanceBetweenNewTarget < distanceBetweenOldTarget)
                         {
-                            if (interactable != targetInteractable)
-                            {
-                                targetInteractable.HideObjectHighlight();
-                            }
-
-                            targetInteractable = interactable;
+                            ChangeTargetInteractable(interactable);
                         }
                     }
                     else
                     {
-                        targetInteractable = interactable;
+                        ChangeTargetInteractable(interactable);
                     }
                 }
             }
 
             if (targetInteractable)
             {
-                targetInteractable.ShowObjectHighlight();
                 return true;
             }
         }
 
         if (targetInteractable)
         {
-            targetInteractable.HideObjectHighlight();
-            targetInteractable = null;
+            /*targetInteractable.HideObjectHighlight();
+            targetInteractable = null;*/
+            ChangeTargetInteractable(null);
         }
 
         return false;
+    }
+
+    private void ChangeTargetInteractable(Interactable newInteractable)
+    {
+        if (targetInteractable)
+        {
+            targetInteractable.HideObjectHighlight();
+        }
+
+        targetInteractable = newInteractable;
+
+        if (targetInteractable)
+        {
+            targetInteractable.ShowObjectHighlight();
+        }
     }
 
     private void OnDrawGizmos()
