@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.T))
         {
-            AddTimeForNextDay(5);
+            IncreaseTimeForNextDay(5);
         }
     }
 
@@ -48,9 +48,8 @@ public class GameManager : MonoBehaviour
         }
 
         currentTimeLeft = 0;
-        timeForNextDay = defaultTimePerDay;
-        dayPlayed++;
         Debug.Log("Round End.");
+        ToNextDay();
     }
 
     public void StartRound()
@@ -60,8 +59,25 @@ public class GameManager : MonoBehaviour
         StartCoroutine(CountTime());
     }
 
-    public void AddTimeForNextDay(float time)
+    public void IncreaseTimeForNextDay(float time)
     {
         timeForNextDay += time;
+    }
+
+    private void ResetAnimalsStatus()
+    {
+        var animals = FindObjectsOfType<Animal>();
+
+        foreach (var animal in animals)
+        {
+            animal.ResetAnimalStatus();
+        }
+    }
+
+    private void ToNextDay()
+    {
+        dayPlayed++;
+        timeForNextDay = defaultTimePerDay;
+        ResetAnimalsStatus();
     }
 }
