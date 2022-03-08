@@ -76,11 +76,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-
-    }
-
     public void SetHoldingItem(PickableObject item)
     {
         Transform itemTransform;
@@ -113,11 +108,12 @@ public class Player : MonoBehaviour
                 itemTransform = holdingObject.transform;
                 itemCollider = holdingObject.objectCollider;
 
-                newPosition.Set(itemDropTransform.position.x, itemDropTransform.position.y + itemCollider.bounds.extents.y);
-                holdingObject.SetInteractable(true);
-                holdingObject.HideObjectHighlight();
+                itemTransform.SetParent(itemDropTransform);
+                //newPosition.Set(itemDropTransform.position.x, itemDropTransform.position.y + itemCollider.bounds.extents.y);
+                newPosition.Set(itemCollider.bounds.extents.x - itemCollider.offset.x, itemCollider.bounds.extents.y - itemCollider.offset.y);
+                itemTransform.localPosition = newPosition;
                 itemTransform.SetParent(null);
-                itemTransform.position = newPosition;
+                holdingObject.SetInteractable(true);
                 holdingObject = null;
             }
         }
@@ -148,7 +144,10 @@ public class Player : MonoBehaviour
         if (holdingObject is Item)
         {
             Item useableItem = holdingObject as Item;
-            useableItem.Use(targetInteractable);
+            if (useableItem.Use(targetInteractable))
+            {
+                holdingObject = null;
+            }
         }
     }
 

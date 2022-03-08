@@ -19,11 +19,11 @@ public class Item : PickableObject
     }
 
 
-    public virtual void Use(Interactable targetToUse)
+    public virtual bool Use(Interactable targetToUse)
     {
-
+        return true;
     }
 
-   
+
 
 }

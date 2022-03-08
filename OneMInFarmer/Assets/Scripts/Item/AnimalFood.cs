@@ -21,18 +21,19 @@ public class AnimalFood : Item
         base.Interact(interactor);
     }
 
-    public override void Use(Interactable targetToUse)
+    public override bool Use(Interactable targetToUse)
     {
-        base.Use(targetToUse);
-
         if (targetToUse is Animal)
         {
             Animal animal = targetToUse as Animal;
             if (animal.TakeFood(this))
             {
                 Destroy(gameObject);
+                return true;
             }
         }
+
+        return false;
     }
 
     protected override void Awake()
