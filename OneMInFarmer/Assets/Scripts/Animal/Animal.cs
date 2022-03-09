@@ -4,24 +4,63 @@ using UnityEngine;
 
 public class Animal : PickableObject
 {
-    [SerializeField] private AnimalData animalData;
+    [SerializeField] public Rigidbody2D rb { get; private set; }
+    [SerializeField] public Animator anim { get; private set; }
+
+    [SerializeField] protected AnimalData animalData;
 
     [SerializeField] private TextMesh textMesh;
     private Coroutine showTextCoroutine;
 
+    private Vector2 velocityWorkspace = new Vector2();
+
     public int currentAge { get; protected set; }
 
     public bool isHungry { get; private set; } = true;
+
+    #region State Machine
+    public StateMachine stateMachine { get; private set; }
+
+    public IdleState idleState { get; private set; }
+    [SerializeField] private IdleStateData idleStateData;
+    public MoveState moveState { get; private set; }
+    [SerializeField] private MoveStateData moveStateData;
+
+    #endregion
     protected override void Awake()
     {
         base.Awake();
 
+        stateMachine = new StateMachine();
+        moveState = new MoveState(this, stateMachine, "move", moveStateData);
+        idleState = new IdleState(this, stateMachine, "idle", idleStateData);
         //interactEvent.AddListener();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        stateMachine.InitializeState(idleState);
+    }
+
+    public void Update()
+    {
+        stateMachine.currentState.LogicUpdate();
+    }
+
+    public void FixedUpdate()
+    {
+        stateMachine.currentState.PhysicUpdate();
     }
 
     public void SetHungry(bool isHungry)
     {
         this.isHungry = isHungry;
+    }
+
+    public void IncreaseAge()
+    {
+        currentAge++;
     }
 
     public virtual bool TakeFood(AnimalFood food)
@@ -62,5 +101,12 @@ public class Animal : PickableObject
     public void ResetAnimalStatus()
     {
         isHungry = true;
+    }
+
+    public void SetVelocity(float x, float y)
+    {
+        velocityWorkspace.Set(x, y);
+
+        rb.velocity = velocityWorkspace;
     }
 }
