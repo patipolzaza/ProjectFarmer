@@ -22,7 +22,7 @@ public class Plot : Interactable
     {
         base.Awake();
 
-        interactEvent.AddListener(PlayerInteract);
+        //interactEvent.AddListener(PlayerInteract);
     }
 
     public void PlayerInteract(Player player)
