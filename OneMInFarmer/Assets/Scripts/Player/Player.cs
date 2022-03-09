@@ -185,52 +185,51 @@ public class Player : MonoBehaviour
 
     private bool CheckInteractableInRange()
     {
+        ChangeTargetInteractable(null);
         Collider2D[] hits = Physics2D.OverlapCircleAll(interactableDetector.position, interactableDetectRange, interactableLayerMask);
 
-        if (hits.Length > 0)
+        if (hits.Length == 0)
         {
-            foreach (var hit in hits)
+            return false;
+        }
+
+        foreach (var hit in hits)
+        {
+            Interactable interactable = hit.GetComponent<Interactable>();
+
+            if (interactable.Equals(holdingObject) || interactable.Equals(targetInteractable))
             {
-                Interactable interactable = hit.GetComponent<Interactable>();
+                continue;
+            }
 
-                if (interactable.Equals(holdingObject) || interactable.Equals(targetInteractable))
+            if (interactable && interactable.isInteractable)
+            {
+                if (targetInteractable)
                 {
-                    continue;
-                }
+                    float distanceBetweenOldTarget = Vector2.Distance(transform.position, targetInteractable.objectCollider.bounds.center);
+                    float distanceBetweenNewTarget = Vector2.Distance(transform.position, interactable.objectCollider.bounds.center);
 
-                if (interactable && interactable.isInteractable)
-                {
-                    if (targetInteractable)
-                    {
-                        float distanceBetweenOldTarget = Vector2.Distance(transform.position, targetInteractable.objectCollider.bounds.center);
-                        float distanceBetweenNewTarget = Vector2.Distance(transform.position, interactable.objectCollider.bounds.center);
-
-                        if (distanceBetweenNewTarget < distanceBetweenOldTarget)
-                        {
-                            ChangeTargetInteractable(interactable);
-                        }
-                    }
-                    else
+                    if (distanceBetweenNewTarget < distanceBetweenOldTarget)
                     {
                         ChangeTargetInteractable(interactable);
                     }
                 }
+                else
+                {
+                    ChangeTargetInteractable(interactable);
+                }
             }
 
-            if (targetInteractable)
-            {
-                return true;
-            }
         }
 
         if (targetInteractable)
         {
-            /*targetInteractable.HideObjectHighlight();
-            targetInteractable = null;*/
-            ChangeTargetInteractable(null);
+            return true;
         }
-
-        return false;
+        else
+        {
+            return false;
+        }
     }
 
     private void ChangeTargetInteractable(Interactable newInteractable)
