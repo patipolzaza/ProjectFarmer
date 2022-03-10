@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class MoveState : State
 {
-    protected MoveStateData stateData;
+    private MoveStateData stateData;
 
-    protected Vector3 moveDestination = new Vector3();
-    private bool hasSetDestination;
+    private Vector2 moveDirection = new Vector3();
+    private float moveTime;
 
     public MoveState(Animal entity, StateMachine stateMachine, string animBoolName, MoveStateData stateData) : base(entity, stateMachine, animBoolName)
     {
@@ -17,19 +17,16 @@ public class MoveState : State
     public override void Exit()
     {
         base.Exit();
-        hasSetDestination = false;
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        if (hasSetDestination)
+        if (Time.time >= startTime + moveTime)
         {
-            MoveToDestination();
-            return;
+            stateMachine.ChangeState(entity.idleState);
         }
-
     }
 
     public override void PhysicUpdate()
@@ -41,25 +38,29 @@ public class MoveState : State
     {
         base.Start();
 
-        moveDestination = FindMoveDestination();
+        moveTime = RandomMoveTime();
+        moveDirection = FindMoveDirection();
+
+        float velocityX = moveDirection.x * stateData.moveSpeed * Time.deltaTime;
+        float velocityY = moveDirection.y * stateData.moveSpeed * Time.deltaTime;
+
+        entity.SetVelocity(velocityX, velocityY);
     }
 
-    private void MoveToDestination()
+    private Vector2 FindMoveDirection()
     {
-        Vector2 velocity = Vector2.MoveTowards(entity.transform.position, moveDestination, stateData.moveSpeed * Time.deltaTime);
-        entity.SetVelocity(velocity.x, velocity.y);
+        Vector2 direction;
+
+        float randomedX = Random.Range(-1, 2);
+        float randomedY = Random.Range(-1, 2);
+
+        direction = new Vector2(randomedX, randomedY);
+
+        return direction;
     }
 
-    public virtual void SetDestination(Vector3 destination)
+    private float RandomMoveTime()
     {
-        moveDestination = destination;
-        hasSetDestination = true;
-    }
-
-    private Vector3 FindMoveDirection()
-    {
-
-
-        return Vector3.zero;
+        return Random.Range(stateData.minMoveTime, stateData.maxMoveTime + 1);
     }
 }

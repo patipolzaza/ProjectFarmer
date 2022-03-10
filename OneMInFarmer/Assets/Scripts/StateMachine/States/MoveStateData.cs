@@ -6,5 +6,7 @@ using UnityEngine;
 public class MoveStateData : ScriptableObject
 {
     public float moveSpeed = 275;
-    public float maxMoveLength = 2.5f;
+
+    public float minMoveTime = 0.5f;
+    public float maxMoveTime = 5f;
 }

@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Animal : PickableObject
 {
-    [SerializeField] public Rigidbody2D rb { get; private set; }
-    [SerializeField] public Animator anim { get; private set; }
+    public Rigidbody2D rb { get; private set; }
+    public Animator anim { get; private set; }
+
+    public float facingDirection { get; private set; }
 
     [SerializeField] protected AnimalData animalData;
 
@@ -25,8 +27,8 @@ public class Animal : PickableObject
     [SerializeField] private IdleStateData idleStateData;
     public MoveState moveState { get; private set; }
     [SerializeField] private MoveStateData moveStateData;
-
     #endregion
+
     protected override void Awake()
     {
         base.Awake();
@@ -44,6 +46,8 @@ public class Animal : PickableObject
     {
         base.Start();
         stateMachine.InitializeState(idleState);
+
+        facingDirection = interactableObject.transform.localScale.x / interactableObject.transform.localScale.x;
     }
 
     public void Update()
@@ -113,8 +117,23 @@ public class Animal : PickableObject
 
     public void SetVelocity(float x, float y)
     {
+        if (x > 0 && facingDirection < 0)
+        {
+            Flip();
+        }
+        else if (x < 0 && facingDirection > 0)
+        {
+            Flip();
+        }
+
         velocityWorkspace.Set(x, y);
 
         rb.velocity = velocityWorkspace;
+    }
+
+    public void Flip()
+    {
+        interactableObject.transform.localScale = new Vector3(-interactableObject.transform.localScale.x, interactableObject.transform.localScale.y, 1);
+        facingDirection *= -1;
     }
 }
