@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Plot : Interactable
 {
-    public bool isPlanted = false;
-    public SpriteRenderer plant;
+    private bool isPlanted = false;
+    [SerializeField] private SpriteRenderer plant;
 
     [SerializeField] Sprite SpriteDry;
     [SerializeField] Sprite SpriteWet;
@@ -174,5 +174,13 @@ public class Plot : Interactable
         isWither = false;
         plant.gameObject.SetActive(false);
         plantStage = 0;
+    }
+    public void ResetPlotStatus()
+    {
+        if (isPlanted)
+        {
+            Grow();
+            Dring();
+        }
     }
 }

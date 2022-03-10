@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum FoodType { Meat, Plant }
 
-public class AnimalFood : Item
+public class AnimalFood : ItemStack
 {
     [SerializeField] private FoodType foodType;
 
