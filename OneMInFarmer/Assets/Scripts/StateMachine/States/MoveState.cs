@@ -24,13 +24,12 @@ public class MoveState : State
     {
         base.LogicUpdate();
 
-        if (!hasSetDestination)
+        if (hasSetDestination)
         {
-            entity.stateMachine.ChangeState(entity.idleState);
+            MoveToDestination();
             return;
         }
 
-        MoveToDestination();
     }
 
     public override void PhysicUpdate()
@@ -41,6 +40,8 @@ public class MoveState : State
     public override void Start()
     {
         base.Start();
+
+        moveDestination = FindMoveDestination();
     }
 
     private void MoveToDestination()
@@ -53,5 +54,12 @@ public class MoveState : State
     {
         moveDestination = destination;
         hasSetDestination = true;
+    }
+
+    private Vector3 FindMoveDirection()
+    {
+
+
+        return Vector3.zero;
     }
 }

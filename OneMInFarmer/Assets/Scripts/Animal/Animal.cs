@@ -31,6 +31,9 @@ public class Animal : PickableObject
     {
         base.Awake();
 
+        anim = interactableObject.GetComponent<Animator>();
+        rb = interactableObject.GetComponent<Rigidbody2D>();
+
         stateMachine = new StateMachine();
         moveState = new MoveState(this, stateMachine, "move", moveStateData);
         idleState = new IdleState(this, stateMachine, "idle", idleStateData);
@@ -46,6 +49,11 @@ public class Animal : PickableObject
     public void Update()
     {
         stateMachine.currentState.LogicUpdate();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            stateMachine.ChangeState(moveState);
+        }
     }
 
     public void FixedUpdate()
