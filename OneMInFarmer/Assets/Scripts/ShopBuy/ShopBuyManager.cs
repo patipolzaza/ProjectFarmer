@@ -11,7 +11,7 @@ public class ShopBuyManager : MonoBehaviour
     {
         foreach (ShopBuy shopBuy in shopBuys)
         {
-            shopBuy.AddNewItemInStock(ListItem[0]);
+            shopBuy.AddNewItemInStock(ListItem[Random.Range(0, ListItem.Length)]);
         }
     }
 

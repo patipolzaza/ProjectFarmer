@@ -73,11 +73,26 @@ public class GameManager : MonoBehaviour
             animal.ResetAnimalStatus();
         }
     }
+    private void ResetPlotsStatus()
+    {
+        var plots = FindObjectsOfType<Plot>();
+        foreach (Plot plot in plots)
+        {
+            plot.ResetPlotStatus();
+        }
+    }
+    private void ResetItemInStacks()
+    {
+        var shopBuyManager = FindObjectOfType<ShopBuyManager>();
+        shopBuyManager.AddItemToShop();
+    }
 
     private void ToNextDay()
     {
         dayPlayed++;
         timeForNextDay = defaultTimePerDay;
         ResetAnimalsStatus();
+        ResetPlotsStatus();
+        ResetItemInStacks();
     }
 }
