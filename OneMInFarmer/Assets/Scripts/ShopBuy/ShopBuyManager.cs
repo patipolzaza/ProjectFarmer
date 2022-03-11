@@ -7,6 +7,10 @@ public class ShopBuyManager : MonoBehaviour
     public ShopBuy[] shopBuys;
     public ItemStack[] ListItem;
 
+    private void Start()
+    {
+        AddItemToShop();
+    }
     public void AddItemToShop()
     {
         foreach (ShopBuy shopBuy in shopBuys)

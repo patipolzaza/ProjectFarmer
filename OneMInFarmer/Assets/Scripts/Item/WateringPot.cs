@@ -9,7 +9,7 @@ public class WateringPot : Item
     float valence = 20;
     float remaining = 20;
     float RefillPerSeconds = 4;
-    public bool isRefill = false;
+    private bool isRefill = false;
 
 
     protected override void Awake()
