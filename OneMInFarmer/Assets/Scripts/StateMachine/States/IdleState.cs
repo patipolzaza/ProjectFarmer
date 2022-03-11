@@ -22,7 +22,7 @@ public class IdleState : State
 
         if (Time.time >= startTime + idleTime)
         {
-            //stateMachine.ChangeState(entity.moveState);
+            stateMachine.ChangeState(entity.moveState);
         }
     }
 

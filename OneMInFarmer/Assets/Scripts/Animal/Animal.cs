@@ -34,7 +34,7 @@ public class Animal : PickableObject
         base.Awake();
 
         anim = interactableObject.GetComponent<Animator>();
-        rb = interactableObject.GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
 
         stateMachine = new StateMachine();
         moveState = new MoveState(this, stateMachine, "move", moveStateData);

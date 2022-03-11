@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
         if (!rb)
         {
             rb = GetComponent<Rigidbody2D>();
-            rb.isKinematic = true;
+            rb.isKinematic = false;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 

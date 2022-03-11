@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8165a21feaec0af4a9510b497977d3fc, type: 3}
   m_Name: Cow_MoveState
   m_EditorClassIdentifier: 
-  moveSpeed: 300
-  maxMoveLength: 3
+  moveSpeed: 1.25
+  minMoveTime: 0.5
+  maxMoveTime: 2.5

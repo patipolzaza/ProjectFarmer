@@ -41,8 +41,8 @@ public class MoveState : State
         moveTime = RandomMoveTime();
         moveDirection = FindMoveDirection();
 
-        float velocityX = moveDirection.x * stateData.moveSpeed * Time.deltaTime;
-        float velocityY = moveDirection.y * stateData.moveSpeed * Time.deltaTime;
+        float velocityX = moveDirection.x * stateData.moveSpeed;
+        float velocityY = moveDirection.y * stateData.moveSpeed;
 
         entity.SetVelocity(velocityX, velocityY);
     }
@@ -53,6 +53,12 @@ public class MoveState : State
 
         float randomedX = Random.Range(-1, 2);
         float randomedY = Random.Range(-1, 2);
+
+        while (randomedX == 0 && randomedY == 0)
+        {
+            randomedX = Random.Range(-1, 2);
+            randomedY = Random.Range(-1, 2);
+        }
 
         direction = new Vector2(randomedX, randomedY);
 
