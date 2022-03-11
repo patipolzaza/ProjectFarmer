@@ -21,12 +21,16 @@ public class Animal : PickableObject
     public bool isHungry { get; private set; } = true;
 
     #region State Machine
+
+    private bool isGrabbed;
+
     public StateMachine stateMachine { get; private set; }
 
     public IdleState idleState { get; private set; }
     [SerializeField] private IdleStateData idleStateData;
     public MoveState moveState { get; private set; }
     [SerializeField] private MoveStateData moveStateData;
+    public GrabbedState grabbedState { get; private set; }
     #endregion
 
     protected override void Awake()
@@ -39,6 +43,7 @@ public class Animal : PickableObject
         stateMachine = new StateMachine();
         moveState = new MoveState(this, stateMachine, "move", moveStateData);
         idleState = new IdleState(this, stateMachine, "idle", idleStateData);
+        grabbedState = new GrabbedState(this, stateMachine, "grabbed");
         //interactEvent.AddListener();
     }
 
@@ -75,6 +80,19 @@ public class Animal : PickableObject
         currentAge++;
     }
 
+    public override void PickUp(Player player)
+    {
+        base.PickUp(player);
+
+        stateMachine.ChangeState(grabbedState);
+    }
+
+    public override void Drop(Player player)
+    {
+        base.Drop(player);
+
+        grabbedState.Unleash();
+    }
     public virtual bool TakeFood(AnimalFood food)
     {
         if (food == null || !isHungry)
