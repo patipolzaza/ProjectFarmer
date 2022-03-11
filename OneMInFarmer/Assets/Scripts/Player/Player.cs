@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 800;
+    [SerializeField] private float moveSpeed = 275;
     private Vector2 moveInput;
 
     [SerializeField] private GameObject characterObject;
@@ -52,11 +52,10 @@ public class Player : MonoBehaviour
     {
         isDetectInteractable = CheckInteractableInRange();
         CheckMoveInput();
-        Move();
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if (targetInteractable)
         {
-            if (targetInteractable)
+            if (Input.GetKeyDown(KeyCode.J))
             {
                 if (holdingObject is Item)
                 {
@@ -69,12 +68,9 @@ public class Player : MonoBehaviour
 
                 Interact();
             }
-        }
-        else if (Input.GetKey(KeyCode.J))
-        {
-            if (targetInteractable)
+            else if (Input.GetKey(KeyCode.J))
             {
-                if (holdingObject is Item)
+                if (holdingObject is WateringPot)
                 {
                     if (holdingObject is WateringPot && targetInteractable is Pool)
                     {
@@ -84,10 +80,16 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.K))
+
+        if (Input.GetKeyDown(KeyCode.K))
         {
             DropItem();
         }
+    }
+
+    public void FixedUpdate()
+    {
+        Move();
     }
 
     public void SetHoldingItem(PickableObject item)
@@ -123,7 +125,6 @@ public class Player : MonoBehaviour
                 itemCollider = holdingObject.objectCollider;
 
                 itemTransform.SetParent(itemDropTransform);
-                //newPosition.Set(itemDropTransform.position.x, itemDropTransform.position.y + itemCollider.bounds.extents.y);
                 newPosition.Set(itemCollider.bounds.extents.x - itemCollider.offset.x, itemCollider.bounds.extents.y - itemCollider.offset.y);
                 itemTransform.localPosition = newPosition;
                 itemTransform.SetParent(null);
@@ -167,8 +168,8 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        float velocityX = moveInput.x * moveSpeed * Time.deltaTime;
-        float velocityY = moveInput.y * moveSpeed * Time.deltaTime;
+        float velocityX = moveInput.x * moveSpeed * Time.fixedDeltaTime;
+        float velocityY = moveInput.y * moveSpeed * Time.fixedDeltaTime;
 
         velocityWorkspace.Set(velocityX, velocityY);
 
