@@ -70,6 +70,20 @@ public class Player : MonoBehaviour
                 Interact();
             }
         }
+        else if (Input.GetKey(KeyCode.J))
+        {
+            if (targetInteractable)
+            {
+                if (holdingObject is Item)
+                {
+                    if (holdingObject is WateringPot && targetInteractable is Pool)
+                    {
+                        holdingObject.GetComponent<WateringPot>().Refill();
+                        return;
+                    }
+                }
+            }
+        }
         else if (Input.GetKeyDown(KeyCode.K))
         {
             DropItem();
