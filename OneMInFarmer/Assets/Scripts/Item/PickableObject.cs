@@ -12,12 +12,12 @@ public class PickableObject : Interactable
         interactEvent.AddListener(PickUp);
     }
 
-    public void PickUp(Player player)
+    public virtual void PickUp(Player player)
     {
         player.SetHoldingItem(this);
     }
 
-    public void Drop(Player player)
+    public virtual void Drop(Player player)
     {
         player.SetHoldingItem(null);
     }
