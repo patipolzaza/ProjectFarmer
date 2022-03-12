@@ -6,12 +6,12 @@ public class WindowUIBase : MonoBehaviour
 {
     [SerializeField] protected GameObject windowUIObject;
 
-    public void ShowWindow()
+    public virtual void ShowWindow()
     {
         windowUIObject.SetActive(true);
     }
 
-    public void CloseWindow()
+    public virtual void HideWindow()
     {
         windowUIObject.SetActive(false);
     }

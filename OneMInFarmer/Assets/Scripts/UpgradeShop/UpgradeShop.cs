@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class UpgradeShop : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static UpgradeShop instance;
+    private UpgradeShopWindowUI ui;
+
+    private void Awake()
     {
-        
+        instance = this;
+        ui = FindObjectOfType<UpgradeShopWindowUI>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OpenWindow()
     {
-        
+        ui.ShowWindow();
+        GameManager.instance.SetTimeScale(0);
+    }
+
+    public void CloseWindow()
+    {
+        ui.HideWindow();
+        GameManager.instance.SetTimeScale(1);
+    }
+
+    public bool UpgradeTime(int extraTime)
+    {
+        //TODO: Check if wallet is enough
+        GameManager.instance.IncreaseTimeForNextDay(extraTime);
+        return true;
+        //Else if not enough return false
     }
 }

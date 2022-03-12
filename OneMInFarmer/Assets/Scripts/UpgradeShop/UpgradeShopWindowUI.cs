@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpgradeShopWindowUI : MonoBehaviour
+public class UpgradeShopWindowUI : WindowUIBase
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void ShowWindow()
     {
-        
+        base.ShowWindow();
     }
-
-    // Update is called once per frame
-    void Update()
+    public override void HideWindow()
     {
-        
+        base.HideWindow();
     }
 }
