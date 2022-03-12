@@ -5,12 +5,20 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
+    public static Timer instance { get; private set; }
+
     private float maxTime;
     private float currentTimeLeft;
 
     [SerializeField] private Text timeText;
     [SerializeField] private Image background;
     [SerializeField] private Transform needle;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
