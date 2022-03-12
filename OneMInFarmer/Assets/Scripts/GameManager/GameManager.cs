@@ -31,32 +31,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator CountTime()
-    {
-        while (currentTimeLeft > 0)
-        {
-            if (currentTimeLeft > 10)
-            {
-                yield return new WaitForSeconds(1);
-                currentTimeLeft -= 1;
-            }
-            else
-            {
-                yield return new WaitForFixedUpdate();
-                currentTimeLeft -= Time.deltaTime;
-            }
-        }
-
-        currentTimeLeft = 0;
-        Debug.Log("Round End.");
-        ToNextDay();
-    }
-
     public void StartRound()
     {
         currentTimeLeft = timeForNextDay;
 
-        StartCoroutine(CountTime());
+        //StartCoroutine(CountTime());
     }
 
     public void IncreaseTimeForNextDay(float time)
@@ -94,5 +73,10 @@ public class GameManager : MonoBehaviour
         ResetAnimalsStatus();
         ResetPlotsStatus();
         ResetItemInStacks();
+    }
+
+    public void SetTimeScale(float value)
+    {
+        Time.timeScale = value;
     }
 }
