@@ -6,24 +6,21 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public int dayPlayed { get; private set; }
+    public int currentDay { get; private set; } = 1;
     public float defaultTimePerDay { get; private set; } = 15;
     public float timeForNextDay { get; private set; }
-    public float currentTimeLeft { get; private set; }
 
-    // Start is called before the first frame update
     void Start()
     {
         instance = this;
         timeForNextDay = defaultTimePerDay;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            StartRound();
+            StartDay();
         }
         else if (Input.GetKeyDown(KeyCode.T))
         {
@@ -31,11 +28,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StartRound()
+    public void StartDay()
     {
-        currentTimeLeft = timeForNextDay;
+        Timer timer = Timer.instance;
+        timer.SetTime(timeForNextDay);
+        timer.Begin();
+    }
 
-        //StartCoroutine(CountTime());
+    public void EndDay()
+    {
+        ToNextDay();
     }
 
     public void IncreaseTimeForNextDay(float time)
@@ -68,7 +70,7 @@ public class GameManager : MonoBehaviour
 
     private void ToNextDay()
     {
-        dayPlayed++;
+        currentDay++;
         timeForNextDay = defaultTimePerDay;
         ResetAnimalsStatus();
         ResetPlotsStatus();

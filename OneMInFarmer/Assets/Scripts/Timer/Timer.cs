@@ -14,6 +14,8 @@ public class Timer : MonoBehaviour
     [SerializeField] private Image background;
     [SerializeField] private Transform needle;
 
+    [SerializeField] private DayFloatingText dayFloatingText;
+    [SerializeField] private Text dayText;
     private void Awake()
     {
         instance = this;
@@ -23,7 +25,7 @@ public class Timer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SetTime(90);
+            SetTime(30);
             Begin();
         }
 
@@ -36,12 +38,16 @@ public class Timer : MonoBehaviour
     public void Begin()
     {
         currentTimeLeft = maxTime;
+
+        SetDayText(GameManager.instance.currentDay.ToString());
+        dayFloatingText.Show();
+
         StartCoroutine(CountTime());
     }
 
     public void End()
     {
-
+        GameManager.instance.EndDay();
     }
 
     public void SetTime(float time)
@@ -92,5 +98,14 @@ public class Timer : MonoBehaviour
         }
 
         currentTimeLeft = 0;
+        End();
+    }
+
+    public void SetDayText(string text)
+    {
+        string message = "Day " + text;
+
+        dayText.text = message;
+        dayFloatingText.SetText(message);
     }
 }
