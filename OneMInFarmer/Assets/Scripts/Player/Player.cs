@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private GameObject characterObject;
 
+    public Wallet wallet { get; private set; }
+
     [SerializeField] private Transform interactableDetector;
     [SerializeField] private float interactableDetectRange;
     [SerializeField] private LayerMask interactableLayerMask;
@@ -31,6 +33,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         facingDirection = transform.localScale.x / transform.localScale.x;
+        wallet = new Wallet(10);
     }
 
     private void OnValidate()

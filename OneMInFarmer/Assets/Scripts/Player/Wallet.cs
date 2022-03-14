@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class Wallet
 {
-    public int currentCoin { get; private set; }
+    public int coin { get; private set; }
 
     public Wallet(int initialCoin)
     {
-        currentCoin = initialCoin;
+        coin = initialCoin;
     }
 
     public void EarnCoin(int amount)
     {
-        currentCoin += amount;
+        coin += amount;
     }
 
     public void LoseCoin(int amount)
     {
-        if (currentCoin <= amount)
+        if (coin <= amount)
         {
-            currentCoin = 0;
+            coin = 0;
         }
         else
         {
-            currentCoin -= amount;
+            coin -= amount;
         }
     }
 }
