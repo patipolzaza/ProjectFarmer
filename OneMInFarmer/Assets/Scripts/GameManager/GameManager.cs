@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public float defaultTimePerDay { get; private set; } = 15;
     public float timeForNextDay { get; private set; }
 
+    public Player player { get; private set; }
     void Start()
     {
         instance = this;
@@ -18,6 +19,11 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (!player)
+        {
+            player = FindObjectOfType<Player>();
+        }
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             StartDay();
@@ -37,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     public void EndDay()
     {
-        ToNextDay();
+        UpgradeShop.instance.OpenWindow();
     }
 
     public void IncreaseTimeForNextDay(float time)
