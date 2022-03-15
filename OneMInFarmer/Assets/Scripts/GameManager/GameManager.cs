@@ -8,7 +8,22 @@ public class GameManager : MonoBehaviour
 
     public int currentDay { get; private set; } = 1;
     public float defaultTimePerDay { get; private set; } = 15;
-    public float timeForNextDay { get; private set; }
+    private float timeForNextDay;
+
+    public string GetTimeForNextDayString
+    {
+        get
+        {
+            string timeString;
+            int roundedTime = Mathf.RoundToInt(timeForNextDay);
+
+            int minute = Mathf.FloorToInt(roundedTime / 60);
+            int second = roundedTime % 60;
+
+            timeString = $"{minute}:{second.ToString("0#")}";
+            return timeString;
+        }
+    }
 
     public Player player { get; private set; }
     void Start()
