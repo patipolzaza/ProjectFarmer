@@ -5,15 +5,16 @@ using UnityEngine.UI;
 
 public class UpgradeShopWindowUI : WindowUIBase
 {
+    [Header("Texts")]
     [SerializeField] private Text playerCoinText;
     [SerializeField] private Text currentExtraTimeText;
     [SerializeField] private Text currentCostText;
+    [SerializeField] private Text timeForNextDayText;
 
-    private int currentExtraTime;
-    [SerializeField] private int minExtraTime = 0;
-    [SerializeField] private int maxExtraTime = 30;
-
-    [SerializeField] private Button[] upgradeTimeButtons = new Button[3];
+    [Header("Buttons")]
+    [SerializeField] private Button increaseTimeButton;
+    [SerializeField] private Button decreaseTimeButton;
+    [SerializeField] private Button confirmBuyTimeButton;
 
     private UpgradeShop upgradeShop;
     protected override void Awake()
@@ -24,7 +25,6 @@ public class UpgradeShopWindowUI : WindowUIBase
     protected override void Update()
     {
         base.Update();
-        UpdateUITexts();
     }
 
     public override void ShowWindow()
@@ -37,62 +37,39 @@ public class UpgradeShopWindowUI : WindowUIBase
         base.HideWindow();
     }
 
-    public void BuyExtraTime()
+    public void UpdatePlayerCoinText(int coin)
     {
-        if (upgradeShop.UpgradeTime(currentExtraTime))
-        {
-            SetTimeUpgradeButtonsInteractable(false);
-        }
-        else
-        {
-
-        }
+        playerCoinText.text = $"{coin}";
     }
 
-    public void IncreaseExtraTime()
+    public void UpdateCurrentExtraTimeText(int extraTime)
     {
-        int extraTime = ++currentExtraTime;
-        SetExtraTime(extraTime);
+        currentExtraTimeText.text = $"{extraTime}";
     }
 
-    public void DecreaseExtraTime()
+    public void UpdateCurrentCostText(int cost)
     {
-        int extraTime = --currentExtraTime;
-        SetExtraTime(extraTime);
+        currentCostText.text = $"Cost: {cost}";
     }
 
-    public void SetExtraTime(int extraTime)
+    public void UpdateTimeForNextDayText(string timeForNextDayString)
     {
-        currentExtraTime = Mathf.Clamp(extraTime, minExtraTime, maxExtraTime);
+        timeForNextDayText.text = timeForNextDayString;
     }
 
-    private void UpdateUITexts()
+    public void SetTimeUpgradeButtonsInteractable(bool isInteractable)
     {
-        UpdateCurrentCostText();
-        UpdateCurrentExtraTimeText();
-        UpdatePlayerCoinText();
+        confirmBuyTimeButton.interactable = isInteractable;
+        SetIncreaseButtonInteractable(isInteractable);
+        SetDecreaseButtonInteractable(isInteractable);
     }
 
-    private void UpdatePlayerCoinText()
+    public void SetIncreaseButtonInteractable(bool isInteractable)
     {
-        playerCoinText.text = GameManager.instance.player.wallet.coin.ToString();
+        increaseTimeButton.interactable = isInteractable;
     }
-
-    private void UpdateCurrentExtraTimeText()
+    public void SetDecreaseButtonInteractable(bool isInteractable)
     {
-        currentExtraTimeText.text = currentExtraTime.ToString();
-    }
-
-    private void UpdateCurrentCostText()
-    {
-        currentCostText.text = upgradeShop.GetPrice(currentExtraTime).ToString();
-    }
-
-    private void SetTimeUpgradeButtonsInteractable(bool isInteractable)
-    {
-        foreach (var button in upgradeTimeButtons)
-        {
-            button.interactable = isInteractable;
-        }
+        decreaseTimeButton.interactable = isInteractable;
     }
 }
