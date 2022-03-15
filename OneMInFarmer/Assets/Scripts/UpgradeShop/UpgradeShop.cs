@@ -11,6 +11,7 @@ public class UpgradeShop : MonoBehaviour
     private int currentExtraTime;
     [SerializeField] private int minExtraTime = 0;
     [SerializeField] private int maxExtraTime = 30;
+    private bool isPurchasedExtraTime = false;
 
     private void Awake()
     {
@@ -43,6 +44,7 @@ public class UpgradeShop : MonoBehaviour
     public void OpenWindow()
     {
         ui.ShowWindow();
+        isPurchasedExtraTime = false;
         ui.SetTimeUpgradeButtonsInteractable(true);
         GameManager.instance.SetTimeScale(0);
     }
@@ -58,7 +60,14 @@ public class UpgradeShop : MonoBehaviour
     {
         ui.UpdatePlayerCoinText(GameManager.instance.player.wallet.coin);
         ui.UpdateCurrentExtraTimeText(currentExtraTime);
-        ui.UpdateCurrentCostText(GetPrice(currentExtraTime));
+        if (isPurchasedExtraTime)
+        {
+            ui.UpdateCurrentCostText("Purchased");
+        }
+        else
+        {
+            ui.UpdateCurrentCostText($"Cost: {GetPrice(currentExtraTime)}");
+        }
         ui.UpdateTimeForNextDayText(GameManager.instance.GetTimeForNextDayString);
     }
 
@@ -70,9 +79,8 @@ public class UpgradeShop : MonoBehaviour
         {
             int price = GetPrice(extraTime);
             GameManager.instance.IncreaseTimeForNextDay(extraTime);
-
             playerWallet.LoseCoin(price);
-
+            isPurchasedExtraTime = true;
             return true;
         }
         else

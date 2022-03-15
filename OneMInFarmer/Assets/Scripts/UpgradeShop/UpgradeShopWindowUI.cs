@@ -47,9 +47,9 @@ public class UpgradeShopWindowUI : WindowUIBase
         currentExtraTimeText.text = $"{extraTime}";
     }
 
-    public void UpdateCurrentCostText(int cost)
+    public void UpdateCurrentCostText(string text)
     {
-        currentCostText.text = $"Cost: {cost}";
+        currentCostText.text = text;
     }
 
     public void UpdateTimeForNextDayText(string timeForNextDayString)
