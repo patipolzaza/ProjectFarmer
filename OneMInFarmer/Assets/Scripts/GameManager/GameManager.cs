@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
 
     public void EndDay()
     {
+        ToNextDay();
         UpgradeShop.instance.OpenWindow();
     }
 

@@ -51,6 +51,7 @@ public class UpgradeShop : MonoBehaviour
     {
         ui.HideWindow();
         GameManager.instance.SetTimeScale(1);
+        GameManager.instance.StartDay();
     }
 
     private void UpdateUI()
