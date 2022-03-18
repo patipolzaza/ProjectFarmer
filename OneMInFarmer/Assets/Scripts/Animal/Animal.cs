@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Animal : PickableObject
+public class Animal : PickableObject, IValuable
 {
     public Rigidbody2D rb { get; private set; }
     public Animator anim { get; private set; }
@@ -16,13 +16,11 @@ public class Animal : PickableObject
 
     private Vector2 velocityWorkspace = new Vector2();
 
-    public int currentAge { get; protected set; }
+    public int currentAge { get; protected set; } = 1;
 
     public bool isHungry { get; private set; } = true;
 
     #region State Machine
-
-    private bool isGrabbed;
 
     public StateMachine stateMachine { get; private set; }
 
@@ -58,11 +56,6 @@ public class Animal : PickableObject
     public void Update()
     {
         stateMachine.currentState.LogicUpdate();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            stateMachine.ChangeState(moveState);
-        }
     }
 
     public void FixedUpdate()
@@ -130,6 +123,11 @@ public class Animal : PickableObject
 
     public void ResetAnimalStatus()
     {
+        if (!isHungry)
+        {
+            IncreaseAge();
+        }
+
         isHungry = true;
     }
 
@@ -153,5 +151,23 @@ public class Animal : PickableObject
     {
         interactableObject.transform.localScale = new Vector3(-interactableObject.transform.localScale.x, interactableObject.transform.localScale.y, 1);
         facingDirection *= -1;
+    }
+
+    public void Sell()
+    {
+        Destroy(gameObject);
+
+        Wallet playerWallet = Player.instance.wallet;
+        int price = Mathf.FloorToInt(animalData.sellPrice * (currentAge / animalData.lifespan));
+
+        playerWallet.EarnCoin(price);
+    }
+
+    public void Buy()
+    {
+        Wallet playerWallet = Player.instance.wallet;
+        int price = animalData.buyPrice;
+
+        playerWallet.LoseCoin(price);
     }
 }

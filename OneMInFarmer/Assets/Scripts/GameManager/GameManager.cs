@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
         timeForNextDay += time;
     }
 
-    private void ResetAnimalsStatus()
+    private void GrowUpAnimals()
     {
         var animals = FindObjectsOfType<Animal>();
 
@@ -94,7 +94,11 @@ public class GameManager : MonoBehaviour
     {
         currentDay++;
         timeForNextDay = defaultTimePerDay;
-        ResetAnimalsStatus();
+
+        player.ResetMoveSpeedBuff();
+
+        GrowUpAnimals();
+
         ResetPlotsStatus();
         ResetItemInStacks();
     }

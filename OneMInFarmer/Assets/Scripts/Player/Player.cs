@@ -5,7 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 275;
+    public static Player instance { get; private set; }
+
+    [SerializeField] private float baseMoveSpeed = 275;
+    [SerializeField] private float baseMoveSpeedBuffMultiplier = 1;
+    [SerializeField] private float moveSpeedBuffMultiplier;
     private Vector2 moveInput;
 
     [SerializeField] private GameObject characterObject;
@@ -34,6 +38,9 @@ public class Player : MonoBehaviour
     {
         facingDirection = transform.localScale.x / transform.localScale.x;
         wallet = new Wallet(10);
+
+        moveSpeedBuffMultiplier = baseMoveSpeedBuffMultiplier;
+        instance = this;
     }
 
     private void OnValidate()
@@ -60,16 +67,23 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.J))
             {
-                if (holdingObject is Item)
+                if (holdingObject)
                 {
-                    if (holdingObject is AnimalFood && targetInteractable is Animal)
+                    if (holdingObject is IValuable /*TODO: Check if target interactable is BuyShop*/)
+                    {
+                        IValuable valuable = (IValuable)holdingObject;
+                        valuable.Sell();
+                    }
+                    else if (holdingObject is AnimalFood && targetInteractable is Animal)
                     {
                         UseItem();
                         return;
                     }
                 }
-
-                Interact();
+                else
+                {
+                    Interact();
+                }
             }
             else if (Input.GetKey(KeyCode.J))
             {
@@ -171,6 +185,8 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
+        var moveSpeed = baseMoveSpeed * moveSpeedBuffMultiplier;
+
         float velocityX = moveInput.x * moveSpeed * Time.fixedDeltaTime;
         float velocityY = moveInput.y * moveSpeed * Time.fixedDeltaTime;
 
@@ -263,6 +279,21 @@ public class Player : MonoBehaviour
         {
             targetInteractable.ShowObjectHighlight();
         }
+    }
+
+    public void GainMoveSpeedBuff(float extraMultiplier)
+    {
+        moveSpeedBuffMultiplier += extraMultiplier;
+    }
+
+    public void ResetMoveSpeedBuff()
+    {
+        moveSpeedBuffMultiplier = baseMoveSpeedBuffMultiplier;
+    }
+
+    public void SetBaseMoveSpeedBuffMultiplier(float newMultiplier)
+    {
+        baseMoveSpeedBuffMultiplier = newMultiplier;
     }
 
     private void OnDrawGizmos()
