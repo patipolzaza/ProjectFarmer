@@ -1,9 +1,11 @@
 public class UpgradeStatusCommand : ICommand
 {
     private Status statusToUpgrade;
+    private bool isExecuted;
     public UpgradeStatusCommand(Status statusToUpgrade)
     {
         this.statusToUpgrade = statusToUpgrade;
+        isExecuted = false;
     }
 
     public void Execute()
@@ -11,15 +13,23 @@ public class UpgradeStatusCommand : ICommand
         if (!statusToUpgrade.IsReachMaxLevel)
         {
             Wallet playerWallet = Player.Instance.wallet;
-            playerWallet?.LoseCoin(statusToUpgrade.GetUpgradeCost);
-            statusToUpgrade.Upgrade();
+            if (playerWallet.coin >= statusToUpgrade.GetUpgradeCost)
+            {
+                playerWallet?.LoseCoin(statusToUpgrade.GetUpgradeCost);
+                statusToUpgrade.Upgrade();
+                isExecuted = true;
+            }
         }
     }
 
     public void Undo()
     {
-        Wallet playerWallet = Player.Instance.wallet;
-        playerWallet.EarnCoin(statusToUpgrade.GetUpgradeCost);
-        statusToUpgrade.Downgrade();
+        if (isExecuted)
+        {
+            Wallet playerWallet = Player.Instance.wallet;
+            playerWallet.EarnCoin(statusToUpgrade.GetUpgradeCost);
+            statusToUpgrade.Downgrade();
+            isExecuted = false;
+        }
     }
 }
