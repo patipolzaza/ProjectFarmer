@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager Instance;
 
     public int currentDay { get; private set; } = 1;
-    public float defaultTimePerDay { get; private set; } = 15;
-    private float timeForNextDay;
+    public int defaultTimePerDay { get; private set; } = 15;
 
     public string GetTimeForNextDayString
     {
         get
         {
             string timeString;
-            int roundedTime = Mathf.RoundToInt(timeForNextDay);
+            int time = Timer.Instance.maxTime;
 
-            int minute = Mathf.FloorToInt(roundedTime / 60);
-            int second = roundedTime % 60;
+            int minute = Mathf.FloorToInt(time / 60);
+            int second = time % 60;
 
             timeString = $"{minute}:{second.ToString("0#")}";
             return timeString;
@@ -28,8 +27,7 @@ public class GameManager : MonoBehaviour
     public Player player { get; private set; }
     void Start()
     {
-        instance = this;
-        timeForNextDay = defaultTimePerDay;
+        Instance = this;
     }
 
     void Update()
@@ -43,28 +41,20 @@ public class GameManager : MonoBehaviour
         {
             StartDay();
         }
-        else if (Input.GetKeyDown(KeyCode.T))
-        {
-            IncreaseTimeForNextDay(5);
-        }
     }
 
     public void StartDay()
     {
-        Timer timer = Timer.instance;
-        timer.SetTime(timeForNextDay);
+        StatusUpgradeManager.Instance.ClearUpgradeHistory();
+
+        Timer timer = Timer.Instance;
         timer.Begin();
     }
 
     public void EndDay()
     {
         ToNextDay();
-        UpgradeShop.instance.OpenWindow();
-    }
-
-    public void IncreaseTimeForNextDay(float time)
-    {
-        timeForNextDay += time;
+        UpgradeShop.Instance.OpenWindow();
     }
 
     private void GrowUpAnimals()
@@ -76,6 +66,7 @@ public class GameManager : MonoBehaviour
             animal.ResetAnimalStatus();
         }
     }
+
     private void ResetPlotsStatus()
     {
         var plots = FindObjectsOfType<Plot>();
@@ -93,7 +84,6 @@ public class GameManager : MonoBehaviour
     private void ToNextDay()
     {
         currentDay++;
-        timeForNextDay = defaultTimePerDay;
 
         player.ResetMoveSpeedBuff();
 

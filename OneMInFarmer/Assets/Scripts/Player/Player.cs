@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
-    public static Player instance { get; private set; }
+    public static Player Instance { get; private set; }
 
     [SerializeField] private float baseMoveSpeed = 275;
     [SerializeField] private float baseMoveSpeedBuffMultiplier = 1;
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
         wallet = new Wallet(10);
 
         moveSpeedBuffMultiplier = baseMoveSpeedBuffMultiplier;
-        instance = this;
+        Instance = this;
     }
 
     private void OnValidate()

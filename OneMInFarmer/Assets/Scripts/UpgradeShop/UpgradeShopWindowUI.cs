@@ -19,7 +19,7 @@ public class UpgradeShopWindowUI : WindowUIBase
     private UpgradeShop upgradeShop;
     protected override void Awake()
     {
-        upgradeShop = UpgradeShop.instance;
+        upgradeShop = UpgradeShop.Instance;
     }
 
     protected override void Update()

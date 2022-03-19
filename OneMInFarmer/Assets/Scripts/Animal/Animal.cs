@@ -157,7 +157,7 @@ public class Animal : PickableObject, IValuable
     {
         Destroy(gameObject);
 
-        Wallet playerWallet = Player.instance.wallet;
+        Wallet playerWallet = Player.Instance.wallet;
         int price = Mathf.FloorToInt(animalData.sellPrice * (currentAge / animalData.lifespan));
 
         playerWallet.EarnCoin(price);
@@ -165,7 +165,7 @@ public class Animal : PickableObject, IValuable
 
     public void Buy()
     {
-        Wallet playerWallet = Player.instance.wallet;
+        Wallet playerWallet = Player.Instance.wallet;
         int price = animalData.buyPrice;
 
         playerWallet.LoseCoin(price);

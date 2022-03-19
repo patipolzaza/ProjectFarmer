@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public static Timer instance { get; private set; }
+    public static Timer Instance { get; private set; }
 
-    private float maxTime;
+    public int maxTime { get; private set; }
     private float currentTimeLeft;
 
     [SerializeField] private Text timeText;
@@ -18,14 +18,13 @@ public class Timer : MonoBehaviour
     [SerializeField] private Text dayText;
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SetTime(30);
             Begin();
         }
 
@@ -37,9 +36,10 @@ public class Timer : MonoBehaviour
 
     public void Begin()
     {
+        maxTime = GameManager.Instance.defaultTimePerDay + StatusUpgradeManager.Instance.extraTimeStatus.GetValue;
         currentTimeLeft = maxTime;
 
-        SetDayText(GameManager.instance.currentDay.ToString());
+        SetDayText(GameManager.Instance.currentDay.ToString());
         dayFloatingText.Show();
 
         StartCoroutine(CountTime());
@@ -47,12 +47,7 @@ public class Timer : MonoBehaviour
 
     public void End()
     {
-        GameManager.instance.EndDay();
-    }
-
-    public void SetTime(float time)
-    {
-        maxTime = time;
+        GameManager.Instance.EndDay();
     }
 
     private void UpdateTimerUI()

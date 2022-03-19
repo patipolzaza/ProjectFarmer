@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class UpgradeShop : MonoBehaviour
 {
-    public static UpgradeShop instance;
+    public static UpgradeShop Instance;
     private UpgradeShopWindowUI ui;
-    [SerializeField] private int baseTimeCostPerSecond = 1;
 
-    private int currentExtraTime;
+    [Header("ExtraTime Upgrade")]
+    [SerializeField] private int baseTimeCostPerSecond = 1;
     [SerializeField] private int minExtraTime = 0;
     [SerializeField] private int maxExtraTime = 30;
+    private int currentExtraTime;
     private bool isPurchasedExtraTime = false;
+
+    [Header("MoveSpeed Upgrade")]
+    [SerializeField] private float buffMoveSpeedMultiplier = 0.25f;
+    [SerializeField] private float moveSpeedBuffCost = 5;
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
         ui = FindObjectOfType<UpgradeShopWindowUI>();
     }
 
@@ -46,19 +51,19 @@ public class UpgradeShop : MonoBehaviour
         ui.ShowWindow();
         isPurchasedExtraTime = false;
         ui.SetTimeUpgradeButtonsInteractable(true);
-        GameManager.instance.SetTimeScale(0);
+        GameManager.Instance.SetTimeScale(0);
     }
 
     public void CloseWindow()
     {
         ui.HideWindow();
-        GameManager.instance.SetTimeScale(1);
-        GameManager.instance.StartDay();
+        GameManager.Instance.SetTimeScale(1);
+        GameManager.Instance.StartDay();
     }
 
     private void UpdateUI()
     {
-        ui.UpdatePlayerCoinText(GameManager.instance.player.wallet.coin);
+        ui.UpdatePlayerCoinText(GameManager.Instance.player.wallet.coin);
         ui.UpdateCurrentExtraTimeText(currentExtraTime);
         if (isPurchasedExtraTime)
         {
@@ -68,17 +73,17 @@ public class UpgradeShop : MonoBehaviour
         {
             ui.UpdateCurrentCostText($"Cost: {GetPrice(currentExtraTime)}");
         }
-        ui.UpdateTimeForNextDayText(GameManager.instance.GetTimeForNextDayString);
+
+        ui.UpdateTimeForNextDayText(GameManager.Instance.GetTimeForNextDayString);
     }
 
     private bool UpgradeTime(int extraTime)
     {
-        var playerWallet = GameManager.instance.player.wallet;
+        var playerWallet = GameManager.Instance.player.wallet;
 
         if (playerWallet.coin >= GetPrice(extraTime))
         {
             int price = GetPrice(extraTime);
-            GameManager.instance.IncreaseTimeForNextDay(extraTime);
             playerWallet.LoseCoin(price);
             isPurchasedExtraTime = true;
             return true;
@@ -97,21 +102,9 @@ public class UpgradeShop : MonoBehaviour
         }
     }
 
-    public void IncreaseExtraTime()
-    {
-        int extraTime = ++currentExtraTime;
-        SetExtraTime(extraTime);
-    }
-
-    public void DecreaseExtraTime()
-    {
-        int extraTime = --currentExtraTime;
-        SetExtraTime(extraTime);
-    }
-
     public void SetExtraTime(int extraTime)
     {
-        int playerCoin = GameManager.instance.player.wallet.coin;
+        int playerCoin = GameManager.Instance.player.wallet.coin;
         currentExtraTime = Mathf.Clamp(extraTime, minExtraTime, maxExtraTime);
 
         if (extraTime <= minExtraTime)
@@ -130,9 +123,14 @@ public class UpgradeShop : MonoBehaviour
 
     }
 
+    public void ResetUpgrade()
+    {
+        StatusUpgradeManager.Instance.UndoAll();
+    }
+
     public int GetPrice(int extraTime)
     {
-        int currentPrice = Mathf.CeilToInt(baseTimeCostPerSecond * (GameManager.instance.currentDay * 0.35f)) * extraTime;
+        int currentPrice = Mathf.CeilToInt(baseTimeCostPerSecond * (GameManager.Instance.currentDay * 0.35f)) * extraTime;
         return currentPrice;
     }
 }
