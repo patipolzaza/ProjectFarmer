@@ -26,31 +26,21 @@ public class StatusUpgradeManager : MonoBehaviour
         extraTimeStatus = new Status(extraTimeData.name, extraTimeData);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            Wallet wallet = Player.Instance.wallet;
-            wallet.EarnCoin(extraTimeStatus.GetUpgradeCost);
-            ExecuteCommand(new UpgradeStatusCommand(extraTimeStatus));
-            Debug.Log(extraTimeStatus.currentLevel);
-        }
-    }
-
     private void ExecuteCommand(ICommand command)
     {
-        command?.Execute();
+        command.Execute();
         commandHistory.Push(command);
     }
 
     public void Undo()
     {
         ICommand command = commandHistory.Pop();
-        command?.Undo();
+        command.Undo();
     }
     public void UndoAll()
     {
-        for (int i = 0; i < commandHistory.Count; i++)
+        int loopCount = commandHistory.Count;
+        for (int i = 0; i < loopCount; i++)
         {
             Undo();
         }
