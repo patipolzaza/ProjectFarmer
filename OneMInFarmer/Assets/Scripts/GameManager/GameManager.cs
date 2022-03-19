@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
     {
         currentDay++;
 
-        player.ResetMoveSpeedBuff();
+        StatusUpgradeManager.Instance.ResetDiaryUpgradeStatus();
 
         GrowUpAnimals();
 

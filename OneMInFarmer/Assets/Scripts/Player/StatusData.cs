@@ -7,7 +7,8 @@ public class StatusData : ScriptableObject
 {
     public string statusName;
     public int maxLevel = 5;
-    public int valuePerLevel = 1;
+    public int baseValue = 1;
+    public int extraValuePerLevel = 1;
     public int startUpgradeCost = 5;
     public float upgradeCostMultiplierPerLevel = 1.25f;
 }

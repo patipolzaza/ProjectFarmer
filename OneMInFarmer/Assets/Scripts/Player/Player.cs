@@ -7,9 +7,7 @@ public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
 
-    [SerializeField] private float baseMoveSpeed = 275;
-    [SerializeField] private float baseMoveSpeedBuffMultiplier = 1;
-    [SerializeField] private float moveSpeedBuffMultiplier;
+    [SerializeField] private int baseMoveSpeed = 275;
     private Vector2 moveInput;
 
     [SerializeField] private GameObject characterObject;
@@ -39,7 +37,6 @@ public class Player : MonoBehaviour
         facingDirection = transform.localScale.x / transform.localScale.x;
         wallet = new Wallet(10);
 
-        moveSpeedBuffMultiplier = baseMoveSpeedBuffMultiplier;
         Instance = this;
     }
 
@@ -185,7 +182,7 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        var moveSpeed = baseMoveSpeed * moveSpeedBuffMultiplier;
+        var moveSpeed = baseMoveSpeed + StatusUpgradeManager.Instance.extraMoveSpeedStatus.GetValue;
 
         float velocityX = moveInput.x * moveSpeed * Time.fixedDeltaTime;
         float velocityY = moveInput.y * moveSpeed * Time.fixedDeltaTime;
@@ -279,21 +276,6 @@ public class Player : MonoBehaviour
         {
             targetInteractable.ShowObjectHighlight();
         }
-    }
-
-    public void GainMoveSpeedBuff(float extraMultiplier)
-    {
-        moveSpeedBuffMultiplier += extraMultiplier;
-    }
-
-    public void ResetMoveSpeedBuff()
-    {
-        moveSpeedBuffMultiplier = baseMoveSpeedBuffMultiplier;
-    }
-
-    public void SetBaseMoveSpeedBuffMultiplier(float newMultiplier)
-    {
-        baseMoveSpeedBuffMultiplier = newMultiplier;
     }
 
     private void OnDrawGizmos()

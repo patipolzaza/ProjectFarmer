@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Status : IUpgradable
 {
-    public string statusName;
+    public string statusName { get; private set; }
     [SerializeField] private StatusData statusData;
-    public int currentLevel;
+    public int currentLevel { get; private set; }
 
     public Status(string name, StatusData statusData)
     {
@@ -19,7 +19,7 @@ public class Status : IUpgradable
     {
         get
         {
-            return statusData.valuePerLevel * currentLevel;
+            return statusData.baseValue + statusData.extraValuePerLevel * currentLevel;
         }
     }
 
@@ -58,5 +58,29 @@ public class Status : IUpgradable
         {
             return Mathf.CeilToInt(statusData.startUpgradeCost * (statusData.upgradeCostMultiplierPerLevel * currentLevel));
         }
+    }
+    public int GetUpgradeToTargetLevelCost(int targetLevel)
+    {
+        int cost = 0;
+        if (targetLevel < currentLevel)
+        {
+            return 0;
+        }
+
+        if (targetLevel > statusData.maxLevel)
+        {
+            targetLevel = statusData.maxLevel;
+        }
+
+        int levelDiff = targetLevel - currentLevel;
+        int level = currentLevel;
+
+        for (int i = 0; i < levelDiff; i++)
+        {
+            cost += Mathf.CeilToInt(statusData.startUpgradeCost * (statusData.upgradeCostMultiplierPerLevel * level));
+            level++;
+        }
+
+        return cost;
     }
 }

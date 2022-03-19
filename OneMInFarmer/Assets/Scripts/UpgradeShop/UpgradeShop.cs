@@ -14,9 +14,6 @@ public class UpgradeShop : MonoBehaviour
     private int currentExtraTime;
     private bool isPurchasedExtraTime = false;
 
-    [Header("MoveSpeed Upgrade")]
-    [SerializeField] private float buffMoveSpeedMultiplier = 0.25f;
-    [SerializeField] private float moveSpeedBuffCost = 5;
 
     private void Awake()
     {
