@@ -3,12 +3,13 @@ public class UpgradeStatusToTargetLevelCommand : ICommand
 {
     private bool isExecuted;
     private Status statusToUpgrade;
-    private int levelBeforeUpfrade;
+    private int levelBeforeUpgrade;
     private int targetLevel;
 
     public UpgradeStatusToTargetLevelCommand(Status statusToUpgrade, int targetLevel)
     {
         this.statusToUpgrade = statusToUpgrade;
+        levelBeforeUpgrade = this.statusToUpgrade.currentLevel;
         this.targetLevel = targetLevel;
         isExecuted = false;
     }
@@ -53,11 +54,15 @@ public class UpgradeStatusToTargetLevelCommand : ICommand
         if (isExecuted)
         {
             Wallet wallet = Player.Instance.wallet;
+            int levelDiff = Mathf.Abs(levelBeforeUpgrade - statusToUpgrade.currentLevel);
 
-            while (statusToUpgrade.currentLevel > levelBeforeUpfrade)
+            int cost;
+            for (int i = 0; i < levelDiff; i++)
             {
                 statusToUpgrade.Downgrade();
-                wallet.EarnCoin(statusToUpgrade.GetUpgradeCost);
+
+                cost = statusToUpgrade.GetUpgradeCost;
+                wallet.EarnCoin(cost);
             }
 
             isExecuted = false;
