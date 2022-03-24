@@ -1,3 +1,4 @@
+using UnityEngine;
 public class UpgradeStatusToTargetLevelCommand : ICommand
 {
     private bool isExecuted;
@@ -12,11 +13,11 @@ public class UpgradeStatusToTargetLevelCommand : ICommand
         isExecuted = false;
     }
 
-    public void Execute()
+    public bool Execute()
     {
         if (isExecuted)
         {
-            return;
+            return false;
         }
 
         int cost = statusToUpgrade.GetUpgradeToTargetLevelCost(targetLevel);
@@ -25,19 +26,26 @@ public class UpgradeStatusToTargetLevelCommand : ICommand
         if (playerWallet.coin >= cost)
         {
             playerWallet.LoseCoin(cost);
-
             while (statusToUpgrade.currentLevel < targetLevel)
             {
-                statusToUpgrade.Upgrade();
-
-                if (statusToUpgrade.IsReachMaxLevel)
+                if (!statusToUpgrade.IsReachMaxLevel)
+                {
+                    statusToUpgrade.Upgrade();
+                }
+                else
                 {
                     break;
                 }
             }
+
+            isExecuted = true;
+            return true;
+        }
+        else
+        {
+            return false;
         }
 
-        isExecuted = true;
     }
 
     public void Undo()

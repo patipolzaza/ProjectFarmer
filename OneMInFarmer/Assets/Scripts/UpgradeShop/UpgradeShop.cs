@@ -1,34 +1,31 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradeShop : MonoBehaviour
 {
-    public static UpgradeShop Instance;
-    private UpgradeShopWindowUI ui;
+    public static UpgradeShop Instance { get; private set; }
+    [SerializeField] private UpgradeShopWindowUI ui;
+    private int currentPanelIndex = 0;
+    public int playerCoinInMemmory { get; private set; }
 
-    [Header("ExtraTime Upgrade")]
-    [SerializeField] private int baseTimeCostPerSecond = 1;
-    [SerializeField] private int minExtraTime = 0;
-    [SerializeField] private int maxExtraTime = 30;
-    private int currentExtraTime;
-    private bool isPurchasedExtraTime = false;
-
+    private ExtraTimeShop extraTimeShop;
+    public bool isReadied { get; private set; } = false;
 
     private void Awake()
     {
-        Instance = this;
-        ui = FindObjectOfType<UpgradeShopWindowUI>();
-    }
-
-    private void Start()
-    {
-        CloseWindow();
+        StartCoroutine(InitialSetUp());
     }
 
     private void Update()
     {
         UpdateUI();
+
+        if (Player.Instance && playerCoinInMemmory != Player.Instance.wallet.coin)
+        {
+            playerCoinInMemmory = Player.Instance.wallet.coin;
+            StartCoroutine(extraTimeShop.UpdateUpgradeButtonsInteractable());
+        }
 
         if (Input.GetKeyDown(KeyCode.Keypad1))
         {
@@ -43,11 +40,17 @@ public class UpgradeShop : MonoBehaviour
         }
     }
 
+    private IEnumerator InitialSetUp()
+    {
+        yield return null;
+        Instance = this;
+        extraTimeShop = GetComponent<ExtraTimeShop>();
+        ChangePanel(0);
+    }
+
     public void OpenWindow()
     {
         ui.ShowWindow();
-        isPurchasedExtraTime = false;
-        ui.SetTimeUpgradeButtonsInteractable(true);
         GameManager.Instance.SetTimeScale(0);
     }
 
@@ -60,74 +63,18 @@ public class UpgradeShop : MonoBehaviour
 
     private void UpdateUI()
     {
-        ui.UpdatePlayerCoinText(GameManager.Instance.player.wallet.coin);
-        ui.UpdateCurrentExtraTimeText(currentExtraTime);
-        if (isPurchasedExtraTime)
-        {
-            ui.UpdateCurrentCostText("Purchased");
-        }
-        else
-        {
-            ui.UpdateCurrentCostText($"Cost: {GetPrice(currentExtraTime)}");
-        }
-
-        ui.UpdateTimeForNextDayText(GameManager.Instance.GetTimeForNextDayString);
+        ui.UpdatePlayerCoinText(Player.Instance.wallet.coin);
     }
 
-    private bool UpgradeTime(int extraTime)
+    public void ChangePanel(int newIndex)
     {
-        var playerWallet = GameManager.Instance.player.wallet;
-
-        if (playerWallet.coin >= GetPrice(extraTime))
-        {
-            int price = GetPrice(extraTime);
-            playerWallet.LoseCoin(price);
-            isPurchasedExtraTime = true;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    public void BuyExtraTime()
-    {
-        if (UpgradeTime(currentExtraTime))
-        {
-            ui.SetTimeUpgradeButtonsInteractable(false);
-        }
-    }
-
-    public void SetExtraTime(int extraTime)
-    {
-        int playerCoin = GameManager.Instance.player.wallet.coin;
-        currentExtraTime = Mathf.Clamp(extraTime, minExtraTime, maxExtraTime);
-
-        if (extraTime <= minExtraTime)
-        {
-            ui.SetDecreaseButtonInteractable(false);
-        }
-        else if (extraTime >= maxExtraTime || extraTime >= playerCoin)
-        {
-            ui.SetIncreaseButtonInteractable(false);
-        }
-        else
-        {
-            ui.SetDecreaseButtonInteractable(true);
-            ui.SetIncreaseButtonInteractable(true);
-        }
-
+        ui.ChangePanel(currentPanelIndex, newIndex);
+        currentPanelIndex = newIndex;
     }
 
     public void ResetUpgrade()
     {
         StatusUpgradeManager.Instance.UndoAll();
-    }
-
-    public int GetPrice(int extraTime)
-    {
-        int currentPrice = Mathf.CeilToInt(baseTimeCostPerSecond * (GameManager.Instance.currentDay * 0.35f)) * extraTime;
-        return currentPrice;
+        extraTimeShop.ResetUpgrade();
     }
 }

@@ -7,20 +7,10 @@ public class UpgradeShopWindowUI : WindowUIBase
 {
     [Header("Texts")]
     [SerializeField] private Text playerCoinText;
-    [SerializeField] private Text currentExtraTimeText;
-    [SerializeField] private Text currentCostText;
-    [SerializeField] private Text timeForNextDayText;
 
-    [Header("Buttons")]
-    [SerializeField] private Button increaseTimeButton;
-    [SerializeField] private Button decreaseTimeButton;
-    [SerializeField] private Button confirmBuyTimeButton;
-
-    private UpgradeShop upgradeShop;
-    protected override void Awake()
-    {
-        upgradeShop = UpgradeShop.Instance;
-    }
+    [Header("Tabs")]
+    [SerializeField] private List<Button> changeTabButtons = new List<Button>();
+    [SerializeField] private List<GameObject> tabPanels = new List<GameObject>();
 
     protected override void Update()
     {
@@ -30,7 +20,6 @@ public class UpgradeShopWindowUI : WindowUIBase
     public override void ShowWindow()
     {
         base.ShowWindow();
-        SetTimeUpgradeButtonsInteractable(true);
     }
     public override void HideWindow()
     {
@@ -42,34 +31,16 @@ public class UpgradeShopWindowUI : WindowUIBase
         playerCoinText.text = $"{coin}";
     }
 
-    public void UpdateCurrentExtraTimeText(int extraTime)
+    public void SetPanelButtonInteractable(int index, bool isInteractable)
     {
-        currentExtraTimeText.text = $"{extraTime}";
+        changeTabButtons[index].interactable = isInteractable;
     }
 
-    public void UpdateCurrentCostText(string text)
+    public void ChangePanel(int oldIndex, int newIndex)
     {
-        currentCostText.text = text;
-    }
+        SetPanelButtonInteractable(oldIndex, true);
 
-    public void UpdateTimeForNextDayText(string timeForNextDayString)
-    {
-        timeForNextDayText.text = timeForNextDayString;
-    }
-
-    public void SetTimeUpgradeButtonsInteractable(bool isInteractable)
-    {
-        confirmBuyTimeButton.interactable = isInteractable;
-        SetIncreaseButtonInteractable(isInteractable);
-        SetDecreaseButtonInteractable(isInteractable);
-    }
-
-    public void SetIncreaseButtonInteractable(bool isInteractable)
-    {
-        increaseTimeButton.interactable = isInteractable;
-    }
-    public void SetDecreaseButtonInteractable(bool isInteractable)
-    {
-        decreaseTimeButton.interactable = isInteractable;
+        tabPanels[newIndex].transform.SetAsLastSibling();
+        SetPanelButtonInteractable(newIndex, false);
     }
 }

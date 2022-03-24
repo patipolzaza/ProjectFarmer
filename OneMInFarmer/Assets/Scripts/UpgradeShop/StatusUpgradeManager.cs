@@ -15,8 +15,16 @@ public class StatusUpgradeManager : MonoBehaviour
 
     private Stack<ICommand> commandHistory = new Stack<ICommand>();
 
+    public bool isReadied { get; private set; } = false;
+
     private void Awake()
     {
+        StartCoroutine(InitialSetUp());
+    }
+
+    private IEnumerator InitialSetUp()
+    {
+        yield return null;
         if (Instance == null)
         {
             Instance = this;
@@ -24,12 +32,18 @@ public class StatusUpgradeManager : MonoBehaviour
 
         extraMoveSpeedStatus = new Status(extraMoveSpeedData.name, extraMoveSpeedData);
         extraTimeStatus = new Status(extraTimeData.name, extraTimeData);
+
+        isReadied = true;
     }
 
-    private void ExecuteCommand(ICommand command)
+    public bool ExecuteCommand(ICommand command)
     {
-        command.Execute();
-        commandHistory.Push(command);
+        if (command.Execute())
+        {
+            commandHistory.Push(command);
+            return true;
+        }
+        else return false;
     }
 
     public void Undo()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager Instance { get; private set; }
 
     public int currentDay { get; private set; } = 1;
     public int defaultTimePerDay { get; private set; } = 15;

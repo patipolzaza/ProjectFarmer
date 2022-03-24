@@ -8,7 +8,7 @@ public class UpgradeStatusCommand : ICommand
         isExecuted = false;
     }
 
-    public void Execute()
+    public bool Execute()
     {
         if (!statusToUpgrade.IsReachMaxLevel)
         {
@@ -18,8 +18,11 @@ public class UpgradeStatusCommand : ICommand
                 playerWallet?.LoseCoin(statusToUpgrade.GetUpgradeCost);
                 statusToUpgrade.Upgrade();
                 isExecuted = true;
+                return true;
             }
         }
+
+        return false;
     }
 
     public void Undo()

@@ -10,5 +10,5 @@ public class StatusData : ScriptableObject
     public int baseValue = 1;
     public int extraValuePerLevel = 1;
     public int startUpgradeCost = 5;
-    public float upgradeCostMultiplierPerLevel = 1.25f;
+    public float extraCostPerLevel = 1;
 }

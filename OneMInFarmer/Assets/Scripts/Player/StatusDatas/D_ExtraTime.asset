@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: D_ExtraTime
   m_EditorClassIdentifier: 
   statusName: Extra Time
-  maxLevel: 30
-  baseValue: 1
-  extraValuePerLevel: 1
-  startUpgradeCost: 1
-  upgradeCostMultiplierPerLevel: 1.35
+  maxLevel: 4
+  baseValue: 0
+  extraValuePerLevel: 10
+  startUpgradeCost: 10
+  extraCostPerLevel: -2.35

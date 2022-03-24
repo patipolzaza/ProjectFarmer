@@ -251,8 +251,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseMoveSpeed: 275
-  baseMoveSpeedBuffMultiplier: 1
-  moveSpeedBuffMultiplier: 0
   characterObject: {fileID: 1807996646350201449}
   interactableDetector: {fileID: 4423809371545508611}
   interactableDetectRange: 0.85

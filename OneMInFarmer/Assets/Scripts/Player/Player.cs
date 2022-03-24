@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         facingDirection = transform.localScale.x / transform.localScale.x;
-        wallet = new Wallet(10);
+        wallet = new Wallet(20);
 
         Instance = this;
     }
@@ -98,6 +98,11 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
         {
             DropItem();
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            wallet.EarnCoin(10);
         }
     }
 
