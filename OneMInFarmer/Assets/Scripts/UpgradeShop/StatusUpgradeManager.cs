@@ -24,7 +24,6 @@ public class StatusUpgradeManager : MonoBehaviour
 
     private IEnumerator InitialSetUp()
     {
-        yield return null;
         if (Instance == null)
         {
             Instance = this;
@@ -34,6 +33,7 @@ public class StatusUpgradeManager : MonoBehaviour
         extraTimeStatus = new Status(extraTimeData.name, extraTimeData);
 
         isReadied = true;
+        yield return null;
     }
 
     public bool ExecuteCommand(ICommand command)

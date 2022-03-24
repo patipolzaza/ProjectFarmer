@@ -21,7 +21,7 @@ public class UpgradeShop : MonoBehaviour
     {
         UpdateUI();
 
-        if (Player.Instance && playerCoinInMemmory != Player.Instance.wallet.coin)
+        if (isReadied && Player.Instance && playerCoinInMemmory != Player.Instance.wallet.coin)
         {
             playerCoinInMemmory = Player.Instance.wallet.coin;
             StartCoroutine(extraTimeShop.UpdateUpgradeButtonsInteractable());
@@ -38,14 +38,20 @@ public class UpgradeShop : MonoBehaviour
                 OpenWindow();
             }
         }
+        else if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            Debug.Log(Player.Instance.wallet.coin);
+        }
     }
 
     private IEnumerator InitialSetUp()
     {
-        yield return null;
         Instance = this;
         extraTimeShop = GetComponent<ExtraTimeShop>();
         ChangePanel(0);
+
+        isReadied = true;
+        yield return null;
     }
 
     public void OpenWindow()

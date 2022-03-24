@@ -7,11 +7,13 @@ public class ExtraTimeShop : MonoBehaviour
     private UpgradeShop upgradeShop;
     [SerializeField] private ExtraTimeShopUI ui;
     private bool isSelectedTargetLevel;
-    private int currentChosenLevel; //Level - 1 = button index on ui.
+    private int currentChosenLevel; //Level - 2 = button index on ui.
 
     private ICommand lastestCommand;
 
     private Status statusToUpgrade;
+
+    private int[] upgradeCosts;
     public bool isReadied { get; private set; } = false;
 
     private void Awake()
@@ -26,10 +28,22 @@ public class ExtraTimeShop : MonoBehaviour
 
     private IEnumerator InitialSetUp()
     {
+
         yield return new WaitUntil(() => StatusUpgradeManager.Instance);
         statusToUpgrade = StatusUpgradeManager.Instance.extraTimeStatus;
+        InitialUpgradeCosts();
         yield return new WaitUntil(() => Player.Instance);
-        StartCoroutine(UpdateUpgradeButtonsInteractable());
+        isReadied = true;
+    }
+
+    private void InitialUpgradeCosts()
+    {
+        upgradeCosts = new int[statusToUpgrade.GetMaxLevel - 1];
+        int loopTimes = upgradeCosts.Length;
+        for (int i = 0; i < loopTimes; i++)
+        {
+            upgradeCosts[i] = statusToUpgrade.GetUpgradeToTargetLevelCost(i + 2);
+        }
     }
 
     public void SelectTargetLevel(int targetLevel)
@@ -67,18 +81,22 @@ public class ExtraTimeShop : MonoBehaviour
 
     public void ResetUpgrade()
     {
-        lastestCommand?.Undo();
+        if (lastestCommand != null)
+        {
+            lastestCommand.Undo();
+            isSelectedTargetLevel = false;
+        }
     }
 
     public IEnumerator UpdateUpgradeButtonsInteractable()
     {
         yield return new WaitUntil(() => statusToUpgrade != null);
-
         ui.SetAllExtraTimeUpgradeButtonsInteractable(false);
         int maxCost = statusToUpgrade.GetUpgradeToTargetLevelCost(statusToUpgrade.GetMaxLevel);
 
         yield return new WaitUntil(() => upgradeShop.playerCoinInMemmory == Player.Instance.wallet.coin);
         int playerCoin = upgradeShop.playerCoinInMemmory;
+
 
         if (maxCost <= playerCoin)
         {
@@ -87,13 +105,22 @@ public class ExtraTimeShop : MonoBehaviour
         else
         {
             int cost;
+
+            if (isSelectedTargetLevel)
+            {
+                playerCoin += upgradeCosts[currentChosenLevel - 2];
+            }
+
             for (int i = 0; i < 3; i++)
             {
-                yield return new WaitForFixedUpdate();
-                cost = statusToUpgrade.GetUpgradeToTargetLevelCost(i + 2);
+                cost = upgradeCosts[i];
+                yield return new WaitForEndOfFrame();
                 if (playerCoin >= cost)
                 {
-                    ui.SetExtraTimeUpgradeButtonInteractable(i, true);
+                    if (i != currentChosenLevel - 2)
+                    {
+                        ui.SetExtraTimeUpgradeButtonInteractable(i, true);
+                    }
                 }
                 else
                 {
