@@ -5,16 +5,11 @@ using UnityEngine.UI;
 
 public class ExtraTimeShopUI : MonoBehaviour
 {
-    [SerializeField] private Button[] upgradeButtons = new Button[3];
+    [SerializeField] private ExtraTimeUpgradeButton[] upgradeButtons = new ExtraTimeUpgradeButton[3];
 
     private void Start()
     {
         StartCoroutine(InitialSetUp());
-    }
-
-    private void OnEnable()
-    {
-        //SetAllExtraTimeUpgradeButtonsInteractable(true);
     }
 
     private IEnumerator InitialSetUp()
@@ -42,6 +37,11 @@ public class ExtraTimeShopUI : MonoBehaviour
         Text belowButtonText = button.transform.GetChild(1).GetComponent<Text>();
         belowButtonText.text = costText;
 
+    }
+
+    public void ChangeUpgradeChosen(int oldIndex)
+    {
+        upgradeButtons[oldIndex].Reject();
     }
 
     public void SetExtraTimeUpgradeButtonInteractable(int index, bool isInteractable)

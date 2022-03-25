@@ -28,7 +28,6 @@ public class ExtraTimeShop : MonoBehaviour
 
     private IEnumerator InitialSetUp()
     {
-
         yield return new WaitUntil(() => StatusUpgradeManager.Instance);
         statusToUpgrade = StatusUpgradeManager.Instance.extraTimeStatus;
         InitialUpgradeCosts();
@@ -74,7 +73,8 @@ public class ExtraTimeShop : MonoBehaviour
     private void ChangeTargetLevel(int oldLevel, int newLevel)
     {
         int oldButtonIndex = oldLevel - 2;
-        ui.SetExtraTimeUpgradeButtonInteractable(oldButtonIndex, true);
+
+        ui.ChangeUpgradeChosen(oldButtonIndex);
 
         currentChosenLevel = newLevel;
     }
@@ -84,6 +84,7 @@ public class ExtraTimeShop : MonoBehaviour
         if (lastestCommand != null)
         {
             lastestCommand.Undo();
+            ChangeTargetLevel(currentChosenLevel, 0);
             isSelectedTargetLevel = false;
         }
     }
