@@ -5,7 +5,7 @@ using UnityEngine;
 public class Status : IUpgradable
 {
     public string statusName { get; private set; }
-    [SerializeField] private StatusData statusData;
+    [SerializeField] protected StatusData statusData;
     public int currentLevel { get; private set; }
 
     public Status(string name, StatusData statusData)
@@ -15,7 +15,7 @@ public class Status : IUpgradable
         currentLevel = 1;
     }
 
-    public int GetValue
+    public virtual int GetValue
     {
         get
         {
@@ -23,7 +23,7 @@ public class Status : IUpgradable
         }
     }
 
-    public int GetVelueAtLevel(int level)
+    public virtual int GetVelueAtLevel(int level)
     {
         return statusData.baseValue + (level - 1) * statusData.extraValuePerLevel;
     }

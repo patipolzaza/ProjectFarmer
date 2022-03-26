@@ -6,8 +6,8 @@ public class StatusUpgradeManager : MonoBehaviour
 {
     public static StatusUpgradeManager Instance { get; private set; }
     //MoveSpeed
-    public Status extraMoveSpeedStatus { get; private set; }
-    [SerializeField] private StatusData extraMoveSpeedData;
+    public MoveSpeedStatus moveSpeedStatus { get; private set; }
+    [SerializeField] private MoveSpeedStatusData moveSpeedData;
 
     //ExtraTime
     public Status extraTimeStatus { get; private set; }
@@ -29,7 +29,7 @@ public class StatusUpgradeManager : MonoBehaviour
             Instance = this;
         }
 
-        extraMoveSpeedStatus = new Status(extraMoveSpeedData.name, extraMoveSpeedData);
+        moveSpeedStatus = new MoveSpeedStatus(moveSpeedData.name, moveSpeedData);
         extraTimeStatus = new Status(extraTimeData.name, extraTimeData);
 
         isReadied = true;
@@ -68,6 +68,6 @@ public class StatusUpgradeManager : MonoBehaviour
     public void ResetDiaryUpgradeStatus()
     {
         extraTimeStatus.ResetLevel();
-        extraMoveSpeedStatus.ResetLevel();
+        moveSpeedStatus.ResetLevel();
     }
 }

@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
 
-    [SerializeField] private int baseMoveSpeed = 275;
     private Vector2 moveInput;
 
     [SerializeField] private GameObject characterObject;
@@ -187,7 +186,7 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        var moveSpeed = baseMoveSpeed + StatusUpgradeManager.Instance.extraMoveSpeedStatus.GetValue;
+        var moveSpeed = StatusUpgradeManager.Instance.moveSpeedStatus.GetValue;
 
         float velocityX = moveInput.x * moveSpeed * Time.fixedDeltaTime;
         float velocityY = moveInput.y * moveSpeed * Time.fixedDeltaTime;
