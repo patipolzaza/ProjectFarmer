@@ -16,7 +16,7 @@ public class MoveSpeedStatus : Status
             MoveSpeedStatusData msData = statusData as MoveSpeedStatusData;
             int baseValue = msData.baseValue;
 
-            float statusValue = baseValue + ((currentLevel - 1) * baseValue * msData.extraValuePerLevel / 100);
+            float statusValue = baseValue + ((currentLevel - 1) * baseValue * msData.extraValuePerLevel);
 
             return Mathf.FloorToInt(statusValue);
         }
@@ -27,7 +27,7 @@ public class MoveSpeedStatus : Status
         MoveSpeedStatusData msData = statusData as MoveSpeedStatusData;
         int baseValue = msData.baseValue;
 
-        float statusValue = baseValue + ((level - 1) * baseValue * msData.extraValuePerLevel / 100);
+        float statusValue = baseValue + ((level - 1) * baseValue * msData.extraValuePerLevel);
 
         return Mathf.FloorToInt(statusValue);
     }
