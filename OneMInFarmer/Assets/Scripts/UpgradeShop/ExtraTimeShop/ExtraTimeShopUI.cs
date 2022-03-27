@@ -6,29 +6,12 @@ using UnityEngine.UI;
 public class ExtraTimeShopUI : MonoBehaviour
 {
     [SerializeField] private ExtraTimeUpgradeButton[] upgradeButtons = new ExtraTimeUpgradeButton[3];
-
-    private void Start()
+    public int upgradeButtonsCount
     {
-        StartCoroutine(InitialSetUp());
+        get { return upgradeButtons.Length; }
     }
 
-    private IEnumerator InitialSetUp()
-    {
-        yield return new WaitUntil(() => StatusUpgradeManager.Instance);
-
-        Status status = StatusUpgradeManager.Instance.extraTimeStatus;
-        int statusLevel;
-
-        for (int i = 0; i < upgradeButtons.Length; i++)
-        {
-            statusLevel = i + 2;
-            string buttonText = $"+{status.GetValueAtLevel(statusLevel)}s";
-            string costText = $"Cost: {status.GetUpgradeToTargetLevelCost(statusLevel)}";
-            SetUpgradeButtonText(i, buttonText, costText);
-        }
-    }
-
-    private void SetUpgradeButtonText(int buttonIndex, string textOnButton, string costText)
+    public void SetUpgradeButtonText(int buttonIndex, string textOnButton, string costText)
     {
         Button button = upgradeButtons[buttonIndex];
         Text buttonText = button.transform.GetChild(0).GetComponent<Text>();
@@ -36,7 +19,6 @@ public class ExtraTimeShopUI : MonoBehaviour
 
         Text belowButtonText = button.transform.GetChild(1).GetComponent<Text>();
         belowButtonText.text = costText;
-
     }
 
     public void ChangeUpgradeChosen(int oldIndex)

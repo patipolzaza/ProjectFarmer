@@ -30,11 +30,28 @@ public class ExtraTimeShop : MonoBehaviour
     {
         yield return new WaitUntil(() => StatusUpgradeManager.Instance);
         statusToUpgrade = StatusUpgradeManager.Instance.extraTimeStatus;
-        InitialUpgradeCosts();
+        yield return new WaitUntil(() => InitialUpgradeCosts());
+        yield return new WaitUntil(() => SetShopButtonTexts());
         isReadied = true;
     }
 
-    private void InitialUpgradeCosts()
+    private bool SetShopButtonTexts()
+    {
+        Status status = StatusUpgradeManager.Instance.extraTimeStatus;
+        int statusLevel;
+
+        for (int i = 0; i < ui.upgradeButtonsCount; i++)
+        {
+            statusLevel = i + 2;
+            string buttonText = $"+{status.GetValueAtLevel(statusLevel)}s";
+            string costText = $"Cost: {upgradeCosts[i]}";
+            ui.SetUpgradeButtonText(i, buttonText, costText);
+        }
+
+        return true;
+    }
+
+    private bool InitialUpgradeCosts()
     {
         upgradeCosts = new int[statusToUpgrade.GetMaxLevel - 1];
         int loopTimes = upgradeCosts.Length;
@@ -42,6 +59,8 @@ public class ExtraTimeShop : MonoBehaviour
         {
             upgradeCosts[i] = statusToUpgrade.GetUpgradeToTargetLevelCost(i + 2);
         }
+
+        return true;
     }
 
     public void SelectTargetLevel(int targetLevel)
