@@ -3549,7 +3549,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Extra Time Shop
+  m_Text: Time Upgrade
 --- !u!1 &8910668121196081480
 GameObject:
   m_ObjectHideFlags: 0

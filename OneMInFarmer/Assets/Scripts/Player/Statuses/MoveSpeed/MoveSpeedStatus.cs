@@ -15,22 +15,20 @@ public class MoveSpeedStatus : Status
         {
             MoveSpeedStatusData msData = statusData as MoveSpeedStatusData;
             int baseValue = msData.baseValue;
-            return baseValue + Mathf.FloorToInt(baseValue * msData.extraValuePerLevel / 100);
+
+            float statusValue = baseValue + ((currentLevel - 1) * baseValue * msData.extraValuePerLevel / 100);
+
+            return Mathf.FloorToInt(statusValue);
         }
     }
 
-    public override int GetVelueAtLevel(int level)
+    public override int GetValueAtLevel(int level)
     {
-        int value = 0;
-        int levelDiff = level - currentLevel;
+        MoveSpeedStatusData msData = statusData as MoveSpeedStatusData;
+        int baseValue = msData.baseValue;
 
-        value = GetValue;
+        float statusValue = baseValue + ((level - 1) * baseValue * msData.extraValuePerLevel / 100);
 
-        for (int i = 0; i < levelDiff - 1; i++)
-        {
-            value += Mathf.FloorToInt(value * statusData.extraValuePerLevel / 100);
-        }
-
-        return value;
+        return Mathf.FloorToInt(statusValue);
     }
 }

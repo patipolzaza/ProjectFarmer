@@ -23,7 +23,7 @@ public class Status : IUpgradable
         }
     }
 
-    public virtual int GetVelueAtLevel(int level)
+    public virtual int GetValueAtLevel(int level)
     {
         return statusData.baseValue + (level - 1) * statusData.extraValuePerLevel;
     }

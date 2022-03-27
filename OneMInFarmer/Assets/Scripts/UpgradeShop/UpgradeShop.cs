@@ -38,10 +38,6 @@ public class UpgradeShop : MonoBehaviour
                 OpenWindow();
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            Debug.Log(Player.Instance.wallet.coin);
-        }
     }
 
     private IEnumerator InitialSetUp()

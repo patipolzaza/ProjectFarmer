@@ -186,7 +186,7 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        var moveSpeed = StatusUpgradeManager.Instance.moveSpeedStatus.GetValue;
+        int moveSpeed = StatusUpgradeManager.Instance.moveSpeedStatus.GetValue;
 
         float velocityX = moveInput.x * moveSpeed * Time.fixedDeltaTime;
         float velocityY = moveInput.y * moveSpeed * Time.fixedDeltaTime;

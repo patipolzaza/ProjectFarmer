@@ -15,6 +15,6 @@ MonoBehaviour:
   statusName: Move Speed
   maxLevel: 2
   baseValue: 275
-  extraValuePerLevel: 30
+  extraValuePerLevel: 15
   startUpgradeCost: 5
   extraCostPerLevel: 1

@@ -22,7 +22,7 @@ public class ExtraTimeShopUI : MonoBehaviour
         for (int i = 0; i < upgradeButtons.Length; i++)
         {
             statusLevel = i + 2;
-            string buttonText = $"+{status.GetVelueAtLevel(statusLevel)}s";
+            string buttonText = $"+{status.GetValueAtLevel(statusLevel)}s";
             string costText = $"Cost: {status.GetUpgradeToTargetLevelCost(statusLevel)}";
             SetUpgradeButtonText(i, buttonText, costText);
         }
