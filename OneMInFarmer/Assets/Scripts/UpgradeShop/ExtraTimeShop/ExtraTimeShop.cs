@@ -19,10 +19,6 @@ public class ExtraTimeShop : MonoBehaviour
     private void Awake()
     {
         upgradeShop = GetComponent<UpgradeShop>();
-    }
-
-    private void Start()
-    {
         StartCoroutine(InitialSetUp());
     }
 
@@ -30,8 +26,11 @@ public class ExtraTimeShop : MonoBehaviour
     {
         yield return new WaitUntil(() => StatusUpgradeManager.Instance);
         statusToUpgrade = StatusUpgradeManager.Instance.extraTimeStatus;
+
         yield return new WaitUntil(() => InitialUpgradeCosts());
         yield return new WaitUntil(() => SetShopButtonTexts());
+        //Wait until each function finished setup.
+
         isReadied = true;
     }
 
