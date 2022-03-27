@@ -1569,24 +1569,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1173176476 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8997332608405060978, guid: 723aa240e3be7da40a2d0a2b2eecbd0b, type: 3}
-  m_PrefabInstance: {fileID: 5243712790485011414}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1173176478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1173176476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6701d6ce760260847aabd8eacea1bc97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upgradeButtons: []
 --- !u!1 &1569350680
 GameObject:
   m_ObjectHideFlags: 0
