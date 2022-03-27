@@ -9,7 +9,7 @@ public class UpgradeShop : MonoBehaviour
     private int currentPanelIndex = 0;
     public int playerCoinInMemmory { get; private set; }
 
-    private ExtraTimeShop extraTimeShop;
+    public ExtraTimeShop extraTimeShop { get; private set; }
     public bool isReadied { get; private set; } = false;
 
     private void Awake()
@@ -45,6 +45,8 @@ public class UpgradeShop : MonoBehaviour
         Instance = this;
         extraTimeShop = GetComponent<ExtraTimeShop>();
         ChangePanel(0);
+
+        yield return new WaitUntil(() => extraTimeShop.isReadied);
 
         isReadied = true;
         yield return null;

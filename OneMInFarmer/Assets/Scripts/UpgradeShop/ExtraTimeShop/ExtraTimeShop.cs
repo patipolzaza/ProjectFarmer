@@ -31,7 +31,6 @@ public class ExtraTimeShop : MonoBehaviour
         yield return new WaitUntil(() => StatusUpgradeManager.Instance);
         statusToUpgrade = StatusUpgradeManager.Instance.extraTimeStatus;
         InitialUpgradeCosts();
-        yield return new WaitUntil(() => Player.Instance);
         isReadied = true;
     }
 
