@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        facingDirection = transform.localScale.x / transform.localScale.x;
+        facingDirection = transform.localScale.x / Mathf.Abs(transform.localScale.x);
         wallet = new Wallet(10);
 
         Instance = this;
