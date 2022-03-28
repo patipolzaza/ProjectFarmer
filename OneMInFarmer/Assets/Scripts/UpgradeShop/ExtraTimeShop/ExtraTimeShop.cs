@@ -19,32 +19,36 @@ public class ExtraTimeShop : MonoBehaviour
     private void Awake()
     {
         upgradeShop = GetComponent<UpgradeShop>();
-        StartCoroutine(InitialSetUp());
+        StartCoroutine(SetupShop());
     }
 
-    private IEnumerator InitialSetUp()
+    IEnumerator SetupShop()
     {
         yield return new WaitUntil(() => StatusUpgradeManager.Instance);
         statusToUpgrade = StatusUpgradeManager.Instance.extraTimeStatus;
 
         yield return new WaitUntil(() => InitialUpgradeCosts());
-        yield return new WaitUntil(() => SetShopButtonTexts());
+        yield return new WaitUntil(() => SetupShopButtons());
         //Wait until each function finished setup.
 
         isReadied = true;
     }
 
-    private bool SetShopButtonTexts()
+    private bool SetupShopButtons()
     {
         Status status = StatusUpgradeManager.Instance.extraTimeStatus;
-        int statusLevel;
+        int loopCount = ui.upgradeButtonsCount;
 
-        for (int i = 0; i < ui.upgradeButtonsCount; i++)
+        for (int i = 0; i < loopCount; i++)
         {
-            statusLevel = i + 2;
+            int statusLevel = i + 2;
+            int index = i;
             string buttonText = $"+{status.GetValueAtLevel(statusLevel)}s";
-            string costText = $"Cost: {upgradeCosts[i]}";
-            ui.SetUpgradeButtonText(i, buttonText, costText);
+            string costText = $"Cost: {upgradeCosts[index]}";
+            ui.SetUpgradeButtonText(index, buttonText, costText);
+
+            ui.AddButtonAction(index, delegate { SelectTargetLevel(statusLevel); });
+            //DebugMessage(index, statusLevel);
         }
 
         return true;
@@ -75,7 +79,6 @@ public class ExtraTimeShop : MonoBehaviour
         }
 
         UpgradeExtraTime();
-        isSelectedTargetLevel = true;
     }
 
     private void UpgradeExtraTime()
@@ -84,6 +87,11 @@ public class ExtraTimeShop : MonoBehaviour
         if (command.Execute())
         {
             lastestCommand = command;
+            isSelectedTargetLevel = true;
+        }
+        else
+        {
+            ui.SetExtraTimeUpgradeButtonInteractable(currentChosenLevel - 2, true);
         }
     }
 
@@ -91,7 +99,7 @@ public class ExtraTimeShop : MonoBehaviour
     {
         int oldButtonIndex = oldLevel - 2;
 
-        ui.ChangeUpgradeChosen(oldButtonIndex);
+        ui.ChangeUpgradeTarget(oldButtonIndex);
 
         currentChosenLevel = newLevel;
     }
@@ -101,12 +109,20 @@ public class ExtraTimeShop : MonoBehaviour
         if (lastestCommand != null)
         {
             lastestCommand.Undo();
-            ChangeTargetLevel(currentChosenLevel, 0);
+            if (isSelectedTargetLevel)
+            {
+                ChangeTargetLevel(currentChosenLevel, 0);
+            }
             isSelectedTargetLevel = false;
         }
     }
 
-    public IEnumerator UpdateUpgradeButtonsInteractable()
+    public void UpdateShopUpgradeButtons()
+    {
+        StartCoroutine(UpdateUpgradeButtonsInteractable());
+    }
+
+    private IEnumerator UpdateUpgradeButtonsInteractable()
     {
         yield return new WaitUntil(() => statusToUpgrade != null);
         ui.SetAllExtraTimeUpgradeButtonsInteractable(false);

@@ -92,7 +92,7 @@ public class Animal : PickableObject, IValuable
         {
             if (showTextCoroutine != null)
             {
-                StopCoroutine(showTextCoroutine);
+                StopMessageCoroutine();
             }
 
             showTextCoroutine = StartCoroutine(ShowText("I'm NOT HUNGRY."));
@@ -102,7 +102,7 @@ public class Animal : PickableObject, IValuable
         {
             if (showTextCoroutine != null)
             {
-                StopCoroutine(showTextCoroutine);
+                StopMessageCoroutine();
             }
 
             showTextCoroutine = StartCoroutine(ShowText("I Don't like this."));
@@ -112,6 +112,12 @@ public class Animal : PickableObject, IValuable
         showTextCoroutine = StartCoroutine(ShowText("Yummy :)"));
         isHungry = false;
         return true;
+    }
+
+    private void StopMessageCoroutine()
+    {
+        textMesh.text = "";
+        StopCoroutine(showTextCoroutine);
     }
 
     public IEnumerator ShowText(string textToShow)

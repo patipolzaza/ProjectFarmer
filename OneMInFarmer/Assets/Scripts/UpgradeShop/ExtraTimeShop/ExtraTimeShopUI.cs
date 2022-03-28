@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ExtraTimeShopUI : MonoBehaviour
 {
-    [SerializeField] private ExtraTimeUpgradeButton[] upgradeButtons = new ExtraTimeUpgradeButton[3];
+    [SerializeField] private DailyUpgradeShopButton[] upgradeButtons = new DailyUpgradeShopButton[3];
     public int upgradeButtonsCount
     {
         get { return upgradeButtons.Length; }
@@ -21,9 +22,22 @@ public class ExtraTimeShopUI : MonoBehaviour
         belowButtonText.text = costText;
     }
 
-    public void ChangeUpgradeChosen(int oldIndex)
+    public void AddButtonAction(int index, UnityAction action)
     {
-        upgradeButtons[oldIndex].Reject();
+        upgradeButtons[index].onClick.AddListener(action);
+    }
+
+    public void RemoveButtonAction(int index, UnityAction action)
+    {
+        upgradeButtons[index].onClick.RemoveListener(action);
+    }
+
+    public void ChangeUpgradeTarget(int oldIndex)
+    {
+        if (oldIndex < upgradeButtons.Length)
+        {
+            upgradeButtons[oldIndex].Reject();
+        }
     }
 
     public void SetExtraTimeUpgradeButtonInteractable(int index, bool isInteractable)

@@ -97,7 +97,6 @@ public class Status : IUpgradable
         int levelDiff = targetLevel - currentLevel;
         int level = currentLevel;
 
-        Debug.Log("Level:" + targetLevel + "\n=====================");
         for (int i = 0; i < levelDiff; i++)
         {
             int upgradeCost = statusData.upgradeCostPerLevel;

@@ -16,6 +16,5 @@ MonoBehaviour:
   maxLevel: 4
   baseValue: 0
   extraValuePerLevel: 10
-  startUpgradeCost: 10
   upgradeCostPerLevel: 10
-  extraCostMultiplierPerLevel: -0.25
+  extraCostPercentage: -25

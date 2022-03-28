@@ -44,6 +44,7 @@ public class UpgradeStatusToTargetLevelCommand : ICommand
         }
         else
         {
+            Debug.LogError("Coin is not enough.");
             return false;
         }
 

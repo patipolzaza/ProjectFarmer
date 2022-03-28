@@ -10,6 +10,8 @@ public class UpgradeShop : MonoBehaviour
     public int playerCoinInMemmory { get; private set; }
 
     public ExtraTimeShop extraTimeShop { get; private set; }
+    public MoveSpeedUpgradeShop moveSpeedUpgradeShop { get; private set; }
+
     public bool isReadied { get; private set; } = false;
 
     private void Awake()
@@ -24,7 +26,8 @@ public class UpgradeShop : MonoBehaviour
         if (isReadied && Player.Instance && playerCoinInMemmory != Player.Instance.wallet.coin)
         {
             playerCoinInMemmory = Player.Instance.wallet.coin;
-            StartCoroutine(extraTimeShop.UpdateUpgradeButtonsInteractable());
+            extraTimeShop.UpdateShopUpgradeButtons();
+            moveSpeedUpgradeShop.UpdateShopButtons();
         }
 
         if (Input.GetKeyDown(KeyCode.Keypad1))
@@ -44,12 +47,13 @@ public class UpgradeShop : MonoBehaviour
     {
         Instance = this;
         extraTimeShop = GetComponent<ExtraTimeShop>();
+        moveSpeedUpgradeShop = GetComponent<MoveSpeedUpgradeShop>();
         ChangePanel(0);
 
         yield return new WaitUntil(() => extraTimeShop.isReadied);
+        yield return new WaitUntil(() => moveSpeedUpgradeShop.isReadied);
 
         isReadied = true;
-        yield return null;
     }
 
     public void OpenWindow()
@@ -80,5 +84,6 @@ public class UpgradeShop : MonoBehaviour
     {
         StatusUpgradeManager.Instance.UndoAll();
         extraTimeShop.ResetUpgrade();
+        moveSpeedUpgradeShop.ResetUpgrade();
     }
 }

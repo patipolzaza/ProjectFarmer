@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ExtraTimeUpgradeButton : Button
+public class DailyUpgradeShopButton : Button
 {
     private Color defaultDisableColor;
     private Color whenChosenColor;
@@ -13,7 +10,7 @@ public class ExtraTimeUpgradeButton : Button
 
     protected override void Awake()
     {
-        defaultDisableColor = base.colors.disabledColor;
+        defaultDisableColor = colors.disabledColor;
         whenChosenColor = new Color32(62, 236, 140, 255);
 
         colorsWorkspace = colors;
