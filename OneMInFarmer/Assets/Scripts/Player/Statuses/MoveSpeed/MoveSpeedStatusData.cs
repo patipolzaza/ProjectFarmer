@@ -16,7 +16,7 @@ public class MoveSpeedStatusData : StatusData
 
             serializedObject.Update();
 
-            EditorGUILayout.HelpBox("Cost will calculate by: \n[ startUpgradeCost + ((currentLevel - 1) * upgradeCostPerLevel * extraCostMultiplierPerLevel) ]", MessageType.Info);
+            EditorGUILayout.HelpBox("Cost will calculate by: \n[ baseUpgradeCost + ((currentLevel - 1) * extraUpgradeCostPerLevel * extraCostMultiplierPerLevel) ]", MessageType.Info);
             EditorGUILayout.HelpBox("Extra value per level for move speed status is as extra percentage form (ex. 30 is equal to +30% from start value.).", MessageType.Info);
         }
     }
