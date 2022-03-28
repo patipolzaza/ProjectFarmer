@@ -69,7 +69,15 @@ public class Status : IUpgradable
     {
         get
         {
-            return Mathf.CeilToInt(statusData.baseUpgradeCost + ((currentLevel - 1) * statusData.extraUpgradeCostPerLevel * statusData.extraCostMultiplierPerLevel));
+            if (currentLevel == statusData.maxLevel)
+            {
+                return 0;
+            }
+
+            int upgradeCost = statusData.upgradeCostPerLevel;
+            float extraCostMultiplier = statusData.extraCostPercentage / 100f;
+
+            return Mathf.Clamp(Mathf.CeilToInt(upgradeCost + (currentLevel - 1) * upgradeCost * extraCostMultiplier), 0, int.MaxValue);
         }
     }
 
@@ -89,13 +97,18 @@ public class Status : IUpgradable
         int levelDiff = targetLevel - currentLevel;
         int level = currentLevel;
 
+        Debug.Log("Level:" + targetLevel + "\n=====================");
         for (int i = 0; i < levelDiff; i++)
         {
-            float currentLevelCost = statusData.baseUpgradeCost + ((level - 1) * statusData.extraUpgradeCostPerLevel * statusData.extraCostMultiplierPerLevel);
+            int upgradeCost = statusData.upgradeCostPerLevel;
+            float extraCostMultiplier = statusData.extraCostPercentage / 100f;
+            //an = a1+(n-1)d
+            float currentLevelCost = upgradeCost + ((level - 1) * upgradeCost * extraCostMultiplier);
+
             cost += Mathf.CeilToInt(currentLevelCost);
             level++;
         }
 
-        return cost;
+        return Mathf.Clamp(cost, 0, int.MaxValue);
     }
 }
