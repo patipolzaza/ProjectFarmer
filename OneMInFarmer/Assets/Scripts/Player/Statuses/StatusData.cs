@@ -10,8 +10,8 @@ public class StatusData : ScriptableObject
     public int maxLevel = 5;
     public int baseValue = 1;
     public int extraValuePerLevel = 1;
-    public int startUpgradeCost = 10;
-    public int upgradeCostPerLevel = 5;
+    public int baseUpgradeCost = 10;
+    public int extraUpgradeCostPerLevel = 0;
     public float extraCostMultiplierPerLevel = 1;
 
     [CustomEditor(typeof(StatusData))]
@@ -24,7 +24,7 @@ public class StatusData : ScriptableObject
 
             serializedObject.Update();
 
-            EditorGUILayout.HelpBox("Cost will calculate by: \n[ startUpgradeCost + ((currentLevel - 1) * upgradeCostPerLevel * extraCostMultiplierPerLevel) ]", MessageType.Info);
+            EditorGUILayout.HelpBox("Cost will calculate by: \n[ baseUpgradeCost + ((currentLevel - 1) * extraUpgradeCostPerLevel * extraCostMultiplierPerLevel) ]", MessageType.Info);
         }
     }
 }
