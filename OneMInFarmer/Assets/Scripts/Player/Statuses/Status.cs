@@ -69,7 +69,7 @@ public class Status : IUpgradable
     {
         get
         {
-            return Mathf.CeilToInt(statusData.startUpgradeCost + ((currentLevel - 1) * statusData.upgradeCostPerLevel * statusData.extraCostPercentagePerLevel));
+            return Mathf.CeilToInt(statusData.startUpgradeCost + ((currentLevel - 1) * statusData.upgradeCostPerLevel * statusData.extraCostMultiplierPerLevel));
         }
     }
 
@@ -91,7 +91,7 @@ public class Status : IUpgradable
 
         for (int i = 0; i < levelDiff; i++)
         {
-            float currentLevelCost = statusData.startUpgradeCost + ((level - 1) * statusData.upgradeCostPerLevel * statusData.extraCostPercentagePerLevel);
+            float currentLevelCost = statusData.startUpgradeCost + ((level - 1) * statusData.upgradeCostPerLevel * statusData.extraCostMultiplierPerLevel);
             cost += Mathf.CeilToInt(currentLevelCost);
             level++;
         }

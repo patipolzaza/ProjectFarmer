@@ -9,6 +9,19 @@ public class MoveSpeedStatus : Status
         base.statusData = statusData;
     }
 
+    public int GetPercentageUpgradeValue
+    {
+        get
+        {
+            return Mathf.CeilToInt((currentLevel - 1) * statusData.extraValuePerLevel);
+        }
+    }
+
+    public int GetPercentageUpgradeValueAtLevel(int targetLevel)
+    {
+        return Mathf.CeilToInt((targetLevel - 1) * statusData.extraValuePerLevel);
+    }
+
     public override int GetValue
     {
         get

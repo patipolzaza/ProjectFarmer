@@ -16,7 +16,8 @@ public class MoveSpeedStatusData : StatusData
 
             serializedObject.Update();
 
-            EditorGUILayout.HelpBox("Extra value per level for move speed status is as multiplier (ex. 1.15 is increase 15% per level, -1.15 is decrease 15% per level).", MessageType.Info);
+            EditorGUILayout.HelpBox("Cost will calculate by: \n[ startUpgradeCost + ((currentLevel - 1) * upgradeCostPerLevel * extraCostMultiplierPerLevel) ]", MessageType.Info);
+            EditorGUILayout.HelpBox("Extra value per level for move speed status is as extra percentage form (ex. 30 is equal to +30% from start value.).", MessageType.Info);
         }
     }
 }
