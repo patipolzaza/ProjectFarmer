@@ -16,6 +16,8 @@ public class Timer : MonoBehaviour
 
     [SerializeField] private DayFloatingText dayFloatingText;
     [SerializeField] private Text dayText;
+
+    private Coroutine countTimeCouroutine;
     private void Awake()
     {
         Instance = this;
@@ -36,13 +38,18 @@ public class Timer : MonoBehaviour
 
     public void Begin()
     {
+        if (countTimeCouroutine != null)
+        {
+            StopCoroutine(countTimeCouroutine);
+        }
+
         maxTime = GameManager.Instance.defaultTimePerDay + StatusUpgradeManager.Instance.extraTimeStatus.GetValue;
         currentTimeLeft = maxTime;
 
         SetDayText(GameManager.Instance.currentDay.ToString());
         dayFloatingText.Show();
 
-        StartCoroutine(CountTime());
+        countTimeCouroutine = StartCoroutine(CountTime());
     }
 
     public void End()
