@@ -73,19 +73,21 @@ public class Animal : PickableObject, IValuable
         currentAge++;
     }
 
-    public override void PickUp(Player player)
+    public override Transform Pick(Player player)
     {
-        base.PickUp(player);
-
+        base.Pick(player);
         stateMachine.ChangeState(grabbedState);
+
+        return transform;
     }
 
-    public override void Drop(Player player)
+    public override void Drop()
     {
-        base.Drop(player);
+        base.Drop();
 
         grabbedState.Unleash();
     }
+
     public virtual bool TakeFood(AnimalFood food)
     {
         if (food == null || !isHungry)

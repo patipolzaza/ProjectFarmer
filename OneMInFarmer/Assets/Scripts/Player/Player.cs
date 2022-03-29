@@ -76,6 +76,11 @@ public class Player : MonoBehaviour
                         return;
                     }
                 }
+                else if (targetInteractable is IPickable)
+                {
+                    Debug.Log($"PickUp {targetInteractable}");
+                    PickUpItem((IPickable)targetInteractable);
+                }
                 else
                 {
                     Interact();
@@ -112,44 +117,7 @@ public class Player : MonoBehaviour
 
     public void SetHoldingItem(PickableObject item)
     {
-        Transform itemTransform;
-        Collider2D itemCollider;
-        Vector2 newPosition = new Vector2();
-
-        if (item)
-        {
-            if (holdingObject)
-            {
-                holdingObject.Drop(this);
-            }
-
-            ChangeTargetInteractable(null);
-
-            item.SetInteractable(false);
-            item.HideObjectHighlight();
-            itemTransform = item.transform;
-            itemCollider = item.objectCollider;
-
-            newPosition.Set(0, itemCollider.bounds.extents.y - itemCollider.offset.y);
-            itemTransform.SetParent(itemHolderTransform);
-            itemTransform.localPosition = newPosition;
-            holdingObject = item;
-        }
-        else
-        {
-            if (holdingObject)
-            {
-                itemTransform = holdingObject.transform;
-                itemCollider = holdingObject.objectCollider;
-
-                itemTransform.SetParent(itemDropTransform);
-                newPosition.Set(itemCollider.bounds.extents.x - itemCollider.offset.x, itemCollider.bounds.extents.y - itemCollider.offset.y);
-                itemTransform.localPosition = newPosition;
-                itemTransform.SetParent(null);
-                holdingObject.SetInteractable(true);
-                holdingObject = null;
-            }
-        }
+        
     }
 
     private void CheckMoveInput()
@@ -210,11 +178,28 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void DropItem()
+    public void PickUpItem(IPickable itemToPick)
+    {
+        Transform itemTransform = itemToPick.Pick(this);
+
+        itemToPick.SetParent(itemHolderTransform);
+        itemToPick.SetLocalPosition(new Vector3(0, 0, 1), false, true);
+
+        holdingObject = itemTransform.GetComponent<PickableObject>();
+    }
+
+    public void DropItem()
     {
         if (holdingObject)
         {
-            holdingObject.Drop(this);
+            IPickable pickable = holdingObject;
+
+            pickable.SetParent(itemDropTransform);
+            pickable.SetLocalPosition(new Vector3(0, 0, 1), true, true);
+            pickable.Drop();
+
+            holdingObject.SetInteractable(true);
+            holdingObject = null;
         }
     }
 

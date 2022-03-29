@@ -16,7 +16,7 @@ public class WateringPot : Item
     {
         base.Awake();
 
-        interactEvent.AddListener(PickUp);
+        //interactEvent.AddListener(PickUp);
     }
 
     public void WateringOnPlot(Plot plot)
