@@ -65,10 +65,14 @@ public class Player : MonoBehaviour
             {
                 if (holdingObject)
                 {
-                    if (holdingObject is IValuable /*TODO: Check if target interactable is BuyShop*/)
+                    if (holdingObject is IValuable && false/*TODO: Check if target interactable is Shop for selling item*/)
                     {
                         IValuable valuable = (IValuable)holdingObject;
                         valuable.Sell();
+                    }
+                    else if (holdingObject is IPickable)
+                    {
+                        PickUpItem((IPickable)targetInteractable);
                     }
                     else if (holdingObject is AnimalFood && targetInteractable is Animal)
                     {
@@ -78,7 +82,6 @@ public class Player : MonoBehaviour
                 }
                 else if (targetInteractable is IPickable)
                 {
-                    Debug.Log($"PickUp {targetInteractable}");
                     PickUpItem((IPickable)targetInteractable);
                 }
                 else
