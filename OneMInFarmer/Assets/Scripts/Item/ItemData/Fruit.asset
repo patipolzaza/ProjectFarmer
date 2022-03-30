@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506212d09f0c14b4e91bf48de4708286, type: 3}
   m_Name: Fruit
   m_EditorClassIdentifier: 
-  id: b1657cfdcf041b64cb0f0fd0135be274
-  ItemName: Frust
+  id: b26c55bee4a32d840ac2ee9a623a53bf
+  ItemName: Fruit
   Icon: {fileID: 5822373649741285269, guid: c91296ee2af1d8e4ab38dc90b100e61b, type: 3}
   canSell: 1
-  IsConsumable: 1
+  IsConsumable: 0
   MaximumStacks: 1
   purchasePrice: 0
-  sellingPrice: 3
+  sellingPrice: 2

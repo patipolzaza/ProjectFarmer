@@ -16,7 +16,7 @@ MonoBehaviour:
   ItemName: Wheat
   Icon: {fileID: -5659601288151787448, guid: c91296ee2af1d8e4ab38dc90b100e61b, type: 3}
   canSell: 1
-  IsConsumable: 1
+  IsConsumable: 0
   MaximumStacks: 1
   purchasePrice: 0
   sellingPrice: 2

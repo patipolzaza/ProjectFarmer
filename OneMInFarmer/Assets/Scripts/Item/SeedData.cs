@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(menuName = "Items/Seed")]
-public class Seed : ItemData
+[CreateAssetMenu(menuName = "Items/SeedData")]
+public class SeedData : ItemData
 {
     public Sprite[] plantStages;
     [Min(1)]

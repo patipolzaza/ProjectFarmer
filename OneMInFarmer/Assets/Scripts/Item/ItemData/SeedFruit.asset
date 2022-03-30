@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: SeedFruit
   m_EditorClassIdentifier: 
   id: 4d9c362b1cb876b4fa6b06ee11ef4da6
-  ItemName: Seed Fruit
+  ItemName: SeedFruit
   Icon: {fileID: -386788524301670192, guid: c91296ee2af1d8e4ab38dc90b100e61b, type: 3}
   canSell: 0
-  IsConsumable: 1
-  MaximumStacks: 5
+  IsConsumable: 0
+  MaximumStacks: 1
   purchasePrice: 2
   sellingPrice: 0
   plantStages:
@@ -25,5 +25,5 @@ MonoBehaviour:
   - {fileID: -8709406779607625839, guid: c91296ee2af1d8e4ab38dc90b100e61b, type: 3}
   - {fileID: -8097741200915394387, guid: c91296ee2af1d8e4ab38dc90b100e61b, type: 3}
   countHarvest: 3
-  waterNeed: 3
-  product: {fileID: 3091261403957349749, guid: 54eaaaffc8e7d764ea0509147f161bcd, type: 3}
+  waterNeed: 2
+  product: {fileID: 0}

@@ -184,7 +184,6 @@ MonoBehaviour:
       m_Calls: []
   interactableObject: {fileID: 2462687588505583701}
   highlightColor: {r: 0.4248605, g: 1, b: 0.3066038, a: 1}
-  isPlanted: 0
   plant: {fileID: 3515325481904339622}
   SpriteDry: {fileID: 165240979840018154, guid: a06636c5ea423334aac09e1005e56e12, type: 3}
   SpriteWet: {fileID: -1571907141483303039, guid: 212facc78115cdd46b0f59ab44119313, type: 3}
@@ -199,7 +198,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

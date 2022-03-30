@@ -50,9 +50,9 @@ MonoBehaviour:
       m_Calls: []
   interactableObject: {fileID: 937699522433420188}
   highlightColor: {r: 0.42352942, g: 1, b: 0.30588236, a: 1}
-  ItemData: {fileID: 11400000, guid: b1657cfdcf041b64cb0f0fd0135be274, type: 2}
+  ItemData: {fileID: 11400000, guid: b26c55bee4a32d840ac2ee9a623a53bf, type: 2}
   isUseable: 0
-  isSellable: 0
+  isSellable: 1
 --- !u!212 &6628693169848381757
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -114,7 +114,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
