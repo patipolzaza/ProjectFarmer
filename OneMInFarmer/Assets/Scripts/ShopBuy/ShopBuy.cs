@@ -24,7 +24,7 @@ public class ShopBuy : Interactable
         ItemStack prepareItem = newItem;
         itemStack = (int)Random.Range(3, 6);
         itemInStock = prepareItem;
-        itemPirce = itemStack * prepareItem.GetItemData().purchasePrice;
+        itemPirce = itemStack * prepareItem.GetItemData.purchasePrice;
         UpdateDisPlayShop();
     }
 
@@ -42,7 +42,7 @@ public class ShopBuy : Interactable
     private void UpdateDisPlayShop()
     {
         Debug.Log("UpdateDisPlayShop");
-        DisplaySpriteIconItem.sprite = itemInStock.GetItemData().Icon;
+        DisplaySpriteIconItem.sprite = itemInStock.GetItemData.Icon;
         DisplayTextStacksItem.text = itemStack.ToString();
         DisplayTextPirce.text = itemPirce.ToString();
     }

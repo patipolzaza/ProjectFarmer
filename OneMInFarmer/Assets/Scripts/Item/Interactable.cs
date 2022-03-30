@@ -19,6 +19,7 @@ public class Interactable : MonoBehaviour
         sr = interactableObject.GetComponent<SpriteRenderer>();
         objectCollider = GetComponent<Collider2D>();
 
+        highlightColor = new Color32(255, 226, 0, 255);
         defaultColor = sr.color;
         isInteractable = true;
     }
@@ -31,7 +32,7 @@ public class Interactable : MonoBehaviour
     public void SetInteractable(bool isInteractable)
     {
         this.isInteractable = isInteractable;
-        //objectCollider.enabled = isInteractable;
+        objectCollider.enabled = isInteractable;
     }
 
     public virtual void Interact(Player interactor)

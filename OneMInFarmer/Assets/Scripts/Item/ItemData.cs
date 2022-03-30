@@ -14,11 +14,12 @@ public class ItemData : ScriptableObject
     public Sprite Icon;
     public bool canSell;
     public bool IsConsumable;
+    public bool isUsable;
 
     [Range(1, 999)]
     public int MaximumStacks = 1;
-    public int purchasePrice;
-    public int sellingPrice;
+    public int purchasePrice = 5;
+    public int sellPrice = 7;
 
 
 #if UNITY_EDITOR

@@ -16,24 +16,21 @@ public class ItemStack : Item
             DisplayStacks.gameObject.SetActive(true);
             DisplayStacks.text = CurrentItemStacks.ToString();
         }
-        else if (CurrentItemStacks == 1)
+        else
         {
             DisplayStacks.gameObject.SetActive(false);
-        }
-        else if (CurrentItemStacks < 1)
-        {
-            DisplayStacks.gameObject.SetActive(false);
-            Debug.Log(" Destroy(this)" + this);
-            Destroy(this.gameObject);
         }
     }
     public void SetCurrentStacks(int num)
     {
         CurrentItemStacks = num;
     }
-    public int GetCurrentStacks()
+    public int GetCurrentStacks
     {
-        return CurrentItemStacks;
+        get
+        {
+            return CurrentItemStacks;
+        }
     }
 
     public void UseItemStacks(int num)

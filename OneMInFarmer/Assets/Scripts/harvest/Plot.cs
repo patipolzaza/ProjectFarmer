@@ -46,7 +46,7 @@ public class Plot : Interactable
         }
         else
         {
-            if (player.holdingObject.GetComponent<ItemStack>().GetItemData() is Seed)
+            if (player.holdingObject.GetComponent<ItemStack>().GetItemData is Seed)
             {
                 ItemStack holdingItem = player.holdingObject as ItemStack;
                 Debug.Log("U have Seed");
@@ -83,7 +83,7 @@ public class Plot : Interactable
         Debug.Log("Plant");
         if (this.seed == null)
         {
-            this.seed = (Seed)seedItem.GetItemData();
+            this.seed = (Seed)seedItem.GetItemData;
             seedItem.UseItemStacks(1);
             isPlanted = true;
             plantStage = 0;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum FoodType { Meat, Plant }
 
-public class AnimalFood : ItemStack
+public class AnimalFood : Item
 {
     [SerializeField] private FoodType foodType;
 
@@ -16,11 +16,6 @@ public class AnimalFood : ItemStack
         }
     }
 
-    public override void Interact(Player interactor)
-    {
-        base.Interact(interactor);
-    }
-
     public override bool Use(Interactable targetToUse)
     {
         if (targetToUse is Animal)
@@ -28,8 +23,7 @@ public class AnimalFood : ItemStack
             Animal animal = targetToUse as Animal;
             if (animal.TakeFood(this))
             {
-                Destroy(gameObject);
-                return true;
+                return base.Use(targetToUse);
             }
         }
 

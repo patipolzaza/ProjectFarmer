@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickableObject : Interactable, IPickable
+public class PickableObject : Interactable
 {
 
     protected override void Awake()

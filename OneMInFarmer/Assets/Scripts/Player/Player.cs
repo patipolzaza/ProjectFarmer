@@ -59,30 +59,29 @@ public class Player : MonoBehaviour
         isDetectInteractable = CheckInteractableInRange();
         CheckMoveInput();
 
-        if (targetInteractable)
+        if (isDetectInteractable && targetInteractable)
         {
             if (Input.GetKeyDown(KeyCode.J))
             {
                 if (holdingObject)
                 {
-                    if (holdingObject is IValuable && false/*TODO: Check if target interactable is Shop for selling item*/)
+                    if (false/*TODO: holdingObject is Valuable*/ && targetInteractable is ShopForSell/*TODO: Check if target interactable is Shop for selling item*/)
                     {
-                        IValuable valuable = (IValuable)holdingObject;
-                        valuable.Sell();
-                    }
-                    else if (holdingObject is IPickable)
-                    {
-                        PickUpItem((IPickable)targetInteractable);
+                        /*IValuable valuable = (IValuable)holdingObject;
+                        valuable.Sell();*/
                     }
                     else if (holdingObject is AnimalFood && targetInteractable is Animal)
                     {
                         UseItem();
-                        return;
+                    }
+                    else if (targetInteractable is PickableObject)
+                    {
+                        PickUpItem((PickableObject)targetInteractable);
                     }
                 }
-                else if (targetInteractable is IPickable)
+                else if (targetInteractable is PickableObject)
                 {
-                    PickUpItem((IPickable)targetInteractable);
+                    PickUpItem((PickableObject)targetInteractable);
                 }
                 else
                 {
@@ -181,7 +180,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void PickUpItem(IPickable itemToPick)
+    public void PickUpItem(PickableObject itemToPick)
     {
         if (holdingObject)
         {
@@ -200,13 +199,14 @@ public class Player : MonoBehaviour
     {
         if (holdingObject)
         {
-            IPickable pickable = holdingObject;
+            PickableObject pickable = holdingObject;
 
             pickable.SetParent(itemDropTransform);
             pickable.SetLocalPosition(new Vector3(0, 0, 1), true, true);
             pickable.Drop();
 
-            holdingObject.SetInteractable(true);
+            pickable.SetInteractable(true);
+
             holdingObject = null;
         }
     }

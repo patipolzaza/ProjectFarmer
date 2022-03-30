@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Animal : PickableObject, IValuable
+public class Animal : PickableObject
 {
     public Rigidbody2D rb { get; private set; }
     public Animator anim { get; private set; }
