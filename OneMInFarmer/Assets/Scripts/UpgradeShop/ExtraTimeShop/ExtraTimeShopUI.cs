@@ -42,14 +42,23 @@ public class ExtraTimeShopUI : MonoBehaviour
 
     public void SetExtraTimeUpgradeButtonInteractable(int index, bool isInteractable)
     {
-        upgradeButtons[index].interactable = isInteractable;
+        if (upgradeButtons[index].isChosen)
+        {
+            upgradeButtons[index].interactable = false;
+        }
+        else
+        {
+            upgradeButtons[index].interactable = isInteractable;
+        }
     }
 
     public void SetAllExtraTimeUpgradeButtonsInteractable(bool isInteractable)
     {
+        int index = 0;
         foreach (var button in upgradeButtons)
         {
-            button.interactable = isInteractable;
+            SetExtraTimeUpgradeButtonInteractable(index, isInteractable);
+            index++;
         }
     }
 }

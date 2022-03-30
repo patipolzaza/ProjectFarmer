@@ -106,7 +106,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            wallet.EarnCoin(10);
+            wallet.EarnCoin(5);
         }
     }
 
@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
 
     public void SetHoldingItem(PickableObject item)
     {
-        
+
     }
 
     private void CheckMoveInput()
@@ -180,6 +180,11 @@ public class Player : MonoBehaviour
 
     public void PickUpItem(IPickable itemToPick)
     {
+        if (holdingObject)
+        {
+            DropItem();
+        }
+
         Transform itemTransform = itemToPick.Pick(this);
 
         itemToPick.SetParent(itemHolderTransform);

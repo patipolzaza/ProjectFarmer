@@ -27,7 +27,16 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
         if (isSelectedTargetLevel)
         {
             lastestCommand.Undo();
-            ChangeTargetLevel(currentChosenLevel, targetLevel);
+            int buttonIndex = 0;
+            for (int i = 0; i < targetUpgradeLevels.Length; i++)
+            {
+                if (targetUpgradeLevels[i] == currentChosenLevel)
+                {
+                    buttonIndex = i;
+                }
+            }
+
+            ChangeTargetLevel(buttonIndex, targetLevel);
         }
         else
         {
@@ -47,10 +56,8 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
         }
     }
 
-    private void ChangeTargetLevel(int oldLevel, int newLevel)
+    private void ChangeTargetLevel(int oldButtonIndex, int newLevel)
     {
-        int oldButtonIndex = oldLevel - 2;
-
         ui.ChangeUpgradeTarget(oldButtonIndex);
 
         currentChosenLevel = newLevel;
@@ -116,7 +123,7 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
     private IEnumerator UpdateUpgradeButtonsInteractable()
     {
         yield return new WaitUntil(() => statusToUpgrade != null);
-        ui.SetAllButtonsInteractable(false);
+        ui.SetAllUpgradeButtonsInteractable(false);
         int maxCost = statusToUpgrade.GetUpgradeToTargetLevelCost(statusToUpgrade.GetMaxLevel);
 
         yield return new WaitUntil(() => upgradeShop.playerCoinInMemmory == Player.Instance.wallet.coin);
@@ -124,7 +131,7 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
 
         if (maxCost <= playerCoin)
         {
-            ui.SetAllButtonsInteractable(true);
+            ui.SetAllUpgradeButtonsInteractable(true);
         }
         else
         {
@@ -148,7 +155,7 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
                 {
                     if (i != currentChosenLevel - 2)
                     {
-                        ui.SetButtonInteractable(i, true);
+                        ui.SetUpgradeButtonInteractable(i, true);
                     }
                 }
                 else

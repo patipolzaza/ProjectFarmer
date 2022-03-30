@@ -34,19 +34,25 @@ public class MoveSpeedUpgradeShopUI : MonoBehaviour
         upgradeButtons[index].onClick.RemoveListener(action);
     }
 
-    public void SetButtonInteractable(int buttonIndex, bool isInteractable)
+    public void SetUpgradeButtonInteractable(int index, bool isInteractable)
     {
-        if (buttonIndex < upgradeButtons.Length)
+        if (upgradeButtons[index].isChosen)
         {
-            upgradeButtons[buttonIndex].interactable = isInteractable;
+            upgradeButtons[index].interactable = false;
+        }
+        else
+        {
+            upgradeButtons[index].interactable = isInteractable;
         }
     }
 
-    public void SetAllButtonsInteractable(bool isInteractable)
+    public void SetAllUpgradeButtonsInteractable(bool isInteractable)
     {
+        int index = 0;
         foreach (var button in upgradeButtons)
         {
-            button.interactable = isInteractable;
+            SetUpgradeButtonInteractable(index, isInteractable);
+            index++;
         }
     }
 
