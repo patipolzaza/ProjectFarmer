@@ -6,7 +6,7 @@ using UnityEngine;
 public class AnimalData : ScriptableObject
 {
     public int sellPrice = 12;
-    public int buyPrice = 5;
+    public int purchasePrice = 5;
 
     public int lifespan = 5;
 

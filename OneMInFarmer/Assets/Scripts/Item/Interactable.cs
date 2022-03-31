@@ -9,7 +9,7 @@ public class Interactable : MonoBehaviour
     [SerializeField] protected UnityEvent<Player> interactEvent;
     [SerializeField] protected GameObject interactableObject;
     public Collider2D objectCollider { get; protected set; }
-    protected SpriteRenderer sr;
+    public SpriteRenderer sr { get; protected set; }
 
     protected Color defaultColor;
     [SerializeField] protected Color highlightColor;
@@ -58,5 +58,10 @@ public class Interactable : MonoBehaviour
     public virtual void HideObjectHighlight()
     {
         sr.color = defaultColor;
+    }
+
+    public virtual void SetObjectSpriteRenderer(bool isRender)
+    {
+        sr.enabled = isRender;
     }
 }

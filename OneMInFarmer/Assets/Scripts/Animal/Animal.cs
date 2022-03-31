@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Animal : PickableObject
+public class Animal : PickableObject, IValuable
 {
     public Rigidbody2D rb { get; private set; }
     public Animator anim { get; private set; }
@@ -56,6 +56,11 @@ public class Animal : PickableObject
     public void Update()
     {
         stateMachine.currentState.LogicUpdate();
+
+        if (Input.GetKeyDown(KeyCode.Keypad8))
+        {
+            IncreaseAge();
+        }
     }
 
     public void FixedUpdate()
@@ -71,6 +76,7 @@ public class Animal : PickableObject
     public void IncreaseAge()
     {
         currentAge++;
+        currentAge = Mathf.Clamp(currentAge, 0, animalData.lifespan);
     }
 
     public override Transform Pick(Player player)
@@ -163,19 +169,37 @@ public class Animal : PickableObject
 
     public void Sell()
     {
-        Destroy(gameObject);
-
         Wallet playerWallet = Player.Instance.wallet;
         int price = Mathf.FloorToInt(animalData.sellPrice * (currentAge / animalData.lifespan));
 
         playerWallet.EarnCoin(price);
+        Destroy(gameObject);
     }
 
-    public void Buy()
+    public bool Purchase()
     {
         Wallet playerWallet = Player.Instance.wallet;
-        int price = animalData.buyPrice;
+        int price = animalData.purchasePrice;
 
-        playerWallet.LoseCoin(price);
+        if (playerWallet.coin >= price)
+        {
+            playerWallet.LoseCoin(price);
+            return true;
+        }
+
+        return false;
+    }
+
+    public GameObject GetObject()
+    {
+        return gameObject;
+    }
+
+    public void PutInShopStash(ShopForSell targetShop)
+    {
+        targetShop.PutItemInContainer(this);
+        SetLocalPosition(Vector3.zero, false, false);
+        SetObjectSpriteRenderer(false);
+        SetInteractable(false);
     }
 }

@@ -4,16 +4,39 @@ using UnityEngine;
 
 public class ItemContainer
 {
-    public List<PickableObject> sellingObjects = new List<PickableObject>();
+    public Stack<IValuable> valuableObjects = new Stack<IValuable>();
 
-    public bool Put(PickableObject objectToPut)
+    public int GetItemCount
     {
-        if (objectToPut != null)
+        get
+        {
+            return valuableObjects.Count;
+        }
+    }
+
+    public IValuable PickItemInStash
+    {
+        get
+        {
+            if (valuableObjects.Count > 0)
+            {
+                return valuableObjects.Pop();
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+
+    public bool Put(IValuable objectToPut)
+    {
+        if (objectToPut == null)
         {
             return false;
         }
 
-
+        valuableObjects.Push(objectToPut);
         return true;
     }
 }

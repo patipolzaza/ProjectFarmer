@@ -65,10 +65,15 @@ public class Player : MonoBehaviour
             {
                 if (holdingObject)
                 {
-                    if (false/*TODO: holdingObject is Valuable*/ && targetInteractable is ShopForSell/*TODO: Check if target interactable is Shop for selling item*/)
+                    if (holdingObject is IValuable && targetInteractable is ShopForSell)
                     {
-                        /*IValuable valuable = (IValuable)holdingObject;
-                        valuable.Sell();*/
+                        IValuable valuable = holdingObject as IValuable;
+                        ShopForSell shop = targetInteractable as ShopForSell;
+
+                        if (shop.PutItemInContainer(valuable))
+                        {
+                            holdingObject = null;
+                        }
                     }
                     else if (holdingObject is AnimalFood && targetInteractable is Animal)
                     {
