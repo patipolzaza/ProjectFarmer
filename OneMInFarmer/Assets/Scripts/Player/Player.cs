@@ -83,6 +83,10 @@ public class Player : MonoBehaviour
                     {
                         PickUpItem((PickableObject)targetInteractable);
                     }
+                    else
+                    {
+                        Interact();
+                    }
                 }
                 else if (targetInteractable is PickableObject)
                 {
@@ -120,11 +124,6 @@ public class Player : MonoBehaviour
     public void FixedUpdate()
     {
         Move();
-    }
-
-    public void SetHoldingItem(PickableObject item)
-    {
-
     }
 
     private void CheckMoveInput()

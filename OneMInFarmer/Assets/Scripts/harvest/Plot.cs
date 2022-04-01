@@ -10,7 +10,7 @@ public class Plot : Interactable
     [SerializeField] Sprite SpriteDry;
     [SerializeField] Sprite SpriteWet;
 
-    public Seed seed;
+    public SeedData seed;
     int plantStage = 0;
     int countHarvest;
     int agePlant = 0;
@@ -38,7 +38,7 @@ public class Plot : Interactable
             {
                 Uproot();
             }
-            else if (player.holdingObject is WateringPot && player.holdingObject != null)
+            if (player.holdingObject is WateringPot && player.holdingObject != null)
             {
                 Debug.Log("U have WateringPot");
                 player.holdingObject.GetComponent<WateringPot>().WateringOnPlot(this);
@@ -46,15 +46,16 @@ public class Plot : Interactable
         }
         else
         {
-            if (player.holdingObject.GetComponent<ItemStack>().GetItemData is Seed)
+            if (player.holdingObject != null)
+
             {
-                ItemStack holdingItem = player.holdingObject as ItemStack;
-                Debug.Log("U have Seed");
-                Plant(holdingItem);
+                if (player.holdingObject.GetComponent<Item>().GetItemData is SeedData)
+                {
+                    Plant(player.holdingObject.GetComponent<Item>());
+                    player.UseItem();
+                }
             }
         }
-
-
     }
 
     void Harvest(Player player)
@@ -64,12 +65,12 @@ public class Plot : Interactable
             countHarvest--;
             plantStage--;
             UpdatePlant();
-            player.SetHoldingItem(Instantiate(seed.product, new Vector3(0, 0, 0), Quaternion.identity));
+            player.PickUpItem(Instantiate(seed.product, new Vector3(0, 0, 0), Quaternion.identity));
             return;
         }
         else
         {
-            player.SetHoldingItem(Instantiate(seed.product, new Vector3(0, 0, 0), Quaternion.identity));
+            player.PickUpItem(Instantiate(seed.product, new Vector3(0, 0, 0), Quaternion.identity));
             isPlanted = false;
             seed = null;
             plant.gameObject.SetActive(false);
@@ -78,13 +79,12 @@ public class Plot : Interactable
     }
 
 
-    void Plant(ItemStack seedItem)
+    void Plant(Item seedItem)
     {
         Debug.Log("Plant");
         if (this.seed == null)
         {
-            this.seed = (Seed)seedItem.GetItemData;
-            seedItem.UseItemStacks(1);
+            this.seed = (SeedData)seedItem.GetItemData;
             isPlanted = true;
             plantStage = 0;
             agePlant = 0;
