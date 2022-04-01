@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShopForSell : Interactable
 {
+    public static ShopForSell Instance { get; private set; }
     private ItemContainer itemContainer;
     public bool isFinishSellingProcess { get; private set; } = false;
 
@@ -11,14 +12,8 @@ public class ShopForSell : Interactable
     {
         base.Awake();
         itemContainer = new ItemContainer();
-    }
 
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Keypad7))
-        {
-            SellAllItemsInContainer();
-        }
+        Instance = this;
     }
 
     public bool PutItemInContainer(IValuable valuable)
@@ -35,6 +30,7 @@ public class ShopForSell : Interactable
 
     public void SellAllItemsInContainer()
     {
+        isFinishSellingProcess = false;
         StartCoroutine(SellItemInContainerProcess());
     }
 
@@ -57,5 +53,6 @@ public class ShopForSell : Interactable
             yield return new WaitForSeconds(0.25f);
         }
 
+        isFinishSellingProcess = true;
     }
 }
