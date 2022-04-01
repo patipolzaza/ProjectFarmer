@@ -7,6 +7,7 @@ public class ShopForSell : Interactable
     public static ShopForSell Instance { get; private set; }
     private ItemContainer itemContainer;
     public bool isFinishSellingProcess { get; private set; } = false;
+    public int totalSoldPrice { get; private set; }
 
     protected override void Awake()
     {
@@ -44,15 +45,21 @@ public class ShopForSell : Interactable
             if (valuableObj != null)
             {
 
-                valuableObj.Sell();
+                int soldPrice = valuableObj.Sell();
+                totalSoldPrice += soldPrice;
             }
             else
             {
                 break;
             }
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForEndOfFrame();
         }
 
         isFinishSellingProcess = true;
+    }
+
+    public void ResetTotalSoldPrice()
+    {
+        totalSoldPrice = 0;
     }
 }
