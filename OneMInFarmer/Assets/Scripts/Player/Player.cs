@@ -125,7 +125,6 @@ public class Player : MonoBehaviour
     {
         Move();
     }
-
     private void CheckMoveInput()
     {
         float inputX = Input.GetAxisRaw("Horizontal");
