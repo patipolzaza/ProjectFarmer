@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3091261403957349749}
   - component: {fileID: 6628693169848381757}
   - component: {fileID: 1113994116788615179}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fruit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,9 +50,8 @@ MonoBehaviour:
       m_Calls: []
   interactableObject: {fileID: 937699522433420188}
   highlightColor: {r: 0.42352942, g: 1, b: 0.30588236, a: 1}
+  currentStackDisplayer: {fileID: 0}
   ItemData: {fileID: 11400000, guid: b26c55bee4a32d840ac2ee9a623a53bf, type: 2}
-  isUseable: 0
-  isSellable: 1
 --- !u!212 &6628693169848381757
 SpriteRenderer:
   m_ObjectHideFlags: 0

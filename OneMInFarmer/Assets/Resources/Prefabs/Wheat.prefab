@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2497770961640166520}
   - component: {fileID: 7611778967870587945}
   - component: {fileID: -1287288550665960763}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,9 +50,8 @@ MonoBehaviour:
       m_Calls: []
   interactableObject: {fileID: 381926451578622609}
   highlightColor: {r: 0.42352942, g: 1, b: 0.30588236, a: 1}
+  currentStackDisplayer: {fileID: 0}
   ItemData: {fileID: 11400000, guid: b30849d21fb78a643a66b32e5ed0629b, type: 2}
-  isUseable: 0
-  isSellable: 1
 --- !u!212 &7611778967870587945
 SpriteRenderer:
   m_ObjectHideFlags: 0

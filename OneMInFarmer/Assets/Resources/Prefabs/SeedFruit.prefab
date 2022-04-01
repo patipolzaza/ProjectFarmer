@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7791995222641762047}
   - component: {fileID: 7158113909072760351}
   - component: {fileID: 3862159388989945962}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,9 +146,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8853653258763358736}
   - component: {fileID: 4999413238353253261}
-  - component: {fileID: 8093894206499064861}
+  - component: {fileID: 2082122146712155905}
   - component: {fileID: 7296608477130200740}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SeedFruit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ PolygonCollider2D:
       - {x: 0.03, y: -0.07}
       - {x: 0.07, y: -0.01}
       - {x: 0.07, y: 0.07}
---- !u!114 &8093894206499064861
+--- !u!114 &2082122146712155905
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,18 +210,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2626021155471713222}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2417a5c2366f784e9ee39a39ab0a218, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c0e11d5f60d95545b239fac52ef89b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactEvent:
     m_PersistentCalls:
       m_Calls: []
   interactableObject: {fileID: 2626021155471713222}
-  highlightColor: {r: 0, g: 1, b: 0.041554213, a: 1}
+  highlightColor: {r: 0, g: 1, b: 0, a: 1}
+  currentStackDisplayer: {fileID: 3862159388989945962}
   ItemData: {fileID: 11400000, guid: 4d9c362b1cb876b4fa6b06ee11ef4da6, type: 2}
-  isUseable: 1
-  isSellable: 0
-  DisplayStacks: {fileID: 3862159388989945962}
 --- !u!212 &7296608477130200740
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -285,7 +283,7 @@ GameObject:
   - component: {fileID: 3348946721921556160}
   - component: {fileID: 8077492870432873841}
   - component: {fileID: 4734923373379400848}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

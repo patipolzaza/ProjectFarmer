@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6769883533272338597}
   - component: {fileID: 6769883533272338598}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: WaterBar-Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 6769883533724361466}
   - component: {fileID: 6769883533724361468}
   - component: {fileID: 6769883533724361467}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 6769883534014683615}
   - component: {fileID: 5432077876269127782}
   - component: {fileID: 8918172129929335609}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WateringPot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,9 +278,8 @@ MonoBehaviour:
         m_CallState: 1
   interactableObject: {fileID: 6769883534014683613}
   highlightColor: {r: 0.42352942, g: 1, b: 0.30588236, a: 1}
+  currentStackDisplayer: {fileID: 0}
   ItemData: {fileID: 0}
-  isUseable: 0
-  isSellable: 0
   slider: {fileID: 6769883533272338598}
 --- !u!60 &8918172129929335609
 PolygonCollider2D:
@@ -325,7 +324,7 @@ GameObject:
   - component: {fileID: 6769883534016835568}
   - component: {fileID: 6769883534016835583}
   - component: {fileID: 6769883534016835582}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,7 +423,7 @@ GameObject:
   - component: {fileID: 6769883535234995013}
   - component: {fileID: 6769883535234995015}
   - component: {fileID: 6769883535234995014}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}

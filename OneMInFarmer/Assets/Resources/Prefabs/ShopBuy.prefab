@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5136167124724474135}
   - component: {fileID: 5136167124724474128}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5136167125041909686}
   - component: {fileID: 5136167125041909687}
   - component: {fileID: 5136167125041909680}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: CanvasItemStack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5136167125273858042}
   - component: {fileID: 5136167125273858041}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ItemShow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 5136167125439973488}
   - component: {fileID: 5136167125439973494}
   - component: {fileID: 5136167125439973495}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 5136167125647573696}
   - component: {fileID: 5136167125647573697}
   - component: {fileID: 5136167125647573698}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: CanvasPirce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ GameObject:
   - component: {fileID: 5136167125676110183}
   - component: {fileID: 5136167125676110181}
   - component: {fileID: 5136167125676110176}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShopBuy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -648,7 +648,7 @@ GameObject:
   - component: {fileID: 5136167126393014983}
   - component: {fileID: 5136167126393014981}
   - component: {fileID: 5136167126393014982}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -39,15 +39,18 @@ public class Item : PickableObject
 
     private void Update()
     {
+        if (currentStackDisplayer)
+        {
+            if (currentStack > 1)
+            {
+                currentStackDisplayer.gameObject.SetActive(true);
+                currentStackDisplayer.text = currentStack.ToString();
+            }
+            else
+            {
+                currentStackDisplayer.gameObject.SetActive(false);
+            }
 
-        if (currentStack > 1)
-        {
-            currentStackDisplayer.gameObject.SetActive(true);
-            currentStackDisplayer.text = currentStack.ToString();
-        }
-        else
-        {
-            currentStackDisplayer.gameObject.SetActive(false);
         }
     }
 

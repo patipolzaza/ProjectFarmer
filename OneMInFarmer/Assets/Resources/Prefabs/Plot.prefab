@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 870083822207488247}
   - component: {fileID: 3515325481904339622}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2751305652198048849}
   - component: {fileID: 6105938317978640753}
   - component: {fileID: 6119803323363319864}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ MonoBehaviour:
   plant: {fileID: 3515325481904339622}
   SpriteDry: {fileID: 165240979840018154, guid: a06636c5ea423334aac09e1005e56e12, type: 3}
   SpriteWet: {fileID: -1571907141483303039, guid: 212facc78115cdd46b0f59ab44119313, type: 3}
-  seed: {fileID: 0}
+  seed: {fileID: 11400000, guid: 4d9c362b1cb876b4fa6b06ee11ef4da6, type: 2}
 --- !u!60 &6119803323363319864
 PolygonCollider2D:
   m_ObjectHideFlags: 0
