@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShopBuyManager : MonoBehaviour
 {
     public ShopBuy[] shopBuys;
-    public ItemStack[] ListItem;
+    public Item[] ListItem;
 
     private void Start()
     {

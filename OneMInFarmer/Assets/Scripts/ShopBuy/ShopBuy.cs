@@ -5,7 +5,7 @@ using TMPro;
 
 public class ShopBuy : Interactable
 {
-    private ItemStack itemInStock;
+    private Item itemInStock;
     private int itemPirce;
     private int itemStack;
     [SerializeField] private SpriteRenderer DisplaySpriteIconItem;
@@ -19,9 +19,9 @@ public class ShopBuy : Interactable
         interactEvent.AddListener(BuyItemInStock);
     }
 
-    public void AddNewItemInStock(ItemStack newItem)
+    public void AddNewItemInStock(Item newItem)
     {
-        ItemStack prepareItem = newItem;
+        Item prepareItem = newItem;
         itemStack = (int)Random.Range(3, 6);
         itemInStock = prepareItem;
         itemPirce = itemStack * prepareItem.GetItemData.purchasePrice;
@@ -34,9 +34,9 @@ public class ShopBuy : Interactable
         {
             return;
         }
-        ItemStack itemBought = Instantiate(itemInStock, new Vector3(0, 0, 0), Quaternion.identity);
-        itemBought.SetCurrentStacks(itemStack);
-        player.SetHoldingItem(itemBought);
+        Item itemBought = Instantiate(itemInStock, new Vector3(0, 0, 0), Quaternion.identity);
+        itemBought.SetCurrentStackNumber(itemStack);
+        player.PickUpItem(itemBought);
     }
 
     private void UpdateDisPlayShop()
