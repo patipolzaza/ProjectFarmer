@@ -38,7 +38,7 @@ public class Plot : Interactable
             {
                 Uproot();
             }
-            if (player.holdingObject is WateringPot && player.holdingObject != null)
+            else if (player.holdingObject is WateringPot && player.holdingObject != null)
             {
                 Debug.Log("U have WateringPot");
                 player.holdingObject.GetComponent<WateringPot>().WateringOnPlot(this);
@@ -46,16 +46,19 @@ public class Plot : Interactable
         }
         else
         {
-            if (player.holdingObject != null)
-
+            if (player.holdingObject)
             {
+                Debug.Log("U have WateringPot123123");
                 if (player.holdingObject.GetComponent<Item>().GetItemData is SeedData)
                 {
+                    Debug.Log("U have WateringPotasdasd");
                     Plant(player.holdingObject.GetComponent<Item>());
                     player.UseItem();
                 }
             }
         }
+
+
     }
 
     void Harvest(Player player)
