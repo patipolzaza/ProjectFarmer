@@ -53,8 +53,11 @@ public class GameManager : MonoBehaviour
 
     public void EndDay()
     {
-        ToNextDay();
-        UpgradeShop.Instance.OpenWindow();
+        var dayResultManager = DayResultManager.Instance;
+        dayResultManager.StartCalculateResult();
+
+        /*ToNextDay();
+        UpgradeShop.Instance.OpenWindow();*/
     }
 
     private void GrowUpAnimals()
