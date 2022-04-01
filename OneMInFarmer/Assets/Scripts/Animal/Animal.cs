@@ -56,11 +56,6 @@ public class Animal : PickableObject, IValuable
     public void Update()
     {
         stateMachine.currentState.LogicUpdate();
-
-        if (Input.GetKeyDown(KeyCode.Keypad8))
-        {
-            IncreaseAge();
-        }
     }
 
     public void FixedUpdate()
@@ -167,13 +162,16 @@ public class Animal : PickableObject, IValuable
         facingDirection *= -1;
     }
 
-    public void Sell()
+    public int Sell()
     {
         Wallet playerWallet = Player.Instance.wallet;
         int price = Mathf.FloorToInt(animalData.sellPrice * (currentAge / animalData.lifespan));
+        price = Mathf.Clamp(price, 0, animalData.sellPrice);
 
         playerWallet.EarnCoin(price);
         Destroy(gameObject);
+
+        return price;
     }
 
     public bool Purchase()
