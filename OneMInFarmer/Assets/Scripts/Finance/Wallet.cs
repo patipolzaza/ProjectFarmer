@@ -18,15 +18,17 @@ public class Wallet
         WalletUI.Instance.SetCoinText(coin);
     }
 
-    public void LoseCoin(int amount)
+    public bool LoseCoin(int amount)
     {
         if (coin <= amount)
         {
             coin = 0;
+            return false;
         }
         else
         {
             coin -= amount;
+            return true;
         }
         WalletUI.Instance.SetCoinText(coin);
     }

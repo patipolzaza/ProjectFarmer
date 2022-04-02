@@ -10,9 +10,9 @@ public class DayResultManager : MonoBehaviour
     [SerializeField] private DayResultUI ui;
     public bool isReadied { get; private set; } = false;
 
-    private int totalSoldPrice;
-    private int debt;
-    private int profit;
+    public int totalSoldPrice { get; private set; }
+    public int debt { get; private set; }
+    public int profit { get; private set; }
 
     public bool isAllProcessFinished { get; private set; }
     private bool updateTotalPriceTextFinished;
@@ -35,9 +35,9 @@ public class DayResultManager : MonoBehaviour
 
     private IEnumerator InitialSetup()
     {
+        Instance = this;
         yield return new WaitUntil(() => ShopForSell.Instance != null);
         shop = ShopForSell.Instance;
-        Instance = this;
         isReadied = true;
     }
 
@@ -105,6 +105,12 @@ public class DayResultManager : MonoBehaviour
         {
             currentValue = Mathf.Lerp(currentValue, target, 0.15f);
             string currentValueText = Mathf.RoundToInt(currentValue).ToString();
+
+            if (target < 0)
+            {
+                currentValueText = $"<color=red>-{currentValueText}</color>";
+            }
+
             ui.SetNetProfitText(currentValueText);
             yield return new WaitForFixedUpdate();
         } while (Mathf.RoundToInt(currentValue) != target);

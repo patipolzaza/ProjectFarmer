@@ -87,8 +87,32 @@ public class GameManager : MonoBehaviour
         shopBuyManager.AddItemToShop();
     }
 
-    private void ToNextDay()
+    public void ToNextDay()
     {
+        int dayProfit = DayResultManager.Instance.profit;
+
+        if (dayProfit <= 0)
+        {
+            GameOver();
+            return;
+        }
+
+        if (DebtManager.Instance.dayForNextDebtPayment == currentDay)
+        {
+            int debt = DayResultManager.Instance.debt;
+            int scoreEarned = 0;
+            if (player.wallet.LoseCoin(debt))
+            {
+                scoreEarned = DebtManager.Instance.PayDebt(debt);
+            }
+            else
+            {
+                GameOver();
+                return;
+            }
+            ScoreManager.Instance.AddScore(scoreEarned);
+        }
+
         currentDay++;
 
         StatusUpgradeManager.Instance.ResetDiaryUpgradeStatus();
@@ -97,6 +121,13 @@ public class GameManager : MonoBehaviour
 
         ResetPlotsStatus();
         ResetItemInStacks();
+
+        UpgradeShop.Instance.OpenWindow();
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("Game is O V E R.");
     }
 
     public void SetTimeScale(float value)
