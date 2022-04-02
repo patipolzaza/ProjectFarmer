@@ -9,11 +9,13 @@ public class Wallet
     public Wallet(int initialCoin)
     {
         coin = initialCoin;
+        WalletUI.Instance.SetCoinText(coin);
     }
 
     public void EarnCoin(int amount)
     {
         coin += amount;
+        WalletUI.Instance.SetCoinText(coin);
     }
 
     public void LoseCoin(int amount)
@@ -26,5 +28,6 @@ public class Wallet
         {
             coin -= amount;
         }
+        WalletUI.Instance.SetCoinText(coin);
     }
 }
