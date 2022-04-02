@@ -34,9 +34,16 @@ public class ShopBuy : Interactable
         {
             return;
         }
-        Item itemBought = Instantiate(itemInStock, new Vector3(0, 0, 0), Quaternion.identity);
-        itemBought.SetCurrentStackNumber(itemStack);
-        player.PickUpItem(itemBought);
+        Wallet playerWallet = Player.Instance.wallet;
+        if (playerWallet.coin >= itemPirce)
+        {
+            playerWallet.LoseCoin(itemPirce);
+            Item itemBought = Instantiate(itemInStock, new Vector3(0, 0, 0), Quaternion.identity);
+            itemBought.SetCurrentStackNumber(itemStack);
+            player.PickUpItem(itemBought);
+        }
+
+
     }
 
     private void UpdateDisPlayShop()
