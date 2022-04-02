@@ -2,19 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DebtManager : MonoBehaviour
+public class DebtManager
 {
-    public static DebtManager Instance { get; private set; }
-
-    public int dayForNextDebtPayment { get; private set; } = 5;
+    public int dayForNextDebtPayment { get; private set; } = 1;
     public int debtPaidCount { get; private set; }
     private float deptMultiplierPerPeriod = 1.3f;
     private int startDebt = 5;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     public int GetDebt
     {

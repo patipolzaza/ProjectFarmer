@@ -6,28 +6,24 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    public ScoreManager ScoreManager { get; private set; }
+    public DebtManager DebtManager { get; private set; }
+
     public int currentDay { get; private set; } = 1;
     public int defaultTimePerDay { get; private set; } = 15;
 
-    public string GetTimeForNextDayString
-    {
-        get
-        {
-            string timeString;
-            int time = Timer.Instance.maxTime;
-
-            int minute = Mathf.FloorToInt(time / 60);
-            int second = time % 60;
-
-            timeString = $"{minute}:{second.ToString("0#")}";
-            return timeString;
-        }
-    }
-
     public Player player { get; private set; }
-    void Start()
+    void Awake()
     {
         Instance = this;
+
+        ScoreManager = new ScoreManager();
+        DebtManager = new DebtManager();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(StartGame());
     }
 
     void Update()
@@ -36,11 +32,11 @@ public class GameManager : MonoBehaviour
         {
             player = FindObjectOfType<Player>();
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            StartDay();
-        }
+    private IEnumerator StartGame()
+    {
+        yield return new WaitUntil(() => isCompletedAllSetup());
     }
 
     public void StartDay()
@@ -58,9 +54,6 @@ public class GameManager : MonoBehaviour
         player.DisableMove();
         var dayResultManager = DayResultManager.Instance;
         dayResultManager.StartCalculateResult();
-
-        /*ToNextDay();
-        UpgradeShop.Instance.OpenWindow();*/
     }
 
     private void GrowUpAnimals()
@@ -89,30 +82,6 @@ public class GameManager : MonoBehaviour
 
     public void ToNextDay()
     {
-        int dayProfit = DayResultManager.Instance.profit;
-
-        if (dayProfit <= 0)
-        {
-            GameOver();
-            return;
-        }
-
-        if (DebtManager.Instance.dayForNextDebtPayment == currentDay)
-        {
-            int debt = DayResultManager.Instance.debt;
-            int scoreEarned = 0;
-            if (player.wallet.LoseCoin(debt))
-            {
-                scoreEarned = DebtManager.Instance.PayDebt(debt);
-            }
-            else
-            {
-                GameOver();
-                return;
-            }
-            ScoreManager.Instance.AddScore(scoreEarned);
-        }
-
         currentDay++;
 
         StatusUpgradeManager.Instance.ResetDiaryUpgradeStatus();
@@ -130,8 +99,44 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game is O V E R.");
     }
 
+    public void CalculateScore()
+    {
+        if (DebtManager.dayForNextDebtPayment == currentDay)
+        {
+            int playerCoin = player.wallet.coin;
+            int debt = DebtManager.GetDebt;
+
+            if (playerCoin < debt)
+            {
+                GameOver();
+                return;
+            }
+
+            int score = DebtManager.PayDebt(debt);
+            player.wallet.LoseCoin(debt);
+
+            ScoreManager.AddScore(score);
+        }
+
+        ToNextDay();
+    }
+
     public void SetTimeScale(float value)
     {
         Time.timeScale = value;
+    }
+
+    private bool isCompletedAllSetup()
+    {
+        if (!DayResultManager.Instance || !DayResultManager.Instance.isReadied)
+            return false;
+        if (!UpgradeShop.Instance || !UpgradeShop.Instance.isReadied)
+            return false;
+        if (!Timer.Instance)
+            return false;
+        if (!StatusUpgradeManager.Instance || !StatusUpgradeManager.Instance.isReadied)
+            return false;
+
+        return true;
     }
 }

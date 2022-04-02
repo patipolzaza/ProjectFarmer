@@ -28,8 +28,8 @@ public class Wallet
         else
         {
             coin -= amount;
+            WalletUI.Instance.SetCoinText(coin);
             return true;
         }
-        WalletUI.Instance.SetCoinText(coin);
     }
 }

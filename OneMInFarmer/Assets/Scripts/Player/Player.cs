@@ -130,6 +130,7 @@ public class Player : MonoBehaviour
     {
         if (!canMove)
         {
+            moveInput.Set(0, 0);
             return;
         }
 
@@ -165,14 +166,17 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        int moveSpeed = StatusUpgradeManager.Instance.moveSpeedStatus.GetValue;
+        if (canMove)
+        {
+            int moveSpeed = StatusUpgradeManager.Instance.moveSpeedStatus.GetValue;
 
-        float velocityX = moveInput.x * moveSpeed * Time.fixedDeltaTime;
-        float velocityY = moveInput.y * moveSpeed * Time.fixedDeltaTime;
+            float velocityX = moveInput.x * moveSpeed * Time.fixedDeltaTime;
+            float velocityY = moveInput.y * moveSpeed * Time.fixedDeltaTime;
 
-        velocityWorkspace.Set(velocityX, velocityY);
+            velocityWorkspace.Set(velocityX, velocityY);
 
-        rb.velocity = velocityWorkspace;
+            rb.velocity = velocityWorkspace;
+        }
     }
 
     private void Flip()

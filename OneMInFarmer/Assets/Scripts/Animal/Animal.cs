@@ -42,7 +42,6 @@ public class Animal : PickableObject, IValuable
         moveState = new MoveState(this, stateMachine, "move", moveStateData);
         idleState = new IdleState(this, stateMachine, "idle", idleStateData);
         grabbedState = new GrabbedState(this, stateMachine, "grabbed");
-        //interactEvent.AddListener();
     }
 
     protected override void Start()
@@ -56,11 +55,6 @@ public class Animal : PickableObject, IValuable
     public void Update()
     {
         stateMachine.currentState.LogicUpdate();
-
-        if (Input.GetKeyDown(KeyCode.Keypad7))
-        {
-            IncreaseAge();
-        }
     }
 
     public void FixedUpdate()

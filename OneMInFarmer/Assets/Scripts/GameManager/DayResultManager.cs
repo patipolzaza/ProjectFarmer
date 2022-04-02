@@ -13,15 +13,34 @@ public class DayResultManager : MonoBehaviour
     public int totalSoldPrice { get; private set; }
     public int debt { get; private set; }
     public int profit { get; private set; }
+    private int playerCoinBeforeCal;
+    private int playerCoinAfterCal;
 
     public bool isAllProcessFinished { get; private set; }
-    private bool updateTotalPriceTextFinished;
-    private bool updateDebtTextFinished;
-    private bool updateProfitTextFinished;
+    private bool finishedUpdateTotalPriceText;
+    private bool finishedUpdateDebtText;
+    private bool finishedUpdateProfitText;
+    private bool finishedUpdatePlayerCoin;
 
     private void Awake()
     {
         StartCoroutine(InitialSetup());
+    }
+
+    private void Update()
+    {
+        if (!isAllProcessFinished)
+        {
+            ui.SetActiveContinueText(false);
+            return;
+        }
+
+        ui.SetActiveContinueText(true);
+
+        if (Input.anyKeyDown)
+        {
+            GameManager.Instance.CalculateScore();
+        }
     }
 
     public void StartCalculateResult()
@@ -43,28 +62,40 @@ public class DayResultManager : MonoBehaviour
 
     private IEnumerator DayResultProcess()
     {
+        Wallet playerWallet = Player.Instance.wallet;
+
         ui.SetDayText(GameManager.Instance.currentDay.ToString());
+        playerCoinBeforeCal = playerWallet.coin;
+        ui.SetPlayerCoinText(playerCoinBeforeCal.ToString());
         shop.SellAllItemsInContainer();
         yield return new WaitForSeconds(1.25f);
         yield return new WaitUntil(() => ShopForSell.Instance.isFinishSellingProcess);
 
         totalSoldPrice = shop.totalSoldPrice;
         StartCoroutine(UpdateTotalSoldPriceText());
-        yield return new WaitUntil(() => updateTotalPriceTextFinished);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitUntil(() => finishedUpdateTotalPriceText);
+        yield return new WaitForSeconds(0.75f);
 
-        if (DebtManager.Instance.dayForNextDebtPayment == GameManager.Instance.currentDay)
+        if (GameManager.Instance.DebtManager.dayForNextDebtPayment == GameManager.Instance.currentDay)
         {
-            debt = DebtManager.Instance.GetDebt;
+            debt = GameManager.Instance.DebtManager.GetDebt;
             StartCoroutine(UpdateDebtText());
-            yield return new WaitUntil(() => updateDebtTextFinished);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitUntil(() => finishedUpdateDebtText);
+            yield return new WaitForSeconds(0.75f);
         }
 
         profit = totalSoldPrice - debt;
         StartCoroutine(UpdateProfitText());
-        yield return new WaitUntil(() => updateProfitTextFinished);
+        yield return new WaitUntil(() => finishedUpdateProfitText);
+        yield return new WaitForSeconds(0.75f);
 
+        playerWallet.EarnCoin(profit);
+        playerCoinAfterCal = playerWallet.coin;
+
+        StartCoroutine(UpdatePlayerCoinText());
+        yield return new WaitUntil(() => finishedUpdatePlayerCoin);
+
+        yield return new WaitForSeconds(1.25f);
         isAllProcessFinished = true;
     }
 
@@ -80,7 +111,7 @@ public class DayResultManager : MonoBehaviour
 
     private IEnumerator UpdateTotalSoldPriceText()
     {
-        updateTotalPriceTextFinished = false;
+        finishedUpdateTotalPriceText = false;
 
         float currentValue = 0;
         int target = totalSoldPrice;
@@ -92,12 +123,34 @@ public class DayResultManager : MonoBehaviour
             yield return new WaitForFixedUpdate();
         } while (Mathf.RoundToInt(currentValue) != target);
 
-        updateTotalPriceTextFinished = true;
+        finishedUpdateTotalPriceText = true;
+    }
+    private IEnumerator UpdatePlayerCoinText()
+    {
+        finishedUpdatePlayerCoin = false;
+
+        float currentValue = playerCoinBeforeCal;
+        int target = playerCoinAfterCal;
+        do
+        {
+            currentValue = Mathf.Lerp(currentValue, target, 0.15f);
+            string currentValueText = Mathf.RoundToInt(currentValue).ToString();
+
+            if (currentValue < 0)
+            {
+                currentValueText = $"<color=red>{currentValueText}</color>";
+            }
+
+            ui.SetPlayerCoinText(currentValueText);
+            yield return new WaitForFixedUpdate();
+        } while (Mathf.RoundToInt(currentValue) != target);
+
+        finishedUpdatePlayerCoin = true;
     }
 
     private IEnumerator UpdateProfitText()
     {
-        updateProfitTextFinished = false;
+        finishedUpdateProfitText = false;
 
         int target = profit;
         float currentValue = 0;
@@ -106,21 +159,21 @@ public class DayResultManager : MonoBehaviour
             currentValue = Mathf.Lerp(currentValue, target, 0.15f);
             string currentValueText = Mathf.RoundToInt(currentValue).ToString();
 
-            if (target < 0)
+            if (currentValue < 0)
             {
-                currentValueText = $"<color=red>-{currentValueText}</color>";
+                currentValueText = $"<color=red>{currentValueText}</color>";
             }
 
             ui.SetNetProfitText(currentValueText);
             yield return new WaitForFixedUpdate();
         } while (Mathf.RoundToInt(currentValue) != target);
 
-        updateProfitTextFinished = true;
+        finishedUpdateProfitText = true;
     }
 
     private IEnumerator UpdateDebtText()
     {
-        updateDebtTextFinished = false;
+        finishedUpdateDebtText = false;
 
         int target = debt;
         float currentValue = 0;
@@ -131,7 +184,7 @@ public class DayResultManager : MonoBehaviour
             ui.SetDeptText($"<color=red>-{currentValueText}</color>");
             yield return new WaitForFixedUpdate();
         } while (Mathf.RoundToInt(currentValue) != target);
-        updateDebtTextFinished = true;
+        finishedUpdateDebtText = true;
     }
 
     public void Reset()
@@ -140,8 +193,11 @@ public class DayResultManager : MonoBehaviour
         debt = 0;
         profit = 0;
 
-        updateTotalPriceTextFinished = false;
-        updateDebtTextFinished = false;
-        updateProfitTextFinished = false;
+        playerCoinBeforeCal = 0;
+        playerCoinAfterCal = 0;
+
+        finishedUpdateTotalPriceText = false;
+        finishedUpdateDebtText = false;
+        finishedUpdateProfitText = false;
     }
 }
