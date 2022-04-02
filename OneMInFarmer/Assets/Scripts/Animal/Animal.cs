@@ -56,6 +56,11 @@ public class Animal : PickableObject, IValuable
     public void Update()
     {
         stateMachine.currentState.LogicUpdate();
+
+        if (Input.GetKeyDown(KeyCode.Keypad7))
+        {
+            IncreaseAge();
+        }
     }
 
     public void FixedUpdate()

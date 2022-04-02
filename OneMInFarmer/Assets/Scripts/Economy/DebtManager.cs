@@ -6,10 +6,15 @@ public class DebtManager : MonoBehaviour
 {
     public static DebtManager Instance { get; private set; }
 
-    public int dayForNextDebtPayment { get; private set; }
+    public int dayForNextDebtPayment { get; private set; } = 5;
     public int debtPaidCount { get; private set; }
     private float deptMultiplierPerPeriod = 1.3f;
     private int startDebt = 5;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public int GetDebt
     {
@@ -38,6 +43,7 @@ public class DebtManager : MonoBehaviour
         }
         int score = debt * debtPaidCount;
 
+        dayForNextDebtPayment += 5;
         debtPaidCount++;
         return score;
     }

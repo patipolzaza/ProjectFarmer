@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DayResultUI : WindowUIBase
 {
     [SerializeField] private Text currentDayText;
-    [SerializeField] private Text totalItemsSoldPriceText;
+    [SerializeField] private Text totalSoldPriceText;
     [SerializeField] private Text deptText;
     [SerializeField] private Text netProfitText;
 
@@ -17,7 +17,7 @@ public class DayResultUI : WindowUIBase
 
     public void SetTotalSoldPriceText(string text)
     {
-        totalItemsSoldPriceText.text = text;
+        totalSoldPriceText.text = text;
     }
 
     public void SetDeptText(string text)

@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public static Player Instance { get; private set; }
 
     private Vector2 moveInput;
+    private bool canMove = true;
 
     [SerializeField] private GameObject characterObject;
 
@@ -127,6 +128,11 @@ public class Player : MonoBehaviour
     }
     private void CheckMoveInput()
     {
+        if (!canMove)
+        {
+            return;
+        }
+
         float inputX = Input.GetAxisRaw("Horizontal");
         float inputY = Input.GetAxisRaw("Vertical");
 
@@ -276,6 +282,17 @@ public class Player : MonoBehaviour
         {
             targetInteractable.ShowObjectHighlight();
         }
+    }
+
+    public void EnableMove()
+    {
+        canMove = true;
+    }
+
+    public void DisableMove()
+    {
+        canMove = false;
+        rb.velocity = Vector3.zero;
     }
 
     private void OnDrawGizmos()

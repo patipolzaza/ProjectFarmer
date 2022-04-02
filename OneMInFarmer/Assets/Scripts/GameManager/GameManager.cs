@@ -49,10 +49,13 @@ public class GameManager : MonoBehaviour
 
         Timer timer = Timer.Instance;
         timer.Begin();
+
+        player.EnableMove();
     }
 
     public void EndDay()
     {
+        player.DisableMove();
         var dayResultManager = DayResultManager.Instance;
         dayResultManager.StartCalculateResult();
 

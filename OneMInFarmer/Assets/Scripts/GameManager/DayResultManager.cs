@@ -37,7 +37,7 @@ public class DayResultManager : MonoBehaviour
     {
         yield return new WaitUntil(() => ShopForSell.Instance != null);
         shop = ShopForSell.Instance;
-
+        Instance = this;
         isReadied = true;
     }
 
@@ -45,17 +45,20 @@ public class DayResultManager : MonoBehaviour
     {
         ui.SetDayText(GameManager.Instance.currentDay.ToString());
         shop.SellAllItemsInContainer();
+        yield return new WaitForSeconds(1.25f);
         yield return new WaitUntil(() => ShopForSell.Instance.isFinishSellingProcess);
 
         totalSoldPrice = shop.totalSoldPrice;
         StartCoroutine(UpdateTotalSoldPriceText());
         yield return new WaitUntil(() => updateTotalPriceTextFinished);
+        yield return new WaitForSeconds(0.5f);
 
         if (DebtManager.Instance.dayForNextDebtPayment == GameManager.Instance.currentDay)
         {
             debt = DebtManager.Instance.GetDebt;
             StartCoroutine(UpdateDebtText());
             yield return new WaitUntil(() => updateDebtTextFinished);
+            yield return new WaitForSeconds(0.5f);
         }
 
         profit = totalSoldPrice - debt;
@@ -87,7 +90,7 @@ public class DayResultManager : MonoBehaviour
             string currentValueText = Mathf.RoundToInt(currentValue).ToString();
             ui.SetTotalSoldPriceText(currentValueText);
             yield return new WaitForFixedUpdate();
-        } while (currentValue != target);
+        } while (Mathf.RoundToInt(currentValue) != target);
 
         updateTotalPriceTextFinished = true;
     }
@@ -104,7 +107,7 @@ public class DayResultManager : MonoBehaviour
             string currentValueText = Mathf.RoundToInt(currentValue).ToString();
             ui.SetNetProfitText(currentValueText);
             yield return new WaitForFixedUpdate();
-        } while (currentValue != target);
+        } while (Mathf.RoundToInt(currentValue) != target);
 
         updateProfitTextFinished = true;
     }
@@ -119,10 +122,9 @@ public class DayResultManager : MonoBehaviour
         {
             currentValue = Mathf.Lerp(currentValue, target, 0.15f);
             string currentValueText = Mathf.RoundToInt(currentValue).ToString();
-            ui.SetDeptText(currentValueText);
+            ui.SetDeptText($"<color=red>-{currentValueText}</color>");
             yield return new WaitForFixedUpdate();
-        } while (currentValue != target);
-
+        } while (Mathf.RoundToInt(currentValue) != target);
         updateDebtTextFinished = true;
     }
 
