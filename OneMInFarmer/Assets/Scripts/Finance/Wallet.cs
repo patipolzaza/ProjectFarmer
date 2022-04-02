@@ -9,7 +9,6 @@ public class Wallet
     public Wallet(int initialCoin)
     {
         coin = initialCoin;
-        WalletUI.Instance.SetCoinText(coin);
     }
 
     public void EarnCoin(int amount)

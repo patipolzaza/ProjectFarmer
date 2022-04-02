@@ -25,12 +25,7 @@ public class Timer : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Begin();
-        }
-
-        if (currentTimeLeft > 0)
+        if (currentTimeLeft >= 0)
         {
             UpdateTimerUI();
         }
@@ -86,6 +81,12 @@ public class Timer : MonoBehaviour
     private void UpdateClockNeedle()
     {
         float currentTimeRotation = (currentTimeLeft / maxTime) * 360;
+
+        if (float.IsNaN(currentTimeRotation))
+        {
+            return;
+        }
+
         needle.rotation = Quaternion.Euler(new Vector3(0, 0, currentTimeRotation));
 
         background.fillAmount = currentTimeLeft > 0 ? (currentTimeLeft / maxTime) : 0;

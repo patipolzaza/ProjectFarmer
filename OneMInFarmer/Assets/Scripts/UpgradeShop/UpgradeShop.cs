@@ -12,6 +12,8 @@ public class UpgradeShop : MonoBehaviour
     public ExtraTimeShop extraTimeShop { get; private set; }
     public MoveSpeedUpgradeShop moveSpeedUpgradeShop { get; private set; }
 
+    private bool isOpenedShop;
+
     public bool isReadied { get; private set; } = false;
 
     private void Awake()
@@ -21,6 +23,11 @@ public class UpgradeShop : MonoBehaviour
 
     private void Update()
     {
+        if (!isOpenedShop)
+        {
+            return;
+        }
+
         UpdateUI();
 
         if (isReadied && Player.Instance && playerCoinInMemmory != Player.Instance.wallet.coin)
@@ -58,12 +65,14 @@ public class UpgradeShop : MonoBehaviour
 
     public void OpenWindow()
     {
+        isOpenedShop = true;
         ui.ShowWindow();
         GameManager.Instance.SetTimeScale(0);
     }
 
     public void CloseWindow()
     {
+        isOpenedShop = false;
         ui.HideWindow();
         GameManager.Instance.SetTimeScale(1);
         GameManager.Instance.StartDay();
@@ -71,6 +80,7 @@ public class UpgradeShop : MonoBehaviour
 
     private void UpdateUI()
     {
+        Debug.Log(Player.Instance);
         ui.UpdatePlayerCoinText(Player.Instance.wallet.coin);
     }
 

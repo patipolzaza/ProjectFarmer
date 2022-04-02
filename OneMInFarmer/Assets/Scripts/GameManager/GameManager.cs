@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     private IEnumerator StartGame()
     {
         yield return new WaitUntil(() => isCompletedAllSetup());
+
+        StartDay();
     }
 
     public void StartDay()
@@ -51,7 +53,21 @@ public class GameManager : MonoBehaviour
 
     public void EndDay()
     {
+        StartCoroutine(EndDayProcess());
+    }
+
+    private IEnumerator EndDayProcess()
+    {
         player.DisableMove();
+
+        EndDayUI endDayUI = EndDayUI.Instance;
+        endDayUI.Show();
+
+        yield return new WaitUntil(() => EndDayUI.Instance.isFinishedAnimation);
+        yield return new WaitForSeconds(2);
+
+        endDayUI.Hide();
+
         var dayResultManager = DayResultManager.Instance;
         dayResultManager.StartCalculateResult();
     }
@@ -135,6 +151,10 @@ public class GameManager : MonoBehaviour
         if (!Timer.Instance)
             return false;
         if (!StatusUpgradeManager.Instance || !StatusUpgradeManager.Instance.isReadied)
+            return false;
+        if (!Player.Instance)
+            return false;
+        if (!WalletUI.Instance)
             return false;
 
         return true;

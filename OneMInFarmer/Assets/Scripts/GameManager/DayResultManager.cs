@@ -40,6 +40,7 @@ public class DayResultManager : MonoBehaviour
         if (Input.anyKeyDown)
         {
             GameManager.Instance.CalculateScore();
+            Reset();
         }
     }
 
