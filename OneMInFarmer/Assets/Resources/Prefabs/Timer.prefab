@@ -30,7 +30,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1892445611599563755}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -141,7 +141,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1892445611599563755}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
-  m_FillClockwise: 0
+  m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
@@ -293,8 +293,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1892445610892843304}
   - {fileID: 1892445610267835172}
+  - {fileID: 1892445610892843304}
   - {fileID: 1892445612092570464}
   - {fileID: 1892445612187471812}
   - {fileID: 1892445610850262671}
@@ -319,8 +319,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d72d5d08c4b4db4da856ac25ed7998a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeStatusData: {fileID: 0}
   timeText: {fileID: 1892445611128265104}
-  background: {fileID: 1892445610267835171}
+  redZone: {fileID: 1892445610892843303}
   needle: {fileID: 1892445612187471812}
   dayFloatingText: {fileID: 777217500539590907}
   dayText: {fileID: 6974312839439828526}
@@ -626,7 +627,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -89.03882}
+  m_AnchoredPosition: {x: 0, y: -90}
   m_SizeDelta: {x: 1080, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &69356114419568722
@@ -661,9 +662,9 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 84
     m_FontStyle: 1
-    m_BestFit: 0
-    m_MinSize: 8
-    m_MaxSize: 84
+    m_BestFit: 1
+    m_MinSize: 50
+    m_MaxSize: 120
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -702,4 +703,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bd7e05fe89e4924e935c615823a791f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 4037417716662478968}

@@ -3149,6 +3149,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 910674524}
     m_Modifications:
+    - target: {fileID: 1892445610892843303, guid: e36b3197e7ba09d40ad3c337d450f28c, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892445611599563754, guid: e36b3197e7ba09d40ad3c337d450f28c, type: 3}
+      propertyPath: timeStatusData
+      value: 
+      objectReference: {fileID: 11400000, guid: ff7d97a100ceb384dad117f4619c4c52, type: 2}
     - target: {fileID: 1892445611599563755, guid: e36b3197e7ba09d40ad3c337d450f28c, type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
@@ -3311,6 +3319,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7690412981774749738, guid: 07096e005b325b74db078c51b190810f, type: 3}
+      propertyPath: moveSpeedData
+      value: 
+      objectReference: {fileID: 11400000, guid: bbd6b447adf7303438b01eb7050fd258, type: 2}
     - target: {fileID: 8252043505170744580, guid: 07096e005b325b74db078c51b190810f, type: 3}
       propertyPath: m_RootOrder
       value: 2

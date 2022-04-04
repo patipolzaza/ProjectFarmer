@@ -66,8 +66,8 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
     private IEnumerator InitialSetup()
     {
         upgradeShop = GetComponent<UpgradeShop>();
-        yield return new WaitUntil(() => StatusUpgradeManager.Instance);
-        statusToUpgrade = StatusUpgradeManager.Instance.moveSpeedStatus;
+        yield return new WaitUntil(() => Player.Instance);
+        statusToUpgrade = Player.Instance.moveSpeedStatus;
         yield return new WaitUntil(() => InitialUpgradeCostsSetup());
         yield return new WaitUntil(() => SetUpShopButtons());
 

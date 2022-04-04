@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Animator))]
 public class DayFloatingText : MonoBehaviour
 {
     private Animator anim;
     private bool isFinishedPlayAnimation;
-    [SerializeField] Text text;
+    private Text text;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         gameObject.SetActive(false);
+        text = GetComponent<Text>();
     }
 
     public void Show()

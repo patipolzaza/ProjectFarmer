@@ -22,15 +22,6 @@ public class StatusUpgradeManager : MonoBehaviour
         StartCoroutine(InitialSetUp());
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            Debug.Log(moveSpeedStatus.GetValue);
-            Debug.Log(moveSpeedStatus.GetValueAtLevel(2));
-        }
-    }
-
     private IEnumerator InitialSetUp()
     {
         if (Instance == null)

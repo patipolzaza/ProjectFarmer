@@ -1,12 +1,117 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
+    [CustomEditor(typeof(Player))]
+    [CanEditMultipleObjects]
+    class CustomInspector : Editor
+    {
+        SerializedProperty interactableDetectorProp;
+        SerializedProperty interactableDetectorRangeProp;
+        SerializedProperty interactableLayerMaskProp;
+        SerializedProperty itemHolderTransformProp;
+        SerializedProperty itemDropTransformProp;
+
+        SerializedProperty moveSpeedDataProp;
+
+        private void OnEnable()
+        {
+            interactableDetectorProp = serializedObject.FindProperty("interactableDetector");
+            interactableDetectorRangeProp = serializedObject.FindProperty("interactableDetectRange");
+            interactableLayerMaskProp = serializedObject.FindProperty("interactableLayerMask");
+
+            itemHolderTransformProp = serializedObject.FindProperty("itemHolderTransform");
+            itemDropTransformProp = serializedObject.FindProperty("itemDropTransform");
+
+            moveSpeedDataProp = serializedObject.FindProperty("moveSpeedData");
+        }
+
+        public override void OnInspectorGUI()
+        {
+            serializedObject.Update();
+
+            GUILayout.Label("Status Data.");
+            EditorGUILayout.PropertyField(moveSpeedDataProp);
+            if (GUILayout.Button("Generate data file"))
+            {
+                OpenSaveFilePanel();
+            }
+            GUILayout.Space(1.25f);
+            GUILayout.Label("Interactable Detection.");
+            EditorGUILayout.PropertyField(interactableDetectorProp);
+            EditorGUILayout.PropertyField(interactableDetectorRangeProp);
+            EditorGUILayout.PropertyField(interactableLayerMaskProp);
+            GUILayout.Space(1.25f);
+            GUILayout.Label("Item Pick.");
+            EditorGUILayout.PropertyField(itemHolderTransformProp);
+            EditorGUILayout.PropertyField(itemDropTransformProp);
+
+            serializedObject.ApplyModifiedProperties();
+        }
+
+        private void OpenSaveFilePanel()
+        {
+            string startPath = Application.dataPath;
+            string filePath = EditorUtility.SaveFilePanel("Choose path to place file.", startPath, "Data_MoveSpeedStatus", "asset");
+
+            if (filePath.Length > 0)
+            {
+                GenerateMoveSpeedData(filePath);
+            }
+        }
+
+        private void GenerateMoveSpeedData(string filePath)
+        {
+            string[] paths = filePath.Split('/');
+
+            string realPath = "";
+            bool isFoundAssetsAtPath = false;
+            int index = 0;
+            string appendingPath;
+            foreach (var splittedPath in paths)
+            {
+                if (splittedPath.Equals("Assets"))
+                {
+                    isFoundAssetsAtPath = true;
+                }
+
+                if (isFoundAssetsAtPath)
+                {
+                    appendingPath = splittedPath;
+
+                    realPath += appendingPath;
+
+                    if (index < paths.Length - 1)
+                    {
+                        realPath += "/";
+                    }
+                }
+
+                index++;
+            }
+
+            MoveSpeedStatusData moveSpeedData = CreateInstance<MoveSpeedStatusData>();
+            moveSpeedData.Init("moveSpeed", 4, 250, 30, 10, 5);
+
+            AssetDatabase.CreateAsset(moveSpeedData, realPath);
+            AssetDatabase.SaveAssets();
+
+            SetMoveSpeedStatusData(moveSpeedData);
+        }
+
+        private void SetMoveSpeedStatusData(MoveSpeedStatusData newData)
+        {
+            moveSpeedDataProp.objectReferenceValue = newData;
+        }
+    }
     public static Player Instance { get; private set; }
 
+    public MoveSpeedStatus moveSpeedStatus { get; private set; }
+    [SerializeField] private MoveSpeedStatusData moveSpeedData;
     private Vector2 moveInput;
     private bool canMove = true;
 
@@ -15,14 +120,16 @@ public class Player : MonoBehaviour
     public Wallet wallet { get; private set; }
 
     [SerializeField] private Transform interactableDetector;
-    [SerializeField] private float interactableDetectRange;
+    [SerializeField] private float interactableDetectRange = 0.85f;
     [SerializeField] private LayerMask interactableLayerMask;
 
     public PickableObject holdingObject { get; private set; }
     public Interactable targetInteractable { get; private set; }
     private bool isDetectInteractable = false;
 
+    [Tooltip("The transform that is a where player hold the hoding object.")]
     [SerializeField] private Transform itemHolderTransform;
+    [Tooltip("The transform that is a where player drop the hoding object.")]
     [SerializeField] private Transform itemDropTransform;
 
     public float facingDirection { get; private set; }
@@ -40,16 +147,21 @@ public class Player : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        moveSpeedStatus = new MoveSpeedStatus("moveSpeed", moveSpeedData);
+    }
+
     private void OnValidate()
     {
-        if (!rb)
+        if (!rb && GetComponent<Rigidbody2D>())
         {
             rb = GetComponent<Rigidbody2D>();
             rb.isKinematic = false;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
-        if (!anim)
+        if (!anim && characterObject && characterObject.GetComponent<Animator>())
         {
             anim = characterObject.GetComponent<Animator>();
         }
@@ -168,7 +280,7 @@ public class Player : MonoBehaviour
     {
         if (canMove)
         {
-            int moveSpeed = StatusUpgradeManager.Instance.moveSpeedStatus.GetValue;
+            int moveSpeed = moveSpeedStatus.GetValue;
 
             float velocityX = moveInput.x * moveSpeed * Time.fixedDeltaTime;
             float velocityY = moveInput.y * moveSpeed * Time.fixedDeltaTime;
@@ -301,7 +413,10 @@ public class Player : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(interactableDetector.position, interactableDetectRange);
+        if (interactableDetector)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(interactableDetector.position, interactableDetectRange);
+        }
     }
 }
