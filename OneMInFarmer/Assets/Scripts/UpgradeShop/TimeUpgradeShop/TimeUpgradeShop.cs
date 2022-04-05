@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExtraTimeShop : MonoBehaviour
+public class TimeUpgradeShop : MonoBehaviour
 {
     private UpgradeShop upgradeShop;
-    [SerializeField] private ExtraTimeShopUI ui;
+    [SerializeField] private TimeUpgradeShopUI ui;
     private bool isSelectedTargetLevel;
     private int currentChosenLevel; //Level - 2 = button index on ui.
 
@@ -44,12 +44,11 @@ public class ExtraTimeShop : MonoBehaviour
         {
             int statusLevel = i + 2;
             int index = i;
-            string buttonText = $"+{status.GetValueAtLevel(statusLevel)}s";
+            string buttonText = $"+{status.GetValueAtLevel(statusLevel) - status.GetBaseValue}s";
             string costText = $"Cost: {upgradeCosts[index]}";
             ui.SetUpgradeButtonText(index, buttonText, costText);
 
             ui.AddButtonAction(index, delegate { SelectTargetLevel(statusLevel); });
-            //DebugMessage(index, statusLevel);
         }
 
         return true;

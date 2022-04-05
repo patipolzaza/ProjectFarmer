@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class ExtraTimeShopUI : MonoBehaviour
+public class TimeUpgradeShopUI : MonoBehaviour
 {
     [SerializeField] private DailyUpgradeShopButton[] upgradeButtons = new DailyUpgradeShopButton[3];
     public int upgradeButtonsCount

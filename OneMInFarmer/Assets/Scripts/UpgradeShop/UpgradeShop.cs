@@ -9,7 +9,7 @@ public class UpgradeShop : MonoBehaviour
     private int currentPanelIndex = 0;
     public int playerCoinInMemmory { get; private set; }
 
-    public ExtraTimeShop extraTimeShop { get; private set; }
+    public TimeUpgradeShop extraTimeShop { get; private set; }
     public MoveSpeedUpgradeShop moveSpeedUpgradeShop { get; private set; }
 
     private bool isOpenedShop;
@@ -36,24 +36,12 @@ public class UpgradeShop : MonoBehaviour
             extraTimeShop.UpdateShopUpgradeButtons();
             moveSpeedUpgradeShop.UpdateShopButtons();
         }
-
-        if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            if (ui.gameObject.activeSelf)
-            {
-                CloseWindow();
-            }
-            else
-            {
-                OpenWindow();
-            }
-        }
     }
 
     private IEnumerator InitialSetUp()
     {
         Instance = this;
-        extraTimeShop = GetComponent<ExtraTimeShop>();
+        extraTimeShop = GetComponent<TimeUpgradeShop>();
         moveSpeedUpgradeShop = GetComponent<MoveSpeedUpgradeShop>();
         ChangePanel(0);
 

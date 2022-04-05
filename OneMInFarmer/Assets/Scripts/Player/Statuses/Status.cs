@@ -27,6 +27,13 @@ public class Status : IUpgradable
     {
         return statusData.baseValue + (level - 1) * statusData.extraValuePerLevel;
     }
+    public virtual int GetBaseValue
+    {
+        get
+        {
+            return statusData.baseValue;
+        }
+    }
 
     public int GetMaxLevel
     {
