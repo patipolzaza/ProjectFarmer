@@ -11,7 +11,7 @@ public class Item : PickableObject
 {
     [SerializeField] private TextMeshProUGUI currentStackDisplayer;
 
-    [SerializeField] private ItemData ItemData;
+    [SerializeField] protected ItemData ItemData;
     public int currentStack { get; private set; }
 
     public bool isUsable
