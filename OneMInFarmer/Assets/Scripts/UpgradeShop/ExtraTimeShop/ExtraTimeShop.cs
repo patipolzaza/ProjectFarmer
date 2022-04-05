@@ -24,10 +24,11 @@ public class ExtraTimeShop : MonoBehaviour
 
     IEnumerator SetupShop()
     {
-        yield return new WaitUntil(() => StatusUpgradeManager.Instance);
-        statusToUpgrade = StatusUpgradeManager.Instance.extraTimeStatus;
+        yield return new WaitUntil(() => Timer.Instance);
+        statusToUpgrade = Timer.Instance.timeStatus;
 
         yield return new WaitUntil(() => InitialUpgradeCosts());
+        yield return new WaitUntil(() => statusToUpgrade != null);
         yield return new WaitUntil(() => SetupShopButtons());
         //Wait until each function finished setup.
 
@@ -36,7 +37,7 @@ public class ExtraTimeShop : MonoBehaviour
 
     private bool SetupShopButtons()
     {
-        Status status = StatusUpgradeManager.Instance.extraTimeStatus;
+        Status status = statusToUpgrade;
         int loopCount = ui.upgradeButtonsCount;
 
         for (int i = 0; i < loopCount; i++)

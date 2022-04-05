@@ -278,7 +278,10 @@ public class Timer : MonoBehaviour
                 }
             }
         }
-        catch (System.Exception e) { }
+        catch (System.Exception e)
+        {
+            Debug.LogException(e);
+        }
     }
 
     public void Begin()

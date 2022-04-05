@@ -5,13 +5,6 @@ using UnityEngine;
 public class StatusUpgradeManager : MonoBehaviour
 {
     public static StatusUpgradeManager Instance { get; private set; }
-    //MoveSpeed
-    public MoveSpeedStatus moveSpeedStatus { get; private set; }
-    [SerializeField] private MoveSpeedStatusData moveSpeedData;
-
-    //ExtraTime
-    public Status extraTimeStatus { get; private set; }
-    [SerializeField] private StatusData extraTimeData;
 
     private Stack<ICommand> commandHistory = new Stack<ICommand>();
 
@@ -28,9 +21,6 @@ public class StatusUpgradeManager : MonoBehaviour
         {
             Instance = this;
         }
-
-        moveSpeedStatus = new MoveSpeedStatus(moveSpeedData.name, moveSpeedData);
-        extraTimeStatus = new Status(extraTimeData.name, extraTimeData);
 
         isReadied = true;
         yield return null;
@@ -67,7 +57,7 @@ public class StatusUpgradeManager : MonoBehaviour
 
     public void ResetDiaryUpgradeStatus()
     {
-        extraTimeStatus.ResetLevel();
-        moveSpeedStatus.ResetLevel();
+        Timer.Instance.timeStatus.ResetLevel();
+        Player.Instance.moveSpeedStatus.ResetLevel();
     }
 }
