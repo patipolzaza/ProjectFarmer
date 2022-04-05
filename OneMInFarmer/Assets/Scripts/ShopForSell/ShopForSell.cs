@@ -32,10 +32,10 @@ public class ShopForSell : Interactable
     public void SellAllItemsInContainer()
     {
         isFinishSellingProcess = false;
-        StartCoroutine(SellItemInContainerProcess());
+        SellItemInContainerProcess();
     }
 
-    private IEnumerator SellItemInContainerProcess()
+    private void SellItemInContainerProcess()
     {
         int loopCount = itemContainer.GetItemCount;
 
@@ -52,7 +52,6 @@ public class ShopForSell : Interactable
             {
                 break;
             }
-            yield return new WaitForEndOfFrame();
         }
 
         isFinishSellingProcess = true;

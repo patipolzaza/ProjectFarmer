@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviour
     {
         currentDay++;
 
+        ShopForSell.Instance.ResetTotalSoldPrice();
         StatusUpgradeManager.Instance.ResetDiaryUpgradeStatus();
 
         GrowUpAnimals();
