@@ -8,8 +8,7 @@ public class DayResultUI : WindowUIBase
     [SerializeField] private Text currentDayText;
     [SerializeField] private Text totalSoldPriceText;
     [SerializeField] private Text deptText;
-    [SerializeField] private Text netProfitText;
-    [SerializeField] private Text playerCoinText;
+    [SerializeField] private Text dayRemainingForNextDebtPaymentText;
 
     [SerializeField] private GameObject continueTextObj;
 
@@ -28,14 +27,9 @@ public class DayResultUI : WindowUIBase
         deptText.text = text;
     }
 
-    public void SetNetProfitText(string text)
+    public void SetDayRemainingForNextDebtPaymentText(string text)
     {
-        netProfitText.text = text;
-    }
-
-    public void SetPlayerCoinText(string text)
-    {
-        playerCoinText.text = text;
+        dayRemainingForNextDebtPaymentText.text = text;
     }
 
     public void SetActiveContinueText(bool isActive)

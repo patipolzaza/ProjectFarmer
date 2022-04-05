@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
         endDayUI.Hide();
 
         var dayResultManager = DayResultManager.Instance;
-        dayResultManager.StartCalculateResult();
+        dayResultManager.ShowDayResult();
     }
 
     private void GrowUpAnimals()
@@ -151,12 +151,7 @@ public class GameManager : MonoBehaviour
         if (!DayResultManager.Instance || !DayResultManager.Instance.isReadied)
             return false;
         if (!UpgradeShop.Instance || !UpgradeShop.Instance.isReadied)
-        {
-            Debug.Log("!UpgradeShop");
-            Debug.Log(!UpgradeShop.Instance);
-            Debug.Log(!UpgradeShop.Instance.isReadied);
             return false;
-        }
         if (!Timer.Instance)
             return false;
         if (!StatusUpgradeManager.Instance || !StatusUpgradeManager.Instance.isReadied)
@@ -166,5 +161,13 @@ public class GameManager : MonoBehaviour
         if (!WalletUI.Instance)
             return false;
         return true;
+    }
+
+    public int GetDayRemainForDebtPayment
+    {
+        get
+        {
+            return DebtManager.dayForNextDebtPayment - currentDay;
+        }
     }
 }
