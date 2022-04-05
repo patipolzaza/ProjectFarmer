@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e8cac953a8120549a11e43d42a7b3e6, type: 3}
-  m_Name: D_ExtraTime
+  m_Name: D_Time
   m_EditorClassIdentifier: 
-  statusName: Extra Time
+  statusName: Time
   maxLevel: 4
-  baseValue: 60
+  baseValue: 5
   extraValuePerLevel: 10
   upgradeCostPerLevel: 10
   extraCostPercentage: -25

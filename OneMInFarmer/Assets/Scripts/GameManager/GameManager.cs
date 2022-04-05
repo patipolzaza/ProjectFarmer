@@ -107,8 +107,8 @@ public class GameManager : MonoBehaviour
 
         GrowUpAnimals();
 
-        ResetPlotsStatus();
-        ResetItemInStacks();
+        //ResetPlotsStatus();
+        //ResetItemInStacks();
 
         UpgradeShop.Instance.OpenWindow();
     }

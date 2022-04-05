@@ -27,14 +27,7 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
         if (isSelectedTargetLevel)
         {
             lastestCommand.Undo();
-            int buttonIndex = 0;
-            for (int i = 0; i < targetUpgradeLevels.Length; i++)
-            {
-                if (targetUpgradeLevels[i] == currentChosenLevel)
-                {
-                    buttonIndex = i;
-                }
-            }
+            int buttonIndex = GetIndexFromLevel(currentChosenLevel);
 
             ChangeTargetLevel(buttonIndex, targetLevel);
         }
@@ -139,7 +132,7 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
 
             if (isSelectedTargetLevel)
             {
-                playerCoin += upgradeCosts[currentChosenLevel - 2];
+                playerCoin += upgradeCosts[GetIndexFromLevel(currentChosenLevel)];
             }
 
             for (int i = 0; i < ui.GetButtonLength; i++)
@@ -153,7 +146,7 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
                 yield return new WaitForEndOfFrame();
                 if (playerCoin >= cost)
                 {
-                    if (i != currentChosenLevel - 2)
+                    if (i != GetIndexFromLevel(currentChosenLevel))
                     {
                         ui.SetUpgradeButtonInteractable(i, true);
                     }
@@ -168,12 +161,28 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
         isReadied = true;
     }
 
+    private int GetIndexFromLevel(int level)
+    {
+        if (level > 0)
+        {
+            for (int i = 0; i < targetUpgradeLevels.Length; i++)
+            {
+                if (level == targetUpgradeLevels[i])
+                {
+                    return i;
+                }
+            }
+        }
+
+        return -1;
+    }
+
     public void ResetUpgrade()
     {
         lastestCommand?.Undo();
         if (isSelectedTargetLevel)
         {
-            ChangeTargetLevel(currentChosenLevel, 0);
+            ChangeTargetLevel(GetIndexFromLevel(currentChosenLevel), 0);
         }
         isSelectedTargetLevel = false;
     }
