@@ -192,6 +192,11 @@ public class Animal : PickableObject, IValuable
         return gameObject;
     }
 
+    public int GetPrice()
+    {
+        return 0;
+    }
+
     public void PutInShopStash(ShopForSell targetShop)
     {
         targetShop.PutItemInContainer(this);
