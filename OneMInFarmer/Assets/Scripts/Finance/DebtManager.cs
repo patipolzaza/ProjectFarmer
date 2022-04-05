@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DebtManager
 {
-    public int dayForNextDebtPayment { get; private set; } = 1;
+    public int dayForNextDebtPayment { get; private set; } = 5;
     public int debtPaidCount { get; private set; }
     private float deptMultiplierPerPeriod = 1.3f;
     private int startDebt = 5;
