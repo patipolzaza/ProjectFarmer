@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class WateringPot : Item
 {
-    public Slider slider;
-    float valence = 20;
-    float remaining = 20;
-    float RefillPerSeconds = 4;
+    [SerializeField]private Slider slider;
+    public float valence { get; private set; } = 20;
+    public float remaining { get; private set; } = 20;
+    public float RefillPerSeconds { get; private set; } = 1;
     private bool isRefill = false;
 
 
