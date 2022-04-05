@@ -182,7 +182,6 @@ public class Player : MonoBehaviour
                     {
                         IValuable valuable = holdingObject as IValuable;
                         ShopForSell shop = targetInteractable as ShopForSell;
-
                         if (shop.PutItemInContainer(valuable))
                         {
                             holdingObject = null;
@@ -370,6 +369,17 @@ public class Player : MonoBehaviour
                 else
                 {
                     ChangeTargetInteractable(interactable);
+                    if (holdingObject)
+                    {
+                        if (holdingObject is IValuable && targetInteractable is ShopForSell)
+                        {
+                            Debug.Log(targetInteractable);
+                            IValuable valuable = holdingObject as IValuable;
+                            ShopForSell shop = targetInteractable as ShopForSell;
+                            shop.ShowPrice(valuable.GetPrice());
+                           
+                        }
+                    }
                 }
             }
 
