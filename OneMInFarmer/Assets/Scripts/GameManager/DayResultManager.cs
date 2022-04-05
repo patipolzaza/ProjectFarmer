@@ -39,6 +39,8 @@ public class DayResultManager : MonoBehaviour
 
         if (Input.anyKeyDown)
         {
+            isAllProcessFinished = false;
+            CloseWindow();
             GameManager.Instance.CalculateScore();
             Reset();
         }
@@ -68,9 +70,9 @@ public class DayResultManager : MonoBehaviour
         ui.SetDayText(GameManager.Instance.currentDay.ToString());
         playerCoinBeforeCal = playerWallet.coin;
         ui.SetPlayerCoinText(playerCoinBeforeCal.ToString());
-        shop.SellAllItemsInContainer();
+        //shop.SellAllItemsInContainer();
         yield return new WaitForSeconds(1.25f);
-        yield return new WaitUntil(() => ShopForSell.Instance.isFinishSellingProcess);
+        //yield return new WaitUntil(() => ShopForSell.Instance.isFinishSellingProcess);
 
         totalSoldPrice = shop.totalSoldPrice;
         StartCoroutine(UpdateTotalSoldPriceText());
@@ -90,12 +92,11 @@ public class DayResultManager : MonoBehaviour
         yield return new WaitUntil(() => finishedUpdateProfitText);
         yield return new WaitForSeconds(0.75f);
 
-        playerWallet.EarnCoin(profit);
+        //playerWallet.EarnCoin(profit);
         playerCoinAfterCal = playerWallet.coin;
 
         StartCoroutine(UpdatePlayerCoinText());
         yield return new WaitUntil(() => finishedUpdatePlayerCoin);
-
         yield return new WaitForSeconds(1.25f);
         isAllProcessFinished = true;
     }

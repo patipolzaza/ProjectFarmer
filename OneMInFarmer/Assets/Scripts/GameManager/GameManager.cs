@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public DebtManager DebtManager { get; private set; }
 
     public int currentDay { get; private set; } = 1;
-    public int defaultTimePerDay { get; private set; } = 15;
+    public int defaultTimePerDay { get; private set; } = 5;
 
     public Player player { get; private set; }
     void Awake()
@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
         timer.Begin();
 
         player.EnableMove();
+        WalletUI.Instance.ShowWindow();
     }
 
     public void EndDay()
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator EndDayProcess()
     {
         player.DisableMove();
+        WalletUI.Instance.HideWindow();
 
         EndDayUI endDayUI = EndDayUI.Instance;
         endDayUI.Show();
@@ -122,7 +124,8 @@ public class GameManager : MonoBehaviour
         {
             int playerCoin = player.wallet.coin;
             int debt = DebtManager.GetDebt;
-
+            Debug.Log(playerCoin);
+            Debug.Log(debt);
             if (playerCoin < debt)
             {
                 GameOver();
@@ -148,7 +151,12 @@ public class GameManager : MonoBehaviour
         if (!DayResultManager.Instance || !DayResultManager.Instance.isReadied)
             return false;
         if (!UpgradeShop.Instance || !UpgradeShop.Instance.isReadied)
+        {
+            Debug.Log("!UpgradeShop");
+            Debug.Log(!UpgradeShop.Instance);
+            Debug.Log(!UpgradeShop.Instance.isReadied);
             return false;
+        }
         if (!Timer.Instance)
             return false;
         if (!StatusUpgradeManager.Instance || !StatusUpgradeManager.Instance.isReadied)
@@ -157,7 +165,6 @@ public class GameManager : MonoBehaviour
             return false;
         if (!WalletUI.Instance)
             return false;
-
         return true;
     }
 }
