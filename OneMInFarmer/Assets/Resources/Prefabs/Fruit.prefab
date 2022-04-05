@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3317179165575660663}
-  - component: {fileID: 3091261403957349749}
+  - component: {fileID: 6446048334776484171}
   - component: {fileID: 6628693169848381757}
   - component: {fileID: 1113994116788615179}
   m_Layer: 6
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3091261403957349749
+--- !u!114 &6446048334776484171
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,14 +42,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 937699522433420188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c0e11d5f60d95545b239fac52ef89b8, type: 3}
+  m_Script: {fileID: 11500000, guid: df562df619aed794fbdf455b016ba8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactEvent:
     m_PersistentCalls:
       m_Calls: []
   interactableObject: {fileID: 937699522433420188}
-  highlightColor: {r: 0.42352942, g: 1, b: 0.30588236, a: 1}
+  highlightColor: {r: 0, g: 1, b: 0, a: 1}
   currentStackDisplayer: {fileID: 0}
   ItemData: {fileID: 11400000, guid: b26c55bee4a32d840ac2ee9a623a53bf, type: 2}
 --- !u!212 &6628693169848381757
