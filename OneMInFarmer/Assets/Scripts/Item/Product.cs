@@ -8,7 +8,10 @@ public class Product : Item, IValuable
     {
         throw new System.NotImplementedException();
     }
-
+    public int GetPrice()
+    {
+        return ItemData.sellPrice;
+    }
     public bool Purchase()
     {
         throw new System.NotImplementedException();
