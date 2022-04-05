@@ -80,7 +80,7 @@ public class UpgradeShop : MonoBehaviour
 
     private void UpdateUI()
     {
-        Debug.Log(Player.Instance);
+        //Debug.Log(Player.Instance);
         ui.UpdatePlayerCoinText(Player.Instance.wallet.coin);
     }
 

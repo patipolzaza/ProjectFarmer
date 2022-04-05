@@ -19,11 +19,13 @@ public class ShopForSell : Interactable
 
     public bool PutItemInContainer(IValuable valuable)
     {
+        Debug.Log("Selling");
         if (valuable != null)
         {
-            GameObject pickableObject = valuable.GetObject();
-            itemContainer.Put(valuable);
-            pickableObject.SetActive(false);
+            valuable.Sell();
+   
+            //itemContainer.Put(valuable);
+            //pickableObject.SetActive(false);
         }
 
         return true;
