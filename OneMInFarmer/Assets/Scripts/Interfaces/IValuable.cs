@@ -15,4 +15,6 @@ public interface IValuable
     /// <returns>Price that valuable object was sold.</returns>
     public int Sell();
     public GameObject GetObject();
+
+    public int GetPrice();
 }
