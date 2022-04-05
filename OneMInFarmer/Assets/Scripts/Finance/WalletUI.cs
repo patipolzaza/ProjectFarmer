@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WalletUI : MonoBehaviour
+public class WalletUI : WindowUIBase
 {
     public static WalletUI Instance;
     [SerializeField] private Text CoinText;
-    private void Awake()
+    protected override void Awake()
     {
         StartCoroutine(InitialSetUp());
     }
@@ -23,4 +23,6 @@ public class WalletUI : MonoBehaviour
     {
         this.CoinText.text = "Coin : " + coin.ToString();
     }
+
+
 }
