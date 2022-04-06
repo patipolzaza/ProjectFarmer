@@ -39,8 +39,10 @@ public class UpgradeShopWindowUI : WindowUIBase
     public void ChangePanel(int oldIndex, int newIndex)
     {
         SetPanelButtonInteractable(oldIndex, true);
+        tabPanels[oldIndex].SetActive(false);
 
         tabPanels[newIndex].transform.SetAsLastSibling();
         SetPanelButtonInteractable(newIndex, false);
+        tabPanels[newIndex].SetActive(true);
     }
 }

@@ -394,6 +394,7 @@ MonoBehaviour:
       m_Calls: []
   interactableObject: {fileID: 1318744144}
   highlightColor: {r: 0, g: 0, b: 0, a: 0}
+  priceTMPro: {fileID: 0}
 --- !u!4 &146086151
 Transform:
   m_ObjectHideFlags: 0
@@ -465,8 +466,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c2e3542ec338e8418808eba0f643c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedData: {fileID: 11400000, guid: bbd6b447adf7303438b01eb7050fd258, type: 2}
-  extraTimeData: {fileID: 11400000, guid: ff7d97a100ceb384dad117f4619c4c52, type: 2}
 --- !u!4 &235518059
 Transform:
   m_ObjectHideFlags: 0
@@ -709,6 +708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0d852d718a4ce24b81b5167e21f988c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  windowUIObject: {fileID: 434876728}
   CoinText: {fileID: 1660893460}
 --- !u!1 &617176960
 GameObject:

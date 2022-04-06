@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimeUpgradeShop : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class TimeUpgradeShop : MonoBehaviour
     private Status statusToUpgrade;
 
     private int[] upgradeCosts;
+
+    [SerializeField] private Button resetButton;
+
     public bool isReadied { get; private set; } = false;
 
     private void Awake()
@@ -24,6 +28,7 @@ public class TimeUpgradeShop : MonoBehaviour
 
     IEnumerator SetupShop()
     {
+        resetButton.gameObject.SetActive(false);
         yield return new WaitUntil(() => Timer.Instance);
         statusToUpgrade = Timer.Instance.timeStatus;
 
@@ -87,6 +92,7 @@ public class TimeUpgradeShop : MonoBehaviour
         if (command.Execute())
         {
             lastestCommand = command;
+            resetButton.gameObject.SetActive(true);
             isSelectedTargetLevel = true;
         }
         else
@@ -113,6 +119,7 @@ public class TimeUpgradeShop : MonoBehaviour
             {
                 ChangeTargetLevel(currentChosenLevel, 0);
             }
+            resetButton.gameObject.SetActive(false);
             isSelectedTargetLevel = false;
         }
     }

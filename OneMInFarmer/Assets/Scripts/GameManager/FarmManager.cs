@@ -6,7 +6,7 @@ public class FarmManager : MonoBehaviour
 {
     public Status plotSizeStatus { get; private set; }
     [SerializeField] private StatusData plotSizeStatusData;
-    public List<Plot> plots = new List<Plot>();
+    private List<Plot> plots = new List<Plot>();
     public int GetCurrentPlotCount
     {
         get
@@ -17,7 +17,7 @@ public class FarmManager : MonoBehaviour
 
     public Status maxAnimalStatus { get; private set; }
     [SerializeField] private StatusData maxAnimalStatusData;
-    public List<Animal> animals = new List<Animal>();
+    private List<Animal> animals = new List<Animal>();
     public int GetCurrentAnimalCount
     {
         get
@@ -30,5 +30,27 @@ public class FarmManager : MonoBehaviour
     {
         plotSizeStatus = new Status("Plot Size", plotSizeStatusData);
         maxAnimalStatus = new Status("Max Animal", maxAnimalStatusData);
+    }
+
+    public bool AddAnimal(Animal animalToAdd)
+    {
+        if (animals.Count >= maxAnimalStatus.GetValue || !animalToAdd)
+        {
+            return false;
+        }
+
+        animals.Add(animalToAdd);
+        return true;
+    }
+
+    public bool RemoveAnimal(Animal animalToRemove)
+    {
+        if (!animalToRemove || !animals.Contains(animalToRemove))
+        {
+            return false;
+        }
+
+        animals.Remove(animalToRemove);
+        return true;
     }
 }
