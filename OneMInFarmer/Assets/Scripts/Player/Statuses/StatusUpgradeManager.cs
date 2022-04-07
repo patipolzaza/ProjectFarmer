@@ -12,18 +12,13 @@ public class StatusUpgradeManager : MonoBehaviour
 
     private void Awake()
     {
-        StartCoroutine(InitialSetUp());
+        InitialSetUp();
     }
 
-    private IEnumerator InitialSetUp()
+    private void InitialSetUp()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-
+        Instance = this;
         isReadied = true;
-        yield return null;
     }
 
     public bool ExecuteCommand(ICommand command)
@@ -55,7 +50,7 @@ public class StatusUpgradeManager : MonoBehaviour
         commandHistory.Clear();
     }
 
-    public void ResetDiaryUpgradeStatus()
+    public void ResetDailyUpgradeStatus()
     {
         Timer.Instance.timeStatus.ResetLevel();
         Player.Instance.moveSpeedStatus.ResetLevel();

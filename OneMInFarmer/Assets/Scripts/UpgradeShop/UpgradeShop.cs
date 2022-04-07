@@ -78,10 +78,14 @@ public class UpgradeShop : MonoBehaviour
         currentPanelIndex = newIndex;
     }
 
+    public void ResetDailyUpgrade()
+    {
+        extraTimeShop.ResetUpgrade();
+        moveSpeedUpgradeShop.ResetUpgrade();
+    }
+
     public void ResetUpgrade()
     {
         StatusUpgradeManager.Instance.UndoAll();
-        extraTimeShop.ResetUpgrade();
-        moveSpeedUpgradeShop.ResetUpgrade();
     }
 }

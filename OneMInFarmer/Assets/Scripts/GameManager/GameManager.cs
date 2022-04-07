@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
         currentDay++;
 
         ShopForSell.Instance.ResetTotalSoldPrice();
-        StatusUpgradeManager.Instance.ResetDiaryUpgradeStatus();
+        StatusUpgradeManager.Instance.ResetDailyUpgradeStatus();
 
         GrowUpAnimals();
 
@@ -116,29 +116,6 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("Game is O V E R.");
-    }
-
-    public void CalculateScore()
-    {
-        if (DebtManager.dayForNextDebtPayment == currentDay)
-        {
-            int playerCoin = player.wallet.coin;
-            int debt = DebtManager.GetDebt;
-            Debug.Log(playerCoin);
-            Debug.Log(debt);
-            if (playerCoin < debt)
-            {
-                GameOver();
-                return;
-            }
-
-            int score = DebtManager.PayDebt(debt);
-            player.wallet.LoseCoin(debt);
-
-            ScoreManager.AddScore(score);
-        }
-
-        ToNextDay();
     }
 
     public void SetTimeScale(float value)

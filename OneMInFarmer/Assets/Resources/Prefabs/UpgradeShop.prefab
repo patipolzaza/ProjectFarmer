@@ -679,7 +679,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Diary
+  m_Text: Daily
 --- !u!1 &1510309442209942396
 GameObject:
   m_ObjectHideFlags: 0
@@ -4756,7 +4756,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5243712791023657383}
         m_TargetAssemblyTypeName: UpgradeShop, Assembly-CSharp
-        m_MethodName: ResetUpgrade
+        m_MethodName: ResetDailyUpgrade
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
