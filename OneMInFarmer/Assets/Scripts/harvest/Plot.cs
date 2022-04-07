@@ -5,10 +5,13 @@ using UnityEngine;
 public class Plot : Interactable
 {
     private bool isPlanted = false;
-    [SerializeField] private SpriteRenderer plant;
+    private SpriteRenderer spriteRenderer;
+    [SerializeField] private GameObject plantObject;
+    private SpriteRenderer plantSpriteRenderer;
+    [SerializeField] private GameObject lockedSign;
 
-    [SerializeField] Sprite SpriteDry;
-    [SerializeField] Sprite SpriteWet;
+    [SerializeField] private Sprite SpriteDry;
+    [SerializeField] private Sprite SpriteWet;
 
     public SeedData seed;
     int plantStage = 0;
@@ -22,6 +25,9 @@ public class Plot : Interactable
     {
         base.Awake();
 
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        plantSpriteRenderer = plantObject.GetComponent<SpriteRenderer>();
         interactEvent.AddListener(PlayerInteract);
     }
 
@@ -76,11 +82,10 @@ public class Plot : Interactable
             player.PickUpItem(Instantiate(seed.product, new Vector3(0, 0, 0), Quaternion.identity));
             isPlanted = false;
             seed = null;
-            plant.gameObject.SetActive(false);
+            plantObject.SetActive(false);
 
         }
     }
-
 
     void Plant(Item seedItem)
     {
@@ -94,7 +99,7 @@ public class Plot : Interactable
             countHarvest = seed.countHarvest;
             dehydration = 0;
             UpdatePlant();
-            plant.gameObject.SetActive(true);
+            plantObject.SetActive(true);
         }
     }
 
@@ -152,14 +157,14 @@ public class Plot : Interactable
         }
         if (isPlanted)
         {
-            plant.sprite = seed.plantStages[plantStage];
+            plantSpriteRenderer.sprite = seed.plantStages[plantStage];
             if (isWither)
             {
-                plant.GetComponent<SpriteRenderer>().color = new Color32(188, 146, 0, 255);
+                plantSpriteRenderer.color = new Color32(188, 146, 0, 255);
             }
             else
             {
-                plant.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+                plantSpriteRenderer.color = new Color32(255, 255, 255, 255);
             }
         }
     }
@@ -175,7 +180,7 @@ public class Plot : Interactable
         seed = null;
         isPlanted = false;
         isWither = false;
-        plant.gameObject.SetActive(false);
+        plantObject.SetActive(false);
         plantStage = 0;
     }
     public void ResetPlotStatus()
@@ -185,5 +190,19 @@ public class Plot : Interactable
             Grow();
             Dring();
         }
+    }
+
+    public void Lock()
+    {
+        lockedSign.SetActive(true);
+        spriteRenderer.color = new Color32(200, 200, 200, 255);
+        SetInteractable(false);
+    }
+
+    public void Unlock()
+    {
+        lockedSign.SetActive(false);
+        spriteRenderer.color = Color.white;
+        SetInteractable(true);
     }
 }
