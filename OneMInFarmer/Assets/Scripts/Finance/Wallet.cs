@@ -14,7 +14,7 @@ public class Wallet
     public void EarnCoin(int amount)
     {
         coin += amount;
-        WalletUI.Instance.SetCoinText(coin);
+        WalletUI.Instance.UpdateCoinText(coin);
     }
 
     public bool LoseCoin(int amount)
@@ -27,7 +27,7 @@ public class Wallet
         else
         {
             coin -= amount;
-            WalletUI.Instance.SetCoinText(coin);
+            WalletUI.Instance.UpdateCoinText(coin);
             return true;
         }
     }

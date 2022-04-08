@@ -15,11 +15,11 @@ public class WalletUI : WindowUIBase
     private IEnumerator InitialSetUp()
     {
         yield return new WaitUntil(() => Player.Instance);
-        SetCoinText(Player.Instance.wallet.coin);
+        UpdateCoinText(Player.Instance.wallet.coin);
         Instance = this;
     }
 
-    public void SetCoinText(int coin)
+    public void UpdateCoinText(int coin)
     {
         this.CoinText.text = "Coin : " + coin.ToString();
     }
