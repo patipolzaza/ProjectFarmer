@@ -19,7 +19,7 @@ public class Wallet
         int oldCoinValue = coin;
         coin += amount;
         OnCoinChanged?.Invoke(oldCoinValue, coin);
-        WalletUI.Instance.UpdateCoinText(coin);
+        //WalletUI.Instance.UpdateCoinText(coin);
     }
 
     public void LoseCoin(int amount)
@@ -35,6 +35,6 @@ public class Wallet
         }
 
         OnCoinChanged?.Invoke(oldCoinValue, coin);
-        WalletUI.Instance.UpdateCoinText(coin);
+        //WalletUI.Instance.UpdateCoinText(coin);
     }
 }

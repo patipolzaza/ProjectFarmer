@@ -7,7 +7,7 @@ public class PermanentUpgradeShop : MonoBehaviour
 {
     private Status _statusToUpgrade;
 
-    [SerializeField] private GameObject _objectContainStatus;
+    [SerializeField] private GameObject _targetObjectContainStatus;
     private IContainStatus _componentContainStatus;
 
     public UnityEvent<Status> OnShopSetup;
@@ -15,7 +15,7 @@ public class PermanentUpgradeShop : MonoBehaviour
 
     private void Awake()
     {
-        _componentContainStatus = _objectContainStatus.GetComponent<IContainStatus>();
+        _componentContainStatus = _targetObjectContainStatus.GetComponent<IContainStatus>();
         _statusToUpgrade = _componentContainStatus.GetStatus;
 
         OnShopSetup?.Invoke(_statusToUpgrade);

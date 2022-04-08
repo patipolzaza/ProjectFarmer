@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class GameManager : MonoBehaviour
     public int defaultTimePerDay { get; private set; } = 5;
 
     public Player player { get; private set; }
+
+    public UnityEvent OnDayStarted;
+    public UnityEvent OnDayEnded;
     void Awake()
     {
         Instance = this;
@@ -45,23 +49,17 @@ public class GameManager : MonoBehaviour
     {
         StatusUpgradeManager.Instance.ClearUpgradeHistory();
 
-        Timer timer = Timer.Instance;
-        timer.Begin();
-
-        player.EnableMove();
-        WalletUI.Instance.ShowWindow();
+        OnDayStarted?.Invoke();
     }
 
     public void EndDay()
     {
         StartCoroutine(EndDayProcess());
+        OnDayEnded?.Invoke();
     }
 
     private IEnumerator EndDayProcess()
     {
-        player.DisableMove();
-        WalletUI.Instance.HideWindow();
-
         EndDayUI endDayUI = EndDayUI.Instance;
         endDayUI.Show();
 
@@ -134,8 +132,6 @@ public class GameManager : MonoBehaviour
         if (!StatusUpgradeManager.Instance || !StatusUpgradeManager.Instance.isReadied)
             return false;
         if (!Player.Instance)
-            return false;
-        if (!WalletUI.Instance)
             return false;
         return true;
     }
