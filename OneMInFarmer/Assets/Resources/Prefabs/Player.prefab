@@ -259,6 +259,9 @@ MonoBehaviour:
     m_Bits: 64
   itemHolderTransform: {fileID: 2012922464997435667}
   itemDropTransform: {fileID: 607904613580533643}
+  OnWatering:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6508507179172989048
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,8 +29,15 @@ public class Plot : Interactable
 
         plantSpriteRenderer = plantObject.GetComponent<SpriteRenderer>();
         interactEvent.AddListener(PlayerInteract);
+
+        Lock();
     }
 
+    protected override void Start()
+    {
+        base.Start();
+
+    }
     public void PlayerInteract(Player player)
     {
         if (isPlanted)

@@ -5,12 +5,15 @@ using UnityEngine;
 public class UpgradePlotSizeCommand : ICommand
 {
     private bool isExecuted = false;
+    private int latestUnlockIndex = 0;
     private Status statusToUpgrade = null;
 
     public UpgradePlotSizeCommand(Status statusToUpgrade)
     {
         this.statusToUpgrade = statusToUpgrade;
         isExecuted = false;
+
+        latestUnlockIndex = statusToUpgrade.GetValue;
     }
 
     public bool Execute()
@@ -24,7 +27,7 @@ public class UpgradePlotSizeCommand : ICommand
                 statusToUpgrade.Upgrade();
                 isExecuted = true;
 
-                FarmManager.Instance.UnlockPlots();
+                PlotManager.Instance.UnlockPlots(latestUnlockIndex, statusToUpgrade.GetValue);
 
                 return true;
             }
@@ -39,6 +42,7 @@ public class UpgradePlotSizeCommand : ICommand
         {
             Wallet playerWallet = Player.Instance.wallet;
             playerWallet.EarnCoin(statusToUpgrade.GetUpgradeCost);
+            PlotManager.Instance.LockPlots(latestUnlockIndex, statusToUpgrade.GetValue);
             statusToUpgrade.Downgrade();
             isExecuted = false;
         }

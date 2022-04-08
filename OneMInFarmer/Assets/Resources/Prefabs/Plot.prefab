@@ -185,11 +185,11 @@ MonoBehaviour:
       m_Calls: []
   interactableObject: {fileID: 2462687588505583701}
   highlightColor: {r: 0.4248605, g: 1, b: 0.3066038, a: 1}
-  plantObject: {fileID: 3920867688730202926}
+  plantObject: {fileID: 1909002920848576239}
   lockedSign: {fileID: 3920867688730202926}
   SpriteDry: {fileID: 165240979840018154, guid: a06636c5ea423334aac09e1005e56e12, type: 3}
   SpriteWet: {fileID: -1571907141483303039, guid: 212facc78115cdd46b0f59ab44119313, type: 3}
-  seed: {fileID: 11400000, guid: 4d9c362b1cb876b4fa6b06ee11ef4da6, type: 2}
+  seed: {fileID: 0}
 --- !u!60 &6119803323363319864
 PolygonCollider2D:
   m_ObjectHideFlags: 0
