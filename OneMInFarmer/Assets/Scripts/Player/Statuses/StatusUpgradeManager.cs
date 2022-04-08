@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class StatusUpgradeManager : MonoBehaviour
 {
     public static StatusUpgradeManager Instance { get; private set; }
+
+    public UnityEvent OnClearUpgradeHistory;
+    public UnityEvent OnResetDailyStatus;
 
     private Stack<ICommand> commandHistory = new Stack<ICommand>();
 
@@ -48,11 +52,15 @@ public class StatusUpgradeManager : MonoBehaviour
     public void ClearUpgradeHistory()
     {
         commandHistory.Clear();
+
+        OnClearUpgradeHistory?.Invoke();
     }
 
     public void ResetDailyUpgradeStatus()
     {
         Timer.Instance.timeStatus.ResetLevel();
         Player.Instance.moveSpeedStatus.ResetLevel();
+
+        OnResetDailyStatus?.Invoke();
     }
 }

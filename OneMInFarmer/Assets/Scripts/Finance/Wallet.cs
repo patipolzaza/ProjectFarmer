@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Wallet
 {
+    public delegate void CoinChangedDelegate(int oldValue, int newValue);
+    public CoinChangedDelegate OnCoinChanged;
+
     public int coin { get; private set; }
 
     public Wallet(int initialCoin)
@@ -13,22 +16,25 @@ public class Wallet
 
     public void EarnCoin(int amount)
     {
+        int oldCoinValue = coin;
         coin += amount;
+        OnCoinChanged?.Invoke(oldCoinValue, coin);
         WalletUI.Instance.UpdateCoinText(coin);
     }
 
-    public bool LoseCoin(int amount)
+    public void LoseCoin(int amount)
     {
+        int oldCoinValue = coin;
         if (coin <= amount)
         {
             coin = 0;
-            return false;
         }
         else
         {
             coin -= amount;
-            WalletUI.Instance.UpdateCoinText(coin);
-            return true;
         }
+
+        OnCoinChanged?.Invoke(oldCoinValue, coin);
+        WalletUI.Instance.UpdateCoinText(coin);
     }
 }

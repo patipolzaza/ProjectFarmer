@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class UpgradeShop : MonoBehaviour
@@ -13,6 +14,9 @@ public class UpgradeShop : MonoBehaviour
     public MoveSpeedUpgradeShop moveSpeedUpgradeShop { get; private set; }
 
     private bool isOpenedShop;
+
+    public UnityEvent OnResetDailyUpgrade;
+    public UnityEvent OnResetPermanentUpgrade;
 
     public bool isReadied { get; private set; } = false;
 
@@ -48,6 +52,7 @@ public class UpgradeShop : MonoBehaviour
         yield return new WaitUntil(() => extraTimeShop.isReadied);
         yield return new WaitUntil(() => moveSpeedUpgradeShop.isReadied);
 
+        ui.HideWindow();
         isReadied = true;
     }
 
@@ -82,10 +87,14 @@ public class UpgradeShop : MonoBehaviour
     {
         extraTimeShop.ResetUpgrade();
         moveSpeedUpgradeShop.ResetUpgrade();
+
+        OnResetDailyUpgrade?.Invoke();
     }
 
     public void ResetUpgrade()
     {
         StatusUpgradeManager.Instance.UndoAll();
+
+        OnResetPermanentUpgrade?.Invoke();
     }
 }

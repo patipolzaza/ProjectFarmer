@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class MoveSpeedUpgradeShop : MonoBehaviour
 {
     private UpgradeShop upgradeShop;
     [SerializeField] private MoveSpeedUpgradeShopUI ui;
-    [SerializeField] private Button resetButton;
     private bool isSelectedTargetLevel;
     private int currentChosenLevel;
 
@@ -15,10 +15,10 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
 
     private MoveSpeedStatus statusToUpgrade;
 
+    public UnityEvent OnUpgradedStatus;
+
     [SerializeField] private int[] targetUpgradeLevels = { 2, 4 };
     private int[] upgradeCosts;
-
-
     public bool isReadied { get; private set; } = false;
 
     private void Awake()
@@ -49,8 +49,8 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
         if (command.Execute())
         {
             lastestCommand = command;
-            resetButton.gameObject.SetActive(true);
             isSelectedTargetLevel = true;
+            OnUpgradedStatus?.Invoke();
         }
     }
 
@@ -63,8 +63,6 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
 
     private IEnumerator InitialSetup()
     {
-        resetButton.gameObject.SetActive(false);
-
         upgradeShop = GetComponent<UpgradeShop>();
         yield return new WaitUntil(() => Player.Instance);
         statusToUpgrade = Player.Instance.moveSpeedStatus;
@@ -191,7 +189,6 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
         {
             ChangeTargetLevel(GetIndexFromLevel(currentChosenLevel), 0);
         }
-        resetButton.gameObject.SetActive(false);
         isSelectedTargetLevel = false;
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlotManager : MonoBehaviour
+public class PlotManager : MonoBehaviour, IContainStatus
 {
     public static PlotManager Instance;
 
@@ -23,6 +23,13 @@ public class PlotManager : MonoBehaviour
         UnlockPlots(0, plotSizeStatus.GetBaseValue);
     }
 
+    public Status GetStatus
+    {
+        get
+        {
+            return plotSizeStatus;
+        }
+    }
 
     /// <summary>
     /// Unlock plots from plot at start index to end index.

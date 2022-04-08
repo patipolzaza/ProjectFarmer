@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class AnimalFarmManager : MonoBehaviour
+public class AnimalFarmManager : MonoBehaviour, IContainStatus
 {
     public static AnimalFarmManager Instance { get; private set; }
 
@@ -20,8 +20,16 @@ public class AnimalFarmManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
         maxAnimalStatus = new Status("Max Animal", maxAnimalStatusData);
+        Instance = this;
+    }
+
+    public Status GetStatus
+    {
+        get
+        {
+            return maxAnimalStatus;
+        }
     }
 
     public bool AddAnimal(Animal animalToAdd)

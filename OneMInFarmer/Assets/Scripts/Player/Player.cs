@@ -7,6 +7,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
+    #region Custom Inepector
     [CustomEditor(typeof(Player))]
     [CanEditMultipleObjects]
     class CustomInspector : Editor
@@ -109,6 +110,7 @@ public class Player : MonoBehaviour
             moveSpeedDataProp.objectReferenceValue = newData;
         }
     }
+    #endregion
     public static Player Instance { get; private set; }
 
     public MoveSpeedStatus moveSpeedStatus { get; private set; }
