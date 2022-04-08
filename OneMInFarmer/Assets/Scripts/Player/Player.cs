@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
@@ -135,7 +136,8 @@ public class Player : MonoBehaviour
     public float facingDirection { get; private set; }
 
     private Rigidbody2D rb;
-    private Animator anim;
+
+    [SerializeField] private UnityEvent OnWatering;
 
     private Vector2 velocityWorkspace;
 
@@ -161,10 +163,7 @@ public class Player : MonoBehaviour
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
-        if (!anim && characterObject && characterObject.GetComponent<Animator>())
-        {
-            anim = characterObject.GetComponent<Animator>();
-        }
+        
     }
 
     private void Update()
@@ -195,6 +194,16 @@ public class Player : MonoBehaviour
                     {
                         PickUpItem((PickableObject)targetInteractable);
                     }
+                    else if (holdingObject is WateringPot && targetInteractable is Plot)
+                    {
+                        OnWatering?.Invoke();
+                        UseItem();
+                    }
+                    if (holdingObject is WateringPot && targetInteractable is Pool)
+                    {
+                        OnWatering?.Invoke();
+                        UseItem();
+                    }
                     else
                     {
                         Interact();
@@ -207,17 +216,6 @@ public class Player : MonoBehaviour
                 else
                 {
                     Interact();
-                }
-            }
-            else if (Input.GetKey(KeyCode.J))
-            {
-                if (holdingObject is WateringPot)
-                {
-                    if (holdingObject is WateringPot && targetInteractable is Pool)
-                    {
-                        holdingObject.GetComponent<WateringPot>().Refill();
-                        return;
-                    }
                 }
             }
         }
