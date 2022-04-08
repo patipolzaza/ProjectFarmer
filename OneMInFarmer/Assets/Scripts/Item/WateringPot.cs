@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class WateringPot : Item
 {
-    [SerializeField]private Slider slider;
+    [SerializeField] private Slider slider;
     public float valence { get; private set; } = 20;
     public float remaining { get; private set; } = 20;
     public float RefillPerSeconds { get; private set; } = 1;
@@ -18,8 +18,25 @@ public class WateringPot : Item
 
         //interactEvent.AddListener(PickUp);
     }
+    public override bool Use(Interactable targetToUse)
+    {
+        if (targetToUse is Plot)
+        {
+            Plot plot = targetToUse as Plot;
+            if (WateringOnPlot(plot))
+            {
+                return true;
+            }
+        }
+        if (targetToUse is Pool)
+        {
+            Refill();
+            return true;
+        }
 
-    public void WateringOnPlot(Plot plot)
+        return false;
+    }
+    public bool WateringOnPlot(Plot plot)
     {
         if (plot.seed != null)
             if (remaining > plot.seed.waterNeed)
@@ -27,7 +44,9 @@ public class WateringPot : Item
                 remaining -= plot.seed.waterNeed;
                 plot.Watering();
                 slider.value = remaining;
+                return true;
             }
+        return false;
     }
 
     public void Refill()
@@ -35,20 +54,6 @@ public class WateringPot : Item
         if (remaining < 20)
         {
             remaining += RefillPerSeconds * Time.fixedDeltaTime;
-        }
-    }
-    public void Refilling(bool isRe)
-    {
-        isRefill = isRe;
-    }
-
-    private void FixedUpdate()
-    {
-        slider.value = remaining;
-        if (isRefill)
-        {
-            Refill();
-
         }
     }
 }
