@@ -225,6 +225,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1803902904}
     m_Modifications:
+    - target: {fileID: 1909002920848576239, guid: 5cda5f61ce5dc7a4c8baceb00640c76d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2462687588505583701, guid: 5cda5f61ce5dc7a4c8baceb00640c76d, type: 3}
       propertyPath: m_Name
       value: Plot (9)
@@ -7161,6 +7165,14 @@ PrefabInstance:
     - target: {fileID: 607904613580533643, guid: 07096e005b325b74db078c51b190810f, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4050693991100158026, guid: 07096e005b325b74db078c51b190810f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e107ba05b7f023a4390c7719ceaedba3, type: 2}
+    - target: {fileID: 4050693991100158026, guid: 07096e005b325b74db078c51b190810f, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5264358407311945026, guid: 07096e005b325b74db078c51b190810f, type: 3}
       propertyPath: m_IsTrigger
