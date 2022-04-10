@@ -164,13 +164,22 @@ public class Player : MonoBehaviour
             rb.isKinematic = false;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
-
-
     }
 
     private void Update()
     {
         isDetectInteractable = CheckInteractableInRange();
+
+        if (!canMove)
+        {
+            if (holdingObject)
+            {
+                DropItem();
+            }
+
+            return;
+        }
+
         CheckMoveInput();
 
         if (isDetectInteractable && targetInteractable)

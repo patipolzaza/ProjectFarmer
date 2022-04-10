@@ -17,8 +17,8 @@ public class DayResultManager : MonoBehaviour
     public bool isFinishedAllProcess { get; private set; }
     private bool finishedUpdateTotalPriceText;
 
-    private bool skipMode;
-    private bool isInProcess;
+    private bool _skipMode;
+    private bool _isInProcess;
 
     private void Awake()
     {
@@ -31,10 +31,10 @@ public class DayResultManager : MonoBehaviour
         {
             ui.SetActiveContinueText(false);
 
-            if (isInProcess && Input.anyKeyDown && skipMode == false)
+            if (_isInProcess && Input.anyKeyDown && _skipMode == false)
             {
                 ShowSkippedDayResult();
-                skipMode = true;
+                _skipMode = true;
             }
 
             return;
@@ -44,18 +44,18 @@ public class DayResultManager : MonoBehaviour
 
         if (Input.anyKeyDown)
         {
-            isFinishedAllProcess = false;
-            CloseWindow();
-            ResetParameters();
-
             if (dayRemainForNextDebtPaymentInMem < 1)
             {
-                //TODO: Do debt payment process
+                DebtManager.Instance.ShowResultUI();
             }
             else
             {
                 GameManager.Instance.ToNextDay();
             }
+
+            isFinishedAllProcess = false;
+            CloseWindow();
+            ResetParameters();
         }
     }
 
@@ -65,7 +65,7 @@ public class DayResultManager : MonoBehaviour
 
         OpenWindow();
 
-        isInProcess = true;
+        _isInProcess = true;
         StartCoroutine(DayResultProcess());
     }
 
@@ -74,8 +74,8 @@ public class DayResultManager : MonoBehaviour
         Instance = this;
         yield return new WaitUntil(() => ShopForSell.Instance != null);
         shop = ShopForSell.Instance;
-        yield return new WaitUntil(() => GameManager.Instance);
-        dayRemainForNextDebtPaymentInMem = GameManager.Instance.DebtManager.dayForNextDebtPayment;
+        yield return new WaitUntil(() => DebtManager.Instance);
+        dayRemainForNextDebtPaymentInMem = DebtManager.Instance.dayForNextDebtPayment;
         isReadied = true;
     }
 
@@ -92,10 +92,10 @@ public class DayResultManager : MonoBehaviour
     private IEnumerator DayResultProcess()
     {
         totalSoldPrice = shop.totalSoldPrice;
-        var dayRemainForNextDebtPayment = GameManager.Instance.GetDayRemainForDebtPayment;
+        var dayRemainForNextDebtPayment = DebtManager.Instance.GetDayRemainForDebtPayment;
 
         ui.SetDayText(GameManager.Instance.currentDay.ToString());
-        ui.SetDeptText(GameManager.Instance.DebtManager.GetDebt.ToString());
+        ui.SetDeptText(DebtManager.Instance.GetDebt.ToString());
         ui.SetDayRemainingForNextDebtPaymentText(dayRemainForNextDebtPaymentInMem.ToString());
 
         yield return new WaitForSeconds(1.25f);
@@ -125,7 +125,7 @@ public class DayResultManager : MonoBehaviour
             currentValue = Mathf.Lerp(currentValue, target, 0.15f);
             string currentValueText = Mathf.RoundToInt(currentValue).ToString();
             ui.SetTotalSoldPriceText(currentValueText);
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForSeconds(0.01f);
         } while (Mathf.RoundToInt(currentValue) != target);
 
         finishedUpdateTotalPriceText = true;
@@ -136,9 +136,9 @@ public class DayResultManager : MonoBehaviour
         StopAllCoroutines();
 
         totalSoldPrice = shop.totalSoldPrice;
-        dayRemainForNextDebtPaymentInMem = GameManager.Instance.GetDayRemainForDebtPayment;
+        dayRemainForNextDebtPaymentInMem = DebtManager.Instance.GetDayRemainForDebtPayment;
         ui.SetDayText(GameManager.Instance.currentDay.ToString());
-        ui.SetDeptText(GameManager.Instance.DebtManager.GetDebt.ToString());
+        ui.SetDeptText(DebtManager.Instance.GetDebt.ToString());
         ui.SetDayRemainingForNextDebtPaymentText(dayRemainForNextDebtPaymentInMem.ToString());
 
         isFinishedAllProcess = true;
@@ -151,7 +151,7 @@ public class DayResultManager : MonoBehaviour
 
         finishedUpdateTotalPriceText = false;
         isFinishedAllProcess = false;
-        isInProcess = false;
-        skipMode = false;
+        _isInProcess = false;
+        _skipMode = false;
     }
 }

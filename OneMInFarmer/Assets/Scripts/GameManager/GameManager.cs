@@ -7,9 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public ScoreManager ScoreManager { get; private set; }
-    public DebtManager DebtManager { get; private set; }
-
     public int currentDay { get; private set; } = 1;
     public int defaultTimePerDay { get; private set; } = 5;
 
@@ -20,9 +17,6 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-
-        ScoreManager = new ScoreManager();
-        DebtManager = new DebtManager();
     }
 
     private void Start()
@@ -54,8 +48,8 @@ public class GameManager : MonoBehaviour
 
     public void EndDay()
     {
-        StartCoroutine(EndDayProcess());
         OnDayEnded?.Invoke();
+        StartCoroutine(EndDayProcess());
     }
 
     private IEnumerator EndDayProcess()
@@ -102,7 +96,7 @@ public class GameManager : MonoBehaviour
 
         ShopForSell.Instance.ResetTotalSoldPrice();
         StatusUpgradeManager.Instance.ResetDailyUpgradeStatus();
-
+        DebtManager.Instance.ResetParameters();
         GrowUpAnimals();
 
         //ResetPlotsStatus();
@@ -134,13 +128,5 @@ public class GameManager : MonoBehaviour
         if (!Player.Instance)
             return false;
         return true;
-    }
-
-    public int GetDayRemainForDebtPayment
-    {
-        get
-        {
-            return DebtManager.dayForNextDebtPayment - currentDay;
-        }
     }
 }
