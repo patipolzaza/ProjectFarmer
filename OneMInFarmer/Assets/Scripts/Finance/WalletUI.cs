@@ -7,6 +7,8 @@ public class WalletUI : WindowUIBase
 {
     [SerializeField] private Text CoinText;
     private Wallet _playerWallet;
+
+    private Coroutine _slideTextCoroutine;
     protected override void Awake()
     {
         StartCoroutine(InitialSetUp());
@@ -16,35 +18,52 @@ public class WalletUI : WindowUIBase
     {
         if (_playerWallet == null)
         {
-            _playerWallet = FindObjectOfType<Player>().wallet;
+            _playerWallet = FindObjectOfType<Player>().GetComponent<Wallet>();
         }
-
         _playerWallet.OnCoinChanged += UpdateCoinTextToTarget;
     }
 
     private void OnDisable()
     {
-        if (_playerWallet == null)
-        {
-            _playerWallet = FindObjectOfType<Player>().wallet;
-        }
-
         _playerWallet.OnCoinChanged -= UpdateCoinTextToTarget;
     }
 
     private IEnumerator InitialSetUp()
     {
         yield return new WaitUntil(() => Player.Instance);
-        UpdateCoinText(Player.Instance.wallet.coin);
+        SetCoinText(FindObjectOfType<Player>().GetComponent<Wallet>().coin);
     }
 
-    public void UpdateCoinText(int coin)
+
+
+    public void SetCoinText(int coin)
     {
-        this.CoinText.text = "Coin : " + coin.ToString();
+        CoinText.text = "Coin : " + coin.ToString();
     }
 
-    public void UpdateCoinTextToTarget(int from, int target)
+    public void UpdateCoinTextToTarget(int oldValue, int newValue)
     {
-        UpdateCoinText(target);
+        if (_slideTextCoroutine != null)
+        {
+            StopCoroutine(_slideTextCoroutine);
+            _slideTextCoroutine = null;
+        }
+
+        StartCoroutine(SlideCoinToTarget(oldValue, newValue));
+    }
+
+    private IEnumerator SlideCoinToTarget(float currentValue, float target)
+    {
+        float slideSpeed = 0.15f;
+        do
+        {
+            currentValue = Mathf.Lerp(currentValue, target, (currentValue / target) * slideSpeed);
+            int currentRoundedValue = Mathf.RoundToInt(currentValue);
+            SetCoinText(currentRoundedValue);
+            yield return new WaitForFixedUpdate();
+        } while (Mathf.RoundToInt(currentValue) != target);
+
+        _slideTextCoroutine = null;
+        yield break;
     }
 }

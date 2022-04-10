@@ -146,7 +146,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         facingDirection = transform.localScale.x / Mathf.Abs(transform.localScale.x);
-        wallet = new Wallet(10);
+        wallet = GetComponent<Wallet>();
 
         Instance = this;
     }
@@ -165,7 +165,7 @@ public class Player : MonoBehaviour
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
-        
+
     }
 
     private void Update()
@@ -377,7 +377,7 @@ public class Player : MonoBehaviour
                             IValuable valuable = holdingObject as IValuable;
                             ShopForSell shop = targetInteractable as ShopForSell;
                             shop.ShowPrice(valuable.GetPrice());
-                           
+
                         }
                     }
                 }

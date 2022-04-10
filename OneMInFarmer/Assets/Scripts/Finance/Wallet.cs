@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wallet
+public class Wallet : MonoBehaviour
 {
     public delegate void CoinChangedDelegate(int oldValue, int newValue);
     public CoinChangedDelegate OnCoinChanged;
 
     public int coin { get; private set; }
 
-    public Wallet(int initialCoin)
+    private void Awake()
     {
-        coin = initialCoin;
+        coin = 10;
     }
 
     public void EarnCoin(int amount)
