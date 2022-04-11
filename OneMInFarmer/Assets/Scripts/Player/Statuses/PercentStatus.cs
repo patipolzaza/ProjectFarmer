@@ -2,31 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveSpeedStatus : Status
+public class PercentStatus : Status
 {
-    public MoveSpeedStatus(string name, MoveSpeedStatusData statusData) : base(name, statusData)
+    public PercentStatus(string name, PercentStatusData statusData) : base(name, statusData)
     {
         base.statusData = statusData;
     }
 
-    public int GetPercentageUpgradeValue
-    {
-        get
-        {
-            return Mathf.CeilToInt((currentLevel - 1) * statusData.extraValuePerLevel);
-        }
-    }
+    public int GetPercentageUpgradeValue => Mathf.CeilToInt((currentLevel - 1) * statusData.extraValuePerLevel);
 
-    public int GetPercentageUpgradeValueAtLevel(int targetLevel)
-    {
-        return Mathf.CeilToInt((targetLevel - 1) * statusData.extraValuePerLevel);
-    }
+    public int GetPercentageUpgradeValueAtLevel(int targetLevel) => Mathf.CeilToInt((targetLevel - 1) * statusData.extraValuePerLevel);
 
     public override int GetValue
     {
         get
         {
-            MoveSpeedStatusData msData = statusData as MoveSpeedStatusData;
+            PercentStatusData msData = statusData as PercentStatusData;
             int baseValue = msData.baseValue;
 
             float statusValue = baseValue + ((currentLevel - 1) * baseValue * msData.extraValuePerLevel);
@@ -37,7 +28,7 @@ public class MoveSpeedStatus : Status
 
     public override int GetValueAtLevel(int level)
     {
-        MoveSpeedStatusData msData = statusData as MoveSpeedStatusData;
+        PercentStatusData msData = statusData as PercentStatusData;
         int baseValue = msData.baseValue;
 
         float statusValue = baseValue + ((level - 1) * baseValue * msData.extraValuePerLevel);

@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEditor;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Status/MoveSpeedData", fileName = "Move Speed Data")]
-public class MoveSpeedStatusData : StatusData
+public class PercentStatusData : StatusData
 {
-    public MoveSpeedStatusData() { }
+    public PercentStatusData() { }
     /// <summary>
     /// 
     /// </summary>
@@ -16,7 +16,7 @@ public class MoveSpeedStatusData : StatusData
         base.Init(statusName, maxLevel, baseValue, extraValuePerLevel, upgradeCostPerLevel, extraCostPercentage);
     }
 
-    [CustomEditor(typeof(MoveSpeedStatusData))]
+    [CustomEditor(typeof(PercentStatusData))]
     [CanEditMultipleObjects]
     class CustomInspector : Editor
     {
@@ -27,7 +27,7 @@ public class MoveSpeedStatusData : StatusData
             serializedObject.Update();
 
             EditorGUILayout.HelpBox("Cost will calculate by: \n[ upgradeCost + ((level - 1) * upgradeCost * extraCostMultiplier) ]", MessageType.Info);
-            EditorGUILayout.HelpBox("Extra value per level for move speed status is as extra percentage form (ex. 30 is equal to +30% from start value.).", MessageType.Info);
+            EditorGUILayout.HelpBox("Extra value per level for percent status is as extra percentage form (ex. 30 is equal to +30% from start value.).", MessageType.Info);
         }
     }
 }

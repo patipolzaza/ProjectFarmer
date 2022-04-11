@@ -13,7 +13,7 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
 
     private ICommand lastestCommand;
 
-    private MoveSpeedStatus statusToUpgrade;
+    private PercentStatus _statusToUpgrade;
 
     public UnityEvent OnUpgradedStatus;
 
@@ -45,7 +45,7 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
 
     private void UpgradeStatus()
     {
-        ICommand command = new UpgradeStatusToTargetLevelCommand(statusToUpgrade, currentChosenLevel);
+        ICommand command = new UpgradeStatusToTargetLevelCommand(_statusToUpgrade, currentChosenLevel);
         if (command.Execute())
         {
             lastestCommand = command;
@@ -65,7 +65,7 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
     {
         upgradeShop = GetComponent<UpgradeShop>();
         yield return new WaitUntil(() => Player.Instance);
-        statusToUpgrade = Player.Instance.moveSpeedStatus;
+        _statusToUpgrade = Player.Instance.moveSpeedStatus;
         yield return new WaitUntil(() => InitialUpgradeCostsSetup());
         yield return new WaitUntil(() => SetUpShopButtons());
 
@@ -80,12 +80,12 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
         for (int i = 0; i < loopTimes; i++)
         {
             //i+2 = target level according to button[i]
-            if (i + 2 > statusToUpgrade.GetMaxLevel)
+            if (i + 2 > _statusToUpgrade.GetMaxLevel)
             {
                 break;
             }
 
-            upgradeCosts[i] = statusToUpgrade.GetUpgradeToTargetLevelCost(targetUpgradeLevels[i]);
+            upgradeCosts[i] = _statusToUpgrade.GetUpgradeToTargetLevelCost(targetUpgradeLevels[i]);
         }
 
         return true;
@@ -100,7 +100,7 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
 
         for (int i = 0; i < loopCount; i++)
         {
-            statusValue = statusToUpgrade.GetPercentageUpgradeValueAtLevel(targetUpgradeLevels[i]);
+            statusValue = _statusToUpgrade.GetPercentageUpgradeValueAtLevel(targetUpgradeLevels[i]);
             buttonText = $"+{statusValue}%";
             belowButtonText = $"Cost: {upgradeCosts[i]}";
 
@@ -120,9 +120,9 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
 
     private IEnumerator UpdateUpgradeButtonsInteractable()
     {
-        yield return new WaitUntil(() => statusToUpgrade != null);
+        yield return new WaitUntil(() => _statusToUpgrade != null);
         ui.SetAllUpgradeButtonsInteractable(false);
-        int maxCost = statusToUpgrade.GetUpgradeToTargetLevelCost(statusToUpgrade.GetMaxLevel);
+        int maxCost = _statusToUpgrade.GetUpgradeToTargetLevelCost(_statusToUpgrade.GetMaxLevel);
 
         yield return new WaitUntil(() => upgradeShop.playerCoinInMemmory == Player.Instance.wallet.coin);
         int playerCoin = upgradeShop.playerCoinInMemmory;
