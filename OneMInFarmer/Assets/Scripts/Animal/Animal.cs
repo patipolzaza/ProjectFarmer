@@ -17,6 +17,7 @@ public class Animal : PickableObject, IValuable
     private Vector2 velocityWorkspace = new Vector2();
 
     public int currentAge { get; protected set; } = 1;
+    public int lifePoint { get; protected set; } = 2;
 
     public bool isHungry { get; private set; } = true;
 
@@ -50,11 +51,24 @@ public class Animal : PickableObject, IValuable
         stateMachine.InitializeState(idleState);
 
         facingDirection = interactableObject.transform.localScale.x / interactableObject.transform.localScale.x;
+
+        float size = GetSize;
+        Vector3 newScale = new Vector3(size, size, 1);
+        SetScale(newScale);
     }
 
     public void Update()
     {
         stateMachine.currentState.LogicUpdate();
+
+        if (Input.GetKeyDown(KeyCode.Keypad0))
+        {
+            IncreaseAge();
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            DecreaseLifePoint();
+        }
     }
 
     public void FixedUpdate()
@@ -71,6 +85,25 @@ public class Animal : PickableObject, IValuable
     {
         currentAge++;
         currentAge = Mathf.Clamp(currentAge, 0, animalData.lifespan);
+
+        float size = GetSize;
+        Vector3 newScale = new Vector3(size, size, 1);
+        SetScale(newScale);
+    }
+
+    public void DecreaseLifePoint()
+    {
+        lifePoint--;
+        lifePoint = Mathf.Clamp(lifePoint, 0, 2);
+
+        if (lifePoint <= 0)
+        {
+            Debug.Log("Die");
+            return;
+        }
+
+        Color newColor = sr.color - new Color32(75, 75, 75, 0);
+        SetColor(newColor);
     }
 
     public override Transform Pick(Player player)
@@ -129,11 +162,15 @@ public class Animal : PickableObject, IValuable
         textMesh.text = "";
     }
 
-    public void ResetAnimalStatus()
+    public void ResetAnimalHungryStatus()
     {
         if (!isHungry)
         {
             IncreaseAge();
+        }
+        else
+        {
+            DecreaseLifePoint();
         }
 
         isHungry = true;
@@ -164,7 +201,7 @@ public class Animal : PickableObject, IValuable
     public int Sell()
     {
         Wallet playerWallet = Player.Instance.wallet;
-        int price = Mathf.FloorToInt(animalData.sellPrice * (currentAge / animalData.lifespan));
+        int price = GetPrice();
         price = Mathf.Clamp(price, 0, animalData.sellPrice);
 
         playerWallet.EarnCoin(price);
@@ -192,10 +229,7 @@ public class Animal : PickableObject, IValuable
         return gameObject;
     }
 
-    public int GetPrice()
-    {
-        return 0;
-    }
+    public int GetPrice() => Mathf.FloorToInt((float)animalData.sellPrice * ((float)currentAge / (float)animalData.lifespan));
 
     public void PutInShopStash(ShopForSell targetShop)
     {
@@ -203,5 +237,15 @@ public class Animal : PickableObject, IValuable
         SetLocalPosition(Vector3.zero, false, false);
         SetObjectSpriteRenderer(false);
         SetInteractable(false);
+    }
+
+    public float GetSize => Mathf.Clamp(0.45f + (((float)currentAge / (float)animalData.lifespan) * 0.55f), 0.45f, 1);
+    public void SetScale(Vector3 newScale)
+    {
+        transform.localScale = newScale;
+    }
+    public void SetColor(Color newColor)
+    {
+        sr.color = newColor;
     }
 }

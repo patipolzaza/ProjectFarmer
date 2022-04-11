@@ -45,6 +45,7 @@ public class Interactable : MonoBehaviour
 
     public virtual void ShowObjectHighlight()
     {
+        defaultColor = sr.color;
         if (isInteractable)
         {
             sr.color = highlightColor;

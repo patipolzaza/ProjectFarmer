@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
 
         foreach (var animal in animals)
         {
-            animal.ResetAnimalStatus();
+            animal.ResetAnimalHungryStatus();
         }
     }
 
