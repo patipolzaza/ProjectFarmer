@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e8cac953a8120549a11e43d42a7b3e6, type: 3}
   m_Name: D_PlotSize
   m_EditorClassIdentifier: 
-  statusName: PlotSize
+  statusName: Plot Count
   maxLevel: 11
   baseValue: 2
   extraValuePerLevel: 1

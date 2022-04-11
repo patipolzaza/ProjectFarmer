@@ -6,7 +6,12 @@ using UnityEngine.UI;
 public class PermanentUpgradeShopUI : MonoBehaviour
 {
     [SerializeField] private Button _upgradeButton;
+    [SerializeField] private Text _statusName;
+    [SerializeField] private Text _currentLevelText;
+    [SerializeField] private Text _currentStatusValueText;
+    [SerializeField] private Text _extraValueText;
     [SerializeField] private Text _upgradeCostText;
+
     private Wallet _playerWallet;
     private Status _status;
 
@@ -37,6 +42,10 @@ public class PermanentUpgradeShopUI : MonoBehaviour
         }
 
         _status = status;
+
+        SetStatusNameText(_status.statusName);
+        SetExtraValueText("+ " + _status.GetExtraValuePerLevel.ToString());
+
         UpdateShopUI();
     }
 
@@ -46,6 +55,8 @@ public class PermanentUpgradeShopUI : MonoBehaviour
         {
             SetActiveButton(false);
             SetUpgradeCostText("MAX");
+            SetCurrentLevelText("MAX");
+            SetExtraValueText("");
         }
         else
         {
@@ -59,6 +70,8 @@ public class PermanentUpgradeShopUI : MonoBehaviour
             int upgradeCost = _status.GetUpgradeCost;
 
             SetUpgradeCostText(upgradeCost.ToString());
+            SetCurrentLevelText(_status.currentLevel.ToString());
+            SetCurrentValueText(_status.GetValue.ToString());
 
             if (player.wallet.coin >= upgradeCost)
             {
@@ -71,21 +84,22 @@ public class PermanentUpgradeShopUI : MonoBehaviour
         }
     }
 
-    private void UpdateUpgradeButtonInteractable(int oldValue, int newValue)
+    private void UpdateUpgradeButtonInteractable(int oldPlayerCoin, int newPlayerCoin)
     {
         if (_status.IsReachMaxLevel)
         {
             SetButtonInteractable(false);
-            return;
-        }
-
-        if (newValue >= _status.GetUpgradeCost)
-        {
-            SetButtonInteractable(true);
         }
         else
         {
-            SetButtonInteractable(false);
+            if (newPlayerCoin >= _status.GetUpgradeCost)
+            {
+                SetButtonInteractable(true);
+            }
+            else
+            {
+                SetButtonInteractable(false);
+            }
         }
     }
 
@@ -102,5 +116,25 @@ public class PermanentUpgradeShopUI : MonoBehaviour
     private void SetUpgradeCostText(string message)
     {
         _upgradeCostText.text = message;
+    }
+
+    private void SetCurrentLevelText(string newText)
+    {
+        _currentLevelText.text = newText;
+    }
+
+    private void SetExtraValueText(string newText)
+    {
+        _extraValueText.text = newText;
+    }
+
+    private void SetCurrentValueText(string newText)
+    {
+        _currentStatusValueText.text = newText;
+    }
+
+    private void SetStatusNameText(string newText)
+    {
+        _statusName.text = newText;
     }
 }
