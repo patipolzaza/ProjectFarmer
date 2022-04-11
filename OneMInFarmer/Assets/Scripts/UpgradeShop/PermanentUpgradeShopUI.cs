@@ -19,29 +19,22 @@ public class PermanentUpgradeShopUI : MonoBehaviour
     {
         if (_playerWallet == null)
         {
-            _playerWallet = FindObjectOfType<Player>().wallet;
+            _playerWallet = FindObjectOfType<Player>().transform.Find("Wallet").GetComponent<Wallet>();
         }
 
         _playerWallet.OnCoinChanged += UpdateUpgradeButtonInteractable;
     }
     private void OnDisable()
     {
-        if (_playerWallet == null)
-        {
-            _playerWallet = FindObjectOfType<Player>().wallet;
-        }
-
         _playerWallet.OnCoinChanged -= UpdateUpgradeButtonInteractable;
     }
 
     public void SetUpUI(Status status)
     {
-        if (_status == status)
+        if (_status == null || _status != status)
         {
-            return;
+            _status = status;
         }
-
-        _status = status;
 
         SetStatusNameText(_status.statusName);
         SetExtraValueText("+ " + _status.GetExtraValuePerLevel.ToString());

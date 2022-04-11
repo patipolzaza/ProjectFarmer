@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CreateAssetMenu(menuName = "ScriptableObjects/Status/Data", fileName = "Status Data")]
+[CreateAssetMenu(menuName = "ScriptableObjects/Status/FlatStatusData")]
 public class StatusData : ScriptableObject
 {
     [CustomEditor(typeof(StatusData))]

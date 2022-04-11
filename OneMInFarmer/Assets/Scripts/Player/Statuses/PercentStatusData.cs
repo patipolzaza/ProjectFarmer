@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CreateAssetMenu(menuName = "ScriptableObjects/Status/MoveSpeedData", fileName = "Move Speed Data")]
+[CreateAssetMenu(menuName = "ScriptableObjects/Status/PercentStatusData")]
 public class PercentStatusData : StatusData
 {
     public PercentStatusData() { }

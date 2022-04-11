@@ -146,7 +146,8 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         facingDirection = transform.localScale.x / Mathf.Abs(transform.localScale.x);
-        wallet = GetComponent<Wallet>();
+
+        wallet = transform.Find("Wallet").GetComponent<Wallet>();
 
         Instance = this;
     }

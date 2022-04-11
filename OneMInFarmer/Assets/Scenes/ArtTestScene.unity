@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &27805136 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7931184816176259948, guid: 07096e005b325b74db078c51b190810f, type: 3}
+  m_PrefabInstance: {fileID: 3506422846902200625}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &67162781
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,7 +558,7 @@ RectTransform:
   - {fileID: 121675198}
   - {fileID: 1336320523}
   m_Father: {fileID: 910674524}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -785,7 +790,7 @@ RectTransform:
   - {fileID: 1625735160}
   - {fileID: 1660893459}
   m_Father: {fileID: 910674524}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1649,10 +1654,10 @@ RectTransform:
   - {fileID: 281674836}
   - {fileID: 131796632}
   - {fileID: 1809187988}
-  - {fileID: 1841271312}
   - {fileID: 434876729}
   - {fileID: 1391858795}
   - {fileID: 280325527}
+  - {fileID: 1841271312}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3479,7 +3484,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 910674524}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1857723942
 GameObject:
@@ -4564,7 +4569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2168344050173468007, guid: b8957336f3f1f3c44b13695bfa180068, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2168344050173468007, guid: b8957336f3f1f3c44b13695bfa180068, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4716,6 +4721,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 384467824085214110, guid: 723aa240e3be7da40a2d0a2b2eecbd0b, type: 3}
+      propertyPath: _targetObjectContainStatus
+      value: 
+      objectReference: {fileID: 27805136}
     - target: {fileID: 510253519613841567, guid: 723aa240e3be7da40a2d0a2b2eecbd0b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -4747,6 +4756,14 @@ PrefabInstance:
     - target: {fileID: 549634250322303287, guid: 723aa240e3be7da40a2d0a2b2eecbd0b, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 779939935082317553, guid: 723aa240e3be7da40a2d0a2b2eecbd0b, type: 3}
+      propertyPath: _targetObjectContainStatus
+      value: 
+      objectReference: {fileID: 1774731132}
+    - target: {fileID: 1129905280499761675, guid: 723aa240e3be7da40a2d0a2b2eecbd0b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 1537751722239921195, guid: 723aa240e3be7da40a2d0a2b2eecbd0b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4820,6 +4837,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -47.45
       objectReference: {fileID: 0}
+    - target: {fileID: 1849624144061805979, guid: 723aa240e3be7da40a2d0a2b2eecbd0b, type: 3}
+      propertyPath: _targetObjectContainStatus
+      value: 
+      objectReference: {fileID: 27805136}
     - target: {fileID: 2025236442299415012, guid: 723aa240e3be7da40a2d0a2b2eecbd0b, type: 3}
       propertyPath: _objectContainStatus
       value: 
@@ -5096,6 +5117,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -58.333332
       objectReference: {fileID: 0}
+    - target: {fileID: 6203989688896292017, guid: 723aa240e3be7da40a2d0a2b2eecbd0b, type: 3}
+      propertyPath: _targetObjectContainStatus
+      value: 
+      objectReference: {fileID: 1774731132}
     - target: {fileID: 6272175213986857847, guid: 723aa240e3be7da40a2d0a2b2eecbd0b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1

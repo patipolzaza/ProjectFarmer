@@ -21,12 +21,15 @@ public class PermanentUpgradeShop : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        OnShopSetup?.Invoke(_statusToUpgrade);
+    }
+
     protected void Awake()
     {
         _componentContainStatus = _targetObjectContainStatus.GetComponent<IContainStatus>();
         _statusToUpgrade = _componentContainStatus.GetStatus;
-
-        OnShopSetup?.Invoke(_statusToUpgrade);
     }
 
     public void UpgradeStatus()
