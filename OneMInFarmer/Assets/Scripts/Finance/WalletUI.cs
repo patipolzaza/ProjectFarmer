@@ -31,7 +31,7 @@ public class WalletUI : WindowUIBase
     private IEnumerator InitialSetUp()
     {
         yield return new WaitUntil(() => Player.Instance);
-        SetCoinText(FindObjectOfType<Player>().GetComponent<Wallet>().coin);
+        SetCoinText(FindObjectOfType<Wallet>().GetComponent<Wallet>().coin);
     }
 
 
