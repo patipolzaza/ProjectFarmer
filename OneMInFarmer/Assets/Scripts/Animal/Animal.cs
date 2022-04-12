@@ -78,6 +78,13 @@ public class Animal : PickableObject, IValuable
     {
         stateMachine.currentState.PhysicUpdate();
     }
+    public AnimalData GetAnimalData
+    {
+        get
+        {
+            return animalData;
+        }
+    }
 
     public void SetHungry(bool isHungry)
     {
