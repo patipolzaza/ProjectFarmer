@@ -511,11 +511,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5136167125676110182}
-  - component: {fileID: 5136167125676110183}
+  - component: {fileID: 1562618698079211125}
   - component: {fileID: 5136167125676110181}
   - component: {fileID: 5136167125676110176}
   m_Layer: 6
-  m_Name: ShopBuy
+  m_Name: ShopBuySeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -537,7 +537,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5136167125676110183
+--- !u!114 &1562618698079211125
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -546,17 +546,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 5136167125676110177}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24bc2fbf4ab83ff4bb3c7608d3699f68, type: 3}
+  m_Script: {fileID: 11500000, guid: a02e3903634730446afe21fa089afc55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactEvent:
     m_PersistentCalls:
       m_Calls: []
   interactableObject: {fileID: 5136167125676110177}
-  highlightColor: {r: 0.42352942, g: 1, b: 0.30588236, a: 1}
+  highlightColor: {r: 0, g: 0, b: 0, a: 0}
   DisplaySpriteIconItem: {fileID: 5136167125273858041}
   DisplayTextPirce: {fileID: 5136167125439973495}
   DisplayTextStacksItem: {fileID: 5136167126393014982}
+  itemInStock: {fileID: 0}
 --- !u!212 &5136167125676110181
 SpriteRenderer:
   m_ObjectHideFlags: 0
