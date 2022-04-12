@@ -20,6 +20,7 @@ public class Animal : PickableObject, IValuable
     public int lifePoint { get; protected set; } = 2;
 
     public bool isHungry { get; private set; } = true;
+    public bool isDie { get; private set; } = false;
 
     #region State Machine
 
@@ -30,6 +31,7 @@ public class Animal : PickableObject, IValuable
     public MoveState moveState { get; private set; }
     [SerializeField] private MoveStateData moveStateData;
     public GrabbedState grabbedState { get; private set; }
+    public DieState dieState { get; private set; }
     #endregion
 
     protected override void Awake()
@@ -43,6 +45,7 @@ public class Animal : PickableObject, IValuable
         moveState = new MoveState(this, stateMachine, "move", moveStateData);
         idleState = new IdleState(this, stateMachine, "idle", idleStateData);
         grabbedState = new GrabbedState(this, stateMachine, "grabbed");
+        dieState = new DieState(this, stateMachine, "die");
     }
 
     protected override void Start()
@@ -83,7 +86,18 @@ public class Animal : PickableObject, IValuable
 
     public void IncreaseAge()
     {
+        if (isDie)
+        {
+            return;
+        }
+
         currentAge++;
+
+        if (currentAge > animalData.lifespan)
+        {
+            DecreaseLifePoint();
+        }
+
         currentAge = Mathf.Clamp(currentAge, 0, animalData.lifespan);
 
         float size = GetSize;
@@ -93,23 +107,33 @@ public class Animal : PickableObject, IValuable
 
     public void DecreaseLifePoint()
     {
+        if (isDie)
+        {
+            return;
+        }
+
         lifePoint--;
         lifePoint = Mathf.Clamp(lifePoint, 0, 2);
 
         if (lifePoint <= 0)
         {
-            Debug.Log("Die");
+            stateMachine.ChangeState(dieState);
+            isDie = true;
             return;
         }
 
-        Color newColor = sr.color - new Color32(75, 75, 75, 0);
+        Color newColor = defaultColor - new Color32(75, 75, 75, 0);
         SetColor(newColor);
     }
 
     public override Transform Pick(Player player)
     {
         base.Pick(player);
-        stateMachine.ChangeState(grabbedState);
+
+        if (!isDie)
+        {
+            stateMachine.ChangeState(grabbedState);
+        }
 
         return transform;
     }
@@ -123,7 +147,11 @@ public class Animal : PickableObject, IValuable
 
     public virtual bool TakeFood(AnimalFood food)
     {
-        if (food == null || !isHungry)
+        if (isDie)
+        {
+            return false;
+        }
+        else if (food == null || !isHungry)
         {
             if (showTextCoroutine != null)
             {
@@ -229,7 +257,7 @@ public class Animal : PickableObject, IValuable
         return gameObject;
     }
 
-    public int GetPrice() => Mathf.FloorToInt((float)animalData.sellPrice * ((float)currentAge / (float)animalData.lifespan));
+    public int GetPrice() => isDie ? 0 : Mathf.FloorToInt((float)animalData.sellPrice * ((float)currentAge / (float)animalData.lifespan));
 
     public void PutInShopStash(ShopForSell targetShop)
     {
@@ -246,6 +274,7 @@ public class Animal : PickableObject, IValuable
     }
     public void SetColor(Color newColor)
     {
-        sr.color = newColor;
+        defaultColor = newColor;
+        sr.color = defaultColor;
     }
 }
