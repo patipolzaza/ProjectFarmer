@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     public UnityEvent OnDayStarted;
     public UnityEvent OnDayEnded;
+
+    public UnityEvent OnGameEnded;
     void Awake()
     {
         Instance = this;
@@ -108,6 +110,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("Game is O V E R.");
+        OnGameEnded?.Invoke();
     }
 
     public void SetTimeScale(float value)

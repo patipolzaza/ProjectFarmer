@@ -5,9 +5,9 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
+    [SerializeField] private PlayScoreSO scoreSO;
 
-    public int currentScore { get; private set; } = 0;
-
+    public int GetScore => scoreSO.score;
     private void Awake()
     {
         Instance = this;
@@ -15,11 +15,11 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore(int amount)
     {
-        currentScore += amount;
+        scoreSO.AddScore(amount);
     }
 
     public void ResetScore()
     {
-        currentScore = 0;
+        scoreSO.ResetScore();
     }
 }
