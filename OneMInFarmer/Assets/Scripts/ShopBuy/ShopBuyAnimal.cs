@@ -19,8 +19,7 @@ public class ShopBuyAnimal : ShopBuyBase
         {
             itemInStock = (Animal)newItem;
             Animal prepareItem = (Animal)newItem;
-            itemStack = 0;
-            itemPirce = itemStack * prepareItem.GetAnimalData.purchasePrice;
+            itemPirce =prepareItem.GetAnimalData.purchasePrice;
             UpdateDisPlayShop();
         }
     }
