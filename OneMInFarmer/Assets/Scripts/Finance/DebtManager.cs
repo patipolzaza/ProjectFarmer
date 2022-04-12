@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class DebtManager : MonoBehaviour
 {
     public static DebtManager Instance { get; private set; }
-    public int dayForNextDebtPayment { get; private set; } = 5;
+    public int dayForNextDebtPayment { get; private set; } = 1;
     public int debtPaidCount { get; private set; }
     private float _debtMultiplierPerPeriod = 1.3f;
     private int _startDebt = 15;
@@ -93,11 +93,11 @@ public class DebtManager : MonoBehaviour
         {
             remainingDebt -= playerCoin;
             playerWallet.LoseCoin(playerCoin);
-            GameManager.Instance.GameOver();
         }
         else
         {
             playerWallet.LoseCoin(debt);
+            remainingDebt = 0;
 
             int score = debt * debtPaidCount;
 
@@ -109,6 +109,7 @@ public class DebtManager : MonoBehaviour
 
         _isDebtPaid = true;
         isAllProcessFinished = true;
+
         OnDebtPaid?.Invoke();
     }
 
