@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4109012177263337938}
   - component: {fileID: 5264358407311945026}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collider
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 4647182759832709628}
   - component: {fileID: 381429231727980407}
   - component: {fileID: 4050693991100158026}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerCharacter
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 607904613580533643}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ItemDropPos
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 5650534669948132808}
   - component: {fileID: 7690412981774749738}
   - component: {fileID: 4906361071807833580}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -256,9 +256,6 @@ MonoBehaviour:
   characterObject: {fileID: 1807996646350201449}
   interactableDetector: {fileID: 4423809371545508611}
   interactableDetectRange: 0.85
-  interactableLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
   itemHolderTransform: {fileID: 2012922464997435667}
   itemDropTransform: {fileID: 607904613580533643}
   OnWatering:
@@ -286,7 +283,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4423809371545508611}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: InteractableDetector
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -317,7 +314,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3363944891064590417}
   - component: {fileID: 3493027370833162288}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DirectionIndicator
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -398,7 +395,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2012922464997435667}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ItemHolder
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
@@ -429,7 +426,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5221306919852162254}
   - component: {fileID: 3156386970089216396}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wallet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

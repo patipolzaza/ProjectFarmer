@@ -124,7 +124,6 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Transform interactableDetector;
     [SerializeField] private float interactableDetectRange = 0.85f;
-    [SerializeField] private LayerMask interactableLayerMask;
 
     public PickableObject holdingObject { get; private set; }
     public Interactable targetInteractable { get; private set; }
@@ -348,7 +347,7 @@ public class Player : MonoBehaviour
     private bool CheckInteractableInRange()
     {
         ChangeTargetInteractable(null);
-        Collider2D[] hits = Physics2D.OverlapCircleAll(interactableDetector.position, interactableDetectRange, interactableLayerMask);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(interactableDetector.position, interactableDetectRange);
 
         if (hits.Length == 0)
         {
@@ -357,6 +356,11 @@ public class Player : MonoBehaviour
 
         foreach (var hit in hits)
         {
+            if (hit.GetComponent<Interactable>() == null)
+            {
+                continue;
+            }
+
             Interactable interactable = hit.GetComponent<Interactable>();
 
             if (interactable.Equals(holdingObject) || interactable.Equals(targetInteractable))

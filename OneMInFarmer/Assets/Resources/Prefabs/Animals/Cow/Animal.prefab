@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8454360660538379783}
   - component: {fileID: 8454360660538379780}
   - component: {fileID: 8454360660538379781}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 8454360660607022440}
   - component: {fileID: 8454360660607022441}
   - component: {fileID: 8454360660607022446}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Animal Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 8454360660856007168}
   - component: {fileID: 8454360660856007169}
   - component: {fileID: 8454360660856007174}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Animal
   m_TagString: Animal
   m_Icon: {fileID: 0}
@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 8454360660910358648}
   - component: {fileID: 8454360660910358650}
   - component: {fileID: 8454360660910358651}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Text box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,7 +389,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8454360661194929623}
   - component: {fileID: 8454360661194929622}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
