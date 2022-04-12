@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class ShopBuyManager : MonoBehaviour
 {
-    public ShopBuy[] shopBuys;
+    [SerializeField]private ShopBuySeed[] shopBuySeeds;
+    [SerializeField]private ShopBuyAnimal[] shopBuyAnimals;
     public Item[] ListItem;
+    public Animal[] ListAnimal;
 
     private void Start()
     {
@@ -13,9 +15,13 @@ public class ShopBuyManager : MonoBehaviour
     }
     public void AddItemToShop()
     {
-        foreach (ShopBuy shopBuy in shopBuys)
+        foreach (ShopBuySeed shopBuy in shopBuySeeds)
         {
             shopBuy.AddNewItemInStock(ListItem[Random.Range(0, ListItem.Length)]);
+        }
+        foreach (ShopBuyAnimal shopBuy in shopBuyAnimals)
+        {
+            shopBuy.AddNewItemInStock(ListAnimal[Random.Range(0, ListAnimal.Length)]);
         }
     }
 
