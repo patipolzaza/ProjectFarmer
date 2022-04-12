@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
     {
         SerializedProperty interactableDetectorProp;
         SerializedProperty interactableDetectorRangeProp;
-        SerializedProperty interactableLayerMaskProp;
         SerializedProperty itemHolderTransformProp;
         SerializedProperty itemDropTransformProp;
 
@@ -24,7 +23,6 @@ public class Player : MonoBehaviour
         {
             interactableDetectorProp = serializedObject.FindProperty("interactableDetector");
             interactableDetectorRangeProp = serializedObject.FindProperty("interactableDetectRange");
-            interactableLayerMaskProp = serializedObject.FindProperty("interactableLayerMask");
 
             itemHolderTransformProp = serializedObject.FindProperty("itemHolderTransform");
             itemDropTransformProp = serializedObject.FindProperty("itemDropTransform");
@@ -46,7 +44,6 @@ public class Player : MonoBehaviour
             GUILayout.Label("Interactable Detection.");
             EditorGUILayout.PropertyField(interactableDetectorProp);
             EditorGUILayout.PropertyField(interactableDetectorRangeProp);
-            EditorGUILayout.PropertyField(interactableLayerMaskProp);
             GUILayout.Space(1.25f);
             GUILayout.Label("Item Pick.");
             EditorGUILayout.PropertyField(itemHolderTransformProp);
