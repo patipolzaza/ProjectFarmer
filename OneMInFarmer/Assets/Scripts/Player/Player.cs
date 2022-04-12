@@ -96,8 +96,8 @@ public class Player : MonoBehaviour
                 index++;
             }
 
-            MoveSpeedStatusData moveSpeedData = CreateInstance<MoveSpeedStatusData>();
-            moveSpeedData.Init("moveSpeed", 4, 250, 30, 10, 5);
+            PercentStatusData moveSpeedData = CreateInstance<PercentStatusData>();
+            moveSpeedData.Init("Move Speed", 4, 250, 30, 10, 5);
 
             AssetDatabase.CreateAsset(moveSpeedData, realPath);
             AssetDatabase.SaveAssets();
@@ -105,7 +105,7 @@ public class Player : MonoBehaviour
             SetMoveSpeedStatusData(moveSpeedData);
         }
 
-        private void SetMoveSpeedStatusData(MoveSpeedStatusData newData)
+        private void SetMoveSpeedStatusData(PercentStatusData newData)
         {
             moveSpeedDataProp.objectReferenceValue = newData;
         }
@@ -113,8 +113,8 @@ public class Player : MonoBehaviour
     #endregion
     public static Player Instance { get; private set; }
 
-    public MoveSpeedStatus moveSpeedStatus { get; private set; }
-    [SerializeField] private MoveSpeedStatusData moveSpeedData;
+    public PercentStatus moveSpeedStatus { get; private set; }
+    [SerializeField] private PercentStatusData moveSpeedData;
     private Vector2 moveInput;
     private bool canMove = true;
 
@@ -146,14 +146,15 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         facingDirection = transform.localScale.x / Mathf.Abs(transform.localScale.x);
-        wallet = new Wallet(10);
+
+        wallet = transform.Find("Wallet").GetComponent<Wallet>();
 
         Instance = this;
     }
 
     private void Start()
     {
-        moveSpeedStatus = new MoveSpeedStatus("moveSpeed", moveSpeedData);
+        moveSpeedStatus = new PercentStatus(moveSpeedData.statusName, moveSpeedData);
     }
 
     private void OnValidate()
@@ -164,13 +165,22 @@ public class Player : MonoBehaviour
             rb.isKinematic = false;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
-
-        
     }
 
     private void Update()
     {
         isDetectInteractable = CheckInteractableInRange();
+
+        if (!canMove)
+        {
+            if (holdingObject)
+            {
+                DropItem();
+            }
+
+            return;
+        }
+
         CheckMoveInput();
 
         if (isDetectInteractable && targetInteractable)
@@ -377,7 +387,7 @@ public class Player : MonoBehaviour
                             IValuable valuable = holdingObject as IValuable;
                             ShopForSell shop = targetInteractable as ShopForSell;
                             shop.ShowPrice(valuable.GetPrice());
-                           
+
                         }
                     }
                 }

@@ -15,33 +15,15 @@ public class Status : IUpgradable
         currentLevel = 1;
     }
 
-    public virtual int GetValue
-    {
-        get
-        {
-            return statusData.baseValue + (currentLevel - 1) * statusData.extraValuePerLevel;
-        }
-    }
+    public virtual int GetValue => statusData.baseValue + (currentLevel - 1) * statusData.extraValuePerLevel;
 
-    public virtual int GetValueAtLevel(int level)
-    {
-        return statusData.baseValue + (level - 1) * statusData.extraValuePerLevel;
-    }
-    public virtual int GetBaseValue
-    {
-        get
-        {
-            return statusData.baseValue;
-        }
-    }
+    public virtual int GetValueAtLevel(int level) => statusData.baseValue + (level - 1) * statusData.extraValuePerLevel;
+    public virtual int GetBaseValue => statusData.baseValue;
 
-    public int GetMaxLevel
-    {
-        get
-        {
-            return statusData.maxLevel;
-        }
-    }
+    public int GetMaxLevel => statusData.maxLevel;
+
+    public int GetExtraValuePerLevel => statusData.extraValuePerLevel;
+    public bool IsReachMaxLevel => currentLevel == statusData.maxLevel;
 
     public void Upgrade()
     {
@@ -64,13 +46,6 @@ public class Status : IUpgradable
         currentLevel = 1;
     }
 
-    public bool IsReachMaxLevel
-    {
-        get
-        {
-            return currentLevel == statusData.maxLevel;
-        }
-    }
 
     public int GetUpgradeCost
     {

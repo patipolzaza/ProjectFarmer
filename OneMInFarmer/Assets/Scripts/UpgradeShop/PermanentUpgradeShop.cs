@@ -5,20 +5,31 @@ using UnityEngine.Events;
 
 public class PermanentUpgradeShop : MonoBehaviour
 {
-    private Status _statusToUpgrade;
+    protected Status _statusToUpgrade;
 
-    [SerializeField] private GameObject _targetObjectContainStatus;
-    private IContainStatus _componentContainStatus;
+    [SerializeField] protected GameObject _targetObjectContainStatus;
+    protected IContainStatus _componentContainStatus;
 
     public UnityEvent<Status> OnShopSetup;
     public UnityEvent OnUpgradedStatus;
 
-    private void Awake()
+    protected void OnValidate()
+    {
+        if (_targetObjectContainStatus && _targetObjectContainStatus.GetComponent<IContainStatus>() == null)
+        {
+            _targetObjectContainStatus = null;
+        }
+    }
+
+    private void OnEnable()
+    {
+        OnShopSetup?.Invoke(_statusToUpgrade);
+    }
+
+    protected void Awake()
     {
         _componentContainStatus = _targetObjectContainStatus.GetComponent<IContainStatus>();
         _statusToUpgrade = _componentContainStatus.GetStatus;
-
-        OnShopSetup?.Invoke(_statusToUpgrade);
     }
 
     public void UpgradeStatus()

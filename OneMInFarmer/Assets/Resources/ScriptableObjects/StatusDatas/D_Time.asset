@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusName: Time
   maxLevel: 4
-  baseValue: 60
+  baseValue: 15
   extraValuePerLevel: 10
   upgradeCostPerLevel: 10
   extraCostPercentage: -25

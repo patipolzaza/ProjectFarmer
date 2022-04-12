@@ -17,6 +17,9 @@ TextureImporter:
   - first:
       213: -2414581210190814732
     second: Free Cow Sprites_4
+  - first:
+      213: -5568810989785458591
+    second: Free Cow Sprites_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -278,6 +281,27 @@ TextureImporter:
       bones: []
       spriteID: 4f16e3dae2fad7ed0800000000000000
       internalID: -2414581210190814732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Free Cow Sprites_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 168db8cd8eb97b2b0800000000000000
+      internalID: -5568810989785458591
       vertices: []
       indices: 
       edges: []

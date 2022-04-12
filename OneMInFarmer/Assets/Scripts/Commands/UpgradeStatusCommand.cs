@@ -30,8 +30,8 @@ public class UpgradeStatusCommand : ICommand
         if (isExecuted)
         {
             Wallet playerWallet = Player.Instance.wallet;
-            playerWallet.EarnCoin(statusToUpgrade.GetUpgradeCost);
             statusToUpgrade.Downgrade();
+            playerWallet.EarnCoin(statusToUpgrade.GetUpgradeCost);
             isExecuted = false;
         }
     }

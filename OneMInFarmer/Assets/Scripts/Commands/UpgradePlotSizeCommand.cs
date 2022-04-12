@@ -41,9 +41,9 @@ public class UpgradePlotSizeCommand : ICommand
         if (isExecuted)
         {
             Wallet playerWallet = Player.Instance.wallet;
-            playerWallet.EarnCoin(statusToUpgrade.GetUpgradeCost);
             PlotManager.Instance.LockPlots(latestUnlockIndex, statusToUpgrade.GetValue);
             statusToUpgrade.Downgrade();
+            playerWallet.EarnCoin(statusToUpgrade.GetUpgradeCost);
             isExecuted = false;
         }
     }

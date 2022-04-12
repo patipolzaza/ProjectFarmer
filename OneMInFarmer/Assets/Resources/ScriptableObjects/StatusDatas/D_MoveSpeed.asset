@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusName: Move Speed
   maxLevel: 4
-  baseValue: 40
+  baseValue: 270
   extraValuePerLevel: 10
   upgradeCostPerLevel: 10
   extraCostPercentage: 5
