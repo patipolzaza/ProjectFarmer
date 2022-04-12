@@ -31,9 +31,16 @@ public class DebtResultUI : WindowUIBase
 
         if (Input.anyKeyDown && _canContinue)
         {
-            GameManager.Instance.ToNextDay();
-            HideWindow();
-            _canContinue = false;
+            if (DebtManager.Instance.remainingDebt == 0)
+            {
+                GameManager.Instance.ToNextDay();
+                DebtManager.Instance.HideResultUI();
+                _canContinue = false;
+            }
+            else
+            {
+                GameManager.Instance.GameOver();
+            }
         }
 
         _canContinue = true;
@@ -104,8 +111,8 @@ public class DebtResultUI : WindowUIBase
     {
         DebtManager.Instance.PayDebt();
         StopAllCoroutines();
-        SetDebtCostText(DebtManager.Instance.remainingDebt.ToString());
         SetPlayerCoinText(Player.Instance.wallet.coin.ToString());
+        SetDebtCostText(DebtManager.Instance.remainingDebt.ToString());
 
         ShowContinueText();
     }
@@ -113,6 +120,11 @@ public class DebtResultUI : WindowUIBase
     public void ShowContinueText()
     {
         _continueTextObject.SetActive(true);
+    }
+
+    public void ResetParameters()
+    {
+        _canContinue = false;
     }
 
     public void HideContinueText()
