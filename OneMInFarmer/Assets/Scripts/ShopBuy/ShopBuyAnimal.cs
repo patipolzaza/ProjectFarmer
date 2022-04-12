@@ -44,7 +44,6 @@ public class ShopBuyAnimal : ShopBuyBase
 
     protected override void UpdateDisPlayShop()
     {
-        Debug.Log("UpdateDisPlayShop");
         DisplaySpriteIconItem.sprite = itemInStock.GetAnimalData.spriteAnimal;
         DisplayTextStacksItem.text = "";
         DisplayTextPirce.text = itemPirce.ToString();

@@ -49,7 +49,6 @@ public class ShopBuySeed : ShopBuyBase
 
     protected override void UpdateDisPlayShop()
     {
-        Debug.Log("UpdateDisPlayShop");
         DisplaySpriteIconItem.sprite = itemInStock.GetItemData.Icon;
         DisplayTextStacksItem.text = itemStack.ToString();
         DisplayTextPirce.text = itemPirce.ToString();

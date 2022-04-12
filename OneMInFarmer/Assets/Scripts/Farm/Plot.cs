@@ -51,11 +51,11 @@ public class Plot : Interactable
             {
                 Uproot();
             }
-            else if (player.holdingObject is WateringPot && player.holdingObject != null)
+            /*else if (player.holdingObject is WateringPot && player.holdingObject != null)
             {
                 Debug.Log("U have WateringPot");
                 player.holdingObject.GetComponent<WateringPot>().WateringOnPlot(this);
-            }
+            }*/
         }
         else
         {

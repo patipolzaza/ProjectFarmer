@@ -118,15 +118,34 @@ public class GameManager : MonoBehaviour
     private bool isCompletedAllSetup()
     {
         if (!DayResultManager.Instance || !DayResultManager.Instance.isReadied)
+        {
+            //Debug.Log("DayResultManager");
             return false;
+        }
         if (!UpgradeShop.Instance || !UpgradeShop.Instance.isReadied)
+        {
+            Debug.Log("UpgradeShop");
             return false;
+
+        }
         if (!Timer.Instance)
+        {
+            Debug.Log("Timer");
             return false;
+
+        }
         if (!StatusUpgradeManager.Instance || !StatusUpgradeManager.Instance.isReadied)
+        {
+            Debug.Log("StatusUpgradeManager");
             return false;
+
+        }
         if (!Player.Instance)
+        {
+            Debug.Log("Player");
             return false;
+
+        }
         return true;
     }
 }
