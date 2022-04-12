@@ -1,16 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
-public class ShopBuy : Interactable
+public class ShopBuySeed : ShopBuyBase
 {
-    private Item itemInStock;
-    private int itemPirce;
-    private int itemStack;
-    [SerializeField] private SpriteRenderer DisplaySpriteIconItem;
-    [SerializeField] private TextMeshProUGUI DisplayTextPirce;
-    [SerializeField] private TextMeshProUGUI DisplayTextStacksItem;
+    [SerializeField] private Item itemInStock;
+
 
     protected override void Awake()
     {
@@ -18,18 +13,23 @@ public class ShopBuy : Interactable
 
         interactEvent.AddListener(BuyItemInStock);
     }
-
-    public void AddNewItemInStock(Item newItem)
+    public override void AddNewItemInStock(PickableObject newItem)
     {
-        Item prepareItem = newItem;
-        itemStack = (int)Random.Range(3, 6);
-        itemInStock = prepareItem;
-        itemPirce = itemStack * prepareItem.GetItemData.purchasePrice;
-        UpdateDisPlayShop();
+        base.AddNewItemInStock(newItem);
+        if (newItem is Item)
+        {
+            itemInStock = (Item)newItem;
+            Item prepareItem = (Item)newItem;
+            itemStack = (int)Random.Range(3, 6);
+            itemPirce = itemStack * prepareItem.GetItemData.purchasePrice;
+            UpdateDisPlayShop();
+        }
     }
 
-    public void BuyItemInStock(Player player)
+    public override void BuyItemInStock(Player player)
     {
+        base.BuyItemInStock(player);
+        Debug.Log("BuyItemInStock");
         if (itemInStock == null)
         {
             return;
@@ -38,6 +38,7 @@ public class ShopBuy : Interactable
         if (playerWallet.coin >= itemPirce)
         {
             playerWallet.LoseCoin(itemPirce);
+
             Item itemBought = Instantiate(itemInStock, new Vector3(0, 0, 0), Quaternion.identity);
             itemBought.SetCurrentStackNumber(itemStack);
             player.PickUpItem(itemBought);
@@ -46,7 +47,7 @@ public class ShopBuy : Interactable
 
     }
 
-    private void UpdateDisPlayShop()
+    protected override void UpdateDisPlayShop()
     {
         Debug.Log("UpdateDisPlayShop");
         DisplaySpriteIconItem.sprite = itemInStock.GetItemData.Icon;
