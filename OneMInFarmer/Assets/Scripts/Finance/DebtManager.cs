@@ -6,10 +6,10 @@ using UnityEngine.Events;
 public class DebtManager : MonoBehaviour
 {
     public static DebtManager Instance { get; private set; }
-    public int dayForNextDebtPayment { get; private set; } = 1;
+    public int dayForNextDebtPayment { get; private set; } = 5;
     public int debtPaidCount { get; private set; }
     private float _debtMultiplierPerPeriod = 1.3f;
-    private int _startDebt = 15;
+    private int _startDebt = 10;
     public int remainingDebt { get; private set; } = 0;
 
     private Coroutine _delayPayDebtCoroutine = null;
@@ -26,6 +26,10 @@ public class DebtManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
         remainingDebt = GetDebt;
     }
 
