@@ -204,12 +204,12 @@ public class Player : MonoBehaviour
                     }
                     else if (holdingObject is WateringPot && targetInteractable is Plot)
                     {
-                        OnWatering?.Invoke();
+                        Debug.Log("holdingObject is WateringPot");
                         UseItem();
                     }
                     if (holdingObject is WateringPot && targetInteractable is Pool)
                     {
-                        OnWatering?.Invoke();
+                        
                         UseItem();
                     }
                     else
@@ -235,7 +235,8 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            wallet.EarnCoin(5);
+            //wallet.EarnCoin(5);
+            Debug.Log(wallet.coin.ToString());
         }
     }
 
@@ -274,8 +275,12 @@ public class Player : MonoBehaviour
         if (holdingObject is Item)
         {
             Item useableItem = holdingObject as Item;
+            
             if (useableItem.Use(targetInteractable))
             {
+                if (useableItem is WateringPot)
+                    return;
+
                 holdingObject = null;
             }
         }
