@@ -10,6 +10,7 @@ public class AnimalHungryBar : MonoBehaviour
     private int currentValue = 0;
 
     private Coroutine slideBarCoroutine;
+    private Coroutine showBarCoroutine;
 
     public void UpdateBar(int oldValue, int newValue)
     {
@@ -40,5 +41,25 @@ public class AnimalHungryBar : MonoBehaviour
     public void SetBarFillAmount(float newFillAmount)
     {
         hungryBar.fillAmount = newFillAmount;
+    }
+
+    public void ShowBar(float showingTime)
+    {
+        gameObject.SetActive(true);
+
+        if (showBarCoroutine != null)
+        {
+            StopCoroutine(showBarCoroutine);
+        }
+
+        showBarCoroutine = StartCoroutine(ShowBarForWhile(showingTime));
+    }
+
+    private IEnumerator ShowBarForWhile(float showingTime)
+    {
+        yield return new WaitForSeconds(showingTime);
+        gameObject.SetActive(false);
+
+        showBarCoroutine = null;
     }
 }
