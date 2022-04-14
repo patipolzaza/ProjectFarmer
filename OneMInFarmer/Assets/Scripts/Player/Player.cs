@@ -143,7 +143,7 @@ public class Player : MonoBehaviour
     {
         facingDirection = transform.localScale.x / Mathf.Abs(transform.localScale.x);
 
-        wallet = transform.Find("Wallet").GetComponent<Wallet>();
+        wallet = FindObjectOfType<Player>().transform.Find("Wallet").GetComponent<Wallet>();
 
         Instance = this;
     }
