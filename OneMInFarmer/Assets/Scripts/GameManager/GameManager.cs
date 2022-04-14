@@ -86,11 +86,6 @@ public class GameManager : MonoBehaviour
             plot.ResetPlotStatus();
         }
     }
-    private void ResetItemInStacks()
-    {
-        var shopBuyManager = FindObjectOfType<ShopBuyManager>();
-        shopBuyManager.AddItemToShop();
-    }
 
     public void ToNextDay()
     {
@@ -102,7 +97,7 @@ public class GameManager : MonoBehaviour
         GrowUpAnimals();
 
         //ResetPlotsStatus();
-        //ResetItemInStacks();
+        ShopBuyManager.Instance.RestockShops();
 
         UpgradeShop.Instance.OpenWindow();
     }

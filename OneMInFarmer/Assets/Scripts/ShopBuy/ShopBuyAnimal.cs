@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ShopBuyAnimal : ShopBuyBase
 {
-    [SerializeField] private Animal itemInStock;
-
+    public Animal animalInStock { get; private set; }
 
     protected override void Awake()
     {
@@ -17,34 +16,36 @@ public class ShopBuyAnimal : ShopBuyBase
     {
         if (newItem is Animal)
         {
-            itemInStock = (Animal)newItem;
-            Animal prepareItem = (Animal)newItem;
-            itemPirce =prepareItem.GetAnimalData.purchasePrice;
+            animalInStock = (Animal)newItem;
+
+            animalInStock = Instantiate<Animal>(animalInStock, transform.position, Quaternion.identity, transform);
+            animalInStock.gameObject.SetActive(false);
+
+            itemPirce = animalInStock.GetAnimalData.purchasePrice;
             UpdateDisPlayShop();
         }
     }
 
     public override void BuyItemInStock(Player player)
     {
-        if (itemInStock == null)
+        if (animalInStock == null)
         {
             return;
         }
         Wallet playerWallet = Player.Instance.wallet;
-        if (playerWallet.coin >= itemPirce)
+        if (playerWallet.coin >= itemPirce && AnimalFarmManager.Instance.AddAnimal(animalInStock))
         {
             playerWallet.LoseCoin(itemPirce);
-            Vector3 pos = transform.position;
-            Animal AnimalBought = Instantiate(itemInStock, pos, Quaternion.identity);
-            //player.PickUpItem(AnimalBought);
+            animalInStock.gameObject.SetActive(true);
+            player.PickUpItem(animalInStock);
+
+            animalInStock = null;
         }
-
-
     }
 
     protected override void UpdateDisPlayShop()
     {
-        DisplaySpriteIconItem.sprite = itemInStock.GetAnimalData.spriteAnimal;
+        DisplaySpriteIconItem.sprite = animalInStock.GetAnimalData.spriteAnimal;
         DisplayTextStacksItem.text = "";
         DisplayTextPirce.text = itemPirce.ToString();
     }

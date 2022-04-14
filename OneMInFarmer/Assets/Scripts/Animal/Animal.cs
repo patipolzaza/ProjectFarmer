@@ -46,12 +46,13 @@ public class Animal : PickableObject, IValuable
         idleState = new IdleState(this, stateMachine, "idle", idleStateData);
         grabbedState = new GrabbedState(this, stateMachine, "grabbed");
         dieState = new DieState(this, stateMachine, "die");
+
+        stateMachine.InitializeState(idleState);
     }
 
     protected override void Start()
     {
         base.Start();
-        stateMachine.InitializeState(idleState);
 
         facingDirection = interactableObject.transform.localScale.x / interactableObject.transform.localScale.x;
 

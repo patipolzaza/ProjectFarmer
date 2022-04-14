@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class ShopBuyManager : MonoBehaviour
 {
-    [SerializeField]private ShopBuySeed[] shopBuySeeds;
-    [SerializeField]private ShopBuyAnimal[] shopBuyAnimals;
+    public static ShopBuyManager Instance;
+
+    [SerializeField] private ShopBuySeed[] shopBuySeeds;
+    [SerializeField] private ShopBuyAnimal[] shopBuyAnimals;
     public Item[] ListItem;
     public Animal[] ListAnimal;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
-        AddItemToShop();
+        RestockShops();
     }
-    public void AddItemToShop()
+    public void RestockShops()
     {
         foreach (ShopBuySeed shopBuy in shopBuySeeds)
         {
@@ -21,7 +28,10 @@ public class ShopBuyManager : MonoBehaviour
         }
         foreach (ShopBuyAnimal shopBuy in shopBuyAnimals)
         {
-            shopBuy.AddNewItemInStock(ListAnimal[Random.Range(0, ListAnimal.Length)]);
+            if (!shopBuy.animalInStock)
+            {
+                shopBuy.AddNewItemInStock(ListAnimal[Random.Range(0, ListAnimal.Length)]);
+            }
         }
     }
 
