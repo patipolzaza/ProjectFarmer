@@ -23,7 +23,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(StartGame());
+
+        //StartCoroutine(StartGameFirstDay());
     }
 
     void Update()
@@ -34,7 +35,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator StartGame()
+    public void StartGame()
+    {
+        StartCoroutine(StartGameFirstDay());
+    }
+
+    private IEnumerator StartGameFirstDay()
     {
         yield return new WaitUntil(() => isCompletedAllSetup());
 
@@ -122,25 +128,31 @@ public class GameManager : MonoBehaviour
         }
         if (!UpgradeShop.Instance || !UpgradeShop.Instance.isReadied)
         {
-            Debug.Log("UpgradeShop");
+            //Debug.Log("UpgradeShop");
             return false;
 
         }
         if (!Timer.Instance)
         {
-            Debug.Log("Timer");
+            //Debug.Log("Timer");
+            return false;
+
+        }
+        if (!TuTorialManager.Instance)
+        {
+            //Debug.Log("TuTorialManager");
             return false;
 
         }
         if (!StatusUpgradeManager.Instance || !StatusUpgradeManager.Instance.isReadied)
         {
-            Debug.Log("StatusUpgradeManager");
+            //Debug.Log("StatusUpgradeManager");
             return false;
 
         }
         if (!Player.Instance)
         {
-            Debug.Log("Player");
+            //Debug.Log("Player");
             return false;
 
         }
