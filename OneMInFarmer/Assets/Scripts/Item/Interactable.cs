@@ -14,6 +14,10 @@ public class Interactable : MonoBehaviour
     protected Color defaultColor;
     [SerializeField] protected Color highlightColor;
 
+    [Header("On Highlight Events")]
+    public UnityEvent OnHighlightShowed;
+    public UnityEvent OnHighlightHided;
+
     protected virtual void Awake()
     {
         sr = interactableObject.GetComponent<SpriteRenderer>();
@@ -54,11 +58,14 @@ public class Interactable : MonoBehaviour
         {
             sr.color = defaultColor;
         }
+        OnHighlightShowed?.Invoke();
     }
 
     public virtual void HideObjectHighlight()
     {
         sr.color = defaultColor;
+
+        OnHighlightHided?.Invoke();
     }
 
     public virtual void SetObjectSpriteRenderer(bool isRender)

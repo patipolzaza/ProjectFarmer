@@ -9,9 +9,6 @@ public class GameResultUI : WindowUIBase
     [SerializeField] private Text _totalScoresText;
     [SerializeField] private Button _backToTitleButton;
 
-    private bool _isSlideTotalScoresFinished = false;
-    private bool _isSlideDayPlayedFinished = false;
-
     private bool _canSkip = false;
 
     private Coroutine _showResultCoroutine;

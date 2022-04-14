@@ -443,6 +443,12 @@ MonoBehaviour:
       m_Calls: []
   interactableObject: {fileID: 1318744144}
   highlightColor: {r: 0, g: 0, b: 0, a: 0}
+  OnHighlightShowed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHighlightHided:
+    m_PersistentCalls:
+      m_Calls: []
   priceTMPro: {fileID: 1120381240}
 --- !u!4 &146086151
 Transform:
@@ -1006,6 +1012,7 @@ GameObject:
   - component: {fileID: 629382120}
   - component: {fileID: 629382119}
   - component: {fileID: 629382118}
+  - component: {fileID: 629382121}
   m_Layer: 0
   m_Name: ShopBuyAnimal
   m_TagString: Untagged
@@ -1030,9 +1037,15 @@ MonoBehaviour:
       m_Calls: []
   interactableObject: {fileID: 629382117}
   highlightColor: {r: 0, g: 0, b: 0, a: 0}
+  OnHighlightShowed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHighlightHided:
+    m_PersistentCalls:
+      m_Calls: []
   DisplaySpriteIconItem: {fileID: 1262626848}
-  DisplayTextPirce: {fileID: 0}
-  DisplayTextStacksItem: {fileID: 0}
+  DisplayTextPirce: {fileID: 365176312}
+  DisplayTextStacksItem: {fileID: 660724195}
 --- !u!212 &629382119
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1097,9 +1110,36 @@ Transform:
   m_Children:
   - {fileID: 1262626849}
   - {fileID: 365176311}
+  - {fileID: 965178548}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &629382121
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629382117}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &660724193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1804,6 +1844,63 @@ RectTransform:
   m_AnchoredPosition: {x: -0.34585, y: -0.34585002}
   m_SizeDelta: {x: 0.6917, y: 0.6917}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &965178547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 965178548}
+  - component: {fileID: 965178549}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &965178548
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965178547}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 629382120}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &965178549
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965178547}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.297019}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.405962}
+  m_EdgeRadius: 0
 --- !u!1 &1015244583
 GameObject:
   m_ObjectHideFlags: 0
@@ -1971,9 +2068,14 @@ MonoBehaviour:
       m_Calls: []
   interactableObject: {fileID: 1017408981}
   highlightColor: {r: 1, g: 0, b: 0, a: 1}
+  OnHighlightShowed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHighlightHided:
+    m_PersistentCalls:
+      m_Calls: []
   currentStackDisplayer: {fileID: 941949185}
-  ItemData: {fileID: 0}
-  foodType: 0
+  ItemData: {fileID: 11400000, guid: adf1d8f50fa3b974793f4f9da461af51, type: 2}
 --- !u!61 &1017408983
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2276,8 +2378,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262626847}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.15, z: 0}
-  m_LocalScale: {x: 0.5, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 1.8, z: 0}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children:
   - {fileID: 660724194}
   m_Father: {fileID: 629382120}
@@ -2427,6 +2529,55 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2168344050173468007, guid: b8957336f3f1f3c44b13695bfa180068, type: 3}
   m_PrefabInstance: {fileID: 2168344048868116748}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1546209652
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1546209654}
+  - component: {fileID: 1546209653}
+  m_Layer: 0
+  m_Name: PurchaseShopManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1546209653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546209652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41cc14820347dab4589c1603ed634680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopBuySeeds: []
+  shopBuyAnimals:
+  - {fileID: 629382118}
+  ListItem: []
+  ListAnimal:
+  - {fileID: 8454360660856007169, guid: 6a50425afb41e8d4f836e90994a5a78d, type: 3}
+--- !u!4 &1546209654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546209652}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1569350680
 GameObject:
   m_ObjectHideFlags: 0
@@ -3334,9 +3485,14 @@ MonoBehaviour:
       m_Calls: []
   interactableObject: {fileID: 1858559013}
   highlightColor: {r: 1, g: 0, b: 0, a: 1}
+  OnHighlightShowed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHighlightHided:
+    m_PersistentCalls:
+      m_Calls: []
   currentStackDisplayer: {fileID: 2005444767}
   ItemData: {fileID: 0}
-  foodType: 1
 --- !u!61 &1858559015
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3790,9 +3946,14 @@ MonoBehaviour:
       m_Calls: []
   interactableObject: {fileID: 1947301110}
   highlightColor: {r: 1, g: 0, b: 0, a: 1}
+  OnHighlightShowed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHighlightHided:
+    m_PersistentCalls:
+      m_Calls: []
   currentStackDisplayer: {fileID: 617176961}
-  ItemData: {fileID: 0}
-  foodType: 0
+  ItemData: {fileID: 11400000, guid: adf1d8f50fa3b974793f4f9da461af51, type: 2}
 --- !u!61 &1947301112
 BoxCollider2D:
   m_ObjectHideFlags: 0

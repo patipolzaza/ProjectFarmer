@@ -74,16 +74,6 @@ public class GameManager : MonoBehaviour
         dayResultManager.ShowDayResult();
     }
 
-    private void GrowUpAnimals()
-    {
-        var animals = FindObjectsOfType<Animal>();
-
-        foreach (var animal in animals)
-        {
-            animal.ResetAnimalHungryStatus();
-        }
-    }
-
     private void ResetPlotsStatus()
     {
         var plots = FindObjectsOfType<Plot>();
@@ -100,7 +90,7 @@ public class GameManager : MonoBehaviour
         ShopForSell.Instance.ResetTotalSoldPrice();
         StatusUpgradeManager.Instance.ResetDailyUpgradeStatus();
         DebtManager.Instance.ResetParameters();
-        GrowUpAnimals();
+        AnimalFarmManager.Instance.GrowUpAnimals();
 
         //ResetPlotsStatus();
         ShopBuyManager.Instance.RestockShops();

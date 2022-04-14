@@ -53,4 +53,12 @@ public class AnimalFarmManager : MonoBehaviour, IContainStatus
         animals.Remove(animalToRemove);
         return true;
     }
+
+    public void GrowUpAnimals()
+    {
+        foreach (var animal in animals)
+        {
+            animal.IncreaseAge();
+        }
+    }
 }

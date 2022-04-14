@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Animal : PickableObject, IValuable
 {
@@ -16,10 +17,15 @@ public class Animal : PickableObject, IValuable
 
     private Vector2 velocityWorkspace = new Vector2();
 
-    public int currentAge { get; protected set; } = 1;
+    public int age { get; protected set; } = 1;
+    public AgeSpan currentAgeSpan;
     public int lifePoint { get; protected set; } = 2;
 
     public bool isHungry { get; private set; } = true;
+    private List<AnimalFood> foodsEaten = new List<AnimalFood>();
+    public float weight { get; protected set; }
+    public UnityEvent OnEatenFood;
+
     public bool isDie { get; private set; } = false;
 
     #region State Machine
@@ -48,6 +54,7 @@ public class Animal : PickableObject, IValuable
         dieState = new DieState(this, stateMachine, "die");
 
         stateMachine.InitializeState(idleState);
+        currentAgeSpan = 0;
     }
 
     protected override void Start()
@@ -59,6 +66,8 @@ public class Animal : PickableObject, IValuable
         float size = GetSize;
         Vector3 newScale = new Vector3(size, size, 1);
         SetScale(newScale);
+
+        weight = animalData.startWeight;
     }
 
     public void Update()
@@ -79,6 +88,7 @@ public class Animal : PickableObject, IValuable
     {
         stateMachine.currentState.PhysicUpdate();
     }
+
     public AnimalData GetAnimalData
     {
         get
@@ -87,30 +97,39 @@ public class Animal : PickableObject, IValuable
         }
     }
 
-    public void SetHungry(bool isHungry)
-    {
-        this.isHungry = isHungry;
-    }
-
     public void IncreaseAge()
     {
-        if (isDie)
-        {
-            return;
-        }
+        if (isDie) return;
 
-        currentAge++;
-
-        if (currentAge > animalData.lifespan)
-        {
+        if (foodsEaten.Count == 0)
             DecreaseLifePoint();
-        }
+        else
+            DigestFoods();
 
-        currentAge = Mathf.Clamp(currentAge, 0, animalData.lifespan);
+        age++;
+        currentAgeSpan = (AgeSpan)(Mathf.Clamp(Mathf.CeilToInt(age / (animalData.lifespan / 3f) - 1), 0, 2));
+
+        if (age > animalData.lifespan)
+            DecreaseLifePoint();
 
         float size = GetSize;
         Vector3 newScale = new Vector3(size, size, 1);
         SetScale(newScale);
+    }
+
+    private void DigestFoods()
+    {
+        foreach (var food in foodsEaten)
+        {
+            IncreaseWeight(food.GetWeightGain);
+        }
+
+        foodsEaten.Clear();
+    }
+
+    private void IncreaseWeight(float amount)
+    {
+        weight += amount;
     }
 
     public void DecreaseLifePoint()
@@ -159,7 +178,7 @@ public class Animal : PickableObject, IValuable
         {
             return false;
         }
-        else if (food == null || !isHungry)
+        else if (food == null || foodsEaten.Count >= animalData.stomachSize)
         {
             if (showTextCoroutine != null)
             {
@@ -180,8 +199,9 @@ public class Animal : PickableObject, IValuable
             return false;
         }
 
+        foodsEaten.Add(food);
         showTextCoroutine = StartCoroutine(ShowText("Yummy :)"));
-        isHungry = false;
+        OnEatenFood?.Invoke();
         return true;
     }
 
@@ -196,20 +216,6 @@ public class Animal : PickableObject, IValuable
         textMesh.text = textToShow;
         yield return new WaitForSeconds(3.5f);
         textMesh.text = "";
-    }
-
-    public void ResetAnimalHungryStatus()
-    {
-        if (!isHungry)
-        {
-            IncreaseAge();
-        }
-        else
-        {
-            DecreaseLifePoint();
-        }
-
-        isHungry = true;
     }
 
     public void SetVelocity(float x, float y)
@@ -238,7 +244,7 @@ public class Animal : PickableObject, IValuable
     {
         Wallet playerWallet = Player.Instance.wallet;
         int price = GetPrice();
-        price = Mathf.Clamp(price, 0, animalData.sellPrice);
+        //price = Mathf.Clamp(price, 0, animalData.sellPrice);
 
         playerWallet.EarnCoin(price);
         Destroy(gameObject);
@@ -265,7 +271,21 @@ public class Animal : PickableObject, IValuable
         return gameObject;
     }
 
-    public int GetPrice() => isDie ? 0 : Mathf.FloorToInt((float)animalData.sellPrice * ((float)currentAge / (float)animalData.lifespan));
+    public int GetPrice()
+    {
+        int price = 0;
+
+        if (!isDie)
+        {
+            price = Mathf.FloorToInt(animalData.sellPricePerKilo * weight);
+            if (currentAgeSpan == (AgeSpan)1)
+                price += animalData.bonusSellPriceForAdult;
+            else if (currentAgeSpan == (AgeSpan)2)
+                price += animalData.bonusSellPriceForAdult + animalData.bonusSellPriceForElder;
+        }
+
+        return price;
+    }
 
     public void PutInShopStash(ShopForSell targetShop)
     {
@@ -275,7 +295,7 @@ public class Animal : PickableObject, IValuable
         SetInteractable(false);
     }
 
-    public float GetSize => Mathf.Clamp(0.45f + (((float)currentAge / (float)animalData.lifespan) * 0.55f), 0.45f, 1);
+    public float GetSize => Mathf.Clamp(0.45f + (((float)age / (float)animalData.lifespan) * 0.55f), 0.45f, 1);
     public void SetScale(Vector3 newScale)
     {
         transform.localScale = newScale;
