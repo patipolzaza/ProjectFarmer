@@ -20,6 +20,11 @@ public class ShopForSell : Interactable
     {
         if (valuable != null)
         {
+            if (valuable is Animal)
+            {
+                AnimalFarmManager.Instance.RemoveAnimal((Animal)valuable);
+            }
+
             totalSoldPrice += valuable.Sell();
         }
 

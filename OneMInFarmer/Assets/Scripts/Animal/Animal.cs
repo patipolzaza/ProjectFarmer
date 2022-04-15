@@ -24,7 +24,7 @@ public class Animal : PickableObject, IValuable
     public bool isHungry { get; private set; } = true;
     private List<AnimalFood> foodsEaten = new List<AnimalFood>();
     public float weight { get; protected set; }
-    public UnityEvent<int, int> OnEatenFood;
+    public UnityEvent<float, float> OnEatenFood;
 
     public bool isDie { get; private set; } = false;
 
@@ -196,11 +196,11 @@ public class Animal : PickableObject, IValuable
             return false;
         }
 
-        int oldFoodCount = foodsEaten.Count;
+        float oldFoodRatio = foodsEaten.Count / (float)animalData.stomachSize;
         foodsEaten.Add(food);
         showTextCoroutine = StartCoroutine(ShowText("Yummy :)"));
-        int newFoodCount = foodsEaten.Count;
-        OnEatenFood?.Invoke(oldFoodCount, newFoodCount);
+        float newFoodRatio = foodsEaten.Count / (float)animalData.stomachSize;
+        OnEatenFood?.Invoke(oldFoodRatio, newFoodRatio);
         return true;
     }
 

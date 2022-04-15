@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class AnimalHungryBar : MonoBehaviour
 {
     [SerializeField] private Image hungryBar;
-    private int maxHungry = 1;
-    private int currentValue = 0;
+    private float maxHungry = 1;
+    private float currentValue = 0;
 
     private Coroutine slideBarCoroutine;
     private Coroutine showBarCoroutine;
@@ -17,7 +17,7 @@ public class AnimalHungryBar : MonoBehaviour
         SetBarFillAmount(0);
     }
 
-    public void UpdateBar(int oldValue, int newValue)
+    public void UpdateBar(float oldValue, float newValue)
     {
         if (slideBarCoroutine != null)
         {
@@ -29,7 +29,7 @@ public class AnimalHungryBar : MonoBehaviour
         slideBarCoroutine = StartCoroutine(SlideUpdateBar(newValue));
     }
 
-    private IEnumerator SlideUpdateBar(int target)
+    private IEnumerator SlideUpdateBar(float target)
     {
         float currentBarValue = currentValue;
 
