@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class WateringPot : Item
 {
-    [SerializeField] private Slider slider;
+    [SerializeField] private Slider sliderWaterBar;
     public float valence { get; private set; } = 20;
     public float remaining { get; private set; } = 20;
     public float RefillPerSeconds { get; private set; } = 1;
@@ -43,7 +43,7 @@ public class WateringPot : Item
             {
                 remaining -= plot.seed.waterNeed;
                 plot.Watering();
-                slider.value = remaining;
+                sliderWaterBar.value = remaining;
                 return true;
             }
         return false;
@@ -54,6 +54,7 @@ public class WateringPot : Item
         if (remaining < 20)
         {
             remaining += RefillPerSeconds * Time.fixedDeltaTime;
+            sliderWaterBar.value = remaining;
         }
     }
 }
