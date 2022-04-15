@@ -264,6 +264,8 @@ public class Animal : PickableObject, IBuyable, ISellable
         int price = GetSellPrice;
 
         playerWallet.EarnCoin(price);
+
+        AnimalFarmManager.Instance.RemoveAnimal(this);
         Destroy(gameObject);
 
         return price;
