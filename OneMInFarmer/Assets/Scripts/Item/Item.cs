@@ -66,19 +66,4 @@ public class Item : PickableObject
             return currentStack;
         }
     }
-
-    public virtual bool Use(Interactable targetToUse)
-    {
-        currentStack--;
-
-        if (currentStack > 0)
-        {
-            return false;
-        }
-        else
-        {
-            Destroy(gameObject);
-            return true;
-        }
-    }
 }

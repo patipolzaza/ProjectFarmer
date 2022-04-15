@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimalFood : Item
+public class AnimalFood : Item, IBuyable, IUsable
 {
     public FoodType GetFoodType => ((AnimalFoodData)ItemData).foodType;
 
     public float GetWeightGain => ((AnimalFoodData)ItemData).weightGain;
+
+    public int GetBuyPrice => ItemData.purchasePrice;
+    public GameObject GetObject() => gameObject;
 
     private void OnValidate()
     {
@@ -16,7 +19,7 @@ public class AnimalFood : Item
         }
     }
 
-    public override bool Use(Interactable targetToUse)
+    public bool Use(Interactable targetToUse)
     {
         if (targetToUse is Animal)
         {
@@ -36,7 +39,7 @@ public class AnimalFood : Item
                 }
                 else
                 {
-                    Destroy(instantiatedFood);
+                    Destroy(instantiatedFood.gameObject);
                 }
             }
             else
@@ -54,5 +57,10 @@ public class AnimalFood : Item
         }
 
         return false;
+    }
+
+    public bool Buy(Player player)
+    {
+        throw new System.NotImplementedException();
     }
 }

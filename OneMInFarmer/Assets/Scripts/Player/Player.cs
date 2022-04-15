@@ -292,15 +292,12 @@ public class Player : MonoBehaviour
 
     public void UseItem()
     {
-        if (holdingObject is Item)
+        if (holdingObject is IUsable)
         {
-            Item useableItem = holdingObject as Item;
+            IUsable useableItem = holdingObject as IUsable;
 
             if (useableItem.Use(targetInteractable))
             {
-                if (useableItem is WateringPot)
-                    return;
-
                 holdingObject = null;
             }
         }
@@ -407,17 +404,17 @@ public class Player : MonoBehaviour
                     ChangeTargetInteractable(interactable);
 
                     //Use OnHighlightShowed OnInteractable to shop detail
-/*                    if (holdingObject)
-                    {
-                        if (holdingObject is IValuable && targetInteractable is ShopForSell)
-                        {
-                            Debug.Log(targetInteractable);
-                            IValuable valuable = holdingObject as IValuable;
-                            ShopForSell shop = targetInteractable as ShopForSell;
-                            shop.ShowPrice(valuable.GetPrice);
+                    /*                    if (holdingObject)
+                                        {
+                                            if (holdingObject is IValuable && targetInteractable is ShopForSell)
+                                            {
+                                                Debug.Log(targetInteractable);
+                                                IValuable valuable = holdingObject as IValuable;
+                                                ShopForSell shop = targetInteractable as ShopForSell;
+                                                shop.ShowPrice(valuable.GetPrice);
 
-                        }
-                    }*/
+                                            }
+                                        }*/
                 }
             }
 

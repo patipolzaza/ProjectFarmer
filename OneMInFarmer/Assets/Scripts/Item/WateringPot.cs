@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WateringPot : Item
+public class WateringPot : PickableObject, IUsable
 {
     [SerializeField] private Slider sliderWaterBar;
     public float valence { get; private set; } = 20;
@@ -18,20 +18,20 @@ public class WateringPot : Item
 
         //interactEvent.AddListener(PickUp);
     }
-    public override bool Use(Interactable targetToUse)
+    public bool Use(Interactable targetToUse)
     {
         if (targetToUse is Plot)
         {
             Plot plot = targetToUse as Plot;
             if (WateringOnPlot(plot))
             {
-                return true;
+                //return true;
             }
         }
         if (targetToUse is Pool)
         {
             Refill();
-            return true;
+            //return true;
         }
 
         return false;
