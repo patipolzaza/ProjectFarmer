@@ -7,6 +7,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
+
     #region Custom Inepector
     [CustomEditor(typeof(Player))]
     [CanEditMultipleObjects]
@@ -19,6 +20,9 @@ public class Player : MonoBehaviour
 
         SerializedProperty moveSpeedDataProp;
 
+        SerializedProperty OnWateringEventProp;
+        SerializedProperty OnPickingEventProp;
+
         private void OnEnable()
         {
             interactableDetectorProp = serializedObject.FindProperty("interactableDetector");
@@ -28,6 +32,9 @@ public class Player : MonoBehaviour
             itemDropTransformProp = serializedObject.FindProperty("itemDropTransform");
 
             moveSpeedDataProp = serializedObject.FindProperty("moveSpeedData");
+
+            OnWateringEventProp = serializedObject.FindProperty("OnWateringEvent");
+            OnPickingEventProp = serializedObject.FindProperty("OnPickingEvent");
         }
 
         public override void OnInspectorGUI()
@@ -48,6 +55,10 @@ public class Player : MonoBehaviour
             GUILayout.Label("Item Pick.");
             EditorGUILayout.PropertyField(itemHolderTransformProp);
             EditorGUILayout.PropertyField(itemDropTransformProp);
+            GUILayout.Label("Unity Envent.");
+            EditorGUILayout.PropertyField(OnWateringEventProp);
+            EditorGUILayout.PropertyField(OnPickingEventProp);
+
 
             serializedObject.ApplyModifiedProperties();
         }
@@ -134,8 +145,9 @@ public class Player : MonoBehaviour
     public float facingDirection { get; private set; }
 
     private Rigidbody2D rb;
+    [SerializeField] private UnityEvent OnWateringEvent;
+    [SerializeField] private UnityEvent OnPickingEvent;
 
-    [SerializeField] private UnityEvent OnWatering;
 
     private Vector2 velocityWorkspace;
 
@@ -205,11 +217,7 @@ public class Player : MonoBehaviour
                     else if (holdingObject is WateringPot && targetInteractable is Plot)
                     {
                         Debug.Log("holdingObject is WateringPot");
-                        UseItem();
-                    }
-                    if (holdingObject is WateringPot && targetInteractable is Pool)
-                    {
-                        
+                        OnWateringEvent.Invoke();
                         UseItem();
                     }
                     else
@@ -220,10 +228,22 @@ public class Player : MonoBehaviour
                 else if (targetInteractable is PickableObject)
                 {
                     PickUpItem((PickableObject)targetInteractable);
+                    OnPickingEvent.Invoke();
                 }
                 else
                 {
                     Interact();
+                }
+            }
+            if (Input.GetKey(KeyCode.J))
+            {
+                if (holdingObject)
+                {
+                    if (holdingObject is WateringPot && targetInteractable is Pool)
+                    {
+
+                        UseItem();
+                    }
                 }
             }
         }
@@ -275,7 +295,7 @@ public class Player : MonoBehaviour
         if (holdingObject is Item)
         {
             Item useableItem = holdingObject as Item;
-            
+
             if (useableItem.Use(targetInteractable))
             {
                 if (useableItem is WateringPot)
