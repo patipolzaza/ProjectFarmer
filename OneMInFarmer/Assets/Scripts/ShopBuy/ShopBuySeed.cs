@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ShopBuySeed : ShopBuyBase
 {
-    [SerializeField] private Item itemInStock;
+    [SerializeField] protected TextMeshProUGUI DisplayTextStacksItem;
+    protected int itemStack;
 
+    [SerializeField] private Item itemInStock;
 
     protected override void Awake()
     {
@@ -15,14 +18,14 @@ public class ShopBuySeed : ShopBuyBase
     }
     public override void AddNewItemInStock(PickableObject newItem)
     {
-        base.AddNewItemInStock(newItem);
         if (newItem is Item)
         {
             itemInStock = (Item)newItem;
             Item prepareItem = (Item)newItem;
             itemStack = (int)Random.Range(3, 6);
             itemPirce = itemStack * prepareItem.GetItemData.purchasePrice;
-            UpdateDisPlayShop();
+            UpdateDisplayShop();
+            base.AddNewItemInStock(newItem);
         }
     }
 
@@ -47,7 +50,7 @@ public class ShopBuySeed : ShopBuyBase
 
     }
 
-    protected override void UpdateDisPlayShop()
+    protected override void UpdateDisplayShop()
     {
         DisplaySpriteIconItem.sprite = itemInStock.GetItemData.Icon;
         DisplayTextStacksItem.text = itemStack.ToString();

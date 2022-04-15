@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
 public class ShopBuyBase : Interactable
 {
     protected int itemPirce;
-    protected int itemStack;
-    [SerializeField] protected SpriteRenderer DisplaySpriteIconItem;
+    [SerializeField] protected Image DisplaySpriteIconItem;
     [SerializeField] protected TextMeshProUGUI DisplayTextPirce;
-    [SerializeField] protected TextMeshProUGUI DisplayTextStacksItem;
+
+    public UnityEvent OnRestocked;
+    public UnityEvent OnProductSold;
 
     protected override void Awake()
     {
@@ -18,16 +21,16 @@ public class ShopBuyBase : Interactable
 
     public virtual void AddNewItemInStock(PickableObject newItem)
     {
-      
+        OnRestocked?.Invoke();
     }
 
     public virtual void BuyItemInStock(Player player)
     {
- 
+        OnProductSold?.Invoke();
     }
 
-    protected virtual void UpdateDisPlayShop()
+    protected virtual void UpdateDisplayShop()
     {
-        
+
     }
 }

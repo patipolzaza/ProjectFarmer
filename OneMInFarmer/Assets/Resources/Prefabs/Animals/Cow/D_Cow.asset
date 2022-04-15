@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9cab27eab9b98f428269a4e3b6cb65c, type: 3}
   m_Name: D_Cow
   m_EditorClassIdentifier: 
+  animalName: Cow
   inShopIcon: {fileID: 1201215636998452967, guid: 7ae8c846d6a54fe428bba1d8aef60abc, type: 3}
   sellPricePerKilo: 1
   bonusSellPriceForAdult: 1

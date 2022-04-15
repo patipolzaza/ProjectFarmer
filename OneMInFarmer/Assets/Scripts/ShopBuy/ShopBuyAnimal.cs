@@ -6,6 +6,7 @@ public class ShopBuyAnimal : ShopBuyBase
 {
     public Animal animalInStock { get; private set; }
 
+
     protected override void Awake()
     {
         base.Awake();
@@ -21,8 +22,8 @@ public class ShopBuyAnimal : ShopBuyBase
             animalInStock = Instantiate<Animal>(animalInStock, transform.position, Quaternion.identity, transform);
             animalInStock.gameObject.SetActive(false);
 
-            itemPirce = animalInStock.GetAnimalData.purchasePrice;
-            UpdateDisPlayShop();
+            itemPirce = animalInStock.GetPurchasePrice;
+            base.AddNewItemInStock(newItem);
         }
     }
 
@@ -40,13 +41,13 @@ public class ShopBuyAnimal : ShopBuyBase
             player.PickUpItem(animalInStock);
 
             animalInStock = null;
+            OnProductSold?.Invoke();
         }
     }
 
-    protected override void UpdateDisPlayShop()
+    protected override void UpdateDisplayShop()
     {
-        DisplaySpriteIconItem.sprite = animalInStock.GetAnimalData.inShopIcon;
-        DisplayTextStacksItem.text = "";
+        DisplaySpriteIconItem.sprite = animalInStock.GetAnimalShopIcon;
         DisplayTextPirce.text = itemPirce.ToString();
     }
 }

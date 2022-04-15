@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Animal/Animal Data", fileName = "D_Animal")]
 public class AnimalData : ScriptableObject
 {
+    public string animalName = "Animal";
+
     public Sprite inShopIcon;
     public int sellPricePerKilo = 1;
 

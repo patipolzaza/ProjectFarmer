@@ -89,13 +89,10 @@ public class Animal : PickableObject, IValuable
         stateMachine.currentState.PhysicUpdate();
     }
 
-    public AnimalData GetAnimalData
-    {
-        get
-        {
-            return animalData;
-        }
-    }
+    public string GetAnimalName => animalData.animalName;
+    public Sprite GetAnimalShopIcon => animalData.inShopIcon;
+    public int GetSellPricePerKilo => animalData.sellPricePerKilo;
+    public int GetPurchasePrice => animalData.purchasePrice;
 
     public void IncreaseAge()
     {

@@ -12,6 +12,11 @@ public class AnimalHungryBar : MonoBehaviour
     private Coroutine slideBarCoroutine;
     private Coroutine showBarCoroutine;
 
+    private void Start()
+    {
+        SetBarFillAmount(0);
+    }
+
     public void UpdateBar(int oldValue, int newValue)
     {
         if (slideBarCoroutine != null)
