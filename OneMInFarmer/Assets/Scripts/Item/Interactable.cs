@@ -8,15 +8,18 @@ public class Interactable : MonoBehaviour
     public bool isInteractable { get; protected set; }
     [SerializeField] protected UnityEvent<Player> interactEvent;
     [SerializeField] protected GameObject interactableObject;
+    protected float objectDefaultScale;
     public Collider2D objectCollider { get; protected set; }
     public SpriteRenderer sr { get; protected set; }
 
+
     protected Color defaultColor;
-    [SerializeField] protected Color highlightColor;
+    protected Color highlightColor;
 
     [Header("On Highlight Events")]
     public UnityEvent OnHighlightShowed;
     public UnityEvent OnHighlightHided;
+
 
     protected virtual void Awake()
     {
@@ -26,6 +29,8 @@ public class Interactable : MonoBehaviour
         highlightColor = new Color32(255, 226, 0, 255);
         defaultColor = sr.color;
         isInteractable = true;
+
+        objectDefaultScale = Mathf.Abs(interactableObject.transform.localScale.x);
     }
 
     protected virtual void Start()
@@ -59,6 +64,17 @@ public class Interactable : MonoBehaviour
             sr.color = defaultColor;
         }
         OnHighlightShowed?.Invoke();
+    }
+
+    public virtual void SetScale(Vector3 newScale)
+    {
+        Vector3 scale = new Vector3(objectDefaultScale * newScale.x, objectDefaultScale * newScale.y, 1);
+        interactableObject.transform.localScale = scale;
+    }
+    public virtual void SetColor(Color newColor)
+    {
+        defaultColor = newColor;
+        sr.color = defaultColor;
     }
 
     public virtual void HideObjectHighlight()
