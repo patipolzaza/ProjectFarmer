@@ -53,13 +53,17 @@ public class ShopBuy : Interactable
 
     public void BuyProduct(Player player)
     {
-        if (productInStock.Buy(player))
+        PickableObject product = Instantiate(productInStock.GetObject().GetComponent<PickableObject>());
+        if (((IBuyable)product).Buy(player))
         {
-            PickableObject product = Instantiate(productInStock.GetObject().GetComponent<PickableObject>());
             product.gameObject.SetActive(true);
             player.PickUpItem(product);
 
             OnProductSold?.Invoke();
+        }
+        else
+        {
+            Destroy(product.gameObject);
         }
     }
 
@@ -68,6 +72,7 @@ public class ShopBuy : Interactable
         if (productInStock != null)
         {
             Destroy(productInStock.GetObject());
+            productInStock = null;
         }
 
         int randomedIndex = Random.Range(0, possibleProducts.Count);
