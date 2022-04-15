@@ -210,15 +210,19 @@ public class Player : MonoBehaviour
                     {
                         UseItem();
                     }
-                    else if (targetInteractable is PickableObject)
-                    {
-                        PickUpItem((PickableObject)targetInteractable);
-                    }
                     else if (holdingObject is WateringPot && targetInteractable is Plot)
                     {
                         Debug.Log("holdingObject is WateringPot");
-                        OnWateringEvent.Invoke();
                         UseItem();
+                        OnWateringEvent.Invoke();
+                    }
+                    else if (holdingObject is Seed && targetInteractable is Plot)
+                    {
+                        UseItem();
+                    }
+                    else if (targetInteractable is PickableObject)
+                    {
+                        PickUpItem((PickableObject)targetInteractable);
                     }
                     else
                     {
@@ -354,7 +358,7 @@ public class Player : MonoBehaviour
             PickableObject pickable = holdingObject;
 
             pickable.SetParent(itemDropTransform);
-            pickable.SetLocalPosition(new Vector3(0, 0, 1), true, true);
+            pickable.SetLocalPosition(new Vector3(0, 0, 1), false, true);
             pickable.Drop();
 
             pickable.SetInteractable(true);

@@ -33,15 +33,14 @@ public class Plot : Interactable
         Lock();
     }
 
-    protected override void Start()
-    {
-        base.Start();
-
-    }
     public void PlayerInteract(Player player)
     {
         if (isPlanted)
         {
+            if (player.holdingObject)
+            {
+                return;
+            }
 
             if (plantStage >= seed.plantStages.Length - 1)
             {
@@ -57,21 +56,6 @@ public class Plot : Interactable
                 player.holdingObject.GetComponent<WateringPot>().WateringOnPlot(this);
             }*/
         }
-        else
-        {
-            if (player.holdingObject)
-            {
-                Debug.Log("U have WateringPot123123");
-                if (player.holdingObject.GetComponent<Item>().GetItemData is SeedData)
-                {
-                    Debug.Log("U have WateringPotasdasd");
-                    Plant(player.holdingObject.GetComponent<Item>());
-                    player.UseItem();
-                }
-            }
-        }
-
-
     }
 
     void Harvest(Player player)
@@ -94,12 +78,17 @@ public class Plot : Interactable
         }
     }
 
-    void Plant(Item seedItem)
+    public bool Plant(SeedData seedData)
     {
         Debug.Log("Plant");
+        if (isPlanted)
+        {
+            return false;
+        }
+
         if (this.seed == null)
         {
-            this.seed = (SeedData)seedItem.GetItemData;
+            this.seed = seedData;
             isPlanted = true;
             plantStage = 0;
             agePlant = 0;
@@ -107,6 +96,11 @@ public class Plot : Interactable
             dehydration = 0;
             UpdatePlant();
             plantObject.SetActive(true);
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

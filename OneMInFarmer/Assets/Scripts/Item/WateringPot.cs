@@ -23,15 +23,11 @@ public class WateringPot : PickableObject, IUsable
         if (targetToUse is Plot)
         {
             Plot plot = targetToUse as Plot;
-            if (WateringOnPlot(plot))
-            {
-                //return true;
-            }
+            WateringOnPlot(plot);
         }
         if (targetToUse is Pool)
         {
             Refill();
-            //return true;
         }
 
         return false;

@@ -146,8 +146,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8853653258763358736}
   - component: {fileID: 4999413238353253261}
-  - component: {fileID: 2082122146712155905}
   - component: {fileID: 7296608477130200740}
+  - component: {fileID: 704799237193949980}
   m_Layer: 6
   m_Name: SeedFruit
   m_TagString: Untagged
@@ -201,25 +201,6 @@ PolygonCollider2D:
       - {x: 0.03, y: -0.07}
       - {x: 0.07, y: -0.01}
       - {x: 0.07, y: 0.07}
---- !u!114 &2082122146712155905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2626021155471713222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c0e11d5f60d95545b239fac52ef89b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  interactableObject: {fileID: 2626021155471713222}
-  highlightColor: {r: 0, g: 1, b: 0, a: 1}
-  currentStackDisplayer: {fileID: 3862159388989945962}
-  ItemData: {fileID: 11400000, guid: 4d9c362b1cb876b4fa6b06ee11ef4da6, type: 2}
 --- !u!212 &7296608477130200740
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -271,6 +252,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &704799237193949980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2626021155471713222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5004094f77646d34cbacfe2085c3b139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  interactableObject: {fileID: 2626021155471713222}
+  highlightColor: {r: 0, g: 0, b: 0, a: 0}
+  OnHighlightShowed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHighlightHided:
+    m_PersistentCalls:
+      m_Calls: []
+  currentStackDisplayer: {fileID: 3862159388989945962}
+  ItemData: {fileID: 11400000, guid: 4d9c362b1cb876b4fa6b06ee11ef4da6, type: 2}
 --- !u!1 &5221673011158696210
 GameObject:
   m_ObjectHideFlags: 0

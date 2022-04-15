@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 4467573919479020219}
   - component: {fileID: 1709446539754123528}
   - component: {fileID: 1206766504574694377}
-  - component: {fileID: 6883085959782402741}
+  - component: {fileID: 308365067829325815}
   m_Layer: 6
   m_Name: SeedWheat
   m_TagString: Untagged
@@ -352,7 +352,7 @@ PolygonCollider2D:
       - {x: 0.03, y: -0.07}
       - {x: 0.07, y: -0.01}
       - {x: 0.07, y: 0.07}
---- !u!114 &6883085959782402741
+--- !u!114 &308365067829325815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -361,13 +361,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 6967064389572889453}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c0e11d5f60d95545b239fac52ef89b8, type: 3}
+  m_Script: {fileID: 11500000, guid: 5004094f77646d34cbacfe2085c3b139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactEvent:
     m_PersistentCalls:
       m_Calls: []
   interactableObject: {fileID: 6967064389572889453}
-  highlightColor: {r: 0, g: 1, b: 0, a: 1}
+  highlightColor: {r: 0, g: 0, b: 0, a: 0}
+  OnHighlightShowed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHighlightHided:
+    m_PersistentCalls:
+      m_Calls: []
   currentStackDisplayer: {fileID: 2795866924089225511}
   ItemData: {fileID: 11400000, guid: cb36ce230c4627b4f882c82cd33339cf, type: 2}
