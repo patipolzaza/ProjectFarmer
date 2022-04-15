@@ -271,16 +271,25 @@ public class Animal : PickableObject, IBuyable, ISellable
 
     public bool Buy(Player player)
     {
-        Wallet playerWallet = player.wallet;
-        int price = animalData.purchasePrice;
-
-        if (playerWallet.coin >= price)
+        if (AnimalFarmManager.Instance.AddAnimal(this))
         {
-            playerWallet.LoseCoin(price);
-            return true;
-        }
+            Wallet playerWallet = player.wallet;
+            int price = animalData.purchasePrice;
 
-        return false;
+            if (playerWallet.coin >= price)
+            {
+                playerWallet.LoseCoin(price);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public GameObject GetObject()

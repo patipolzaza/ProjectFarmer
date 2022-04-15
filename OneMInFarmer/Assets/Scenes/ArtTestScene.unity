@@ -1282,8 +1282,8 @@ GameObject:
   m_Component:
   - component: {fileID: 629382120}
   - component: {fileID: 629382119}
-  - component: {fileID: 629382118}
   - component: {fileID: 629382121}
+  - component: {fileID: 629382122}
   m_Layer: 0
   m_Name: ShopBuyAnimal
   m_TagString: Untagged
@@ -1291,85 +1291,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &629382118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 629382117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee20b56d7b7c1a44db66c46a800699fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  interactableObject: {fileID: 629382117}
-  highlightColor: {r: 0, g: 0, b: 0, a: 0}
-  OnHighlightShowed:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1654465261}
-        m_TargetAssemblyTypeName: AnimalInStockDisplayer, Assembly-CSharp
-        m_MethodName: Show
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnHighlightHided:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1654465261}
-        m_TargetAssemblyTypeName: AnimalInStockDisplayer, Assembly-CSharp
-        m_MethodName: Hide
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  DisplaySpriteIconItem: {fileID: 0}
-  DisplayTextPirce: {fileID: 365176312}
-  OnRestocked:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1654465261}
-        m_TargetAssemblyTypeName: AnimalInStockDisplayer, Assembly-CSharp
-        m_MethodName: SetUpUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnProductSold:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1654465261}
-        m_TargetAssemblyTypeName: AnimalInStockDisplayer, Assembly-CSharp
-        m_MethodName: SetUpUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!212 &629382119
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1464,6 +1385,85 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &629382122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629382117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc088cd66219144a98c0599fc9a14ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  interactableObject: {fileID: 629382117}
+  highlightColor: {r: 0, g: 0, b: 0, a: 0}
+  OnHighlightShowed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1654465261}
+        m_TargetAssemblyTypeName: AnimalInStockDisplayer, Assembly-CSharp
+        m_MethodName: Show
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnHighlightHided:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1654465261}
+        m_TargetAssemblyTypeName: AnimalInStockDisplayer, Assembly-CSharp
+        m_MethodName: Hide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnProductRestocked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1654465261}
+        m_TargetAssemblyTypeName: AnimalInStockDisplayer, Assembly-CSharp
+        m_MethodName: SetUpUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnProductSold:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1654465261}
+        m_TargetAssemblyTypeName: AnimalInStockDisplayer, Assembly-CSharp
+        m_MethodName: SetUpUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  possibleProducts:
+  - {fileID: 8454360660856007169, guid: 6a50425afb41e8d4f836e90994a5a78d, type: 3}
 --- !u!1 &630837159
 GameObject:
   m_ObjectHideFlags: 0
@@ -2929,14 +2929,14 @@ MonoBehaviour:
   OnHighlightHided:
     m_PersistentCalls:
       m_Calls: []
-  possibleProducts:
-  - {fileID: 8454360660856007169, guid: 6a50425afb41e8d4f836e90994a5a78d, type: 3}
   OnProductRestocked:
     m_PersistentCalls:
       m_Calls: []
   OnProductSold:
     m_PersistentCalls:
       m_Calls: []
+  possibleProducts:
+  - {fileID: 8454360660856007169, guid: 6a50425afb41e8d4f836e90994a5a78d, type: 3}
 --- !u!4 &1509945258
 Transform:
   m_ObjectHideFlags: 0
@@ -2982,11 +2982,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopBuySeeds: []
-  shopBuyAnimals:
-  - {fileID: 629382118}
+  shopBuyAnimals: []
   ListItem: []
-  ListAnimal:
-  - {fileID: 8454360660856007169, guid: 6a50425afb41e8d4f836e90994a5a78d, type: 3}
+  ListAnimal: []
 --- !u!4 &1546209654
 Transform:
   m_ObjectHideFlags: 0
@@ -3205,7 +3203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901b4e065c1252e4bb81ff5dfd5cf216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shop: {fileID: 629382118}
+  shop: {fileID: 0}
   _iconDisplayer: {fileID: 2076251956}
   _productNameText: {fileID: 2016114729}
   _sellPriceText: {fileID: 898254142}

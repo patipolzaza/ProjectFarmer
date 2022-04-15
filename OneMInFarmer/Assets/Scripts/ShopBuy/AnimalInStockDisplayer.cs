@@ -6,7 +6,7 @@ using TMPro;
 
 public class AnimalInStockDisplayer : MonoBehaviour
 {
-    [SerializeField] private ShopBuyAnimal shop;
+    [SerializeField] private ShopBuy shop;
 
     [SerializeField] private Image _iconDisplayer;
     [SerializeField] private TMP_Text _productNameText;
@@ -15,7 +15,7 @@ public class AnimalInStockDisplayer : MonoBehaviour
 
     public void SetUpUI()
     {
-        Animal animal = shop.animalInStock;
+        Animal animal = shop.productInStock as Animal;
 
         if (animal)
         {
