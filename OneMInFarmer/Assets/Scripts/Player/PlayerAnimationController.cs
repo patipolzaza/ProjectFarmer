@@ -14,4 +14,34 @@ public class PlayerAnimationController : MonoBehaviour
             anim = GetComponent<Animator>();
         }
     }
+
+    public void OnLanding()
+    {
+
+    }
+
+    public void wateringAnimation()
+    {
+        anim.SetTrigger("WateringTrigger");
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Watering"))
+        {
+            Debug.Log("End Animation");
+        }
+    }
+
+    public void runningAnimation()
+    {
+        anim.SetBool("isPickUp", true);
+    }
+    public void pickUpAnimation()
+    {
+        anim.SetTrigger("PickUpTrigger");
+        StartCoroutine(pickUpAnimationPros());
+    }
+    private IEnumerator pickUpAnimationPros()
+    {
+        yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).IsName("PickUp"));
+
+        Debug.Log("End Animation");
+    }
 }
