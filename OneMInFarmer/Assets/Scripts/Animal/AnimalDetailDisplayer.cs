@@ -1,23 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class AnimalDetailDisplayer : MonoBehaviour
 {
-    [SerializeField] private Animal _animal;
-    [SerializeField] private TextMesh _ageSpanText;
-    [SerializeField] private TextMesh _weightText;
+    [SerializeField] private Animal animal;
 
-    private void SetUpDetail()
-    {
-        SetAgeSpanText(_animal.currentAgeSpan.ToString());
-        SetWeightText(_animal.weight);
-    }
+    [SerializeField] private TMP_Text _ageSpanText;
+    [SerializeField] private TMP_Text _weightText;
 
-    private void SetWeightText(float weight)
+    private void UpdateUI()
     {
-        _weightText.text = $"W: {weight} kg";
+        if (animal == null) { return; }
+
+        SetAgeSpanText(animal.currentAgeSpan.ToString());
+        SetWeightText(animal.weight);
     }
 
     private void SetAgeSpanText(string newText)
@@ -25,12 +23,17 @@ public class AnimalDetailDisplayer : MonoBehaviour
         _ageSpanText.text = newText;
     }
 
+    private void SetWeightText(float weight)
+    {
+        _weightText.text = $"W: {weight.ToString("0.##")} kg";
+    }
+
     public void Show()
     {
-        SetUpDetail();
-
+        UpdateUI();
         gameObject.SetActive(true);
     }
+
     public void Hide()
     {
         gameObject.SetActive(false);

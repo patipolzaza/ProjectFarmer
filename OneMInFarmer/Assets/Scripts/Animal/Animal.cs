@@ -306,13 +306,4 @@ public class Animal : PickableObject, IBuyable, ISellable
         SetObjectSpriteRenderer(false);
         SetInteractable(false);
     }
-    public void SetScale(Vector3 newScale)
-    {
-        transform.localScale = newScale;
-    }
-    public void SetColor(Color newColor)
-    {
-        defaultColor = newColor;
-        sr.color = defaultColor;
-    }
 }

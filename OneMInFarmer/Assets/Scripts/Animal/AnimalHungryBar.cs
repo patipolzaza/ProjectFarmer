@@ -35,7 +35,7 @@ public class AnimalHungryBar : MonoBehaviour
 
         while (currentValue != target)
         {
-            currentBarValue = Mathf.Lerp(currentBarValue, target, 0.1f);
+            currentBarValue = Mathf.Lerp(currentBarValue, target, 0.15f);
             SetBarFillAmount(currentBarValue / maxHungry);
             yield return new WaitForSeconds(0.01f);
         }
@@ -48,23 +48,34 @@ public class AnimalHungryBar : MonoBehaviour
         hungryBar.fillAmount = newFillAmount;
     }
 
-    public void ShowBar(float showingTime)
+    public void ShowBar()
     {
         gameObject.SetActive(true);
+    }
+
+    public void HideBar()
+    {
+        if (showBarCoroutine != null) { return; }
+
+        gameObject.SetActive(false);
+    }
+
+    public void ShowBarForWhile(float showingTime)
+    {
+        ShowBar();
 
         if (showBarCoroutine != null)
         {
             StopCoroutine(showBarCoroutine);
         }
 
-        showBarCoroutine = StartCoroutine(ShowBarForWhile(showingTime));
+        showBarCoroutine = StartCoroutine(HideBarAtTime(showingTime));
     }
 
-    private IEnumerator ShowBarForWhile(float showingTime)
+    private IEnumerator HideBarAtTime(float showingTime)
     {
         yield return new WaitForSeconds(showingTime);
-        gameObject.SetActive(false);
-
         showBarCoroutine = null;
+        HideBar();
     }
 }
