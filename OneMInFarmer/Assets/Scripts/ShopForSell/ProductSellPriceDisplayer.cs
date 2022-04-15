@@ -1,18 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ProductSellPriceDisplayer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private TMP_Text _sellPriceText;
+
+    public void SetSellPriceText(string newText)
     {
-        
+        _sellPriceText.text = newText;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetUpText(ISellable sellable)
     {
-        
+        if (sellable != null)
+        {
+            SetSellPriceText($"Sell: {sellable.GetSellPrice}");
+        }
+        else
+        {
+            SetSellPriceText("");
+        }
+    }
+
+    public void ShowSellPriceText()
+    {
+        ISellable sellable = Player.Instance.holdingObject as ISellable;
+        SetUpText(sellable);
+
+        gameObject.SetActive(true);
+    }
+
+    public void HideSellPriceText()
+    {
+        gameObject.SetActive(false);
     }
 }
