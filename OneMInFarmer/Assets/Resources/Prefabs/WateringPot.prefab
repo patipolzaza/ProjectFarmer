@@ -278,9 +278,15 @@ MonoBehaviour:
         m_CallState: 1
   interactableObject: {fileID: 6769883534014683613}
   highlightColor: {r: 0.42352942, g: 1, b: 0.30588236, a: 1}
+  OnHighlightShowed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHighlightHided:
+    m_PersistentCalls:
+      m_Calls: []
   currentStackDisplayer: {fileID: 0}
   ItemData: {fileID: 0}
-  slider: {fileID: 6769883533272338598}
+  sliderWaterBar: {fileID: 6769883533272338598}
 --- !u!60 &8918172129929335609
 PolygonCollider2D:
   m_ObjectHideFlags: 0
