@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Animal : PickableObject, IValuable
+public class Animal : PickableObject, IBuyable, ISellable
 {
     public Rigidbody2D rb { get; private set; }
     public Animator anim { get; private set; }
@@ -92,7 +92,26 @@ public class Animal : PickableObject, IValuable
     public string GetAnimalName => animalData.animalName;
     public Sprite GetAnimalShopIcon => animalData.inShopIcon;
     public int GetSellPricePerKilo => animalData.sellPricePerKilo;
-    public int GetPurchasePrice => animalData.purchasePrice;
+    public int GetBuyPrice => animalData.purchasePrice;
+    public float GetSize => Mathf.Clamp(0.45f + (((float)age / (float)animalData.lifespan) * 0.55f), 0.45f, 1);
+    public int GetSellPrice
+    {
+        get
+        {
+            int price = 0;
+
+            if (!isDie)
+            {
+                price = Mathf.FloorToInt(animalData.sellPricePerKilo * weight);
+                if (currentAgeSpan == (AgeSpan)1)
+                    price += animalData.bonusSellPriceForAdult;
+                else if (currentAgeSpan == (AgeSpan)2)
+                    price += animalData.bonusSellPriceForAdult + animalData.bonusSellPriceForElder;
+            }
+
+            return price;
+        }
+    }
 
     public void IncreaseAge()
     {
@@ -242,8 +261,7 @@ public class Animal : PickableObject, IValuable
     public int Sell()
     {
         Wallet playerWallet = Player.Instance.wallet;
-        int price = GetPrice();
-        //price = Mathf.Clamp(price, 0, animalData.sellPrice);
+        int price = GetSellPrice;
 
         playerWallet.EarnCoin(price);
         Destroy(gameObject);
@@ -251,9 +269,9 @@ public class Animal : PickableObject, IValuable
         return price;
     }
 
-    public bool Purchase()
+    public bool Buy(Player player)
     {
-        Wallet playerWallet = Player.Instance.wallet;
+        Wallet playerWallet = player.wallet;
         int price = animalData.purchasePrice;
 
         if (playerWallet.coin >= price)
@@ -270,22 +288,6 @@ public class Animal : PickableObject, IValuable
         return gameObject;
     }
 
-    public int GetPrice()
-    {
-        int price = 0;
-
-        if (!isDie)
-        {
-            price = Mathf.FloorToInt(animalData.sellPricePerKilo * weight);
-            if (currentAgeSpan == (AgeSpan)1)
-                price += animalData.bonusSellPriceForAdult;
-            else if (currentAgeSpan == (AgeSpan)2)
-                price += animalData.bonusSellPriceForAdult + animalData.bonusSellPriceForElder;
-        }
-
-        return price;
-    }
-
     public void PutInShopStash(ShopForSell targetShop)
     {
         targetShop.PutItemInContainer(this);
@@ -293,8 +295,6 @@ public class Animal : PickableObject, IValuable
         SetObjectSpriteRenderer(false);
         SetInteractable(false);
     }
-
-    public float GetSize => Mathf.Clamp(0.45f + (((float)age / (float)animalData.lifespan) * 0.55f), 0.45f, 1);
     public void SetScale(Vector3 newScale)
     {
         transform.localScale = newScale;

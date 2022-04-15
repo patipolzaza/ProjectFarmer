@@ -197,11 +197,11 @@ public class Player : MonoBehaviour
             {
                 if (holdingObject)
                 {
-                    if (holdingObject is IValuable && targetInteractable is ShopForSell)
+                    if (holdingObject is ISellable && targetInteractable is ShopForSell)
                     {
-                        IValuable valuable = holdingObject as IValuable;
+                        ISellable sellable = holdingObject as ISellable;
                         ShopForSell shop = targetInteractable as ShopForSell;
-                        if (shop.PutItemInContainer(valuable))
+                        if (shop.PutItemInContainer(sellable))
                         {
                             holdingObject = null;
                         }
@@ -405,17 +405,19 @@ public class Player : MonoBehaviour
                 else
                 {
                     ChangeTargetInteractable(interactable);
-                    if (holdingObject)
+
+                    //Use OnHighlightShowed OnInteractable to shop detail
+/*                    if (holdingObject)
                     {
                         if (holdingObject is IValuable && targetInteractable is ShopForSell)
                         {
                             Debug.Log(targetInteractable);
                             IValuable valuable = holdingObject as IValuable;
                             ShopForSell shop = targetInteractable as ShopForSell;
-                            shop.ShowPrice(valuable.GetPrice());
+                            shop.ShowPrice(valuable.GetPrice);
 
                         }
-                    }
+                    }*/
                 }
             }
 

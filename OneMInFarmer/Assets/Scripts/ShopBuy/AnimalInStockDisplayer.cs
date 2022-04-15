@@ -23,7 +23,7 @@ public class AnimalInStockDisplayer : MonoBehaviour
             SetDisplayIcon(animal.GetAnimalShopIcon);
             SetProductNameText(animal.GetAnimalName);
             SetSellPriceText($"Sell: {animal.GetSellPricePerKilo}/kg");
-            SetPurchasePriceText($"Cost: {animal.GetPurchasePrice}");
+            SetPurchasePriceText($"Cost: {animal.GetBuyPrice}");
         }
         else
         {

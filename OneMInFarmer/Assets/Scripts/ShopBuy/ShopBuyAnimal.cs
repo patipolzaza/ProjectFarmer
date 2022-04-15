@@ -22,7 +22,7 @@ public class ShopBuyAnimal : ShopBuyBase
             animalInStock = Instantiate<Animal>(animalInStock, transform.position, Quaternion.identity, transform);
             animalInStock.gameObject.SetActive(false);
 
-            itemPirce = animalInStock.GetPurchasePrice;
+            itemPirce = animalInStock.GetBuyPrice;
             base.AddNewItemInStock(newItem);
         }
     }

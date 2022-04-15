@@ -19,6 +19,6 @@ MonoBehaviour:
   bonusSellPriceForElder: 2
   purchasePrice: 5
   lifespan: 6
-  stomachSize: 1
+  stomachSize: 2
   startWeight: 1
   edibleFoods: 00000000

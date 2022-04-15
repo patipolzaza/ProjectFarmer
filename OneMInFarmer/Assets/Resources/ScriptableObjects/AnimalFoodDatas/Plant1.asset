@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac9c11f4b19380245b9aa167e1487cd2, type: 3}
   m_Name: Plant1
   m_EditorClassIdentifier: 
-  id: 
+  id: e15d24538382d514d915879f280a1b20
   ItemName: 
   Icon: {fileID: 0}
   canSell: 0
@@ -20,5 +20,5 @@ MonoBehaviour:
   isUsable: 0
   purchasePrice: 5
   sellPrice: 7
-  foodType: 0
-  weightGain: 1
+  foodType: 1
+  weightGain: 0.5

@@ -16,7 +16,7 @@ public class ShopForSell : Interactable
         Instance = this;
     }
 
-    public bool PutItemInContainer(IValuable valuable)
+    public bool PutItemInContainer(ISellable valuable)
     {
         if (valuable != null)
         {
@@ -36,10 +36,6 @@ public class ShopForSell : Interactable
         totalSoldPrice = 0;
     }
 
-    public void ShowPrice(int price)
-    {
-        priceTMPro.text = price.ToString();
-    }
     public override void HideObjectHighlight()
     {
         sr.color = defaultColor;

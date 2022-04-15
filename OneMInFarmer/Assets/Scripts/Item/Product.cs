@@ -2,20 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Product : Item, IValuable
+public class Product : Item, ISellable
 {
     public GameObject GetObject()
     {
-        throw new System.NotImplementedException();
+        return gameObject;
     }
-    public int GetPrice()
-    {
-        return ItemData.sellPrice;
-    }
-    public bool Purchase()
-    {
-        throw new System.NotImplementedException();
-    }
+
+    public int GetSellPrice => ItemData.sellPrice;
 
     public int Sell()
     {
