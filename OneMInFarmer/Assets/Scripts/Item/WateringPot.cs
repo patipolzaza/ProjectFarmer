@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class WateringPot : PickableObject, IUsable
 {
     [SerializeField] private Slider sliderWaterBar;
+    [SerializeField] private ParticleSystem WaterParticle;
     public float valence { get; private set; } = 20;
     public float remaining { get; private set; } = 20;
     public float RefillPerSeconds { get; private set; } = 1;
@@ -39,6 +40,8 @@ public class WateringPot : PickableObject, IUsable
         if (plot.seed != null)
             if (remaining > plot.seed.waterNeed)
             {
+                WaterParticle.gameObject.transform.localPosition = plot.transform.localPosition;
+                WaterParticle.Play();
                 remaining -= plot.seed.waterNeed;
                 plot.Watering();
                 sliderWaterBar.value = remaining;
