@@ -12,9 +12,6 @@ public class ItemData : ScriptableObject
     public string ID { get { return id; } }
     public string ItemName;
     public Sprite Icon;
-    public bool canSell;
-    public bool IsConsumable;
-    public bool isUsable;
 
     public int purchasePrice = 5;
     public int sellPrice = 7;

@@ -31,6 +31,7 @@ public class Seed : Item, IBuyable, IUsable
     }
 
     public GameObject GetObject() => gameObject;
+    public Product GetProduct => ((SeedData)ItemData).product;
 
     public bool Use(Interactable targetToUse)
     {

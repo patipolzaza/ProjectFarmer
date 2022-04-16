@@ -38,7 +38,8 @@ public class ProductDetailDisplayer : MonoBehaviour
                 SeedData seedData = seed.GetItemData as SeedData;
                 SetDisplayIcon(seedData.Icon);
                 SetProductNameText(seedData.ItemName);
-                SetActiveSellPriceText(false);
+                SetActiveSellPriceText(true);
+                SetSellPriceText($"Sell: {seed.GetProduct.GetSellPrice}/pc.");
                 SetPurchasePriceText($"Cost: {seed.GetBuyPrice}");
             }
             else if (sellable is AnimalFood)

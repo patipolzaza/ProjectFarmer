@@ -14,21 +14,6 @@ public class Item : PickableObject
     [SerializeField] protected ItemData ItemData;
     public int currentStack { get; protected set; }
 
-    public bool isUsable
-    {
-        get
-        {
-            return ItemData.isUsable;
-        }
-    }
-    public bool isConsumable
-    {
-        get
-        {
-            return ItemData.IsConsumable;
-        }
-    }
-
     public ItemData GetItemData
     {
         get
