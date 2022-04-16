@@ -5,8 +5,9 @@ using UnityEngine.Events;
 
 public class PlayerAnimationController : MonoBehaviour
 {
-    
+    public static PlayerAnimationController Instance { get; private set; }
     private Animator anim;
+    public bool isFinishedProcess { get; private set; }
     private void OnValidate()
     {
         if (!anim)
@@ -14,34 +15,42 @@ public class PlayerAnimationController : MonoBehaviour
             anim = GetComponent<Animator>();
         }
     }
-
-    public void OnLanding()
+    private void Awake()
     {
-
+        Instance = this;
     }
 
     public void wateringAnimation()
     {
-        anim.SetTrigger("WateringTrigger");
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Watering"))
-        {
-            Debug.Log("End Animation");
-        }
+        string AnimationName = "Watering";
+        anim.SetTrigger(AnimationName);
     }
 
-    public void runningAnimation()
+    public void SetRunningAnimation(Vector2 vector2)
     {
-        anim.SetBool("isPickUp", true);
+        anim.SetFloat("Horizontal", Mathf.Abs(vector2.x));
+        anim.SetFloat("Vertical", Mathf.Abs(vector2.y));
+        anim.SetFloat("Magnitude", Mathf.Abs(vector2.magnitude));
     }
+
     public void pickUpAnimation()
     {
-        anim.SetTrigger("PickUpTrigger");
-        StartCoroutine(pickUpAnimationPros());
+        string AnimationName = "PickUp";
+        anim.SetTrigger(AnimationName);
     }
-    private IEnumerator pickUpAnimationPros()
-    {
-        yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).IsName("PickUp"));
 
-        Debug.Log("End Animation");
+    public void RefillingAnimation()
+    {
+        anim.SetBool("Refilling", true);
+    }
+
+
+    private void Update()
+    {
+        isFinishedProcess = false;
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("PickUp")|| anim.GetCurrentAnimatorStateInfo(0).IsName("Watering") || anim.GetCurrentAnimatorStateInfo(0).IsName("Refilling"))
+        {
+            isFinishedProcess = true;
+        }
     }
 }

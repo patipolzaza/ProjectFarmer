@@ -177,6 +177,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+
         isDetectInteractable = CheckInteractableInRange();
 
         if (!canMove)
@@ -187,6 +188,13 @@ public class Player : MonoBehaviour
             }
 
             return;
+        }
+
+        if (PlayerAnimationController.Instance.isFinishedProcess)
+        {
+            moveInput.Set(0, 0);
+            return;
+
         }
 
         CheckMoveInput();
@@ -317,7 +325,7 @@ public class Player : MonoBehaviour
             float velocityY = moveInput.y * moveSpeed * Time.fixedDeltaTime;
 
             velocityWorkspace.Set(velocityX, velocityY);
-
+            PlayerAnimationController.Instance.SetRunningAnimation(velocityWorkspace);
             rb.velocity = velocityWorkspace;
         }
     }
