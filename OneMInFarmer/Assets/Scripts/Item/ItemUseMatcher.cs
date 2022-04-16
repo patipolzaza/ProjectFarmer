@@ -30,12 +30,15 @@ public class ItemUseMatcher
             return;
         }
 
-        if (itemUseDictionary[usingObjectType] != null || itemUseDictionary[usingObjectType].Count > 0)
+        if (itemUseDictionary.Count > 0 && itemUseDictionary.ContainsKey(usingObjectType))
         {
-            List<Type> pairTypes = itemUseDictionary[usingObjectType];
-            if (!pairTypes.Contains(targetType))
+            if (itemUseDictionary[usingObjectType].Count > 0)
             {
-                pairTypes.Add(targetType);
+                List<Type> pairTypes = itemUseDictionary[usingObjectType];
+                if (!pairTypes.Contains(targetType))
+                {
+                    pairTypes.Add(targetType);
+                }
             }
         }
         else

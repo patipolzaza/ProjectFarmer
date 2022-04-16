@@ -22,6 +22,8 @@ public class AnimalFood : Item, IBuyable, IUsable
 
     protected override void Awake()
     {
+        base.Awake();
+
         AddTargetType(typeof(Animal));
     }
 

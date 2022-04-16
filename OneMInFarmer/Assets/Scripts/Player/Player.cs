@@ -214,20 +214,28 @@ public class Player : MonoBehaviour
                             holdingObject = null;
                         }
                     }
+                    else if (holdingObject is IUsable && ItemUseMatcher.isMatch((IUsable)holdingObject, targetInteractable))
+                    {
+                        UseItem();
+                    }
                     else if (holdingObject is AnimalFood && targetInteractable is Animal)
                     {
                         UseItem();
+
+                        if (holdingObject is WateringPot && targetInteractable is Plot)
+                        {
+                            OnWateringEvent.Invoke();
+                        }
                     }
-                    else if (holdingObject is WateringPot && targetInteractable is Plot)
-                    {
-                        Debug.Log("holdingObject is WateringPot");
-                        UseItem();
-                        OnWateringEvent.Invoke();
-                    }
-                    else if (holdingObject is Seed && targetInteractable is Plot)
-                    {
-                        UseItem();
-                    }
+                    /*                    else if (holdingObject is WateringPot && targetInteractable is Plot)
+                                        {
+                                            UseItem();
+                                            OnWateringEvent.Invoke();
+                                        }
+                                        else if (holdingObject is Seed && targetInteractable is Plot)
+                                        {
+                                            UseItem();
+                                        }*/
                     else if (targetInteractable is PickableObject)
                     {
                         PickUpItem((PickableObject)targetInteractable);
@@ -414,19 +422,6 @@ public class Player : MonoBehaviour
                 else
                 {
                     ChangeTargetInteractable(interactable);
-
-                    //Use OnHighlightShowed OnInteractable to shop detail
-                    /*                    if (holdingObject)
-                                        {
-                                            if (holdingObject is IValuable && targetInteractable is ShopForSell)
-                                            {
-                                                Debug.Log(targetInteractable);
-                                                IValuable valuable = holdingObject as IValuable;
-                                                ShopForSell shop = targetInteractable as ShopForSell;
-                                                shop.ShowPrice(valuable.GetPrice);
-
-                                            }
-                                        }*/
                 }
             }
 
