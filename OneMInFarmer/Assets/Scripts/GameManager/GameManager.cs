@@ -22,9 +22,8 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start()
-    {
-
-        //StartCoroutine(StartGameFirstDay());
+    { 
+        StartCoroutine(StartGameFirstDay());
     }
 
     void Update()
@@ -35,15 +34,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StartGame()
-    {
-        StartCoroutine(StartGameFirstDay());
-    }
-
     private IEnumerator StartGameFirstDay()
     {
         yield return new WaitUntil(() => isCompletedAllSetup());
-
+        yield return new WaitUntil(() => Input.anyKeyDown && !TuTorialManager.Instance._isInProcess);
+        TuTorialManager.Instance.CloseWindow();
         StartDay();
     }
 
@@ -113,36 +108,36 @@ public class GameManager : MonoBehaviour
     {
         if (!DayResultManager.Instance || !DayResultManager.Instance.isReadied)
         {
-            //Debug.Log("DayResultManager");
+            Debug.Log("DayResultManager");
             return false;
         }
         if (!UpgradeShop.Instance || !UpgradeShop.Instance.isReadied)
         {
-            //Debug.Log("UpgradeShop");
+            Debug.Log("UpgradeShop");
             return false;
 
         }
         if (!Timer.Instance)
         {
-            //Debug.Log("Timer");
+            Debug.Log("Timer");
             return false;
 
         }
         if (!TuTorialManager.Instance)
         {
-            //Debug.Log("TuTorialManager");
+            Debug.Log("TuTorialManager");
             return false;
 
         }
         if (!StatusUpgradeManager.Instance || !StatusUpgradeManager.Instance.isReadied)
         {
-            //Debug.Log("StatusUpgradeManager");
+            Debug.Log("StatusUpgradeManager");
             return false;
 
         }
         if (!Player.Instance)
         {
-            //Debug.Log("Player");
+            Debug.Log("Player");
             return false;
 
         }
