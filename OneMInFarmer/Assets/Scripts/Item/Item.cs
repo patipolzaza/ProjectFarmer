@@ -13,6 +13,7 @@ public class Item : PickableObject
 
     [SerializeField] protected ItemData ItemData;
     public int currentStack { get; protected set; }
+    public string GetItemId => ItemData.ID;
 
     public ItemData GetItemData
     {

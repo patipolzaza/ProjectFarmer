@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,12 +10,13 @@ public class WateringPot : PickableObject, IUsable
     public float valence { get; private set; } = 20;
     public float remaining { get; private set; } = 20;
     public float RefillPerSeconds { get; private set; } = 1;
-    private bool isRefill = false;
-
 
     protected override void Awake()
     {
         base.Awake();
+
+        AddTargetType(typeof(Plot));
+        AddTargetType(typeof(Pool));
 
         //interactEvent.AddListener(PickUp);
     }
@@ -52,5 +54,10 @@ public class WateringPot : PickableObject, IUsable
             remaining += RefillPerSeconds * Time.fixedDeltaTime;
             sliderWaterBar.value = remaining;
         }
+    }
+
+    public void AddTargetType(Type targetType)
+    {
+        ItemUseMatcher.AddUseItemPair(GetType(), targetType);
     }
 }

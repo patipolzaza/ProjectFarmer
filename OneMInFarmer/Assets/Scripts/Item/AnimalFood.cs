@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class AnimalFood : Item, IBuyable, IUsable
 {
@@ -17,6 +18,11 @@ public class AnimalFood : Item, IBuyable, IUsable
         {
             ItemData = null;
         }
+    }
+
+    protected override void Awake()
+    {
+        AddTargetType(typeof(Animal));
     }
 
     public bool Use(Interactable targetToUse)
@@ -61,6 +67,22 @@ public class AnimalFood : Item, IBuyable, IUsable
 
     public bool Buy(Player player)
     {
-        throw new System.NotImplementedException();
+        Wallet playerWallet = player.wallet;
+        int price = GetBuyPrice;
+
+        if (playerWallet.coin >= price)
+        {
+            playerWallet.LoseCoin(price);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void AddTargetType(Type targetType)
+    {
+        ItemUseMatcher.AddUseItemPair(GetType(), targetType);
     }
 }

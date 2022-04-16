@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Seed : Item, IBuyable, IUsable
 {
@@ -12,6 +13,13 @@ public class Seed : Item, IBuyable, IUsable
         {
             ItemData = null;
         }
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        AddTargetType(typeof(Plot));
     }
 
     public bool Buy(Player player)
@@ -51,5 +59,10 @@ public class Seed : Item, IBuyable, IUsable
         }
 
         return false;
+    }
+
+    public void AddTargetType(Type targetType)
+    {
+        ItemUseMatcher.AddUseItemPair(GetType(), targetType);
     }
 }
