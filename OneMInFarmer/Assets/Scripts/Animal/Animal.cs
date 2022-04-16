@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class Animal : PickableObject, IBuyable, ISellable
 {
@@ -12,7 +13,7 @@ public class Animal : PickableObject, IBuyable, ISellable
 
     [SerializeField] protected AnimalData animalData;
 
-    [SerializeField] private TextMesh textMesh;
+    [SerializeField] private TMP_Text messageText;
     private Coroutine showTextCoroutine;
 
     private Vector2 velocityWorkspace = new Vector2();
@@ -225,15 +226,15 @@ public class Animal : PickableObject, IBuyable, ISellable
 
     private void StopMessageCoroutine()
     {
-        textMesh.text = "";
+        messageText.text = "";
         StopCoroutine(showTextCoroutine);
     }
 
     public IEnumerator ShowText(string textToShow)
     {
-        textMesh.text = textToShow;
-        yield return new WaitForSeconds(3.5f);
-        textMesh.text = "";
+        messageText.text = textToShow;
+        yield return new WaitForSeconds(2f);
+        messageText.text = "";
     }
 
     public void SetVelocity(float x, float y)
