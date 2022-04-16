@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class PlayerAnimationController : MonoBehaviour
 {
-    public static PlayerAnimationController Instance { get; private set; }
     private Animator anim;
     public bool isFinishedProcess { get; private set; }
     private void OnValidate()
@@ -14,10 +13,6 @@ public class PlayerAnimationController : MonoBehaviour
         {
             anim = GetComponent<Animator>();
         }
-    }
-    private void Awake()
-    {
-        Instance = this;
     }
 
     public void wateringAnimation()

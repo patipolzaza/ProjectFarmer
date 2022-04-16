@@ -129,6 +129,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject characterObject;
 
     public Wallet wallet { get; private set; }
+    public PlayerAnimationController PlayerAnimation { get; private set; }
 
     [SerializeField] private Transform interactableDetector;
     [SerializeField] private float interactableDetectRange = 0.85f;
@@ -156,7 +157,7 @@ public class Player : MonoBehaviour
         facingDirection = transform.localScale.x / Mathf.Abs(transform.localScale.x);
 
         wallet = FindObjectOfType<Player>().transform.Find("Wallet").GetComponent<Wallet>();
-
+        PlayerAnimation = FindObjectOfType<Player>().transform.Find("PlayerCharacter").GetComponent<PlayerAnimationController>();
         Instance = this;
     }
 
@@ -190,7 +191,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (PlayerAnimationController.Instance.isFinishedProcess)
+        if (PlayerAnimation.isFinishedProcess)
         {
             moveInput.Set(0, 0);
             return;
@@ -333,7 +334,7 @@ public class Player : MonoBehaviour
             float velocityY = moveInput.y * moveSpeed * Time.fixedDeltaTime;
 
             velocityWorkspace.Set(velocityX, velocityY);
-            PlayerAnimationController.Instance.SetRunningAnimation(velocityWorkspace);
+            PlayerAnimation.SetRunningAnimation(velocityWorkspace);
             rb.velocity = velocityWorkspace;
         }
     }
