@@ -17,14 +17,7 @@ public class TuTorialManager : MonoBehaviour
     {
         ShowTutorial();
     }
-    private void Update()
-    {
-        if (Input.anyKeyDown&& !_isInProcess)
-        {
-            GameManager.Instance.StartGame();
-            CloseWindow();
-        }
-    }
+
     public void ShowTutorial()
     {
         OpenWindow();
