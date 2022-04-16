@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 2462687588505583701}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.721, y: 0.08, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 0}
   m_Children:
   - {fileID: 870083822207488247}
   - {fileID: 2297509644849260676}
@@ -184,7 +184,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   interactableObject: {fileID: 2462687588505583701}
-  highlightColor: {r: 0.4248605, g: 1, b: 0.3066038, a: 1}
+  OnHighlightShowed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHighlightHided:
+    m_PersistentCalls:
+      m_Calls: []
   plantObject: {fileID: 1909002920848576239}
   lockedSign: {fileID: 3920867688730202926}
   SpriteDry: {fileID: 165240979840018154, guid: a06636c5ea423334aac09e1005e56e12, type: 3}
