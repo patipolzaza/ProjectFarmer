@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
         AnimalFarmManager.Instance.GrowUpAnimals();
 
         //ResetPlotsStatus();
-        ShopBuyManager.Instance.RestockShops();
+        //ShopBuyManager.Instance.RestockShops();
 
         UpgradeShop.Instance.OpenWindow();
     }
