@@ -285,7 +285,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            //wallet.EarnCoin(5);
+            wallet.EarnCoin(5);
             Debug.Log(wallet.coin.ToString());
         }
     }
