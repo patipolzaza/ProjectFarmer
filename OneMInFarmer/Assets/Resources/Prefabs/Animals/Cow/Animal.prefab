@@ -787,8 +787,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2121655513
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -5922754114360663000, guid: 7ae8c846d6a54fe428bba1d8aef60abc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -899,7 +899,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   interactableObject: {fileID: 8454360660607022444}
-  highlightColor: {r: 0.0194422, g: 1, b: 0, a: 1}
   OnHighlightShowed:
     m_PersistentCalls:
       m_Calls:
