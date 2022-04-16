@@ -20,7 +20,9 @@ public class Hand : MonoBehaviour
         pickableObject.Pick();
 
         pickableObject.SetParent(handTransform);
-        pickableObject.SetLocalPosition(new Vector3(0, 0, 1), false, true);
+        pickableObject.SetLocalPosition(new Vector3(0, 0, 1), false, false, false, false);
+        pickableObject.SetInteractable(false);
+        pickableObject.HideObjectHighlight();
 
         holdingObject = pickableObject;
     }
@@ -30,7 +32,7 @@ public class Hand : MonoBehaviour
         if (holdingObject)
         {
             holdingObject.SetParent(transformToDropObject);
-            holdingObject.SetLocalPosition(new Vector3(0, 0, 1), false, true);
+            holdingObject.SetLocalPosition(new Vector3(0, 0, 1), false, true, true, true);
             holdingObject.Drop();
 
             holdingObject.SetInteractable(true);

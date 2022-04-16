@@ -18,15 +18,25 @@ public class PickableObject : Interactable
     public virtual void Drop()
     {
         transform.parent = null;
+
+        if (transform.lossyScale.x < 0)
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
+        }
+
+        if (transform.eulerAngles.magnitude != 0)
+        {
+            transform.eulerAngles = Vector3.zero;
+        }
     }
 
-    public virtual void SetLocalPosition(Vector3 newLocalPosition, bool isIncludeColliderExtendX, bool isIncludeColliderExtendY)
+    public virtual void SetLocalPosition(Vector3 newLocalPosition, bool isIncludeColliderExtendX, bool isIncludeColliderExtendY, bool isIncludeOffsetX, bool isIncludeOffsetY)
     {
         float extendX = isIncludeColliderExtendX ? objectCollider.bounds.extents.x : 0;
         float extendY = isIncludeColliderExtendY ? objectCollider.bounds.extents.y : 0;
 
-        float offsetX = objectCollider.offset.x;
-        float offsetY = objectCollider.offset.y;
+        float offsetX = isIncludeOffsetX ? objectCollider.offset.x : 0;
+        float offsetY = isIncludeOffsetY ? objectCollider.offset.y : 0;
 
         Vector3 offset = new Vector3(extendX, extendY, 0) - new Vector3(offsetX, offsetY, 0);
         transform.localPosition = newLocalPosition + offset;

@@ -42,7 +42,7 @@ public class AnimalFood : Item, IBuyable, IUsable
                 {
                     currentStack--;
                     instantiatedFood.SetParent(animal.transform);
-                    instantiatedFood.SetLocalPosition(Vector3.zero, false, false);
+                    instantiatedFood.SetLocalPosition(Vector3.zero, false, false, false, false);
                     instantiatedFood.gameObject.SetActive(false);
                 }
                 else
@@ -56,7 +56,7 @@ public class AnimalFood : Item, IBuyable, IUsable
                 {
                     currentStack--;
                     SetParent(animal.transform);
-                    SetLocalPosition(Vector3.zero, false, false);
+                    SetLocalPosition(Vector3.zero, false, false, false, false);
                     gameObject.SetActive(false);
 
                     return true;

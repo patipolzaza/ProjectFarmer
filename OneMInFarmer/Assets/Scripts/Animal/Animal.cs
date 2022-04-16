@@ -186,7 +186,12 @@ public class Animal : PickableObject, IBuyable, ISellable
     {
         base.Drop();
 
+        if (transform.lossyScale.x < 0)
+        {
+            Flip();
+        }
         grabbedState.Unleash();
+
     }
 
     public virtual bool TakeFood(AnimalFood food)
@@ -303,7 +308,7 @@ public class Animal : PickableObject, IBuyable, ISellable
     public void PutInShopStash(ShopForSell targetShop)
     {
         targetShop.PutItemInContainer(this);
-        SetLocalPosition(Vector3.zero, false, false);
+        SetLocalPosition(Vector3.zero, false, false, false, false);
         SetObjectSpriteRenderer(false);
         SetInteractable(false);
     }
