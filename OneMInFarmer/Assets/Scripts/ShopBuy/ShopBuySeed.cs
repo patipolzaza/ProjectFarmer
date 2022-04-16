@@ -44,7 +44,7 @@ public class ShopBuySeed : ShopBuyBase
 
             Item itemBought = Instantiate(itemInStock, new Vector3(0, 0, 0), Quaternion.identity);
             itemBought.SetCurrentStackNumber(itemStack);
-            player.PickUpItem(itemBought);
+            player.playerHand.PickUpObject(itemBought);
         }
 
 

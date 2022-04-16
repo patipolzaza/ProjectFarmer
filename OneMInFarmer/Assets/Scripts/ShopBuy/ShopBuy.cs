@@ -57,7 +57,7 @@ public class ShopBuy : Interactable
         if (((IBuyable)product).Buy(player))
         {
             product.gameObject.SetActive(true);
-            player.PickUpItem(product);
+            player.playerHand.PickUpObject(product);
 
             OnProductSold?.Invoke();
         }

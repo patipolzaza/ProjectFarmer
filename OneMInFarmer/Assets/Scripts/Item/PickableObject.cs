@@ -10,7 +10,7 @@ public class PickableObject : Interactable
         base.Awake();
     }
 
-    public virtual Transform Pick(Player player)
+    public virtual Transform Pick()
     {
         return transform;
     }

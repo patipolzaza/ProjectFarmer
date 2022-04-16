@@ -15,8 +15,9 @@ public class Player : MonoBehaviour
     {
         SerializedProperty interactableDetectorProp;
         SerializedProperty interactableDetectorRangeProp;
-        SerializedProperty itemHolderTransformProp;
-        SerializedProperty itemDropTransformProp;
+        SerializedProperty characterObjectProp;
+        /*        SerializedProperty itemHolderTransformProp;
+                SerializedProperty itemDropTransformProp;*/
 
         SerializedProperty moveSpeedDataProp;
 
@@ -27,9 +28,10 @@ public class Player : MonoBehaviour
         {
             interactableDetectorProp = serializedObject.FindProperty("interactableDetector");
             interactableDetectorRangeProp = serializedObject.FindProperty("interactableDetectRange");
+            characterObjectProp = serializedObject.FindProperty("characterObject");
 
-            itemHolderTransformProp = serializedObject.FindProperty("itemHolderTransform");
-            itemDropTransformProp = serializedObject.FindProperty("itemDropTransform");
+            /*            itemHolderTransformProp = serializedObject.FindProperty("itemHolderTransform");
+                        itemDropTransformProp = serializedObject.FindProperty("itemDropTransform");*/
 
             moveSpeedDataProp = serializedObject.FindProperty("moveSpeedData");
 
@@ -40,6 +42,10 @@ public class Player : MonoBehaviour
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
+
+            GUILayout.Label("Character Object.");
+            EditorGUILayout.PropertyField(characterObjectProp);
+            GUILayout.Space(2f);
 
             GUILayout.Label("Status Data.");
             EditorGUILayout.PropertyField(moveSpeedDataProp);
@@ -52,9 +58,9 @@ public class Player : MonoBehaviour
             EditorGUILayout.PropertyField(interactableDetectorProp);
             EditorGUILayout.PropertyField(interactableDetectorRangeProp);
             GUILayout.Space(1.25f);
-            GUILayout.Label("Item Pick.");
-            EditorGUILayout.PropertyField(itemHolderTransformProp);
-            EditorGUILayout.PropertyField(itemDropTransformProp);
+            /*            GUILayout.Label("Item Pick.");
+                        EditorGUILayout.PropertyField(itemHolderTransformProp);
+                        EditorGUILayout.PropertyField(itemDropTransformProp);*/
             GUILayout.Label("Unity Envent.");
             EditorGUILayout.PropertyField(OnWateringEventProp);
             EditorGUILayout.PropertyField(OnPickingEventProp);
@@ -138,22 +144,25 @@ public class Player : MonoBehaviour
     public Interactable targetInteractable { get; private set; }
     private bool isDetectInteractable = false;
 
-    [Tooltip("The transform that is a where player hold the hoding object.")]
+    /*[Tooltip("The transform that is a where player hold the hoding object.")]
     [SerializeField] private Transform itemHolderTransform;
     [Tooltip("The transform that is a where player drop the hoding object.")]
-    [SerializeField] private Transform itemDropTransform;
+    [SerializeField] private Transform itemDropTransform;*/
 
     public float facingDirection { get; private set; }
+
+    public Hand playerHand { get; private set; }
 
     private Rigidbody2D rb;
     [SerializeField] private UnityEvent OnWateringEvent;
     [SerializeField] private UnityEvent OnPickingEvent;
 
-
     private Vector2 velocityWorkspace;
 
     private void Awake()
     {
+        playerHand = GetComponent<Hand>();
+
         facingDirection = transform.localScale.x / Mathf.Abs(transform.localScale.x);
 
         wallet = FindObjectOfType<Player>().transform.Find("Wallet").GetComponent<Wallet>();
@@ -185,7 +194,7 @@ public class Player : MonoBehaviour
         {
             if (holdingObject)
             {
-                DropItem();
+                playerHand.DropObject();
             }
 
             return;
@@ -239,7 +248,7 @@ public class Player : MonoBehaviour
                                         }*/
                     else if (targetInteractable is PickableObject)
                     {
-                        PickUpItem((PickableObject)targetInteractable);
+                        playerHand.PickUpObject((PickableObject)targetInteractable);
                     }
                     else
                     {
@@ -248,7 +257,7 @@ public class Player : MonoBehaviour
                 }
                 else if (targetInteractable is PickableObject)
                 {
-                    PickUpItem((PickableObject)targetInteractable);
+                    playerHand.PickUpObject((PickableObject)targetInteractable);
                     OnPickingEvent.Invoke();
                 }
                 else
@@ -271,7 +280,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.K))
         {
-            DropItem();
+            playerHand.DropObject();
         }
 
         if (Input.GetKeyDown(KeyCode.L))
@@ -353,36 +362,36 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void PickUpItem(PickableObject itemToPick)
-    {
-        if (holdingObject)
+    /*    public void PickUpItem(PickableObject itemToPick)
         {
-            DropItem();
+            if (holdingObject)
+            {
+                DropItem();
+            }
+
+            Transform itemTransform = itemToPick.Pick();
+
+            itemToPick.SetParent(itemHolderTransform);
+            itemToPick.SetLocalPosition(new Vector3(0, 0, 1), false, true);
+
+            holdingObject = itemTransform.GetComponent<PickableObject>();
         }
 
-        Transform itemTransform = itemToPick.Pick(this);
-
-        itemToPick.SetParent(itemHolderTransform);
-        itemToPick.SetLocalPosition(new Vector3(0, 0, 1), false, true);
-
-        holdingObject = itemTransform.GetComponent<PickableObject>();
-    }
-
-    public void DropItem()
-    {
-        if (holdingObject)
+        public void DropItem()
         {
-            PickableObject pickable = holdingObject;
+            if (holdingObject)
+            {
+                PickableObject pickable = holdingObject;
 
-            pickable.SetParent(itemDropTransform);
-            pickable.SetLocalPosition(new Vector3(0, 0, 1), false, true);
-            pickable.Drop();
+                pickable.SetParent(itemDropTransform);
+                pickable.SetLocalPosition(new Vector3(0, 0, 1), false, true);
+                pickable.Drop();
 
-            pickable.SetInteractable(true);
+                pickable.SetInteractable(true);
 
-            holdingObject = null;
-        }
-    }
+                holdingObject = null;
+            }
+        }*/
 
     private bool CheckInteractableInRange()
     {

@@ -65,12 +65,12 @@ public class Plot : Interactable
             countHarvest--;
             plantStage--;
             UpdatePlant();
-            player.PickUpItem(Instantiate(seed.product, new Vector3(0, 0, 0), Quaternion.identity));
+            player.playerHand.PickUpObject(Instantiate(seed.product, new Vector3(0, 0, 0), Quaternion.identity));
             return;
         }
         else
         {
-            player.PickUpItem(Instantiate(seed.product, new Vector3(0, 0, 0), Quaternion.identity));
+            player.playerHand.PickUpObject(Instantiate(seed.product, new Vector3(0, 0, 0), Quaternion.identity));
             isPlanted = false;
             seed = null;
             plantObject.SetActive(false);

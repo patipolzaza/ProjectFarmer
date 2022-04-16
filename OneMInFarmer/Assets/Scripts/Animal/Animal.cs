@@ -170,9 +170,9 @@ public class Animal : PickableObject, IBuyable, ISellable
         SetColor(newColor);
     }
 
-    public override Transform Pick(Player player)
+    public override Transform Pick()
     {
-        base.Pick(player);
+        base.Pick();
 
         if (!isDie)
         {

@@ -38,7 +38,7 @@ public class ShopBuyAnimal : ShopBuyBase
         {
             playerWallet.LoseCoin(itemPirce);
             animalInStock.gameObject.SetActive(true);
-            player.PickUpItem(animalInStock);
+            //player.playerHand.PickUpObject(animalInStock);
 
             animalInStock = null;
             OnProductSold?.Invoke();
