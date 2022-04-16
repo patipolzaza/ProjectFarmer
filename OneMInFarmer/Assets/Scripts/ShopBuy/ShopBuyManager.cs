@@ -6,10 +6,7 @@ public class ShopBuyManager : MonoBehaviour
 {
     public static ShopBuyManager Instance;
 
-    [SerializeField] private ShopBuySeed[] shopBuySeeds;
-    [SerializeField] private ShopBuyAnimal[] shopBuyAnimals;
-    public Item[] ListItem;
-    public Animal[] ListAnimal;
+    [SerializeField] private List<ShopBuy> shopBuys = new List<ShopBuy>();
 
     private void Awake()
     {
@@ -22,16 +19,9 @@ public class ShopBuyManager : MonoBehaviour
     }
     public void RestockShops()
     {
-        foreach (ShopBuySeed shopBuy in shopBuySeeds)
+        foreach (var shop in shopBuys)
         {
-            shopBuy.AddNewItemInStock(ListItem[Random.Range(0, ListItem.Length)]);
-        }
-        foreach (ShopBuyAnimal shopBuy in shopBuyAnimals)
-        {
-            if (!shopBuy.animalInStock)
-            {
-                shopBuy.AddNewItemInStock(ListAnimal[Random.Range(0, ListAnimal.Length)]);
-            }
+            shop.Restock();
         }
     }
 

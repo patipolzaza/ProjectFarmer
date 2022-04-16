@@ -75,13 +75,16 @@ public class ShopBuy : Interactable
             productInStock = null;
         }
 
-        int randomedIndex = Random.Range(0, possibleProducts.Count);
-        PickableObject product = possibleProducts[randomedIndex];
-        product = Instantiate(product);
-        product.gameObject.SetActive(false);
+        if (possibleProducts.Count > 0)
+        {
+            int randomedIndex = Random.Range(0, possibleProducts.Count);
+            PickableObject product = possibleProducts[randomedIndex];
+            product = Instantiate(product);
+            product.gameObject.SetActive(false);
 
-        productInStock = product as IBuyable;
+            productInStock = product as IBuyable;
 
-        OnProductRestocked?.Invoke();
+            OnProductRestocked?.Invoke();
+        }
     }
 }
