@@ -212,17 +212,21 @@ public class Player : MonoBehaviour
                     }
                     else if (playerHand.holdingObject is IUsable && ItemUseMatcher.isMatch((IUsable)playerHand.holdingObject, targetInteractable))
                     {
+                        OnWateringEvent.Invoke();
                         UseItem();
-                    }
-                    else if (playerHand.holdingObject is AnimalFood && targetInteractable is Animal)
-                    {
-                        UseItem();
-
                         if (playerHand.holdingObject is WateringPot && targetInteractable is Plot)
                         {
                             OnWateringEvent.Invoke();
                         }
+
+
+
                     }
+                    else if (playerHand.holdingObject is AnimalFood && targetInteractable is Animal)
+                    {
+                        UseItem();
+                    }
+
                     else if (targetInteractable is PickableObject)
                     {
                         playerHand.PickUpObject((PickableObject)targetInteractable);
@@ -257,6 +261,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.K))
         {
+            OnPickingEvent.Invoke();
             playerHand.DropObject();
         }
 

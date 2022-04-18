@@ -11,6 +11,7 @@ public class WateringPot : PickableObject, IUsable
     public float valence { get; private set; } = 20;
     public float remaining { get; private set; } = 20;
     public float RefillPerSeconds { get; private set; } = 1;
+    public float waterPerUse { get; private set; } = 5;
 
     protected override void Awake()
     {
@@ -37,15 +38,15 @@ public class WateringPot : PickableObject, IUsable
     }
     public bool WateringOnPlot(Plot plot)
     {
-        if (plot.seed != null)
-            if (remaining > plot.seed.waterNeed)
-            {
-                
-                remaining -= plot.seed.waterNeed;
-                plot.Watering();
-                sliderWaterBar.value = remaining;
-                return true;
-            }
+        if (remaining >= waterPerUse)
+        {
+            playWaterParticle(plot);
+            remaining -= waterPerUse;
+            plot.Watering();
+            sliderWaterBar.value = remaining;
+            return true;
+        }
+
         return false;
     }
 
@@ -63,10 +64,10 @@ public class WateringPot : PickableObject, IUsable
         ItemUseMatcher.AddUseItemPair(GetType(), targetType);
     }
 
-    public void PlayWaterParticle(Plot PlotTarget)
+    public void playWaterParticle(Plot PlotTarget)
     {
         Vector3 pos = PlotTarget.gameObject.transform.position;
-        
+        pos.y += 0.6f;
         WaterParticle.gameObject.transform.position = pos;
         WaterParticle.Play();
     }
