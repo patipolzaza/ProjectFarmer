@@ -10,6 +10,8 @@ public class AnimalDetailDisplayer : WindowUIBase
     [SerializeField] private GameObject _meatIconObj;
     [SerializeField] private GameObject _plantIconObj;
 
+    [SerializeField] private TMP_Text _priceText;
+
     protected override void Awake()
     {
         Instance = this;
@@ -21,6 +23,7 @@ public class AnimalDetailDisplayer : WindowUIBase
         SetWeightText(animal.weight);
         SetActiveMeatIcon(isEatMeat);
         SetActivePlantIcon(isEatPlant);
+        SetPriceText(animal.GetSellPrice);
     }
 
     private void SetAgeSpanText(string newText)
@@ -32,6 +35,12 @@ public class AnimalDetailDisplayer : WindowUIBase
     {
         _weightText.text = $"{weight.ToString("0.##")}";
     }
+
+    private void SetPriceText(float price)
+    {
+        _priceText.text = price.ToString();
+    }
+
     private void SetActiveMeatIcon(bool value)
     {
         _meatIconObj.SetActive(value);

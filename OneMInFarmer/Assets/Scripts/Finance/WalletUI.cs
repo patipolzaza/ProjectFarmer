@@ -38,7 +38,7 @@ public class WalletUI : WindowUIBase
 
     public void SetCoinText(int coin)
     {
-        CoinText.text = "Coin : " + coin.ToString();
+        CoinText.text = coin.ToString();
     }
 
     public void UpdateCoinTextToTarget(int oldValue, int newValue)
