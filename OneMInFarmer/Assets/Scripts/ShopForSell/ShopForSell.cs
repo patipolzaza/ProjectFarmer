@@ -15,6 +15,18 @@ public class ShopForSell : Interactable
         Instance = this;
     }
 
+    private void OnEnable()
+    {
+        OnHighlightShowed.AddListener(ShowSellDetail);
+        OnHighlightHided.AddListener(HideSellDetail);
+    }
+
+    private void OnDisable()
+    {
+        OnHighlightShowed.RemoveListener(ShowSellDetail);
+        OnHighlightHided.RemoveListener(HideSellDetail);
+    }
+
     public bool PutItemInContainer(ISellable valuable)
     {
         if (valuable != null)
@@ -33,5 +45,22 @@ public class ShopForSell : Interactable
     public void ResetTotalSoldPrice()
     {
         totalSoldPrice = 0;
+    }
+
+    private void ShowSellDetail()
+    {
+        ISellable sellable = Player.Instance.playerHand.holdingObject as ISellable;
+        if (sellable != null)
+        {
+            ProductSellPriceDisplayer sellPriceDisplayer = ProductSellPriceDisplayer.Instance;
+            sellPriceDisplayer.SetUpText(sellable);
+            sellPriceDisplayer.ShowWindow();
+        }
+    }
+
+    private void HideSellDetail()
+    {
+        ProductSellPriceDisplayer sellPriceDisplayer = ProductSellPriceDisplayer.Instance;
+        sellPriceDisplayer.HideWindow();
     }
 }

@@ -1,13 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ProductSellPriceDisplayer : MonoBehaviour
+public class ProductSellPriceDisplayer : WindowUIBase
 {
+    public static ProductSellPriceDisplayer Instance { get; private set; }
     [SerializeField] private TMP_Text _sellPriceText;
 
-    public void SetSellPriceText(string newText)
+    protected override void Awake()
+    {
+        Instance = this;
+    }
+
+    private void SetSellPriceText(string newText)
     {
         _sellPriceText.text = newText;
     }
@@ -16,24 +20,17 @@ public class ProductSellPriceDisplayer : MonoBehaviour
     {
         if (sellable != null)
         {
-            SetSellPriceText($"Sell: {sellable.GetSellPrice}");
-        }
-        else
-        {
-            SetSellPriceText("");
+            SetSellPriceText($"{sellable.GetSellPrice}");
         }
     }
 
-    public void ShowSellPriceText()
+    public override void ShowWindow()
     {
         ISellable sellable = Player.Instance.playerHand.holdingObject as ISellable;
-        SetUpText(sellable);
-
-        gameObject.SetActive(true);
-    }
-
-    public void HideSellPriceText()
-    {
-        gameObject.SetActive(false);
+        if (sellable != null)
+        {
+            SetUpText(sellable);
+            base.ShowWindow();
+        }
     }
 }
