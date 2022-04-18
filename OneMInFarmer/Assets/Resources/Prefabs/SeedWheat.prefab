@@ -264,7 +264,7 @@ Transform:
   m_GameObject: {fileID: 6967064389572889453}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 545833747420627092}
   m_Father: {fileID: 0}
@@ -368,7 +368,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   interactableObject: {fileID: 6967064389572889453}
-  highlightColor: {r: 0, g: 0, b: 0, a: 0}
   OnHighlightShowed:
     m_PersistentCalls:
       m_Calls: []

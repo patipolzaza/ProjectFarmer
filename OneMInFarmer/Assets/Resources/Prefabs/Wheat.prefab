@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 381926451578622609}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.398, y: 0.2896958, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -49,7 +49,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   interactableObject: {fileID: 381926451578622609}
-  highlightColor: {r: 0, g: 1, b: 0, a: 1}
+  OnHighlightShowed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHighlightHided:
+    m_PersistentCalls:
+      m_Calls: []
   currentStackDisplayer: {fileID: 0}
   ItemData: {fileID: 11400000, guid: b30849d21fb78a643a66b32e5ed0629b, type: 2}
 --- !u!212 &7611778967870587945

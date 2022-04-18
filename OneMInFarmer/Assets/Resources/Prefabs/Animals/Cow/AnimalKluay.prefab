@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7389085728035095653}
   - component: {fileID: 7389085728035095652}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 7389085728319664586}
   - component: {fileID: 7389085728319664584}
   - component: {fileID: 7389085728319664585}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Text box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 7389085728374021042}
   - component: {fileID: 7389085728374021043}
   - component: {fileID: 7389085728374021044}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: AnimalKluay
   m_TagString: Animal
   m_Icon: {fileID: 0}
@@ -201,9 +201,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   interactableObject: {fileID: 7389085728622970078}
-  highlightColor: {r: 0.0194422, g: 1, b: 0, a: 1}
+  OnHighlightShowed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHighlightHided:
+    m_PersistentCalls:
+      m_Calls: []
   animalData: {fileID: 11400000, guid: 1726f98d8f6019d4989c28b1d348aa1d, type: 2}
-  textMesh: {fileID: 7389085728691650487}
+  messageText: {fileID: 0}
+  currentAgeSpan: 0
+  OnEatenFood:
+    m_PersistentCalls:
+      m_Calls: []
   idleStateData: {fileID: 11400000, guid: 19c59efe5334a7c4fa2d1899836c6f8f, type: 2}
   moveStateData: {fileID: 11400000, guid: 15f49bae62878bd438b43b77d5318fb6, type: 2}
 --- !u!50 &7389085728374021044
@@ -238,7 +247,7 @@ GameObject:
   - component: {fileID: 7389085728622970074}
   - component: {fileID: 7389085728622970075}
   - component: {fileID: 7389085728622970076}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Animal Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +349,7 @@ GameObject:
   - component: {fileID: 7389085728691650485}
   - component: {fileID: 7389085728691650486}
   - component: {fileID: 7389085728691650487}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
