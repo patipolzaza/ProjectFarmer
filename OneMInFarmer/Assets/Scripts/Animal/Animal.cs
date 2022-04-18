@@ -71,18 +71,10 @@ public class Animal : PickableObject, IBuyable, ISellable
         weight = animalData.startWeight;
     }
 
-    public void Update()
+    protected override void Update()
     {
+        base.Update();
         stateMachine.currentState.LogicUpdate();
-
-        if (Input.GetKeyDown(KeyCode.Keypad0))
-        {
-            IncreaseAge();
-        }
-        else if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            DecreaseLifePoint();
-        }
     }
 
     public void FixedUpdate()
@@ -311,5 +303,20 @@ public class Animal : PickableObject, IBuyable, ISellable
         SetLocalPosition(Vector3.zero, false, false, false, false);
         SetObjectSpriteRenderer(false);
         SetInteractable(false);
+    }
+
+    public void ShowDetail()
+    {
+        List<FoodType> edibleFoods = animalData.edibleFoods;
+        bool isEatMeat = edibleFoods.Contains(FoodType.Meat);
+        bool isEatPlant = edibleFoods.Contains(FoodType.Plant);
+
+        AnimalDetailDisplayer.Instance.SetDetails(this, isEatMeat, isEatPlant);
+        AnimalDetailDisplayer.Instance.ShowWindow();
+    }
+
+    public void HideDetail()
+    {
+        AnimalDetailDisplayer.Instance.HideWindow();
     }
 }

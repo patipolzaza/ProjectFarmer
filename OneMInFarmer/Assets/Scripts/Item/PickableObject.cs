@@ -9,6 +9,14 @@ public class PickableObject : Interactable
         base.Awake();
     }
 
+    protected virtual void Update()
+    {
+        if (transform.root != transform)
+        {
+            transform.eulerAngles = Vector3.zero;
+        }
+    }
+
     public virtual Transform Pick()
     {
         return transform;

@@ -1,21 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class AnimalDetailDisplayer : MonoBehaviour
+public class AnimalDetailDisplayer : WindowUIBase
 {
-    [SerializeField] private Animal animal;
+    public static AnimalDetailDisplayer Instance { get; private set; }
 
     [SerializeField] private TMP_Text _ageSpanText;
     [SerializeField] private TMP_Text _weightText;
+    [SerializeField] private GameObject _meatIconObj;
+    [SerializeField] private GameObject _plantIconObj;
 
-    private void UpdateUI()
+    protected override void Awake()
     {
-        if (animal == null) { return; }
+        Instance = this;
+    }
 
+    public void SetDetails(Animal animal, bool isEatMeat, bool isEatPlant)
+    {
         SetAgeSpanText(animal.currentAgeSpan.ToString());
         SetWeightText(animal.weight);
+        SetActiveMeatIcon(isEatMeat);
+        SetActivePlantIcon(isEatPlant);
     }
 
     private void SetAgeSpanText(string newText)
@@ -25,17 +30,14 @@ public class AnimalDetailDisplayer : MonoBehaviour
 
     private void SetWeightText(float weight)
     {
-        _weightText.text = $"W: {weight.ToString("0.##")} kg";
+        _weightText.text = $"{weight.ToString("0.##")}";
     }
-
-    public void Show()
+    private void SetActiveMeatIcon(bool value)
     {
-        UpdateUI();
-        gameObject.SetActive(true);
+        _meatIconObj.SetActive(value);
     }
-
-    public void Hide()
+    private void SetActivePlantIcon(bool value)
     {
-        gameObject.SetActive(false);
+        _plantIconObj.SetActive(value);
     }
 }

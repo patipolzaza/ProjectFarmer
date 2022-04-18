@@ -369,7 +369,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3192523546512688086}
-  - component: {fileID: 2632438220021449488}
   m_Layer: 5
   m_Name: Details
   m_TagString: Untagged
@@ -398,21 +397,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0.427}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2632438220021449488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5082624399188628952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d61b1b65b16af77489c2f5ae4d47f264, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animal: {fileID: 8454360660856007169}
-  _ageSpanText: {fileID: 34778866157230385}
-  _weightText: {fileID: 6432607050244364518}
 --- !u!1 &6337752042765355905
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,9 +1014,9 @@ MonoBehaviour:
   OnHighlightShowed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2632438220021449488}
-        m_TargetAssemblyTypeName: AnimalDetailDisplayer, Assembly-CSharp
-        m_MethodName: Show
+      - m_Target: {fileID: 8454360660856007169}
+        m_TargetAssemblyTypeName: Animal, Assembly-CSharp
+        m_MethodName: ShowDetail
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1057,9 +1041,9 @@ MonoBehaviour:
   OnHighlightHided:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2632438220021449488}
-        m_TargetAssemblyTypeName: AnimalDetailDisplayer, Assembly-CSharp
-        m_MethodName: Hide
+      - m_Target: {fileID: 8454360660856007169}
+        m_TargetAssemblyTypeName: Animal, Assembly-CSharp
+        m_MethodName: HideDetail
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
