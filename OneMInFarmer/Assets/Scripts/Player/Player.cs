@@ -187,11 +187,10 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (PlayerAnimation.isFinishedProcess)
+        if (PlayerAnimation.isPlayingAnimation)
         {
             moveInput.Set(0, 0);
             return;
-
         }
 
         CheckMoveInput();

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class PlayerAnimationController : MonoBehaviour
 {
     private Animator anim;
-    public bool isFinishedProcess { get; private set; }
+    public bool isPlayingAnimation { get; private set; }
     private void OnValidate()
     {
         if (!anim)
@@ -46,10 +46,10 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void Update()
     {
-        isFinishedProcess = false;
+        isPlayingAnimation = false;
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("PickUp") || anim.GetCurrentAnimatorStateInfo(0).IsName("Watering") || anim.GetCurrentAnimatorStateInfo(0).IsName("Refilling"))
         {
-            isFinishedProcess = true;
+            isPlayingAnimation = true;
         }
     }
 }

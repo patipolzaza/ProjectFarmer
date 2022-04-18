@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8165a21feaec0af4a9510b497977d3fc, type: 3}
   m_Name: Dinosaur_MoveState
   m_EditorClassIdentifier: 
-  moveSpeed: 2.5
+  moveSpeed: 1.75
   minMoveTime: 3
   maxMoveTime: 7
