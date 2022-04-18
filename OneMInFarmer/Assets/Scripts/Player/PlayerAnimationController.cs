@@ -39,11 +39,15 @@ public class PlayerAnimationController : MonoBehaviour
         anim.SetBool("Refilling", true);
     }
 
+    public void SetIsHoldItemBoolean(bool value)
+    {
+        anim.SetBool("IsHoldItem", value);
+    }
 
     private void Update()
     {
         isFinishedProcess = false;
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("PickUp")|| anim.GetCurrentAnimatorStateInfo(0).IsName("Watering") || anim.GetCurrentAnimatorStateInfo(0).IsName("Refilling"))
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("PickUp") || anim.GetCurrentAnimatorStateInfo(0).IsName("Watering") || anim.GetCurrentAnimatorStateInfo(0).IsName("Refilling"))
         {
             isFinishedProcess = true;
         }

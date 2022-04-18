@@ -184,14 +184,14 @@ public class Animal : PickableObject, IBuyable, ISellable
 
     public override void Drop()
     {
-        base.Drop();
-
         if (transform.lossyScale.x < 0)
         {
             Flip();
         }
-        grabbedState.Unleash();
 
+        base.Drop();
+
+        grabbedState.Unleash();
     }
 
     public virtual bool TakeFood(AnimalFood food)

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PickableObject : Interactable
 {
-
     protected override void Awake()
     {
         base.Awake();
@@ -18,15 +17,12 @@ public class PickableObject : Interactable
     public virtual void Drop()
     {
         transform.parent = null;
+        transform.localScale = Vector3.one;
+        transform.eulerAngles = Vector3.zero;
 
         if (transform.lossyScale.x < 0)
         {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
-        }
-
-        if (transform.eulerAngles.magnitude != 0)
-        {
-            transform.eulerAngles = Vector3.zero;
         }
     }
 

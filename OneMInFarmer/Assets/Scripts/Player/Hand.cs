@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class Hand : MonoBehaviour
 {
+    private PlayerAnimationController playerAC;
     public PickableObject holdingObject { get; private set; } = null;
 
     [SerializeField] private Transform handTransform;
     [Tooltip("The transform that is a where to drop the hoding object.")]
     [SerializeField] private Transform transformToDropObject;
+
+    private void Awake()
+    {
+        playerAC = transform.root.Find("PlayerCharacter").GetComponent<PlayerAnimationController>();
+    }
+
+    private void Update()
+    {
+        playerAC.SetIsHoldItemBoolean(holdingObject != null);
+    }
 
     public void PickUpObject(PickableObject pickableObject)
     {

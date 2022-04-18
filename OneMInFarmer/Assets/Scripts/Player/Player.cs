@@ -16,8 +16,6 @@ public class Player : MonoBehaviour
         SerializedProperty interactableDetectorProp;
         SerializedProperty interactableDetectorRangeProp;
         SerializedProperty characterObjectProp;
-        /*        SerializedProperty itemHolderTransformProp;
-                SerializedProperty itemDropTransformProp;*/
 
         SerializedProperty moveSpeedDataProp;
 
@@ -29,9 +27,6 @@ public class Player : MonoBehaviour
             interactableDetectorProp = serializedObject.FindProperty("interactableDetector");
             interactableDetectorRangeProp = serializedObject.FindProperty("interactableDetectRange");
             characterObjectProp = serializedObject.FindProperty("characterObject");
-
-            /*            itemHolderTransformProp = serializedObject.FindProperty("itemHolderTransform");
-                        itemDropTransformProp = serializedObject.FindProperty("itemDropTransform");*/
 
             moveSpeedDataProp = serializedObject.FindProperty("moveSpeedData");
 
@@ -58,9 +53,7 @@ public class Player : MonoBehaviour
             EditorGUILayout.PropertyField(interactableDetectorProp);
             EditorGUILayout.PropertyField(interactableDetectorRangeProp);
             GUILayout.Space(1.25f);
-            /*            GUILayout.Label("Item Pick.");
-                        EditorGUILayout.PropertyField(itemHolderTransformProp);
-                        EditorGUILayout.PropertyField(itemDropTransformProp);*/
+
             GUILayout.Label("Unity Envent.");
             EditorGUILayout.PropertyField(OnWateringEventProp);
             EditorGUILayout.PropertyField(OnPickingEventProp);
@@ -144,11 +137,6 @@ public class Player : MonoBehaviour
     public Interactable targetInteractable { get; private set; }
     private bool isDetectInteractable = false;
 
-    /*[Tooltip("The transform that is a where player hold the hoding object.")]
-    [SerializeField] private Transform itemHolderTransform;
-    [Tooltip("The transform that is a where player drop the hoding object.")]
-    [SerializeField] private Transform itemDropTransform;*/
-
     public float facingDirection { get; private set; }
 
     public Hand playerHand { get; private set; }
@@ -165,8 +153,8 @@ public class Player : MonoBehaviour
 
         facingDirection = transform.localScale.x / Mathf.Abs(transform.localScale.x);
 
-        wallet = FindObjectOfType<Player>().transform.Find("Wallet").GetComponent<Wallet>();
-        PlayerAnimation = FindObjectOfType<Player>().transform.Find("PlayerCharacter").GetComponent<PlayerAnimationController>();
+        wallet = transform.Find("Wallet").GetComponent<Wallet>();
+        PlayerAnimation = transform.Find("PlayerCharacter").GetComponent<PlayerAnimationController>();
         Instance = this;
     }
 
@@ -237,18 +225,10 @@ public class Player : MonoBehaviour
                             OnWateringEvent.Invoke();
                         }
                     }
-                    /*                    else if (holdingObject is WateringPot && targetInteractable is Plot)
-                                        {
-                                            UseItem();
-                                            OnWateringEvent.Invoke();
-                                        }
-                                        else if (holdingObject is Seed && targetInteractable is Plot)
-                                        {
-                                            UseItem();
-                                        }*/
                     else if (targetInteractable is PickableObject)
                     {
                         playerHand.PickUpObject((PickableObject)targetInteractable);
+                        PlayerAnimation.pickUpAnimation();
                     }
                     else
                     {
@@ -286,7 +266,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             wallet.EarnCoin(5);
-            Debug.Log(wallet.coin.ToString());
         }
     }
 
