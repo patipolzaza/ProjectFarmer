@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 4205238667322088404}
   - component: {fileID: 4205238667322088405}
   m_Layer: 0
-  m_Name: AnimalIconDisplayer
+  m_Name: ProductIconShowcase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
