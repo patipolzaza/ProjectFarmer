@@ -26,7 +26,7 @@ public class ProductSellPriceDisplayer : MonoBehaviour
 
     public void ShowSellPriceText()
     {
-        ISellable sellable = Player.Instance.holdingObject as ISellable;
+        ISellable sellable = Player.Instance.playerHand.holdingObject as ISellable;
         SetUpText(sellable);
 
         gameObject.SetActive(true);

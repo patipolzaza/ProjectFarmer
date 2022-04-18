@@ -37,7 +37,7 @@ public class Plot : Interactable
     {
         if (isPlanted)
         {
-            if (player.holdingObject)
+            if (player.playerHand.holdingObject)
             {
                 return;
             }

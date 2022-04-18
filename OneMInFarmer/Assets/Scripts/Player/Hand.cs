@@ -51,4 +51,14 @@ public class Hand : MonoBehaviour
             holdingObject = null;
         }
     }
+
+    public void SetInHandItemToNull()
+    {
+        if (holdingObject)
+        {
+            DropObject();
+        }
+
+        holdingObject = null;
+    }
 }

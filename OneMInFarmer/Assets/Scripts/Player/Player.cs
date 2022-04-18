@@ -133,7 +133,6 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform interactableDetector;
     [SerializeField] private float interactableDetectRange = 0.85f;
 
-    public PickableObject holdingObject { get; private set; }
     public Interactable targetInteractable { get; private set; }
     private bool isDetectInteractable = false;
 
@@ -180,7 +179,7 @@ public class Player : MonoBehaviour
 
         if (!canMove)
         {
-            if (holdingObject)
+            if (playerHand.holdingObject)
             {
                 playerHand.DropObject();
             }
@@ -201,26 +200,26 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.J))
             {
-                if (holdingObject)
+                if (playerHand.holdingObject)
                 {
-                    if (holdingObject is ISellable && targetInteractable is ShopForSell)
+                    if (playerHand.holdingObject is ISellable && targetInteractable is ShopForSell)
                     {
-                        ISellable sellable = holdingObject as ISellable;
+                        ISellable sellable = playerHand.holdingObject as ISellable;
                         ShopForSell shop = targetInteractable as ShopForSell;
                         if (shop.PutItemInContainer(sellable))
                         {
-                            holdingObject = null;
+                            playerHand.SetInHandItemToNull();
                         }
                     }
-                    else if (holdingObject is IUsable && ItemUseMatcher.isMatch((IUsable)holdingObject, targetInteractable))
+                    else if (playerHand.holdingObject is IUsable && ItemUseMatcher.isMatch((IUsable)playerHand.holdingObject, targetInteractable))
                     {
                         UseItem();
                     }
-                    else if (holdingObject is AnimalFood && targetInteractable is Animal)
+                    else if (playerHand.holdingObject is AnimalFood && targetInteractable is Animal)
                     {
                         UseItem();
 
-                        if (holdingObject is WateringPot && targetInteractable is Plot)
+                        if (playerHand.holdingObject is WateringPot && targetInteractable is Plot)
                         {
                             OnWateringEvent.Invoke();
                         }
@@ -247,9 +246,9 @@ public class Player : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.J))
             {
-                if (holdingObject)
+                if (playerHand.holdingObject)
                 {
-                    if (holdingObject is WateringPot && targetInteractable is Pool)
+                    if (playerHand.holdingObject is WateringPot && targetInteractable is Pool)
                     {
 
                         UseItem();
@@ -301,13 +300,13 @@ public class Player : MonoBehaviour
 
     public void UseItem()
     {
-        if (holdingObject is IUsable)
+        if (playerHand.holdingObject is IUsable)
         {
-            IUsable useableItem = holdingObject as IUsable;
+            IUsable useableItem = playerHand.holdingObject as IUsable;
 
             if (useableItem.Use(targetInteractable))
             {
-                holdingObject = null;
+                playerHand.SetInHandItemToNull();
             }
         }
     }
@@ -341,37 +340,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    /*    public void PickUpItem(PickableObject itemToPick)
-        {
-            if (holdingObject)
-            {
-                DropItem();
-            }
-
-            Transform itemTransform = itemToPick.Pick();
-
-            itemToPick.SetParent(itemHolderTransform);
-            itemToPick.SetLocalPosition(new Vector3(0, 0, 1), false, true);
-
-            holdingObject = itemTransform.GetComponent<PickableObject>();
-        }
-
-        public void DropItem()
-        {
-            if (holdingObject)
-            {
-                PickableObject pickable = holdingObject;
-
-                pickable.SetParent(itemDropTransform);
-                pickable.SetLocalPosition(new Vector3(0, 0, 1), false, true);
-                pickable.Drop();
-
-                pickable.SetInteractable(true);
-
-                holdingObject = null;
-            }
-        }*/
-
     private bool CheckInteractableInRange()
     {
         ChangeTargetInteractable(null);
@@ -391,7 +359,7 @@ public class Player : MonoBehaviour
 
             Interactable interactable = hit.GetComponent<Interactable>();
 
-            if (interactable.Equals(holdingObject) || interactable.Equals(targetInteractable))
+            if (interactable.Equals(playerHand.holdingObject) || interactable.Equals(targetInteractable))
             {
                 continue;
             }
