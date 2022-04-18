@@ -40,8 +40,7 @@ public class WateringPot : PickableObject, IUsable
         if (plot.seed != null)
             if (remaining > plot.seed.waterNeed)
             {
-                WaterParticle.gameObject.transform.localPosition = plot.transform.localPosition;
-                WaterParticle.Play();
+                
                 remaining -= plot.seed.waterNeed;
                 plot.Watering();
                 sliderWaterBar.value = remaining;
@@ -62,5 +61,13 @@ public class WateringPot : PickableObject, IUsable
     public void AddTargetType(Type targetType)
     {
         ItemUseMatcher.AddUseItemPair(GetType(), targetType);
+    }
+
+    public void PlayWaterParticle(Plot PlotTarget)
+    {
+        Vector3 pos = PlotTarget.gameObject.transform.position;
+        
+        WaterParticle.gameObject.transform.position = pos;
+        WaterParticle.Play();
     }
 }
