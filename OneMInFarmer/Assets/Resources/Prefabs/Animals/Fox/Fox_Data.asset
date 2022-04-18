@@ -21,4 +21,4 @@ MonoBehaviour:
   lifespan: 6
   stomachSize: 1
   startWeight: 2
-  edibleFoods: 00000000
+  edibleFoods: 0000000001000000

@@ -580,18 +580,6 @@ MonoBehaviour:
   OnHighlightShowed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6143307328134754751}
-        m_TargetAssemblyTypeName: Animal, Assembly-CSharp
-        m_MethodName: ShowDetail
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1944415046005972004}
         m_TargetAssemblyTypeName: AnimalHungryBar, Assembly-CSharp
         m_MethodName: ShowBar
@@ -607,18 +595,6 @@ MonoBehaviour:
   OnHighlightHided:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6143307328134754751}
-        m_TargetAssemblyTypeName: Animal, Assembly-CSharp
-        m_MethodName: HideDetail
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1944415046005972004}
         m_TargetAssemblyTypeName: AnimalHungryBar, Assembly-CSharp
         m_MethodName: HideBar

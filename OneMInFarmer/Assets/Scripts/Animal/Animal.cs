@@ -58,6 +58,18 @@ public class Animal : PickableObject, IBuyable, ISellable
         currentAgeSpan = 0;
     }
 
+    private void OnEnable()
+    {
+        OnHighlightShowed.AddListener(ShowDetail);
+        OnHighlightHided.AddListener(HideDetail);
+    }
+
+    private void OnDisable()
+    {
+        OnHighlightShowed.RemoveListener(ShowDetail);
+        OnHighlightHided.RemoveListener(HideDetail);
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -305,9 +317,10 @@ public class Animal : PickableObject, IBuyable, ISellable
         SetInteractable(false);
     }
 
-    public void ShowDetail()
+    private void ShowDetail()
     {
         List<FoodType> edibleFoods = animalData.edibleFoods;
+
         bool isEatMeat = edibleFoods.Contains(FoodType.Meat);
         bool isEatPlant = edibleFoods.Contains(FoodType.Plant);
 
@@ -315,7 +328,7 @@ public class Animal : PickableObject, IBuyable, ISellable
         AnimalDetailDisplayer.Instance.ShowWindow();
     }
 
-    public void HideDetail()
+    private void HideDetail()
     {
         AnimalDetailDisplayer.Instance.HideWindow();
     }
