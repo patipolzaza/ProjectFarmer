@@ -13,12 +13,9 @@ MonoBehaviour:
   m_Name: Plant1
   m_EditorClassIdentifier: 
   id: e15d24538382d514d915879f280a1b20
-  ItemName: 
-  Icon: {fileID: 0}
-  canSell: 0
-  IsConsumable: 0
-  isUsable: 0
-  purchasePrice: 5
+  ItemName: Plant Food
+  Icon: {fileID: -2696968531839155382, guid: 92ce2ee1c4f7fd64ea759d3fadfcbb2d, type: 3}
+  purchasePrice: 2
   sellPrice: 7
   foodType: 1
   weightGain: 0.5
