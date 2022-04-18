@@ -227,7 +227,6 @@ public class Player : MonoBehaviour
                     else if (targetInteractable is PickableObject)
                     {
                         playerHand.PickUpObject((PickableObject)targetInteractable);
-                        PlayerAnimation.pickUpAnimation();
                     }
                     else
                     {

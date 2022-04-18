@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04316a636ddf5d7408299e7675169711, type: 3}
-  m_Name: D_MoveSpeed
+  m_Script: {fileID: 11500000, guid: 8165a21feaec0af4a9510b497977d3fc, type: 3}
+  m_Name: Dinosaur_MoveState
   m_EditorClassIdentifier: 
-  statusName: Move Speed
-  maxLevel: 4
-  baseValue: 100
-  extraValuePerLevel: 10
-  upgradeCostPerLevel: 10
-  extraCostPercentage: 5
+  moveSpeed: 2.5
+  minMoveTime: 3
+  maxMoveTime: 7

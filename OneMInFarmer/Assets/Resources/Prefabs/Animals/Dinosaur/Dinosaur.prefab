@@ -627,7 +627,7 @@ Animator:
   m_GameObject: {fileID: 2585229395575861660}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 19a2bf0986e02e242b442eb2f8464545, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2f6159c2ac75deb4b9ad747de7b591a7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -768,7 +768,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  animalData: {fileID: 11400000, guid: 1726f98d8f6019d4989c28b1d348aa1d, type: 2}
+  animalData: {fileID: 11400000, guid: 25b2cdd24fa1eb24f98a087de1a1b340, type: 2}
   messageText: {fileID: 2519934270554106255}
   currentAgeSpan: 0
   OnEatenFood:
@@ -798,8 +798,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  idleStateData: {fileID: 11400000, guid: 19c59efe5334a7c4fa2d1899836c6f8f, type: 2}
-  moveStateData: {fileID: 11400000, guid: 15f49bae62878bd438b43b77d5318fb6, type: 2}
+  idleStateData: {fileID: 11400000, guid: af02a7ae3cb99714ba8234e799706e6c, type: 2}
+  moveStateData: {fileID: 11400000, guid: 362a09cbbff3e0242ad8134f1197ab33, type: 2}
 --- !u!50 &2585229395839758070
 Rigidbody2D:
   serializedVersion: 4
