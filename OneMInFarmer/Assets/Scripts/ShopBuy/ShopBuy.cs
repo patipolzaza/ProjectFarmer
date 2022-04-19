@@ -6,8 +6,7 @@ using UnityEngine.Events;
 public class ShopBuy : Interactable
 {
     public IBuyable productInStock { get; private set; }
-    public UnityEvent OnProductRestocked;
-    public UnityEvent OnProductSold;
+    public UnityEvent<IBuyable> OnProductRestocked;
 
     [SerializeField] private List<PickableObject> possibleProducts = new List<PickableObject>();
 
@@ -64,8 +63,6 @@ public class ShopBuy : Interactable
         {
             product.gameObject.SetActive(true);
             player.playerHand.PickUpObject(product);
-
-            OnProductSold?.Invoke();
         }
         else
         {
@@ -90,7 +87,7 @@ public class ShopBuy : Interactable
 
             productInStock = product as IBuyable;
 
-            OnProductRestocked?.Invoke();
+            OnProductRestocked?.Invoke(productInStock);
         }
     }
 
