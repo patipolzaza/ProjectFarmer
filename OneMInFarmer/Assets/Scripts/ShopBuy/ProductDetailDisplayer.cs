@@ -41,10 +41,8 @@ public class ProductDetailDisplayer : WindowUIBase
 
     public void SetUpUI(IBuyable product)
     {
-        Debug.Log("Called from " + transform.root.name);
         if (product != null)
         {
-            Debug.Log(_buyField);
             SetActiveBuyField(true);
 
             if (product != null)
@@ -76,8 +74,9 @@ public class ProductDetailDisplayer : WindowUIBase
                     Seed seed = product as Seed;
                     SeedData seedData = seed.GetItemData as SeedData;
 
-                    SetSellPriceText($"{seed.GetProduct.GetSellPrice}/pc.");
                     SetPurchasePriceText(seed.GetBuyPrice);
+                    SetActiveSellField(true);
+                    SetSellPriceText($"{seed.GetProduct.GetSellPrice}/pc.");
 
                     SetActivePlantHarvestField(true);
                     SetPlantHarvestCountText(seedData.countHarvest);
