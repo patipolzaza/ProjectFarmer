@@ -4,106 +4,181 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ProductDetailDisplayer : MonoBehaviour
+public class ProductDetailDisplayer : WindowUIBase
 {
-    [SerializeField] private ShopBuy shop;
+    public static ProductDetailDisplayer Instance { get; private set; }
 
-    [SerializeField] private Image _iconDisplayer;
-    [SerializeField] private TMP_Text _productNameText;
+    [Header("Sell Field")]
+    [SerializeField] private GameObject _sellField;
     [SerializeField] private TMP_Text _sellPriceText;
+
+    [Header("Buy Field")]
+    [SerializeField] private GameObject _buyField;
     [SerializeField] private TMP_Text _purchasePriceText;
 
-    [SerializeField] private GameObject _textsParent;
+    [Header("Food Type Field")]
+    [SerializeField] private GameObject _plantFoodTypeField;
+    [SerializeField] private GameObject _meatFoodTypeField;
 
-    public void SetUpUI()
+    [Header("Edible Food Type Field")]
+    [SerializeField] private GameObject _edibleFoodTypeField;
+    [SerializeField] private GameObject _edibleMeatField;
+    [SerializeField] private GameObject _ediblePlantField;
+
+    [Header("Animal Lifespan Field")]
+    [SerializeField] private GameObject _lifespanField;
+    [SerializeField] private TMP_Text _lifespanValueText;
+
+    [Header("Plant Harvest Field")]
+    [SerializeField] private GameObject _plantHarvestField;
+    [SerializeField] private TMP_Text _plantHarvestCountText;
+
+    protected override void Awake()
     {
-        IBuyable sellable = shop.productInStock;
+        base.Awake();
+        Instance = this;
+    }
 
-        if (sellable != null)
+    public void SetUpUI(IBuyable product)
+    {
+        Debug.Log("Called from " + transform.root.name);
+        if (product != null)
         {
-            _iconDisplayer.gameObject.SetActive(true);
+            Debug.Log(_buyField);
+            SetActiveBuyField(true);
 
-            if (sellable is Animal)
+            if (product != null)
             {
-                Animal animal = sellable as Animal;
-                SetDisplayIcon(animal.GetAnimalShopIcon);
-                SetProductNameText(animal.GetAnimalName);
-                SetActiveSellPriceText(true);
-                SetSellPriceText($"Sell: {animal.GetSellPricePerKilo}/kg");
-                SetPurchasePriceText($"Cost: {animal.GetBuyPrice}");
-            }
-            else if (sellable is Seed)
-            {
-                Seed seed = sellable as Seed;
-                SeedData seedData = seed.GetItemData as SeedData;
-                SetDisplayIcon(seedData.Icon);
-                SetProductNameText(seedData.ItemName);
-                SetActiveSellPriceText(true);
-                SetSellPriceText($"Sell: {seed.GetProduct.GetSellPrice}/pc.");
-                SetPurchasePriceText($"Cost: {seed.GetBuyPrice}");
-            }
-            else if (sellable is AnimalFood)
-            {
-                AnimalFood food = sellable as AnimalFood;
-                AnimalFoodData foodData = food.GetItemData as AnimalFoodData;
+                if (product is Animal)
+                {
+                    Animal animal = product as Animal;
+                    SetPurchasePriceText(animal.GetBuyPrice);
 
-                SetDisplayIcon(foodData.Icon);
-                SetProductNameText(foodData.ItemName);
-                SetActiveSellPriceText(false);
-                SetPurchasePriceText($"Cost: {food.GetBuyPrice}");
+                    SetActiveSellField(true);
+                    SetSellPriceText($"{animal.GetSellPricePerKilo}/kg");
+
+                    SetActiveEdibleFoodField(true);
+                    List<FoodType> edibleFoods = animal.GetEdibleFoods;
+                    if (edibleFoods.Contains(FoodType.Meat))
+                    {
+                        SetActiveEdibleMeat(true);
+                    }
+                    if (edibleFoods.Contains(FoodType.Plant))
+                    {
+                        SetActiveEdiblePlant(true);
+                    }
+
+                    SetActiveLifespanField(true);
+                    SetLifespanText(animal.GetLifespan);
+                }
+                else if (product is Seed)
+                {
+                    Seed seed = product as Seed;
+                    SeedData seedData = seed.GetItemData as SeedData;
+
+                    SetSellPriceText($"{seed.GetProduct.GetSellPrice}/pc.");
+                    SetPurchasePriceText(seed.GetBuyPrice);
+
+                    SetActivePlantHarvestField(true);
+                    SetPlantHarvestCountText(seedData.countHarvest);
+                }
+                else if (product is AnimalFood)
+                {
+                    AnimalFood food = product as AnimalFood;
+                    SetPurchasePriceText(food.GetBuyPrice);
+
+                    FoodType foodType = food.GetFoodType;
+
+                    if (foodType.Equals(FoodType.Plant))
+                    {
+                        SetActivePlantFoodTypeField(true);
+                    }
+                    else if (foodType.Equals(FoodType.Meat))
+                    {
+                        SetActiveMeatFoodTypeField(true);
+                    }
+                }
             }
         }
-        else
-        {
-            _iconDisplayer.gameObject.SetActive(false);
-            SetProductNameText("");
-            SetSellPriceText("");
-            SetPurchasePriceText("");
-        }
     }
 
-    public void SetDisplayIcon(Sprite icon)
-    {
-        _iconDisplayer.sprite = icon;
-    }
-
-    public void SetProductNameText(string productName)
-    {
-        _productNameText.text = productName;
-    }
-
-    public void SetSellPriceText(string newText)
+    private void SetSellPriceText(string newText)
     {
         _sellPriceText.text = newText;
     }
 
-    public void SetPurchasePriceText(string newText)
+    private void SetPurchasePriceText(int purchasePrice)
     {
-        _purchasePriceText.text = newText;
+        _purchasePriceText.text = purchasePrice.ToString();
     }
 
-    public void SetActiveSellPriceText(bool value)
+    private void SetActiveBuyField(bool value)
     {
-        _sellPriceText.gameObject.SetActive(value);
+        _buyField.SetActive(value);
     }
 
-    public void Show()
+    private void SetActiveSellField(bool value)
     {
-        ShowTexts();
+        _sellField.SetActive(value);
     }
 
-    public void Hide()
+    private void SetActiveEdibleFoodField(bool value)
     {
-        HideTexts();
+        _edibleFoodTypeField.SetActive(value);
     }
 
-    private void ShowTexts()
+    private void SetActiveEdibleMeat(bool value)
     {
-        _textsParent.SetActive(true);
+        _edibleMeatField.SetActive(value);
     }
 
-    private void HideTexts()
+    private void SetActiveEdiblePlant(bool value)
     {
-        _textsParent.SetActive(false);
+        _ediblePlantField.SetActive(value);
+    }
+
+    private void SetActiveMeatFoodTypeField(bool value)
+    {
+        _meatFoodTypeField.SetActive(value);
+    }
+
+    private void SetActivePlantFoodTypeField(bool value)
+    {
+        _plantFoodTypeField.SetActive(value);
+    }
+
+    private void SetActiveLifespanField(bool value)
+    {
+        _lifespanField.SetActive(value);
+    }
+
+    private void SetLifespanText(int animalLifespan)
+    {
+        _lifespanValueText.text = animalLifespan.ToString();
+    }
+
+    private void SetActivePlantHarvestField(bool value)
+    {
+        _plantHarvestField.SetActive(value);
+    }
+
+    private void SetPlantHarvestCountText(int harvestCount)
+    {
+        _plantHarvestCountText.text = harvestCount.ToString();
+    }
+
+    public override void HideWindow()
+    {
+        SetActiveBuyField(false);
+        SetActiveSellField(false);
+        SetActiveEdibleFoodField(false);
+        SetActiveEdibleMeat(false);
+        SetActiveEdiblePlant(false);
+        SetActivePlantFoodTypeField(false);
+        SetActiveMeatFoodTypeField(false);
+        SetActivePlantHarvestField(false);
+        SetActiveLifespanField(false);
+
+        base.HideWindow();
     }
 }

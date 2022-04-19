@@ -598,64 +598,16 @@ MonoBehaviour:
   interactableObject: {fileID: 1061077377177315657}
   OnHighlightShowed:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4205238668200629935}
-        m_TargetAssemblyTypeName: ProductDetailDisplayer, Assembly-CSharp
-        m_MethodName: Show
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnHighlightHided:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4205238668200629935}
-        m_TargetAssemblyTypeName: ProductDetailDisplayer, Assembly-CSharp
-        m_MethodName: Hide
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnProductRestocked:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4205238668200629935}
-        m_TargetAssemblyTypeName: ProductDetailDisplayer, Assembly-CSharp
-        m_MethodName: SetUpUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnProductSold:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4205238668200629935}
-        m_TargetAssemblyTypeName: ProductDetailDisplayer, Assembly-CSharp
-        m_MethodName: SetUpUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   possibleProducts: []
 --- !u!1 &4205238667963482145
 GameObject:
@@ -800,7 +752,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4205238668200629920}
-  - component: {fileID: 4205238668200629935}
   m_Layer: 0
   m_Name: ShopDetail
   m_TagString: Untagged
@@ -829,24 +780,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4205238668200629935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4205238668200629934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a906364901785024580f5c9f1e61ce26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shop: {fileID: 4205238667441044030}
-  _iconDisplayer: {fileID: 4205238667322088405}
-  _productNameText: {fileID: 4205238667245627695}
-  _sellPriceText: {fileID: 4205238667963482148}
-  _purchasePriceText: {fileID: 4205238668415215553}
-  _textsParent: {fileID: 4205238667063150996}
 --- !u!1 &4205238668385291101
 GameObject:
   m_ObjectHideFlags: 0

@@ -273,7 +273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &76444131
 RectTransform:
   m_ObjectHideFlags: 0
@@ -293,7 +293,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 452.5, y: -100}
+  m_AnchoredPosition: {x: 182.5, y: -100}
   m_SizeDelta: {x: 365, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &76584017
@@ -485,7 +485,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &107962758
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1905,7 +1905,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 925, y: -100}
+  m_AnchoredPosition: {x: 805, y: -100}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &552453864 stripped
@@ -2526,7 +2526,8 @@ PrefabInstance:
       propertyPath: possibleProducts.Array.data[0]
       value: 
       objectReference: {fileID: 8192083982255946560, guid: 8d8ed4c89b34d414ea82508b192ddffe, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4205238668200629935, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
 --- !u!1 &720368520
 GameObject:
@@ -2792,6 +2793,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 806013738}
+  - component: {fileID: 806013739}
   m_Layer: 5
   m_Name: ShopBuyDetail
   m_TagString: Untagged
@@ -2819,6 +2821,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -350}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &806013739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806013737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a906364901785024580f5c9f1e61ce26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windowUIObject: {fileID: 226059386}
+  _sellField: {fileID: 2019429402}
+  _sellPriceText: {fileID: 747370181}
+  _buyField: {fileID: 76444130}
+  _purchasePriceText: {fileID: 2069176823}
+  _plantFoodTypeField: {fileID: 512973052}
+  _meatFoodTypeField: {fileID: 1661437090}
+  _edibleFoodTypeField: {fileID: 1091367739}
+  _edibleMeatField: {fileID: 992864828}
+  _ediblePlantField: {fileID: 107962757}
+  _lifespanField: {fileID: 858065274}
+  _lifespanValueText: {fileID: 989170711}
+  _plantHarvestField: {fileID: 1054854376}
+  _plantHarvestCountText: {fileID: 1098073213}
 --- !u!1 &813348341
 GameObject:
   m_ObjectHideFlags: 0
@@ -3021,7 +3049,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &858065275
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3041,7 +3069,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1150, y: -100}
+  m_AnchoredPosition: {x: 1180, y: -100}
   m_SizeDelta: {x: 300, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &858851266 stripped
@@ -4069,7 +4097,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &992864829
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4218,7 +4246,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1054854377
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4236,9 +4264,9 @@ RectTransform:
   m_Father: {fileID: 269888333}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1830, y: -100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1077853616
@@ -4342,7 +4370,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1091367740
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4362,7 +4390,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1475, y: -100}
+  m_AnchoredPosition: {x: 1505, y: -100}
   m_SizeDelta: {x: 350, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1098073211
@@ -4399,8 +4427,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 206, y: -75}
-  m_SizeDelta: {x: 160, y: 110}
+  m_AnchoredPosition: {x: 210, y: -75}
+  m_SizeDelta: {x: 145, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1098073213
 MonoBehaviour:
@@ -6504,7 +6532,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1075, y: -100}
+  m_AnchoredPosition: {x: 955, y: -100}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1669583754 stripped
@@ -11900,7 +11928,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1913831184
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12139,7 +12167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2019429403
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12159,7 +12187,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 817.5, y: -100}
+  m_AnchoredPosition: {x: 547.5, y: -100}
   m_SizeDelta: {x: 365, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2069176821

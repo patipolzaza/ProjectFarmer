@@ -37,11 +37,17 @@ public class ShopBuy : Interactable
     private void OnEnable()
     {
         interactEvent.AddListener(BuyProduct);
+
+        OnHighlightShowed.AddListener(ShowProductDetail);
+        OnHighlightHided.AddListener(HideProductDetail);
     }
 
     private void OnDisable()
     {
-        interactEvent.RemoveListener(BuyProduct);
+        interactEvent?.RemoveListener(BuyProduct);
+
+        OnHighlightShowed?.RemoveListener(ShowProductDetail);
+        OnHighlightHided?.RemoveListener(HideProductDetail);
     }
 
     protected override void Start()
@@ -86,5 +92,20 @@ public class ShopBuy : Interactable
 
             OnProductRestocked?.Invoke();
         }
+    }
+
+    private void ShowProductDetail()
+    {
+        if (productInStock != null)
+        {
+            ProductDetailDisplayer productDetailDisplayer = ProductDetailDisplayer.Instance;
+            productDetailDisplayer.SetUpUI(productInStock);
+            productDetailDisplayer.ShowWindow();
+        }
+    }
+
+    private void HideProductDetail()
+    {
+        ProductDetailDisplayer.Instance.HideWindow();
     }
 }
