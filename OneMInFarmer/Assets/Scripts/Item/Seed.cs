@@ -7,6 +7,8 @@ public class Seed : Item, IBuyable, IUsable
 {
     public int GetBuyPrice => ItemData.purchasePrice;
     public Sprite GetIcon => ItemData.Icon;
+    public GameObject GetObject() => gameObject;
+    public Product GetProduct => ((SeedData)ItemData).product;
 
     private void OnValidate()
     {
@@ -38,9 +40,6 @@ public class Seed : Item, IBuyable, IUsable
             return false;
         }
     }
-
-    public GameObject GetObject() => gameObject;
-    public Product GetProduct => ((SeedData)ItemData).product;
 
     public bool Use(Interactable targetToUse)
     {

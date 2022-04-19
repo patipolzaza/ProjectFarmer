@@ -25,6 +25,8 @@ public class Item : PickableObject
 
     protected override void Update()
     {
+        base.Update();
+
         if (currentStackDisplayer)
         {
             if (currentStack > 1)
@@ -44,11 +46,5 @@ public class Item : PickableObject
         currentStack = newNum;
     }
 
-    public int GetCurrentNumber
-    {
-        get
-        {
-            return currentStack;
-        }
-    }
+    public int GetCurrentNumber => currentStack;
 }
