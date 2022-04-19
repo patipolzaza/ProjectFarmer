@@ -11,6 +11,7 @@ public class AnimalFood : Item, IBuyable, IUsable
 
     public int GetBuyPrice => ItemData.purchasePrice;
     public GameObject GetObject() => gameObject;
+    public Sprite GetIcon => ItemData.Icon;
 
     private void OnValidate()
     {

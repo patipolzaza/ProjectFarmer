@@ -12,4 +12,5 @@ public interface IBuyable
     /// <returns>True if success purchase, False if not.</returns>
     public bool Buy(Player player);
     public int GetBuyPrice { get; }
+    public Sprite GetIcon { get; }
 }

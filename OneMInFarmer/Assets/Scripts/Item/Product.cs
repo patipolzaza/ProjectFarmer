@@ -10,6 +10,7 @@ public class Product : Item, ISellable
     }
 
     public int GetSellPrice => ItemData.sellPrice;
+    public Sprite GetIcon => ItemData.Icon;
 
     public int Sell()
     {

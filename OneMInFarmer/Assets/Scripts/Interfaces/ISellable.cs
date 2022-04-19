@@ -12,4 +12,5 @@ public interface ISellable
     /// <returns>Price that valuable object was sold.</returns>
     public int Sell();
     public int GetSellPrice { get; }
+    public Sprite GetIcon { get; }
 }

@@ -42,7 +42,7 @@ public class Animal : PickableObject, IBuyable, ISellable
     #endregion
 
     public string GetAnimalName => animalData.animalName;
-    public Sprite GetAnimalShopIcon => animalData.inShopIcon;
+    public Sprite GetIcon => animalData.inShopIcon;
     public int GetSellPricePerKilo => animalData.sellPricePerKilo;
     public int GetBuyPrice => animalData.purchasePrice;
     public float GetSize => Mathf.Clamp(0.45f + (((float)age / (float)animalData.lifespan) * 0.55f), 0.45f, 1);

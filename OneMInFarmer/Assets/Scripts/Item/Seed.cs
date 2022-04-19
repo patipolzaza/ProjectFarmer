@@ -6,6 +6,7 @@ using System;
 public class Seed : Item, IBuyable, IUsable
 {
     public int GetBuyPrice => ItemData.purchasePrice;
+    public Sprite GetIcon => ItemData.Icon;
 
     private void OnValidate()
     {
