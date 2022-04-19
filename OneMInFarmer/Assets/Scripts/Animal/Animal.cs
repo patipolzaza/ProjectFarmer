@@ -41,6 +41,31 @@ public class Animal : PickableObject, IBuyable, ISellable
     public DieState dieState { get; private set; }
     #endregion
 
+    public string GetAnimalName => animalData.animalName;
+    public Sprite GetAnimalShopIcon => animalData.inShopIcon;
+    public int GetSellPricePerKilo => animalData.sellPricePerKilo;
+    public int GetBuyPrice => animalData.purchasePrice;
+    public float GetSize => Mathf.Clamp(0.45f + (((float)age / (float)animalData.lifespan) * 0.55f), 0.45f, 1);
+    public int GetSellPrice
+    {
+        get
+        {
+            int price = 0;
+
+            if (!isDie)
+            {
+                price = Mathf.FloorToInt(animalData.sellPricePerKilo * weight);
+                if (currentAgeSpan == (AgeSpan)1)
+                    price += animalData.bonusSellPriceForAdult;
+                else if (currentAgeSpan == (AgeSpan)2)
+                    price += animalData.bonusSellPriceForAdult + animalData.bonusSellPriceForElder;
+            }
+
+            return price;
+        }
+    }
+    public int GetLifespan => animalData.lifespan;
+    public List<FoodType> GetEdibleFoods => animalData.edibleFoods;
     protected override void Awake()
     {
         base.Awake();
@@ -94,29 +119,6 @@ public class Animal : PickableObject, IBuyable, ISellable
         stateMachine.currentState.PhysicUpdate();
     }
 
-    public string GetAnimalName => animalData.animalName;
-    public Sprite GetAnimalShopIcon => animalData.inShopIcon;
-    public int GetSellPricePerKilo => animalData.sellPricePerKilo;
-    public int GetBuyPrice => animalData.purchasePrice;
-    public float GetSize => Mathf.Clamp(0.45f + (((float)age / (float)animalData.lifespan) * 0.55f), 0.45f, 1);
-    public int GetSellPrice
-    {
-        get
-        {
-            int price = 0;
-
-            if (!isDie)
-            {
-                price = Mathf.FloorToInt(animalData.sellPricePerKilo * weight);
-                if (currentAgeSpan == (AgeSpan)1)
-                    price += animalData.bonusSellPriceForAdult;
-                else if (currentAgeSpan == (AgeSpan)2)
-                    price += animalData.bonusSellPriceForAdult + animalData.bonusSellPriceForElder;
-            }
-
-            return price;
-        }
-    }
 
     public void IncreaseAge()
     {
