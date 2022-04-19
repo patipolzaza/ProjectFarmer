@@ -23,7 +23,7 @@ public class Item : PickableObject
         }
     }
 
-    private void Update()
+    protected override void Update()
     {
         if (currentStackDisplayer)
         {
@@ -36,7 +36,6 @@ public class Item : PickableObject
             {
                 currentStackDisplayer.gameObject.SetActive(false);
             }
-
         }
     }
 
