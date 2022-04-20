@@ -19,8 +19,9 @@ public class Player : MonoBehaviour
 
         SerializedProperty moveSpeedDataProp;
 
-        SerializedProperty OnWateringEventProp;
+        SerializedProperty OnInteractEventProp;
         SerializedProperty OnPickingEventProp;
+        SerializedProperty OnDropingEventProp;
 
         private void OnEnable()
         {
@@ -30,8 +31,9 @@ public class Player : MonoBehaviour
 
             moveSpeedDataProp = serializedObject.FindProperty("moveSpeedData");
 
-            OnWateringEventProp = serializedObject.FindProperty("OnWateringEvent");
+            OnInteractEventProp = serializedObject.FindProperty("OnInteractEvent");
             OnPickingEventProp = serializedObject.FindProperty("OnPickingEvent");
+            OnDropingEventProp = serializedObject.FindProperty("OnDropingEvent");
         }
 
         public override void OnInspectorGUI()
@@ -55,9 +57,9 @@ public class Player : MonoBehaviour
             GUILayout.Space(1.25f);
 
             GUILayout.Label("Unity Envent.");
-            EditorGUILayout.PropertyField(OnWateringEventProp);
+            EditorGUILayout.PropertyField(OnInteractEventProp);
             EditorGUILayout.PropertyField(OnPickingEventProp);
-
+            EditorGUILayout.PropertyField(OnDropingEventProp);
 
             serializedObject.ApplyModifiedProperties();
         }
@@ -141,9 +143,9 @@ public class Player : MonoBehaviour
     public Hand playerHand { get; private set; }
 
     private Rigidbody2D rb;
-    [SerializeField] private UnityEvent OnWateringEvent;
+    [SerializeField] private UnityEvent OnInteractEvent;
     [SerializeField] private UnityEvent OnPickingEvent;
-
+    [SerializeField] private UnityEvent OnDropingEvent;
     private Vector2 velocityWorkspace;
 
     private void Awake()
@@ -212,16 +214,15 @@ public class Player : MonoBehaviour
                     }
                     else if (playerHand.holdingObject is IUsable && ItemUseMatcher.isMatch((IUsable)playerHand.holdingObject, targetInteractable))
                     {
+                        OnInteractEvent.Invoke();
                         UseItem();
 
-                        if (playerHand.holdingObject is WateringPot && targetInteractable is Plot)
-                        {
-                            OnWateringEvent.Invoke();
-                        }
+
                     }
                     else if (targetInteractable is PickableObject)
                     {
                         playerHand.PickUpObject((PickableObject)targetInteractable);
+                        OnPickingEvent.Invoke();
                     }
                     else
                     {
@@ -253,8 +254,12 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.K))
         {
-            OnPickingEvent.Invoke();
-            playerHand.DropObject();
+            if (playerHand.holdingObject)
+            {
+                OnDropingEvent.Invoke();
+
+            }
+
         }
 
         if (Input.GetKeyDown(KeyCode.L))

@@ -15,9 +15,6 @@ MonoBehaviour:
   id: 4d9c362b1cb876b4fa6b06ee11ef4da6
   ItemName: SeedFruit
   Icon: {fileID: -386788524301670192, guid: c91296ee2af1d8e4ab38dc90b100e61b, type: 3}
-  canSell: 0
-  IsConsumable: 0
-  isUsable: 0
   purchasePrice: 2
   sellPrice: 7
   plantStages:
@@ -26,4 +23,4 @@ MonoBehaviour:
   - {fileID: -8097741200915394387, guid: c91296ee2af1d8e4ab38dc90b100e61b, type: 3}
   countHarvest: 3
   waterNeed: 2
-  product: {fileID: 6446048334776484171, guid: 54eaaaffc8e7d764ea0509147f161bcd, type: 3}
+  product: {fileID: 7655550880373777621, guid: af0b34f1f70a1234197bcf6c45e71164, type: 3}

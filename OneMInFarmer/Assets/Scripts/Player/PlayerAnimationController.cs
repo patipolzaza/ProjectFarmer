@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class PlayerAnimationController : MonoBehaviour
 {
+
     private Animator anim;
     public bool isPlayingAnimation { get; private set; }
     private void OnValidate()
@@ -15,9 +16,9 @@ public class PlayerAnimationController : MonoBehaviour
         }
     }
 
-    public void wateringAnimation()
+    public void InteractAnimation()
     {
-        string AnimationName = "Watering";
+        string AnimationName = "Interact";
         anim.SetTrigger(AnimationName);
     }
 
@@ -47,7 +48,7 @@ public class PlayerAnimationController : MonoBehaviour
     private void Update()
     {
         isPlayingAnimation = false;
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("PickUp") || anim.GetCurrentAnimatorStateInfo(0).IsName("Watering") || anim.GetCurrentAnimatorStateInfo(0).IsName("Refilling"))
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("PickUp") || anim.GetCurrentAnimatorStateInfo(0).IsName("Interact") || anim.GetCurrentAnimatorStateInfo(0).IsName("Refilling"))
         {
             isPlayingAnimation = true;
         }

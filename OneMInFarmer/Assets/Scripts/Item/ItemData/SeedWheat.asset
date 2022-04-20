@@ -15,9 +15,6 @@ MonoBehaviour:
   id: cb36ce230c4627b4f882c82cd33339cf
   ItemName: SeedWheat
   Icon: {fileID: 5196230094273877852, guid: c91296ee2af1d8e4ab38dc90b100e61b, type: 3}
-  canSell: 1
-  IsConsumable: 0
-  isUsable: 0
   purchasePrice: 1
   sellPrice: 7
   plantStages:
@@ -26,4 +23,4 @@ MonoBehaviour:
   - {fileID: 8411801333702420389, guid: c91296ee2af1d8e4ab38dc90b100e61b, type: 3}
   countHarvest: 1
   waterNeed: 2
-  product: {fileID: 3495548049364755667, guid: 6d41612133ad029408a769aeb969f591, type: 3}
+  product: {fileID: 542107694001303556, guid: 6d41612133ad029408a769aeb969f591, type: 3}
