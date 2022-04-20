@@ -57,6 +57,6 @@ public class PickableObject : Interactable
 
     public virtual void SetParent(Transform newParent)
     {
-        transform.parent = newParent;
+        transform.SetParent(newParent);
     }
 }
