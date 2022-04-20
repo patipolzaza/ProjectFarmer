@@ -324,6 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57c008f954fe54a8bb972de1018a2cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   m_RootBone: {fileID: 2027454154116362015}
   m_BoneTransforms:
   - {fileID: 2027454154116362015}
@@ -479,6 +480,46 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &2027454153814956644
+=======
+  moveSpeedData: {fileID: 0}
+  characterObject: {fileID: 3876509064086019009}
+  interactableDetector: {fileID: 4423809371545508611}
+  interactableDetectRange: 0.55
+  OnInteractEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7042201776346058755}
+        m_TargetAssemblyTypeName: PlayerAnimationController, Assembly-CSharp
+        m_MethodName: InteractAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPickingEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7042201776346058755}
+        m_TargetAssemblyTypeName: PlayerAnimationController, Assembly-CSharp
+        m_MethodName: pickUpAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDropingEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &229270194061313715
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
