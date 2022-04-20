@@ -37,7 +37,8 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void RefillingAnimation()
     {
-        anim.SetBool("Refilling", true);
+        string AnimationName = "Refilling";
+        anim.SetTrigger(AnimationName);
     }
 
     public void SetIsHoldItemBoolean(bool value)

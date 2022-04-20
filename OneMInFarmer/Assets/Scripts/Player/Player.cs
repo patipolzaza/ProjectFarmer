@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
         SerializedProperty OnInteractEventProp;
         SerializedProperty OnPickingEventProp;
         SerializedProperty OnDropingEventProp;
+        SerializedProperty OnRefillingEventProp;
 
         private void OnEnable()
         {
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
             OnInteractEventProp = serializedObject.FindProperty("OnInteractEvent");
             OnPickingEventProp = serializedObject.FindProperty("OnPickingEvent");
             OnDropingEventProp = serializedObject.FindProperty("OnDropingEvent");
+            OnRefillingEventProp = serializedObject.FindProperty("OnRefillingEvent");
         }
 
         public override void OnInspectorGUI()
@@ -60,6 +62,7 @@ public class Player : MonoBehaviour
             EditorGUILayout.PropertyField(OnInteractEventProp);
             EditorGUILayout.PropertyField(OnPickingEventProp);
             EditorGUILayout.PropertyField(OnDropingEventProp);
+            EditorGUILayout.PropertyField(OnRefillingEventProp);
 
             serializedObject.ApplyModifiedProperties();
         }
@@ -146,6 +149,7 @@ public class Player : MonoBehaviour
     [SerializeField] private UnityEvent OnInteractEvent;
     [SerializeField] private UnityEvent OnPickingEvent;
     [SerializeField] private UnityEvent OnDropingEvent;
+    [SerializeField] private UnityEvent OnRefillingEvent;
     private Vector2 velocityWorkspace;
 
     private void Awake()
@@ -214,9 +218,13 @@ public class Player : MonoBehaviour
                     }
                     else if (playerHand.holdingObject is IUsable && ItemUseMatcher.isMatch((IUsable)playerHand.holdingObject, targetInteractable))
                     {
-                        OnInteractEvent.Invoke();
                         UseItem();
-
+                        if (playerHand.holdingObject is WateringPot &&  targetInteractable is Pool)
+                        {
+                            OnRefillingEvent.Invoke();
+                            return;
+                        }
+                        OnInteractEvent.Invoke();
 
                     }
                     else if (targetInteractable is PickableObject)
@@ -247,6 +255,10 @@ public class Player : MonoBehaviour
                     {
 
                         UseItem();
+                        if (Input.GetKeyUp(KeyCode.J))
+                        { 
+                            
+                        }
                     }
                 }
             }
