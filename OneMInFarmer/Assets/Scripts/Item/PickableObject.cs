@@ -25,7 +25,16 @@ public class PickableObject : Interactable
     public virtual void Drop()
     {
         transform.parent = null;
-        transform.localScale = Vector3.one;
+
+        if (interactableObject.Equals(gameObject))
+        {
+            transform.localScale = new Vector3(objectDefaultScale, objectDefaultScale, 1);
+        }
+        else
+        {
+            transform.localScale = Vector3.one;
+        }
+
         transform.eulerAngles = Vector3.zero;
 
         if (transform.lossyScale.x < 0)
