@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8192083982255946562}
   - component: {fileID: 8192083982255946560}
-  - component: {fileID: 8192083982255946563}
+  - component: {fileID: 7684234959980085751}
   m_Layer: 0
   m_Name: PlantFood
   m_TagString: Untagged
@@ -139,8 +139,8 @@ MonoBehaviour:
       m_Calls: []
   currentStackDisplayer: {fileID: 0}
   ItemData: {fileID: 11400000, guid: e15d24538382d514d915879f280a1b20, type: 2}
---- !u!60 &8192083982255946563
-PolygonCollider2D:
+--- !u!58 &7684234959980085751
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -149,22 +149,9 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.14}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.07775658, y: 0.06770313}
-      - {x: -0.07395309, y: -0.07151854}
-      - {x: 0.07395312, y: -0.064214945}
-      - {x: 0.08278331, y: 0.072729856}
+  serializedVersion: 2
+  m_Radius: 0.3
