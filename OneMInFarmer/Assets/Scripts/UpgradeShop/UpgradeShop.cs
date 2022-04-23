@@ -32,6 +32,22 @@ public class UpgradeShop : MonoBehaviour
             return;
         }
 
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            ChangePanel(currentPanelIndex == 0 ? 1 : 0);
+        }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (currentPanelIndex == 0)
+            {
+                ResetDailyUpgrade();
+            }
+            else if (currentPanelIndex == 1)
+            {
+                ResetUpgrade();
+            }
+        }
+
         UpdateUI();
 
         if (isReadied && Player.Instance && playerCoinInMemmory != Player.Instance.wallet.coin)
@@ -47,7 +63,6 @@ public class UpgradeShop : MonoBehaviour
         Instance = this;
         extraTimeShop = GetComponent<TimeUpgradeShop>();
         moveSpeedUpgradeShop = GetComponent<MoveSpeedUpgradeShop>();
-        ChangePanel(0);
 
         yield return new WaitUntil(() => extraTimeShop.isReadied);
         yield return new WaitUntil(() => moveSpeedUpgradeShop.isReadied);
@@ -59,7 +74,9 @@ public class UpgradeShop : MonoBehaviour
     public void OpenWindow()
     {
         isOpenedShop = true;
+        ChangePanel(0);
         ui.ShowWindow();
+        UShopButtonInputManager.Instance.UpdateButtonSelection();
         GameManager.Instance.SetTimeScale(0);
     }
 
@@ -67,13 +84,13 @@ public class UpgradeShop : MonoBehaviour
     {
         isOpenedShop = false;
         ui.HideWindow();
+        UShopButtonInputManager.Instance.SetCurrentButtonSelected(null);
         GameManager.Instance.SetTimeScale(1);
         GameManager.Instance.StartDay();
     }
 
     private void UpdateUI()
     {
-        //Debug.Log(Player.Instance);
         ui.UpdatePlayerCoinText(Player.Instance.wallet.coin);
     }
 
@@ -81,6 +98,7 @@ public class UpgradeShop : MonoBehaviour
     {
         ui.ChangePanel(currentPanelIndex, newIndex);
         currentPanelIndex = newIndex;
+        UShopButtonInputManager.Instance.UpdateButtonSelection();
     }
 
     public void ResetDailyUpgrade()

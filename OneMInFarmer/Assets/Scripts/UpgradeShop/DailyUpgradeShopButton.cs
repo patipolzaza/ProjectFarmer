@@ -1,7 +1,8 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DailyUpgradeShopButton : Button
+public class DailyUpgradeShopButton : Button, ISelectHandler
 {
     private Color defaultDisableColor;
     private Color whenChosenColor;
@@ -46,5 +47,10 @@ public class DailyUpgradeShopButton : Button
     {
         interactable = true;
         isChosen = false;
+    }
+
+    public override void OnPointerEnter(PointerEventData eventData)
+    {
+        base.OnPointerEnter(eventData);
     }
 }
