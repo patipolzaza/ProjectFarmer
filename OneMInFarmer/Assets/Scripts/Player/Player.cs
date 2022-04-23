@@ -195,6 +195,26 @@ public class Player : MonoBehaviour
 
         if (PlayerAnimation.isPlayingAnimation)
         {
+            if (isDetectInteractable && targetInteractable)
+            {
+                if (Input.GetKey(KeyCode.J))
+                {
+                    if (playerHand.holdingObject)
+                    {
+                        if (playerHand.holdingObject is WateringPot && targetInteractable is Pool)
+                        {
+                            PlayerAnimation.SetRefillingAnimation(true);
+                            SoundEffectsController.Instance.PlaySoundEffect("Refilling");
+                            UseItem();
+                        }
+                    }
+                }
+                if (Input.GetKeyUp(KeyCode.J))
+                {
+                    PlayerAnimation.SetRefillingAnimation(false);
+                    SoundEffectsController.Instance.StopSoundEffect("Refilling");
+                }
+            }
             moveInput.Set(0, 0);
             return;
         }
@@ -219,12 +239,13 @@ public class Player : MonoBehaviour
                     else if (playerHand.holdingObject is IUsable && ItemUseMatcher.isMatch((IUsable)playerHand.holdingObject, targetInteractable))
                     {
                         UseItem();
-                        if (playerHand.holdingObject is WateringPot &&  targetInteractable is Pool)
+                        if (playerHand.holdingObject is WateringPot && targetInteractable is Pool)
                         {
-                            OnRefillingEvent.Invoke();
+                            PlayerAnimation.SetRefillingAnimation(true);
                             return;
                         }
-                        OnInteractEvent.Invoke();
+                        else
+                            OnInteractEvent.Invoke();
 
                     }
                     else if (targetInteractable is PickableObject)
@@ -247,21 +268,7 @@ public class Player : MonoBehaviour
                     Interact();
                 }
             }
-            if (Input.GetKey(KeyCode.J))
-            {
-                if (playerHand.holdingObject)
-                {
-                    if (playerHand.holdingObject is WateringPot && targetInteractable is Pool)
-                    {
 
-                        UseItem();
-                        if (Input.GetKeyUp(KeyCode.J))
-                        { 
-                            
-                        }
-                    }
-                }
-            }
         }
 
         if (Input.GetKeyDown(KeyCode.K))
@@ -335,6 +342,12 @@ public class Player : MonoBehaviour
             velocityWorkspace.Set(velocityX, velocityY);
             PlayerAnimation.SetRunningAnimation(velocityWorkspace);
             rb.velocity = velocityWorkspace;
+            if (Mathf.Abs(velocityWorkspace.magnitude) > 0.1)
+            {
+                SoundEffectsController.Instance.PlaySoundEffect("Walk");
+            }
+            else
+                SoundEffectsController.Instance.StopSoundEffect("Walk");
         }
     }
 

@@ -27,6 +27,7 @@ public class WateringPot : PickableObject, IUsable
         if (targetToUse is Plot)
         {
             Plot plot = targetToUse as Plot;
+            SoundEffectsController.Instance.PlaySoundEffect("Watering");
             WateringOnPlot(plot);
         }
         if (targetToUse is Pool)

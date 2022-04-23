@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class PlayerAnimationController : MonoBehaviour
 {
-
+    
     private Animator anim;
     public bool isPlayingAnimation { get; private set; }
     private void OnValidate()
@@ -35,11 +35,12 @@ public class PlayerAnimationController : MonoBehaviour
         anim.SetTrigger(AnimationName);
     }
 
-    public void RefillingAnimation()
+    public void SetRefillingAnimation(bool value)
     {
         string AnimationName = "Refilling";
-        anim.SetTrigger(AnimationName);
-    }
+        anim.SetBool(AnimationName, value);
+    }  
+
 
     public void SetIsHoldItemBoolean(bool value)
     {

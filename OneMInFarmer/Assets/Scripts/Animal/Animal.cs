@@ -230,6 +230,7 @@ public class Animal : PickableObject, IBuyable, ISellable
         float oldFoodRatio = foodsEaten.Count / (float)animalData.stomachSize;
         foodsEaten.Add(food);
         showTextCoroutine = StartCoroutine(ShowText("Yummy :)"));
+        SoundEffectsController.Instance.PlaySoundEffect("AnimalEating");
         float newFoodRatio = foodsEaten.Count / (float)animalData.stomachSize;
         OnEatenFood?.Invoke(oldFoodRatio, newFoodRatio);
         return true;

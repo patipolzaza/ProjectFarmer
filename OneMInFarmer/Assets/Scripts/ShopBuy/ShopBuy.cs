@@ -63,6 +63,7 @@ public class ShopBuy : Interactable
         {
             product.gameObject.SetActive(true);
             player.playerHand.PickUpObject(product);
+             SoundEffectsController.Instance.PlaySoundEffect("ClinkingCoin");
         }
         else
         {

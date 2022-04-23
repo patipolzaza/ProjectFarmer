@@ -88,6 +88,7 @@ public class Plot : Interactable
 
         if (this.seed == null)
         {
+            SoundEffectsController.Instance.PlaySoundEffect("Planting");
             this.seed = seedData;
             isPlanted = true;
             plantStage = 0;
