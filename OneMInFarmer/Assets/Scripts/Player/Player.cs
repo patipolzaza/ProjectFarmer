@@ -155,6 +155,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         playerHand = GetComponent<Hand>();
+        moveSpeedStatus = new PercentStatus(moveSpeedData.statusName, moveSpeedData);
 
         facingDirection = transform.localScale.x / Mathf.Abs(transform.localScale.x);
 
@@ -165,7 +166,6 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        moveSpeedStatus = new PercentStatus(moveSpeedData.statusName, moveSpeedData);
     }
 
     private void OnValidate()
