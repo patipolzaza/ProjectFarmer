@@ -13,7 +13,7 @@ public class UShopButtonInputNavigator : MonoBehaviour, ISelectHandler
     [Space(15f)]
     public UnityAction OnInteractableOn;
     public UnityAction OnInteractableOff;
-
+    public Button GetButton => button;
     public bool IsStartButton => isStartButton;
 
     private void Awake()
@@ -31,10 +31,6 @@ public class UShopButtonInputNavigator : MonoBehaviour, ISelectHandler
     private void OnDisable()
     {
         OnInteractableOff -= ChangeSelectTarget;
-        if (UShopButtonInputManager.Instance && button.Equals(UShopButtonInputManager.Instance.currentSelected))
-        {
-            UShopButtonInputManager.Instance.SetCurrentButtonSelected(null);
-        }
     }
 
     public void OnSelect(BaseEventData eventData)
@@ -77,6 +73,11 @@ public class UShopButtonInputNavigator : MonoBehaviour, ISelectHandler
 
     private void Update()
     {
+        if (!gameObject.activeSelf)
+        {
+            return;
+        }
+
         if (!isInteractableInMem && button.interactable)
         {
             OnInteractableOn?.Invoke();
@@ -98,13 +99,19 @@ public class UShopButtonInputNavigator : MonoBehaviour, ISelectHandler
 
         if (button is DailyUpgradeShopButton)
         {
-            if (button.navigation.selectOnLeft)
-                UShopButtonInputManager.Instance.ChangeSelectedButton(button.navigation.selectOnLeft);
-            else if (button.navigation.selectOnUp)
-                UShopButtonInputManager.Instance.ChangeSelectedButton(button.navigation.selectOnUp);
+            Selectable target = FindInteractableLeft();
+
+            if (!target)
+            {
+                target = FindInteractableUp();
+
+                if (!target)
+                {
+                    UShopButtonInputManager.Instance.ChangeSelectedButtonToStartButton();
+                }
+            }
             else
             {
-                Selectable target = FindInteractableUp();
                 UShopButtonInputManager.Instance.ChangeSelectedButton(target);
             }
         }
@@ -250,34 +257,5 @@ public class UShopButtonInputNavigator : MonoBehaviour, ISelectHandler
 
             return selectable && selectable.interactable ? selectable : null;
         }
-    }
-
-    public void SetButtonNavigationUp(Selectable selectable)
-    {
-        Navigation navigation = button.navigation;
-        navigation.selectOnUp = selectable;
-
-        button.navigation = navigation;
-    }
-    public void SetButtonNavigationDown(Selectable selectable)
-    {
-        Navigation navigation = button.navigation;
-        navigation.selectOnDown = selectable;
-
-        button.navigation = navigation;
-    }
-    public void SetButtonNavigationLeft(Selectable selectable)
-    {
-        Navigation navigation = button.navigation;
-        navigation.selectOnLeft = selectable;
-
-        button.navigation = navigation;
-    }
-    public void SetButtonNavigationRight(Selectable selectable)
-    {
-        Navigation navigation = button.navigation;
-        navigation.selectOnRight = selectable;
-
-        button.navigation = navigation;
     }
 }

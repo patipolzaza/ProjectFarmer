@@ -17,12 +17,17 @@ public class UShopButtonInputManager : MonoBehaviour
 
     private void Update()
     {
+        if (!UpgradeShop.Instance && !UpgradeShop.Instance.isOpenedShop)
+        {
+            return;
+        }
+
         CheckButtonInput();
     }
 
     private void CheckButtonInput()
     {
-        if ((Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0))
+        if ((Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical")))
         {
             UpdateButtonSelection();
         }
@@ -41,24 +46,18 @@ public class UShopButtonInputManager : MonoBehaviour
         }
         else
         {
-            var selectables = FindObjectsOfType<Selectable>();
+            var buttonNavigators = FindObjectsOfType<UShopButtonInputNavigator>();
             int index = 0;
-            foreach (var sb in selectables)
+            foreach (var bn in buttonNavigators)
             {
-                if (sb.GetComponent<UShopButtonInputNavigator>())
+                if (bn.IsStartButton)
                 {
-                    UShopButtonInputNavigator buttonNavigator = sb.GetComponent<UShopButtonInputNavigator>();
-                    if (buttonNavigator.IsStartButton)
-                    {
-                        currentSelected = sb;
-                        sb.Select();
-                        break;
-                    }
-                    else if (index == selectables.Length - 1 && !currentSelected)
-                    {
-                        currentSelected = sb;
-                        sb.Select();
-                    }
+                    ChangeSelectedButton(bn.GetButton);
+                    break;
+                }
+                else if (index == buttonNavigators.Length - 1 && !currentSelected)
+                {
+                    ChangeSelectedButton(bn.GetButton);
                 }
                 index++;
             }
@@ -74,6 +73,16 @@ public class UShopButtonInputManager : MonoBehaviour
 
         selectable.Select();
         SetCurrentButtonSelected(selectable);
+    }
+
+    public void DeselectCurrentButton()
+    {
+        var currentSelectedObject = EventSystem.current.currentSelectedGameObject;
+        if (currentSelectedObject)
+        {
+            currentSelectedObject = null;
+            currentSelected = null;
+        }
     }
 
     public void ChangeSelectedButtonToStartButton()
