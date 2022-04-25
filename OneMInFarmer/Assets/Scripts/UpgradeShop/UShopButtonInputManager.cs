@@ -9,7 +9,9 @@ public class UShopButtonInputManager : MonoBehaviour
     public static UShopButtonInputManager Instance { get; private set; }
     public Selectable currentSelected { get; private set; }
 
-    [SerializeField] private Selectable startDayButton;
+    [SerializeField] private Selectable _startDayButton;
+
+    [SerializeField] private List<Selectable> _startDayUpNavigationButtons = new List<Selectable>();
     private void Awake()
     {
         Instance = this;
@@ -87,7 +89,7 @@ public class UShopButtonInputManager : MonoBehaviour
 
     public void ChangeSelectedButtonToStartButton()
     {
-        ChangeSelectedButton(startDayButton);
+        ChangeSelectedButton(_startDayButton);
     }
 
     public void SetCurrentButtonSelected(Selectable selectable)

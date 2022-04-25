@@ -132,7 +132,7 @@ public class TimeUpgradeShop : MonoBehaviour
     private IEnumerator UpdateUpgradeButtonsInteractable()
     {
         yield return new WaitUntil(() => statusToUpgrade != null);
-        ui.SetAllExtraTimeUpgradeButtonsInteractable(false);
+        //ui.SetAllExtraTimeUpgradeButtonsInteractable(false);
         int maxCost = statusToUpgrade.GetUpgradeToTargetLevelCost(statusToUpgrade.GetMaxLevel);
 
         yield return new WaitUntil(() => upgradeShop.playerCoinInMemory == Player.Instance.wallet.coin);
@@ -165,7 +165,7 @@ public class TimeUpgradeShop : MonoBehaviour
                 }
                 else
                 {
-                    break;
+                    ui.SetExtraTimeUpgradeButtonInteractable(i, false);
                 }
             }
         }

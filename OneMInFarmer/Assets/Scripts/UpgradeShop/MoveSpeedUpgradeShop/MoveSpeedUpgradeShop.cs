@@ -121,7 +121,7 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
     private IEnumerator UpdateUpgradeButtonsInteractable()
     {
         yield return new WaitUntil(() => _statusToUpgrade != null);
-        ui.SetAllUpgradeButtonsInteractable(false);
+        //ui.SetAllUpgradeButtonsInteractable(false);
         int maxCost = _statusToUpgrade.GetUpgradeToTargetLevelCost(_statusToUpgrade.GetMaxLevel);
 
         yield return new WaitUntil(() => upgradeShop.playerCoinInMemory == Player.Instance.wallet.coin);
@@ -158,7 +158,7 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
                 }
                 else
                 {
-                    break;
+                    ui.SetUpgradeButtonInteractable(i, false);
                 }
             }
         }

@@ -17,6 +17,7 @@ public class UpgradeShop : MonoBehaviour
 
     public UnityEvent OnResetDailyUpgrade;
     public UnityEvent OnResetPermanentUpgrade;
+    public UnityEvent OnPanelChanged;
 
     public bool isReadied { get; private set; } = false;
 
@@ -74,9 +75,10 @@ public class UpgradeShop : MonoBehaviour
     public void OpenWindow()
     {
         isOpenedShop = true;
-        ChangePanel(0);
         ui.ShowWindow();
+        ChangePanel(0);
         GameManager.Instance.SetTimeScale(0);
+        UShopButtonInputManager.Instance.UpdateButtonSelection();
     }
 
     public void CloseWindow()
@@ -98,8 +100,7 @@ public class UpgradeShop : MonoBehaviour
         ui.ChangePanel(currentPanelIndex, newIndex);
         currentPanelIndex = newIndex;
 
-        UShopButtonInputManager.Instance.DeselectCurrentButton();
-        UShopButtonInputManager.Instance.UpdateButtonSelection();
+        OnPanelChanged?.Invoke();
     }
 
     public void ResetDailyUpgrade()

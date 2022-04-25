@@ -78,11 +78,11 @@ public class UShopButtonInputNavigator : MonoBehaviour, ISelectHandler
             return;
         }
 
-        if (!isInteractableInMem && button.interactable)
+        if (isInteractableInMem == false && button.interactable == true)
         {
             OnInteractableOn?.Invoke();
         }
-        else if (isInteractableInMem && !button.interactable)
+        else if (isInteractableInMem == true && button.interactable == false)
         {
             OnInteractableOff?.Invoke();
         }
