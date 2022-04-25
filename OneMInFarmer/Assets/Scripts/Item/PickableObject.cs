@@ -24,7 +24,7 @@ public class PickableObject : Interactable
 
     public virtual void Drop()
     {
-        transform.parent = null;
+        transform.SetParent(null);
 
         if (interactableObject.Equals(gameObject))
         {
