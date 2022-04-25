@@ -34,8 +34,6 @@ public class WalletUI : WindowUIBase
         SetCoinText(FindObjectOfType<Wallet>().GetComponent<Wallet>().coin);
     }
 
-
-
     public void SetCoinText(int coin)
     {
         CoinText.text = coin.ToString();
@@ -64,6 +62,5 @@ public class WalletUI : WindowUIBase
         } while (Mathf.RoundToInt(currentValue) != target);
 
         _slideTextCoroutine = null;
-        yield break;
     }
 }

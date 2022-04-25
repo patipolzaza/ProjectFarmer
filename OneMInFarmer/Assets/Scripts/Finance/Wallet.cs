@@ -10,21 +10,14 @@ public class Wallet : MonoBehaviour, IContainStatus
     public delegate void CoinChangedDelegate(int oldValue, int newValue);
     public CoinChangedDelegate OnCoinChanged;
 
-    public int coin { get; private set; }
+    public int coin { get; private set; } = 10;
 
 
     private void Awake()
     {
         _bonusCoinStatus = new Status("Bonus Coin", _bonusCoinStatusData);
-
-        /*coin = 10;
-        OnCoinChanged?.Invoke(0, coin);*/
     }
 
-    private void Start()
-    {
-        EarnCoin(10);
-    }
     public Status GetStatus => _bonusCoinStatus;
 
     public void EarnCoin(int amount)
