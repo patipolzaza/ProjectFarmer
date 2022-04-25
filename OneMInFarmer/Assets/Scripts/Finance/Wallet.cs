@@ -17,7 +17,13 @@ public class Wallet : MonoBehaviour, IContainStatus
     {
         _bonusCoinStatus = new Status("Bonus Coin", _bonusCoinStatusData);
 
-        coin = 10;
+        /*coin = 10;
+        OnCoinChanged?.Invoke(0, coin);*/
+    }
+
+    private void Start()
+    {
+        EarnCoin(10);
     }
     public Status GetStatus => _bonusCoinStatus;
 
@@ -26,7 +32,6 @@ public class Wallet : MonoBehaviour, IContainStatus
         int oldCoinValue = coin;
         coin += (amount + _bonusCoinStatus.GetValue);
         OnCoinChanged?.Invoke(oldCoinValue, coin);
-        //WalletUI.Instance.UpdateCoinText(coin);
     }
 
     public void LoseCoin(int amount)
@@ -42,6 +47,5 @@ public class Wallet : MonoBehaviour, IContainStatus
         }
 
         OnCoinChanged?.Invoke(oldCoinValue, coin);
-        //WalletUI.Instance.UpdateCoinText(coin);
     }
 }
