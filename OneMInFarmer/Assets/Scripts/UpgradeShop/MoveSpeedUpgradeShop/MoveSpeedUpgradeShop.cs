@@ -124,8 +124,8 @@ public class MoveSpeedUpgradeShop : MonoBehaviour
         ui.SetAllUpgradeButtonsInteractable(false);
         int maxCost = _statusToUpgrade.GetUpgradeToTargetLevelCost(_statusToUpgrade.GetMaxLevel);
 
-        yield return new WaitUntil(() => upgradeShop.playerCoinInMemmory == Player.Instance.wallet.coin);
-        int playerCoin = upgradeShop.playerCoinInMemmory;
+        yield return new WaitUntil(() => upgradeShop.playerCoinInMemory == Player.Instance.wallet.coin);
+        int playerCoin = upgradeShop.playerCoinInMemory;
 
         if (maxCost <= playerCoin)
         {

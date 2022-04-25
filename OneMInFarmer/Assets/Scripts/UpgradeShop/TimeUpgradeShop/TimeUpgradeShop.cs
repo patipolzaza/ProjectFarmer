@@ -135,8 +135,8 @@ public class TimeUpgradeShop : MonoBehaviour
         ui.SetAllExtraTimeUpgradeButtonsInteractable(false);
         int maxCost = statusToUpgrade.GetUpgradeToTargetLevelCost(statusToUpgrade.GetMaxLevel);
 
-        yield return new WaitUntil(() => upgradeShop.playerCoinInMemmory == Player.Instance.wallet.coin);
-        int playerCoin = upgradeShop.playerCoinInMemmory;
+        yield return new WaitUntil(() => upgradeShop.playerCoinInMemory == Player.Instance.wallet.coin);
+        int playerCoin = upgradeShop.playerCoinInMemory;
 
 
         if (maxCost <= playerCoin)

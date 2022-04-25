@@ -8,12 +8,12 @@ public class UpgradeShop : MonoBehaviour
     public static UpgradeShop Instance { get; private set; }
     [SerializeField] private UpgradeShopWindowUI ui;
     private int currentPanelIndex = 0;
-    public int playerCoinInMemmory { get; private set; }
+    public int playerCoinInMemory { get; private set; }
 
     public TimeUpgradeShop extraTimeShop { get; private set; }
     public MoveSpeedUpgradeShop moveSpeedUpgradeShop { get; private set; }
 
-    private bool isOpenedShop;
+    public bool isOpenedShop { get; private set; }
 
     public UnityEvent OnResetDailyUpgrade;
     public UnityEvent OnResetPermanentUpgrade;
@@ -50,9 +50,9 @@ public class UpgradeShop : MonoBehaviour
 
         UpdateUI();
 
-        if (isReadied && Player.Instance && playerCoinInMemmory != Player.Instance.wallet.coin)
+        if (isReadied && Player.Instance && playerCoinInMemory != Player.Instance.wallet.coin)
         {
-            playerCoinInMemmory = Player.Instance.wallet.coin;
+            playerCoinInMemory = Player.Instance.wallet.coin;
             extraTimeShop.UpdateShopUpgradeButtons();
             moveSpeedUpgradeShop.UpdateShopButtons();
         }
@@ -76,7 +76,6 @@ public class UpgradeShop : MonoBehaviour
         isOpenedShop = true;
         ChangePanel(0);
         ui.ShowWindow();
-        UShopButtonInputManager.Instance.UpdateButtonSelection();
         GameManager.Instance.SetTimeScale(0);
     }
 
@@ -84,7 +83,7 @@ public class UpgradeShop : MonoBehaviour
     {
         isOpenedShop = false;
         ui.HideWindow();
-        UShopButtonInputManager.Instance.SetCurrentButtonSelected(null);
+        UShopButtonInputManager.Instance.DeselectCurrentButton();
         GameManager.Instance.SetTimeScale(1);
         GameManager.Instance.StartDay();
     }
@@ -98,6 +97,8 @@ public class UpgradeShop : MonoBehaviour
     {
         ui.ChangePanel(currentPanelIndex, newIndex);
         currentPanelIndex = newIndex;
+
+        UShopButtonInputManager.Instance.DeselectCurrentButton();
         UShopButtonInputManager.Instance.UpdateButtonSelection();
     }
 
