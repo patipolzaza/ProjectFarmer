@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9cab27eab9b98f428269a4e3b6cb65c, type: 3}
+  m_Name: D_Cow
+  m_EditorClassIdentifier: 
+  animalName: Cow
+  inShopIcon: {fileID: 1201215636998452967, guid: 7ae8c846d6a54fe428bba1d8aef60abc, type: 3}
+  sellPricePerKilo: 1
+  bonusSellPriceForAdult: 1
+  bonusSellPriceForElder: 2
+  purchasePrice: 5
+  lifespan: 6
+  stomachSize: 2
+  startWeight: 1
+  edibleFoods: 01000000
