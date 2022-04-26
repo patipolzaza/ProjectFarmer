@@ -166,7 +166,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        DisableMove();
+        //DisableMove();
     }
 
     private void OnValidate()
@@ -444,6 +444,7 @@ public class Player : MonoBehaviour
     {
         canMove = false;
         rb.velocity = Vector3.zero;
+        moveInput = Vector3.zero;
     }
 
     private void OnDrawGizmos()

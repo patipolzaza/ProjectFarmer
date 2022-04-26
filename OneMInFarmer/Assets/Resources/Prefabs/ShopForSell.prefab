@@ -69,6 +69,7 @@ GameObject:
   - component: {fileID: 7641322465874520171}
   - component: {fileID: 7641322465874520169}
   - component: {fileID: 5019565239897653967}
+  - component: {fileID: 2240369442631919388}
   m_Layer: 0
   m_Name: ShopForSell
   m_TagString: Untagged
@@ -214,3 +215,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2240369442631919388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7641322465874520170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd23118f44fddb84dab8e9f4bf008b64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteRenderers:
+  - {fileID: 7641322465874520171}
+  offsetY: 0
