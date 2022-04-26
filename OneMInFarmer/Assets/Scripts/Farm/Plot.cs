@@ -66,6 +66,7 @@ public class Plot : Interactable
             plantStage--;
             UpdatePlant();
             player.playerHand.PickUpObject(Instantiate(seed.product, new Vector3(0, 0, 0), Quaternion.identity));
+            SoundEffectsController.Instance.PlaySoundEffect("Harvesting");
             return;
         }
         else
@@ -73,6 +74,7 @@ public class Plot : Interactable
             player.playerHand.PickUpObject(Instantiate(seed.product, new Vector3(0, 0, 0), Quaternion.identity));
             isPlanted = false;
             seed = null;
+            SoundEffectsController.Instance.PlaySoundEffect("Harvesting");
             plantObject.SetActive(false);
 
         }
