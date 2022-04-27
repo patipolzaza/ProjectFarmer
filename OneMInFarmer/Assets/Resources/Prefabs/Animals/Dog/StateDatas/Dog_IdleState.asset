@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8165a21feaec0af4a9510b497977d3fc, type: 3}
-  m_Name: Fox_MoveState
+  m_Script: {fileID: 11500000, guid: ef64a5a44184eae4792e3d74f919ce1d, type: 3}
+  m_Name: Dog_IdleState
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  minMoveTime: 1.5
-  maxMoveTime: 3
+  minIdleTime: 3
+  maxIdleTime: 10

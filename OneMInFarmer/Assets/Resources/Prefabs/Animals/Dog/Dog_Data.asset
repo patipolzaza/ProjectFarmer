@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9cab27eab9b98f428269a4e3b6cb65c, type: 3}
-  m_Name: Fox_Data
+  m_Name: Dog_Data
   m_EditorClassIdentifier: 
-  animalName: Fox
-  inShopIcon: {fileID: 3596992122997770015, guid: 99a3a7b177f936e46a55c7b17c1bed39, type: 3}
+  animalName: Dog
+  inShopIcon: {fileID: 21300000, guid: d221c364e0bc90241813f3fb2ad75e16, type: 3}
   sellPricePerKilo: 2
   bonusSellPriceForAdult: 3
   bonusSellPriceForElder: 3
