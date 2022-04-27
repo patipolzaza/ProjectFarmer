@@ -10,8 +10,7 @@ public class Interactable : MonoBehaviour
     [SerializeField] protected GameObject interactableObject;
     protected float objectDefaultScale;
     public Collider2D objectCollider { get; protected set; }
-    public SpriteRenderer sr { get; protected set; }
-
+    public SpriteRenderer[] spriteRenderers { get; protected set; }
 
     protected Color defaultColor;
     protected Color highlightColor;
@@ -23,11 +22,24 @@ public class Interactable : MonoBehaviour
 
     protected virtual void Awake()
     {
-        sr = interactableObject.GetComponent<SpriteRenderer>();
+        if (interactableObject.GetComponent<SpriteRenderer>())
+        {
+            SpriteRenderer sr = interactableObject.GetComponent<SpriteRenderer>();
+            spriteRenderers = new SpriteRenderer[1];
+            spriteRenderers[0] = sr;
+            defaultColor = sr.color;
+        }
+        else if (interactableObject.GetComponent<SpriteRenderers>())
+        {
+            SpriteRenderers srs = interactableObject.GetComponent<SpriteRenderers>();
+            spriteRenderers = new SpriteRenderer[srs.GetSpriteRenderers.Length];
+            spriteRenderers = srs.GetSpriteRenderers;
+            defaultColor = srs.GetDefaultColor;
+        }
+
         objectCollider = GetComponent<Collider2D>();
 
         highlightColor = new Color32(255, 226, 0, 255);
-        defaultColor = sr.color;
         isInteractable = true;
 
         objectDefaultScale = Mathf.Abs(interactableObject.transform.localScale.x);
@@ -54,14 +66,21 @@ public class Interactable : MonoBehaviour
 
     public virtual void ShowObjectHighlight()
     {
-        defaultColor = sr.color;
+        defaultColor = spriteRenderers[0].color;
+
         if (isInteractable)
         {
-            sr.color = highlightColor;
+            foreach (var sr in spriteRenderers)
+            {
+                sr.color = highlightColor;
+            }
         }
         else
         {
-            sr.color = defaultColor;
+            foreach (var sr in spriteRenderers)
+            {
+                sr.color = defaultColor;
+            }
         }
         OnHighlightShowed?.Invoke();
     }
@@ -71,21 +90,32 @@ public class Interactable : MonoBehaviour
         Vector3 scale = new Vector3(objectDefaultScale * newScale.x, objectDefaultScale * newScale.y, 1);
         interactableObject.transform.localScale = scale;
     }
+
     public virtual void SetColor(Color newColor)
     {
         defaultColor = newColor;
-        sr.color = defaultColor;
+
+        foreach (var sr in spriteRenderers)
+        {
+            sr.color = defaultColor;
+        }
     }
 
     public virtual void HideObjectHighlight()
     {
-        sr.color = defaultColor;
+        foreach (var sr in spriteRenderers)
+        {
+            sr.color = defaultColor;
+        }
 
         OnHighlightHided?.Invoke();
     }
 
     public virtual void SetObjectSpriteRenderer(bool isRender)
     {
-        sr.enabled = isRender;
+        foreach (var sr in spriteRenderers)
+        {
+            sr.enabled = isRender;
+        }
     }
 }
