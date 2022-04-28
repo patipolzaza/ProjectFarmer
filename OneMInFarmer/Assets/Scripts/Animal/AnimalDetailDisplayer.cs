@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class AnimalDetailDisplayer : WindowUIBase
@@ -12,6 +13,7 @@ public class AnimalDetailDisplayer : WindowUIBase
 
     [SerializeField] private TMP_Text _priceText;
 
+    [SerializeField] private Image _animalIcon;
     protected override void Awake()
     {
         Instance = this;
@@ -24,8 +26,20 @@ public class AnimalDetailDisplayer : WindowUIBase
         SetActiveMeatIcon(isEatMeat);
         SetActivePlantIcon(isEatPlant);
         SetPriceText(animal.GetSellPrice);
+        SetAnimalIcon(animal.GetIcon);
     }
 
+    private void SetAnimalIcon(Sprite icon)
+    {
+        if (icon)
+        {
+            _animalIcon.sprite = icon;
+        }
+        else
+        {
+            _animalIcon.gameObject.SetActive(false);
+        }
+    }
     private void SetAgeSpanText(string newText)
     {
         _ageSpanText.text = newText;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9cab27eab9b98f428269a4e3b6cb65c, type: 3}
   m_Name: D_Bear
   m_EditorClassIdentifier: 
-  animalName: Dinosaur
+  animalName: Bear
   inShopIcon: {fileID: 21300000, guid: e3419865a43623444993f6d29b14f2a6, type: 3}
   sellPricePerKilo: 1
   bonusSellPriceForAdult: 6
