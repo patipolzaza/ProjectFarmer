@@ -227,6 +227,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd23118f44fddb84dab8e9f4bf008b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteRenderers:
-  - {fileID: 7641322465874520171}
-  offsetY: 0
+  obj: {fileID: 7641322465874520170}
+  offsetY: -0.5

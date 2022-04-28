@@ -86,7 +86,7 @@ AnimatorStateTransition:
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
+  m_CanTransitionToSelf: 0
 --- !u!1102 &-4903023450392197520
 AnimatorState:
   serializedVersion: 6
@@ -198,7 +198,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DinosaurAnimatorController
+  m_Name: BearAnimatorController
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: idle

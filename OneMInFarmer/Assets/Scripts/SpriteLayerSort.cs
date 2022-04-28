@@ -4,8 +4,33 @@ using UnityEngine;
 
 public class SpriteLayerSort : MonoBehaviour
 {
-    [SerializeField] private List<SpriteRenderer> _spriteRenderers = new List<SpriteRenderer>();
+    [SerializeField] private GameObject obj;
+
+    private Dictionary<SpriteRenderer, int> spriteRenderersSortingOrderPairs = new Dictionary<SpriteRenderer, int>();
+
     [SerializeField] private float offsetY;
+
+    private void Awake()
+    {
+        if (obj.GetComponent<SpriteRenderer>())
+        {
+            SpriteRenderer sr = obj.GetComponent<SpriteRenderer>();
+            int defaultLayerOrder = sr.sortingOrder;
+
+            spriteRenderersSortingOrderPairs.Add(sr, defaultLayerOrder);
+        }
+        else if (obj.GetComponent<SpriteRenderers>())
+        {
+            SpriteRenderers srs = obj.GetComponent<SpriteRenderers>();
+            var spriteRenderers = srs.GetSpriteRenderers;
+            foreach (var sr in spriteRenderers)
+            {
+                int defaultLayerOrder = sr.sortingOrder;
+                spriteRenderersSortingOrderPairs.Add(sr, defaultLayerOrder);
+            }
+        }
+
+    }
 
     // Update is called once per frame
     void Update()
@@ -17,9 +42,13 @@ public class SpriteLayerSort : MonoBehaviour
     {
         float positionY = transform.position.y;
 
-        foreach (var sr in _spriteRenderers)
+        foreach (var keyValuePair in spriteRenderersSortingOrderPairs)
         {
-            sr.sortingOrder = -Mathf.RoundToInt((positionY - offsetY) * 100f);
+            SpriteRenderer sr = keyValuePair.Key;
+            int defaultSortingOrder = keyValuePair.Value;
+
+            int newSortingOrder = defaultSortingOrder + (-(Mathf.RoundToInt((positionY - offsetY) * 100f)));
+            sr.sortingOrder = newSortingOrder;
         }
     }
 }

@@ -1708,20 +1708,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd23118f44fddb84dab8e9f4bf008b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteRenderers:
-  - {fileID: 8180515931690818259}
-  - {fileID: 9003992918590182815}
-  - {fileID: 2309667958380210162}
-  - {fileID: 5699890573638711342}
-  - {fileID: 4029895827432146739}
-  - {fileID: 3501695946741502182}
-  - {fileID: 5628560157011872515}
-  - {fileID: 8233011642147314784}
-  - {fileID: 72464302829735259}
-  - {fileID: 3876606566847384688}
-  - {fileID: 5352677373096875651}
-  - {fileID: 1142686793412868658}
-  offsetY: 0
+  obj: {fileID: 809145343709555209}
+  offsetY: -0.5
 --- !u!61 &6597479919975617269
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2177,7 +2165,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4513102429519279700
 RectTransform:
   m_ObjectHideFlags: 0

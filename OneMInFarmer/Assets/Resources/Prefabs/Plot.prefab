@@ -319,6 +319,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd23118f44fddb84dab8e9f4bf008b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteRenderers:
-  - {fileID: 1339591568560670064}
+  obj: {fileID: 3920867688730202926}
   offsetY: 0

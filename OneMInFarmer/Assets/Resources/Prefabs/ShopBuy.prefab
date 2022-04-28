@@ -369,8 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd23118f44fddb84dab8e9f4bf008b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteRenderers:
-  - {fileID: 7784426349916879725}
+  obj: {fileID: 1061077377177315657}
   offsetY: -0.5
 --- !u!1 &4205238668200629934
 GameObject:
