@@ -71,7 +71,7 @@ public class UShopButtonInputNavigator : MonoBehaviour, ISelectHandler
         }
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (!gameObject.activeSelf)
         {
@@ -108,6 +108,10 @@ public class UShopButtonInputNavigator : MonoBehaviour, ISelectHandler
                 if (!target)
                 {
                     UShopButtonInputManager.Instance.ChangeSelectedButtonToStartButton();
+                }
+                else
+                {
+                    UShopButtonInputManager.Instance.ChangeSelectedButton(target);
                 }
             }
             else
