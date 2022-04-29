@@ -6,7 +6,7 @@ public class ProductSellPriceDisplayer : WindowUIBase
     public static ProductSellPriceDisplayer Instance { get; private set; }
     [SerializeField] private TMP_Text _sellPriceText;
 
-    protected override void Awake()
+    private void Awake()
     {
         Instance = this;
     }

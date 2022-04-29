@@ -14,7 +14,7 @@ public class AnimalDetailDisplayer : WindowUIBase
     [SerializeField] private TMP_Text _priceText;
 
     [SerializeField] private Image _animalIcon;
-    protected override void Awake()
+    private void Awake()
     {
         Instance = this;
     }

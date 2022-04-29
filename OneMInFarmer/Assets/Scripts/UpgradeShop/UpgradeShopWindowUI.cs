@@ -12,11 +12,6 @@ public class UpgradeShopWindowUI : WindowUIBase
     [SerializeField] private List<Button> changeTabButtons = new List<Button>();
     [SerializeField] private List<GameObject> tabPanels = new List<GameObject>();
 
-    protected override void Update()
-    {
-        base.Update();
-    }
-
     public override void ShowWindow()
     {
         base.ShowWindow();

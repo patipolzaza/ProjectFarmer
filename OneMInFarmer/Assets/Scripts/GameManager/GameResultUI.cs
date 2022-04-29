@@ -14,10 +14,8 @@ public class GameResultUI : WindowUIBase
     private Coroutine _showResultCoroutine;
     private Coroutine _slideNumberCoroutine;
 
-    protected override void Update()
+    private void Update()
     {
-        base.Update();
-
         if (_canSkip && _showResultCoroutine != null && Input.anyKeyDown)
         {
             ShowSkippedGameResult();

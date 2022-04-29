@@ -22,7 +22,7 @@ public class DebtResultUI : WindowUIBase
         HideContinueText();
     }
 
-    protected override void Update()
+    private void Update()
     {
         if (!DebtManager.Instance || !DebtManager.Instance.isAllProcessFinished || !_continueTextObject.activeSelf)
         {

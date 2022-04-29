@@ -33,9 +33,8 @@ public class ProductDetailDisplayer : WindowUIBase
     [SerializeField] private GameObject _plantHarvestField;
     [SerializeField] private TMP_Text _plantHarvestCountText;
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
         Instance = this;
     }
 

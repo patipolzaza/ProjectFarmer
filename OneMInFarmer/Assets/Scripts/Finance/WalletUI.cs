@@ -9,7 +9,7 @@ public class WalletUI : WindowUIBase
     private Wallet _playerWallet;
 
     private Coroutine _slideTextCoroutine;
-    protected override void Awake()
+    private void Awake()
     {
         StartCoroutine(InitialSetUp());
     }
