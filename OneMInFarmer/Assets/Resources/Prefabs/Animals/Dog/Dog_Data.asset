@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dog_Data
   m_EditorClassIdentifier: 
   animalName: Dog
-  inShopIcon: {fileID: 21300000, guid: d221c364e0bc90241813f3fb2ad75e16, type: 3}
+  inShopIcon: {fileID: 21300000, guid: b4b0d6d4e313d8d4e8bd0bc1b640eed9, type: 3}
   sellPricePerKilo: 2
   bonusSellPriceForAdult: 3
   bonusSellPriceForElder: 3

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: D_Cow
   m_EditorClassIdentifier: 
   animalName: Cow
-  inShopIcon: {fileID: 21300000, guid: 4719dc5064e6def47b2ba4c832f79b1a, type: 3}
+  inShopIcon: {fileID: 21300000, guid: a171e6cb4f1edbe40abbf59ba2ec7ac4, type: 3}
   sellPricePerKilo: 1
   bonusSellPriceForAdult: 1
   bonusSellPriceForElder: 2
