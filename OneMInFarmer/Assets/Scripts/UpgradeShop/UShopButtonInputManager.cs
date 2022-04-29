@@ -101,8 +101,6 @@ public class UShopButtonInputManager : MonoBehaviour
                 break;
             }
         }
-
-        Debug.Log($"Change select button to start button({target})");
         ChangeSelectedButton(target);
     }
 

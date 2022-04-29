@@ -20,6 +20,10 @@ public class ProductDetailDisplayer : WindowUIBase
     [SerializeField] private GameObject _plantFoodTypeField;
     [SerializeField] private GameObject _meatFoodTypeField;
 
+    [Header("Weight Gain Field")]
+    [SerializeField] private GameObject _weightGainField;
+    [SerializeField] private TMP_Text _weightGainValueText;
+
     [Header("Edible Food Type Field")]
     [SerializeField] private GameObject _edibleFoodTypeField;
     [SerializeField] private GameObject _edibleMeatField;
@@ -84,6 +88,9 @@ public class ProductDetailDisplayer : WindowUIBase
                 {
                     AnimalFood food = product as AnimalFood;
                     SetPurchasePriceText(food.GetBuyPrice);
+
+                    SetActiveWeightGainField(true);
+                    SetWeightGainValueText(food.GetWeightGain);
 
                     FoodType foodType = food.GetFoodType;
 
@@ -165,6 +172,17 @@ public class ProductDetailDisplayer : WindowUIBase
         _plantHarvestCountText.text = harvestCount.ToString();
     }
 
+    private void SetActiveWeightGainField(bool value)
+    {
+        _weightGainField.SetActive(value);
+    }
+
+    private void SetWeightGainValueText(float weightGain)
+    {
+        _weightGainValueText.text = weightGain.ToString("0.##");
+    }
+
+
     public override void HideWindow()
     {
         SetActiveBuyField(false);
@@ -176,6 +194,7 @@ public class ProductDetailDisplayer : WindowUIBase
         SetActiveMeatFoodTypeField(false);
         SetActivePlantHarvestField(false);
         SetActiveLifespanField(false);
+        SetActiveWeightGainField(false);
 
         base.HideWindow();
     }
