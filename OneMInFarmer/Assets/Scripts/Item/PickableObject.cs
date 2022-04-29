@@ -9,18 +9,6 @@ public class PickableObject : Interactable
         base.Awake();
     }
 
-    protected virtual void OnEnable()
-    {
-        OnHighlightShowed.AddListener(ShowPickButtonInputUI);
-        OnHighlightHided.AddListener(HidePickButtonInputUI);
-    }
-
-    protected virtual void OnDisable()
-    {
-        OnHighlightShowed.RemoveListener(ShowPickButtonInputUI);
-        OnHighlightHided.RemoveListener(HidePickButtonInputUI);
-    }
-
     protected virtual void Update()
     {
         if (transform.root != transform)
@@ -71,18 +59,5 @@ public class PickableObject : Interactable
     public virtual void SetParent(Transform newParent)
     {
         transform.SetParent(newParent);
-    }
-
-    private void ShowPickButtonInputUI()
-    {
-        InputUI inputUI = InputUI.Instance;
-        inputUI.ShowWindow();
-        inputUI.ShowPickInputUI();
-    }
-    private void HidePickButtonInputUI()
-    {
-        InputUI inputUI = InputUI.Instance;
-        inputUI.HideWindow();
-        inputUI.HidePickInputUI();
     }
 }
