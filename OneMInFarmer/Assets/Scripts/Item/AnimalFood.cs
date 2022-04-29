@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class AnimalFood : Item, IBuyable, IUsable
+public class AnimalFood : Item, IBuyable, IAnimalConsumable
 {
     public FoodType GetFoodType => ((AnimalFoodData)ItemData).foodType;
 
@@ -25,7 +25,7 @@ public class AnimalFood : Item, IBuyable, IUsable
     {
         base.Awake();
 
-        AddTargetType(typeof(Animal));
+        //AddTargetType(typeof(Animal));
     }
 
     private void OnEnable()
@@ -40,41 +40,16 @@ public class AnimalFood : Item, IBuyable, IUsable
         OnHighlightHided.RemoveListener(HideDetail);
     }
 
-    public bool Use(Interactable targetToUse)
+    public bool Feed(Animal targetToFeed)
     {
-        if (targetToUse is Animal)
+        if (targetToFeed.TakeFood(this))
         {
-            Animal animal = targetToUse as Animal;
+            currentStack--;
+            SetParent(targetToFeed.transform);
+            SetLocalPosition(Vector3.zero, false, false, false, false);
+            gameObject.SetActive(false);
 
-            if (currentStack > 1)
-            {
-                AnimalFood instantiatedFood = Instantiate(this);
-                instantiatedFood.currentStack = 1;
-
-                if (animal.TakeFood(instantiatedFood))
-                {
-                    currentStack--;
-                    instantiatedFood.SetParent(animal.transform);
-                    instantiatedFood.SetLocalPosition(Vector3.zero, false, false, false, false);
-                    instantiatedFood.gameObject.SetActive(false);
-                }
-                else
-                {
-                    Destroy(instantiatedFood.gameObject);
-                }
-            }
-            else
-            {
-                if (animal.TakeFood(this))
-                {
-                    currentStack--;
-                    SetParent(animal.transform);
-                    SetLocalPosition(Vector3.zero, false, false, false, false);
-                    gameObject.SetActive(false);
-
-                    return true;
-                }
-            }
+            return true;
         }
 
         return false;
@@ -106,10 +81,5 @@ public class AnimalFood : Item, IBuyable, IUsable
     {
         AnimalFoodDetailDisplayer foodDetailDisplayer = AnimalFoodDetailDisplayer.Instance;
         foodDetailDisplayer.HideWindow();
-    }
-
-    public void AddTargetType(Type targetType)
-    {
-        ItemUseMatcher.AddUseItemPair(GetType(), targetType);
     }
 }
