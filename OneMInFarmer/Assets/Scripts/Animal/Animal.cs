@@ -83,18 +83,14 @@ public class Animal : PickableObject, IBuyable, ISellable
         currentAgeSpan = 0;
     }
 
-    protected override void OnEnable()
+    private void OnEnable()
     {
-        base.OnEnable();
-
         OnHighlightShowed.AddListener(ShowDetail);
         OnHighlightHided.AddListener(HideDetail);
     }
 
-    protected override void OnDisable()
+    private void OnDisable()
     {
-        base.OnDisable();
-
         OnHighlightShowed.RemoveListener(ShowDetail);
         OnHighlightHided.RemoveListener(HideDetail);
     }
