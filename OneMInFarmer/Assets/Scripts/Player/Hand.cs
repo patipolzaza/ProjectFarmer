@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Hand : MonoBehaviour
 {
@@ -10,6 +9,19 @@ public class Hand : MonoBehaviour
     [SerializeField] private Transform handTransform;
     [Tooltip("The transform that is a where to drop the hoding object.")]
     [SerializeField] private Transform transformToDropObject;
+
+    public UnityEvent<PickableObject> OnItemPickEvent;
+    public UnityEvent OnItemDropEvent;
+
+    private void OnEnable()
+    {
+        OnItemPickEvent.AddListener(ItemInHandUI.Instance.ShowUI);
+    }
+
+    private void OnDisable()
+    {
+        OnItemPickEvent.RemoveListener(ItemInHandUI.Instance.ShowUI);
+    }
 
     private void Awake()
     {
@@ -36,6 +48,8 @@ public class Hand : MonoBehaviour
         pickableObject.HideObjectHighlight();
 
         holdingObject = pickableObject;
+
+        OnItemPickEvent?.Invoke(pickableObject);
     }
 
     public void DropObject()
@@ -49,6 +63,8 @@ public class Hand : MonoBehaviour
             holdingObject.SetInteractable(true);
 
             holdingObject = null;
+
+            OnItemDropEvent?.Invoke();
         }
     }
 
