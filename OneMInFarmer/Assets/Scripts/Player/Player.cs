@@ -249,6 +249,16 @@ public class Player : MonoBehaviour
                             OnInteractEvent.Invoke();
 
                     }
+                    else if (playerHand.holdingObject is IAnimalConsumable && targetInteractable is Animal)
+                    {
+                        IAnimalConsumable animalConsumable = (IAnimalConsumable)playerHand.holdingObject;
+                        Animal animal = targetInteractable as Animal;
+
+                        if (animalConsumable.Feed(animal))
+                        {
+                            playerHand.SetInHandItemToNull();
+                        }
+                    }
                     else if (targetInteractable is PickableObject)
                     {
                         playerHand.PickUpObject((PickableObject)targetInteractable);
