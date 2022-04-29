@@ -369,6 +369,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handTransform: {fileID: 8248408768146636820}
   transformToDropObject: {fileID: 8248408768785322869}
+  OnItemPickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnItemDropEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1906735269021570566
 MonoBehaviour:
   m_ObjectHideFlags: 0
