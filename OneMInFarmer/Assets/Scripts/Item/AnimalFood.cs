@@ -28,6 +28,18 @@ public class AnimalFood : Item, IBuyable, IUsable
         AddTargetType(typeof(Animal));
     }
 
+    private void OnEnable()
+    {
+        OnHighlightShowed.AddListener(ShowDetail);
+        OnHighlightHided.AddListener(HideDetail);
+    }
+
+    private void OnDisable()
+    {
+        OnHighlightShowed.RemoveListener(ShowDetail);
+        OnHighlightHided.RemoveListener(HideDetail);
+    }
+
     public bool Use(Interactable targetToUse)
     {
         if (targetToUse is Animal)
@@ -82,6 +94,18 @@ public class AnimalFood : Item, IBuyable, IUsable
         {
             return false;
         }
+    }
+
+    private void ShowDetail()
+    {
+        AnimalFoodDetailDisplayer foodDetailDisplayer = AnimalFoodDetailDisplayer.Instance;
+        foodDetailDisplayer.ShowUI(this);
+    }
+
+    private void HideDetail()
+    {
+        AnimalFoodDetailDisplayer foodDetailDisplayer = AnimalFoodDetailDisplayer.Instance;
+        foodDetailDisplayer.HideWindow();
     }
 
     public void AddTargetType(Type targetType)
