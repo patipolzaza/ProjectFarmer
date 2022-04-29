@@ -316,6 +316,7 @@ MonoBehaviour:
       m_Calls: []
   sliderWaterBar: {fileID: 6769883533272338598}
   WaterParticle: {fileID: 0}
+  _icon: {fileID: 21300000, guid: d6b0380ecec4ece48a2a8c354bcfe4b8, type: 3}
 --- !u!61 &4710637508620845148
 BoxCollider2D:
   m_ObjectHideFlags: 0
