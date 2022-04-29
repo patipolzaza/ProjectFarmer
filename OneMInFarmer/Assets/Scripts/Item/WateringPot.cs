@@ -8,10 +8,13 @@ public class WateringPot : PickableObject, IUsable
 {
     [SerializeField] private Slider sliderWaterBar;
     [SerializeField] private ParticleSystem WaterParticle;
+    [SerializeField] private Sprite _icon;
     public float valence { get; private set; } = 20;
     public float remaining { get; private set; } = 20;
     public float RefillPerSeconds { get; private set; } = 1;
     public float waterPerUse { get; private set; } = 5;
+
+    public Sprite GetIcon => _icon;
 
     protected override void Awake()
     {
