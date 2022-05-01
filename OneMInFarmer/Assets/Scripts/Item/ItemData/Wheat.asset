@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 506212d09f0c14b4e91bf48de4708286, type: 3}
+  m_Script: {fileID: 11500000, guid: 82f36d0aad2f9264ba2dd004cd5bf5f3, type: 3}
   m_Name: Wheat
   m_EditorClassIdentifier: 
-  id: b30849d21fb78a643a66b32e5ed0629b
+  id: f936d5fbda2acc647b867eb41aa5de2c
   ItemName: Wheat
   Icon: {fileID: -5659601288151787448, guid: c91296ee2af1d8e4ab38dc90b100e61b, type: 3}
-  canSell: 1
-  IsConsumable: 0
-  MaximumStacks: 1
-  purchasePrice: 0
-  sellingPrice: 2
+  weightGain: 0.5
+  sellPrice: 7

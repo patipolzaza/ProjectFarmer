@@ -9,13 +9,13 @@ public class Product : Item, ISellable
         return gameObject;
     }
 
-    public int GetSellPrice => ItemData.sellPrice;
+    public int GetSellPrice => ((ProductData)ItemData).sellPrice;
     public Sprite GetIcon => ItemData.Icon;
 
     public int Sell()
     {
         Wallet playerWallet = Player.Instance.wallet;
-        int price = ItemData.sellPrice;
+        int price = GetSellPrice;
         playerWallet.EarnCoin(price);
         Destroy(gameObject);
 

@@ -9,7 +9,7 @@ public class AnimalFood : Item, IBuyable, IAnimalEdible
 
     public float GetWeightGain => ((AnimalFoodData)ItemData).weightGain;
 
-    public int GetBuyPrice => ItemData.purchasePrice;
+    public int GetBuyPrice => ((AnimalFoodData)ItemData).purchasePrice;
     public GameObject GetObject() => gameObject;
     public Sprite GetIcon => ItemData.Icon;
 
