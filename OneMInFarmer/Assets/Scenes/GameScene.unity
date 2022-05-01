@@ -11109,6 +11109,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: InputUI
       objectReference: {fileID: 0}
+    - target: {fileID: 5897903993868737905, guid: 4edced9dce65aba41a311ebecbc9d1c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098988776208153757, guid: 4edced9dce65aba41a311ebecbc9d1c8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098988776208153757, guid: 4edced9dce65aba41a311ebecbc9d1c8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098988776208153757, guid: 4edced9dce65aba41a311ebecbc9d1c8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098988776208153757, guid: 4edced9dce65aba41a311ebecbc9d1c8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098988776208153757, guid: 4edced9dce65aba41a311ebecbc9d1c8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6384837924935057524, guid: 4edced9dce65aba41a311ebecbc9d1c8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
