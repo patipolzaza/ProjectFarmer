@@ -8,6 +8,9 @@ public class AnimalFoodDetailDisplayer : WindowUIBase
 
     [SerializeField] private TMP_Text _weightGainValueText;
 
+    [SerializeField] private GameObject _sellPricePanel;
+    [SerializeField] private TMP_Text _sellPriceValueText;
+
     public static AnimalFoodDetailDisplayer Instance { get; private set; }
 
     private void Awake()
@@ -15,13 +18,13 @@ public class AnimalFoodDetailDisplayer : WindowUIBase
         Instance = this;
     }
 
-    public void ShowUI(AnimalFood animalFood)
+    public void ShowUI(IAnimalConsumable animalFood)
     {
         SetUpUI(animalFood);
         ShowWindow();
     }
 
-    private void SetUpUI(AnimalFood animalFood)
+    private void SetUpUI(IAnimalConsumable animalFood)
     {
         SetWeightGainValueText(animalFood.GetWeightGain);
 
@@ -32,6 +35,13 @@ public class AnimalFoodDetailDisplayer : WindowUIBase
         else
         {
             SetActivePlantTypePanel(true);
+        }
+
+        if (animalFood is ISellable)
+        {
+            ISellable sellable = animalFood as ISellable;
+            SetActiveSellPricePanel(true);
+            SetSellPriceValueText(sellable.GetSellPrice);
         }
     }
 
@@ -50,6 +60,16 @@ public class AnimalFoodDetailDisplayer : WindowUIBase
         _plantFoodTypePanel.SetActive(value);
     }
 
+    private void SetActiveSellPricePanel(bool value)
+    {
+        _sellPricePanel.SetActive(value);
+    }
+
+    private void SetSellPriceValueText(int newSellPriceValue)
+    {
+        _sellPriceValueText.text = newSellPriceValue.ToString();
+    }
+
     /// <summary>
     /// This method is will showed without setup please use ShowUI(AnimalFood) to show this ui with seted detail.
     /// </summary>
@@ -64,5 +84,6 @@ public class AnimalFoodDetailDisplayer : WindowUIBase
 
         SetActiveMeatTypePanel(false);
         SetActivePlantTypePanel(false);
+        SetActiveSellPricePanel(false);
     }
 }
