@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ProductDetailDisplayer : WindowUIBase
+public class ShopProductDetailDisplayer : WindowUIBase
 {
-    public static ProductDetailDisplayer Instance { get; private set; }
+    public static ShopProductDetailDisplayer Instance { get; private set; }
 
     [Header("Sell Field")]
     [SerializeField] private GameObject _sellField;

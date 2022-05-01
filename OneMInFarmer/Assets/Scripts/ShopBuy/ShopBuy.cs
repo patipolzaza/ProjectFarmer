@@ -63,7 +63,7 @@ public class ShopBuy : Interactable
         {
             product.gameObject.SetActive(true);
             player.playerHand.PickUpObject(product);
-             SoundEffectsController.Instance.PlaySoundEffect("ClinkingCoin");
+            SoundEffectsController.Instance.PlaySoundEffect("ClinkingCoin");
         }
         else
         {
@@ -96,7 +96,7 @@ public class ShopBuy : Interactable
     {
         if (productInStock != null)
         {
-            ProductDetailDisplayer productDetailDisplayer = ProductDetailDisplayer.Instance;
+            ShopProductDetailDisplayer productDetailDisplayer = ShopProductDetailDisplayer.Instance;
             productDetailDisplayer.SetUpUI(productInStock);
             productDetailDisplayer.ShowWindow();
         }
@@ -104,6 +104,6 @@ public class ShopBuy : Interactable
 
     private void HideProductDetail()
     {
-        ProductDetailDisplayer.Instance.HideWindow();
+        ShopProductDetailDisplayer.Instance.HideWindow();
     }
 }
