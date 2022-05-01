@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ProductDetailDisplayer : MonoBehaviour
+public class ProductDetailDisplayer : WindowUIBase
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static ProductDetailDisplayer Instance { get; private set; }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        Instance = this;
     }
 }
