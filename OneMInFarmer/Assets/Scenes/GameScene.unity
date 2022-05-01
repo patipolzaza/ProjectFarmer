@@ -1365,7 +1365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8248408767884713714, guid: a7e09b0c1ae88f34da923fe4fa1f663c, type: 3}
       propertyPath: OnItemPickEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8248408767884713714, guid: a7e09b0c1ae88f34da923fe4fa1f663c, type: 3}
       propertyPath: OnItemDropEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1382,7 +1382,7 @@ PrefabInstance:
     - target: {fileID: 8248408767884713714, guid: a7e09b0c1ae88f34da923fe4fa1f663c, type: 3}
       propertyPath: OnItemPickEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1814648664}
+      objectReference: {fileID: 0}
     - target: {fileID: 8248408767884713714, guid: a7e09b0c1ae88f34da923fe4fa1f663c, type: 3}
       propertyPath: OnItemDropEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1413,7 +1413,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8248408767884713714, guid: a7e09b0c1ae88f34da923fe4fa1f663c, type: 3}
       propertyPath: OnItemPickEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ShowUI
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8248408767884713714, guid: a7e09b0c1ae88f34da923fe4fa1f663c, type: 3}
       propertyPath: OnItemDropEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1429,7 +1429,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8248408767884713714, guid: a7e09b0c1ae88f34da923fe4fa1f663c, type: 3}
       propertyPath: OnItemPickEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: ItemInHandUI, Assembly-CSharp
+      value: InputUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8248408767884713714, guid: a7e09b0c1ae88f34da923fe4fa1f663c, type: 3}
       propertyPath: OnItemDropEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1445,7 +1445,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8248408767884713714, guid: a7e09b0c1ae88f34da923fe4fa1f663c, type: 3}
       propertyPath: OnItemPickEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: PickableObject, Assembly-CSharp
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8248408767904192920, guid: a7e09b0c1ae88f34da923fe4fa1f663c, type: 3}
       propertyPath: m_Bounds.m_Center.x
