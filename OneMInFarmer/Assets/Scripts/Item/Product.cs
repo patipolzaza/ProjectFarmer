@@ -12,6 +12,17 @@ public class Product : Item, ISellable
     public int GetSellPrice => ((ProductData)ItemData).sellPrice;
     public Sprite GetIcon => ItemData.Icon;
 
+    private void OnEnable()
+    {
+        OnHighlightShowed.AddListener(ShowDetail);
+        OnHighlightHided.AddListener(HideDetail);
+    }
+    private void OnDisable()
+    {
+        OnHighlightShowed.RemoveListener(ShowDetail);
+        OnHighlightHided.RemoveListener(HideDetail);
+    }
+
     public int Sell()
     {
         Wallet playerWallet = Player.Instance.wallet;
@@ -24,11 +35,11 @@ public class Product : Item, ISellable
 
     public virtual void ShowDetail()
     {
-
+        ProductDetailDisplayer.Instance.ShowUI(this);
     }
 
     public virtual void HideDetail()
     {
-
+        ProductDetailDisplayer.Instance.HideWindow();
     }
 }
