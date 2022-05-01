@@ -23,7 +23,7 @@ public class Animal : PickableObject, IBuyable, ISellable
     public int lifePoint { get; protected set; } = 2;
 
     public bool isHungry { get; private set; } = true;
-    private List<IAnimalConsumable> foodsEaten = new List<IAnimalConsumable>();
+    private List<IAnimalEdible> foodsEaten = new List<IAnimalEdible>();
     public float weight { get; protected set; }
     public UnityEvent<float, float> OnEatenFood;
 
@@ -200,7 +200,7 @@ public class Animal : PickableObject, IBuyable, ISellable
         grabbedState.Unleash();
     }
 
-    public virtual bool TakeFood(IAnimalConsumable food)
+    public virtual bool TakeFood(IAnimalEdible food)
     {
         if (isDie)
         {

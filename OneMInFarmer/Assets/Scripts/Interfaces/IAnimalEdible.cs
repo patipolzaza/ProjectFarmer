@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IAnimalConsumable
+public interface IAnimalEdible
 {
     public FoodType GetFoodType { get; }
     public float GetWeightGain { get; }

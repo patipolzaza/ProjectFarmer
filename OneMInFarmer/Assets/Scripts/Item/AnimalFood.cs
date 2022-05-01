@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class AnimalFood : Item, IBuyable, IAnimalConsumable
+public class AnimalFood : Item, IBuyable, IAnimalEdible
 {
     public FoodType GetFoodType => ((AnimalFoodData)ItemData).foodType;
 

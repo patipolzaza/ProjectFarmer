@@ -249,12 +249,12 @@ public class Player : MonoBehaviour
                             OnInteractEvent.Invoke();
 
                     }
-                    else if (playerHand.holdingObject is IAnimalConsumable && targetInteractable is Animal)
+                    else if (playerHand.holdingObject is IAnimalEdible && targetInteractable is Animal)
                     {
-                        IAnimalConsumable animalConsumable = (IAnimalConsumable)playerHand.holdingObject;
+                        IAnimalEdible animalEdible = (IAnimalEdible)playerHand.holdingObject;
                         Animal animal = targetInteractable as Animal;
 
-                        if (animalConsumable.Feed(animal))
+                        if (animalEdible.Feed(animal))
                         {
                             playerHand.SetInHandItemToNull();
                         }

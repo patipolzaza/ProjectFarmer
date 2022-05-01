@@ -18,13 +18,13 @@ public class AnimalFoodDetailDisplayer : WindowUIBase
         Instance = this;
     }
 
-    public void ShowUI(IAnimalConsumable animalFood)
+    public void ShowUI(IAnimalEdible animalFood)
     {
         SetUpUI(animalFood);
         ShowWindow();
     }
 
-    private void SetUpUI(IAnimalConsumable animalFood)
+    private void SetUpUI(IAnimalEdible animalFood)
     {
         SetWeightGainValueText(animalFood.GetWeightGain);
 
