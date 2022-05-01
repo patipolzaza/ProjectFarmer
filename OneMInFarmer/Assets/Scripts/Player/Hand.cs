@@ -15,12 +15,12 @@ public class Hand : MonoBehaviour
 
     private void OnEnable()
     {
-        OnItemPickEvent.AddListener(ItemInHandUI.Instance.ShowUI);
+        OnItemPickEvent.AddListener(ShowInHandItemUI);
     }
 
     private void OnDisable()
     {
-        OnItemPickEvent.RemoveListener(ItemInHandUI.Instance.ShowUI);
+        OnItemPickEvent.RemoveListener(ShowInHandItemUI);
     }
 
     private void Awake()
@@ -76,5 +76,10 @@ public class Hand : MonoBehaviour
         }
 
         holdingObject = null;
+    }
+
+    private void ShowInHandItemUI(PickableObject pickableObject)
+    {
+        ItemInHandUI.Instance.ShowUI(pickableObject);
     }
 }
