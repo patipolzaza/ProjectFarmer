@@ -21,4 +21,14 @@ public class Product : Item, ISellable
 
         return price;
     }
+
+    public virtual void ShowDetail()
+    {
+
+    }
+
+    public virtual void HideDetail()
+    {
+
+    }
 }

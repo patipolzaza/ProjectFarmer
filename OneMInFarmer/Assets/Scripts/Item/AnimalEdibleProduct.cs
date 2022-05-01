@@ -35,13 +35,13 @@ public class AnimalEdibleProduct : Product, IAnimalEdible
         return false;
     }
 
-    private void ShowDetail()
+    public override void ShowDetail()
     {
         AnimalFoodDetailDisplayer foodDetailDisplayer = AnimalFoodDetailDisplayer.Instance;
         foodDetailDisplayer.ShowUI(this);
     }
 
-    private void HideDetail()
+    public override void HideDetail()
     {
         AnimalFoodDetailDisplayer foodDetailDisplayer = AnimalFoodDetailDisplayer.Instance;
         foodDetailDisplayer.HideWindow();
