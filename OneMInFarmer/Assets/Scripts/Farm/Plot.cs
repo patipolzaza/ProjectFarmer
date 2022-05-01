@@ -33,6 +33,18 @@ public class Plot : Interactable
         Lock();
     }
 
+    private void OnEnable()
+    {
+        OnHighlightShowed.AddListener(ShowProductDetail);
+        OnHighlightHided.AddListener(HideProductDetail);
+    }
+
+    private void OnDisable()
+    {
+        OnHighlightShowed.RemoveListener(ShowProductDetail);
+        OnHighlightHided.RemoveListener(HideProductDetail);
+    }
+
     public void PlayerInteract(Player player)
     {
         if (isPlanted)
@@ -208,5 +220,20 @@ public class Plot : Interactable
         lockedSign.SetActive(false);
         spriteRenderer.color = Color.white;
         SetInteractable(true);
+    }
+
+    private void ShowProductDetail()
+    {
+        if (plantStage < seed.plantStages.Length - 1)
+        {
+            return;
+        }
+
+        seed.product.ShowDetail();
+    }
+
+    private void HideProductDetail()
+    {
+        seed.product.HideDetail();
     }
 }
