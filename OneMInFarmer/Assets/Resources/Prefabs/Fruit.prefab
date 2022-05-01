@@ -123,8 +123,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2814044167363037517}
-  - component: {fileID: 7655550880373777621}
   - component: {fileID: 7189566194357562938}
+  - component: {fileID: 7493002209278107430}
   m_Layer: 6
   m_Name: Fruit
   m_TagString: Untagged
@@ -147,30 +147,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7655550880373777621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7109277352688046074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df562df619aed794fbdf455b016ba8fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  interactableObject: {fileID: 607568841083307056}
-  OnHighlightShowed:
-    m_PersistentCalls:
-      m_Calls: []
-  OnHighlightHided:
-    m_PersistentCalls:
-      m_Calls: []
-  currentStackDisplayer: {fileID: 0}
-  ItemData: {fileID: 11400000, guid: b26c55bee4a32d840ac2ee9a623a53bf, type: 2}
 --- !u!60 &7189566194357562938
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -202,3 +178,27 @@ PolygonCollider2D:
       - {x: 0.03, y: -0.07}
       - {x: 0.07, y: -0.01}
       - {x: 0.07, y: 0.07}
+--- !u!114 &7493002209278107430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7109277352688046074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58967b54526133d4ab7c05d3e7082b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  interactableObject: {fileID: 607568841083307056}
+  OnHighlightShowed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHighlightHided:
+    m_PersistentCalls:
+      m_Calls: []
+  currentStackDisplayer: {fileID: 0}
+  ItemData: {fileID: 11400000, guid: b26c55bee4a32d840ac2ee9a623a53bf, type: 2}

@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6838910979771530181}
-  - component: {fileID: 542107694001303556}
   - component: {fileID: 1697039378128503016}
+  - component: {fileID: 344818779878053713}
   m_Layer: 6
   m_Name: Wheat
   m_TagString: Untagged
@@ -33,30 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &542107694001303556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 736416778143717383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df562df619aed794fbdf455b016ba8fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  interactableObject: {fileID: 2879403872770888716}
-  OnHighlightShowed:
-    m_PersistentCalls:
-      m_Calls: []
-  OnHighlightHided:
-    m_PersistentCalls:
-      m_Calls: []
-  currentStackDisplayer: {fileID: 0}
-  ItemData: {fileID: 11400000, guid: f936d5fbda2acc647b867eb41aa5de2c, type: 2}
 --- !u!60 &1697039378128503016
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -88,6 +64,30 @@ PolygonCollider2D:
       - {x: 0.03, y: -0.07}
       - {x: 0.07, y: -0.01}
       - {x: 0.07, y: 0.07}
+--- !u!114 &344818779878053713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736416778143717383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58967b54526133d4ab7c05d3e7082b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  interactableObject: {fileID: 2879403872770888716}
+  OnHighlightShowed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHighlightHided:
+    m_PersistentCalls:
+      m_Calls: []
+  currentStackDisplayer: {fileID: 0}
+  ItemData: {fileID: 11400000, guid: f936d5fbda2acc647b867eb41aa5de2c, type: 2}
 --- !u!1 &2879403872770888716
 GameObject:
   m_ObjectHideFlags: 0
