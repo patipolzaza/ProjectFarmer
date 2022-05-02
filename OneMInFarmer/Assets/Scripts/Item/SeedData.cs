@@ -11,7 +11,6 @@ public class SeedData : ItemData
     [Min(1)]
     public int countHarvest = 1;
     [Min(1)]
-    public int waterNeed = 2;
     public Product product;
 
 }

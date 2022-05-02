@@ -2030,6 +2030,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6769883534016835581, guid: e436a463f60a2d142b8d3e2500844f4f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942748964088367470, guid: e436a463f60a2d142b8d3e2500844f4f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.182
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942748964088367470, guid: e436a463f60a2d142b8d3e2500844f4f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e436a463f60a2d142b8d3e2500844f4f, type: 3}
 --- !u!1 &740045035
@@ -3635,6 +3647,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShopForSell
       objectReference: {fileID: 0}
+    - target: {fileID: 7641322465874520171, guid: 8fbe30feb9b505446a49ec73c356c624, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7641322465874520171, guid: 8fbe30feb9b505446a49ec73c356c624, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7641322465874520171, guid: 8fbe30feb9b505446a49ec73c356c624, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fbe30feb9b505446a49ec73c356c624, type: 3}
 --- !u!1 &1218805954
@@ -4472,6 +4496,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 64936898}
     m_Modifications:
+    - target: {fileID: 2297509644849260676, guid: 5cda5f61ce5dc7a4c8baceb00640c76d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2297509644849260676, guid: 5cda5f61ce5dc7a4c8baceb00640c76d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2297509644849260676, guid: 5cda5f61ce5dc7a4c8baceb00640c76d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2297509644849260676, guid: 5cda5f61ce5dc7a4c8baceb00640c76d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.137
+      objectReference: {fileID: 0}
     - target: {fileID: 2462687588505583701, guid: 5cda5f61ce5dc7a4c8baceb00640c76d, type: 3}
       propertyPath: m_Name
       value: Plot 43

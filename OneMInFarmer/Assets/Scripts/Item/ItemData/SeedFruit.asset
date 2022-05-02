@@ -18,9 +18,10 @@ MonoBehaviour:
   purchasePrice: 2
   sellPrice: 7
   plantStages:
-  - {fileID: -1361314268720151567, guid: c91296ee2af1d8e4ab38dc90b100e61b, type: 3}
-  - {fileID: -8709406779607625839, guid: c91296ee2af1d8e4ab38dc90b100e61b, type: 3}
-  - {fileID: -8097741200915394387, guid: c91296ee2af1d8e4ab38dc90b100e61b, type: 3}
+  - {fileID: -5892800096714757789, guid: 62ddfa0624b18c449a712595fb08d283, type: 3}
+  - {fileID: -2291327162845407921, guid: 62ddfa0624b18c449a712595fb08d283, type: 3}
+  - {fileID: -818924116813736698, guid: 62ddfa0624b18c449a712595fb08d283, type: 3}
+  - {fileID: -7306684562267301292, guid: 62ddfa0624b18c449a712595fb08d283, type: 3}
   countHarvest: 3
   waterNeed: 2
   product: {fileID: 7655550880373777621, guid: af0b34f1f70a1234197bcf6c45e71164, type: 3}
