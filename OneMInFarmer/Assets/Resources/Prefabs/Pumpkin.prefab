@@ -170,7 +170,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   currentStackDisplayer: {fileID: 0}
-  ItemData: {fileID: 11400000, guid: 2f326d9f3e629454dbf8e6914299739e, type: 2}
+  ItemData: {fileID: 11400000, guid: c3386c3cef2fe5541bcfb260f3a34185, type: 2}
 --- !u!60 &9056007688103095280
 PolygonCollider2D:
   m_ObjectHideFlags: 0

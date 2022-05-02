@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 2824363190880485987}
   - component: {fileID: 7767549643980614749}
   m_Layer: 5
-  m_Name: SeedWheat
+  m_Name: SeedFlower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

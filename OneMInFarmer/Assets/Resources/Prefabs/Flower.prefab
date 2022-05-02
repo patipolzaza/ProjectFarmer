@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1697039378128503016}
   - component: {fileID: 344818779878053713}
   m_Layer: 6
-  m_Name: Wheat
+  m_Name: Flower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

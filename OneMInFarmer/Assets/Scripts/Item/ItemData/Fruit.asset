@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: b26c55bee4a32d840ac2ee9a623a53bf
   ItemName: Fruit
-  Icon: {fileID: 5822373649741285269, guid: c91296ee2af1d8e4ab38dc90b100e61b, type: 3}
+  Icon: {fileID: 73779382302904024, guid: 62ddfa0624b18c449a712595fb08d283, type: 3}
   sellPrice: 5
   weightGain: 1
