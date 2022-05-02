@@ -224,7 +224,8 @@ public class Plot : Interactable
 
     private void ShowProductDetail()
     {
-        if (plantStage < seed.plantStages.Length - 1)
+
+        if (!seed || plantStage < seed.plantStages.Length - 1)
         {
             return;
         }
@@ -234,6 +235,6 @@ public class Plot : Interactable
 
     private void HideProductDetail()
     {
-        seed.product.HideDetail();
+        seed?.product.HideDetail();
     }
 }
