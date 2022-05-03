@@ -13,15 +13,6 @@ public class Hand : MonoBehaviour
     public UnityEvent<PickableObject> OnItemPickEvent;
     public UnityEvent OnItemDropEvent;
 
-    private void OnEnable()
-    {
-        OnItemPickEvent.AddListener(ShowInHandItemUI);
-    }
-
-    private void OnDisable()
-    {
-        OnItemPickEvent.RemoveListener(ShowInHandItemUI);
-    }
 
     private void Awake()
     {
@@ -76,10 +67,5 @@ public class Hand : MonoBehaviour
         }
 
         holdingObject = null;
-    }
-
-    private void ShowInHandItemUI(PickableObject pickableObject)
-    {
-        ItemInHandUI.Instance.ShowUI(pickableObject);
     }
 }
