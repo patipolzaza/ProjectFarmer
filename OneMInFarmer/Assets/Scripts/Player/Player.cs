@@ -287,7 +287,6 @@ public class Player : MonoBehaviour
             if (playerHand.holdingObject)
             {
                 OnDropingEvent.Invoke();
-
             }
 
         }
@@ -453,8 +452,9 @@ public class Player : MonoBehaviour
     public void DisableMove()
     {
         canMove = false;
-        rb.velocity = Vector3.zero;
         moveInput = Vector3.zero;
+        rb.velocity = Vector3.zero;
+        PlayerAnimation.SetRunningAnimation(Vector2.zero);
     }
 
     private void OnDrawGizmos()
