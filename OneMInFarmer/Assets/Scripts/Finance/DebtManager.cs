@@ -8,7 +8,7 @@ public class DebtManager : MonoBehaviour
     public static DebtManager Instance { get; private set; }
     public int dayForNextDebtPayment { get; private set; } = 5;
     public int debtPaidCount { get; private set; }
-    private float _debtMultiplierPerPeriod = 1.3f;
+    private float _debtMultiplierPerPeriod = 1.4f;
     private int _startDebt = 10;
     public int remainingDebt { get; private set; } = 0;
 
@@ -52,9 +52,7 @@ public class DebtManager : MonoBehaviour
     {
         get
         {
-            int currentDay = GameManager.Instance.currentDay;
-
-            float debt = _startDebt + (debtPaidCount) * _debtMultiplierPerPeriod * (currentDay * 0.15f);
+            float debt = _startDebt + (debtPaidCount) * _debtMultiplierPerPeriod;
 
             return Mathf.RoundToInt(debt);
         }
