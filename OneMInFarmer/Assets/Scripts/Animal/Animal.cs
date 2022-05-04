@@ -251,11 +251,11 @@ public class Animal : PickableObject, IBuyable, ISellable
 
     public void SetVelocity(float x, float y)
     {
-        if (x > 0 && facingDirection < 0)
+        if (x > 0 && facingDirection < 0 && interactableObject.transform.localScale.x < 0)
         {
             Flip();
         }
-        else if (x < 0 && facingDirection > 0)
+        else if (x < 0 && facingDirection > 0 && interactableObject.transform.localScale.x > 0)
         {
             Flip();
         }
