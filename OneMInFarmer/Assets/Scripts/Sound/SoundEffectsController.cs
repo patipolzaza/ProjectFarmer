@@ -11,18 +11,19 @@ public class SoundEffectsController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        foreach(Sound s in sounds)
+        foreach (Sound s in sounds)
         {
             s.audioSource = gameObject.AddComponent<AudioSource>();
             s.audioSource.clip = s.GetAudioClip();
             s.audioSource.volume = s.volume;
+            s.audioSource.loop = s.Loop;
         }
     }
 
     public void PlaySoundEffect(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.GetSoundName() == name);
-        if(s == null)
+        if (s == null)
         {
             Debug.LogWarning("Not have sound : " + name);
             return;

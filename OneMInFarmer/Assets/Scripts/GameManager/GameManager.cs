@@ -22,16 +22,9 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start()
-    { 
-        StartCoroutine(StartGameFirstDay());
-    }
-
-    void Update()
     {
-        if (!player)
-        {
-            player = FindObjectOfType<Player>();
-        }
+        player = FindObjectOfType<Player>();
+        StartCoroutine(StartGameFirstDay());
     }
 
     private IEnumerator StartGameFirstDay()
@@ -39,6 +32,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => isCompletedAllSetup());
         yield return new WaitUntil(() => Input.anyKeyDown && !TuTorialManager.Instance._isInProcess);
         TuTorialManager.Instance.CloseWindow();
+        FindObjectOfType<SoundEffectsController>().PlaySoundEffect("BGM");
         StartDay();
     }
 
