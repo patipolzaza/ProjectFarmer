@@ -19,7 +19,10 @@ public class WalletUI : WindowUIBase
         if (_playerWallet == null)
         {
             _playerWallet = FindObjectOfType<Player>().transform.Find("Wallet").GetComponent<Wallet>();
+
         }
+        CoinText.text = _playerWallet.coin.ToString();
+
         _playerWallet.OnCoinChanged += UpdateCoinTextToTarget;
     }
 
