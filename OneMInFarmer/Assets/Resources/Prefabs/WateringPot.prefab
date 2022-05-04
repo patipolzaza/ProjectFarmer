@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6942748964088367470}
   - component: {fileID: 2491107288961736634}
+  - component: {fileID: 2564319207874549381}
   m_Layer: 0
   m_Name: WateringPotSR
   m_TagString: Untagged
@@ -82,6 +83,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2564319207874549381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474465494200919902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd23118f44fddb84dab8e9f4bf008b64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj: {fileID: 474465494200919902}
+  offsetY: -0.5
 --- !u!1 &6769883533272338596
 GameObject:
   m_ObjectHideFlags: 0
