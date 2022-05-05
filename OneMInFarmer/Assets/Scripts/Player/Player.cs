@@ -166,7 +166,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        //DisableMove();
+        DisableMove();
     }
 
     private void OnValidate()
