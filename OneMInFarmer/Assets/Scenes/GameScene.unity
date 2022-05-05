@@ -1515,8 +1515,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 665170381}
-        m_TargetAssemblyTypeName: Timer, Assembly-CSharp
-        m_MethodName: Begin
+        m_TargetAssemblyTypeName: WindowUIBase, Assembly-CSharp
+        m_MethodName: ShowWindow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1527,8 +1527,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 665170381}
-        m_TargetAssemblyTypeName: WindowUIBase, Assembly-CSharp
-        m_MethodName: ShowWindow
+        m_TargetAssemblyTypeName: Timer, Assembly-CSharp
+        m_MethodName: Begin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3404,18 +3404,6 @@ PrefabInstance:
     - target: {fileID: 6137979197615333453, guid: e36b3197e7ba09d40ad3c337d450f28c, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6805862816754808281, guid: e36b3197e7ba09d40ad3c337d450f28c, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 227.7601
-      objectReference: {fileID: 0}
-    - target: {fileID: 6805862816754808281, guid: e36b3197e7ba09d40ad3c337d450f28c, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 846.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 6805862816754808281, guid: e36b3197e7ba09d40ad3c337d450f28c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 6974312839439828526, guid: e36b3197e7ba09d40ad3c337d450f28c, type: 3}
       propertyPath: m_Text
