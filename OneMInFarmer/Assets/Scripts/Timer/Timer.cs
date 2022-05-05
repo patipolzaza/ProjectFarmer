@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
 
-public class Timer : MonoBehaviour
+public class Timer : WindowUIBase
 {
     #region Custom Inspector
     [CustomEditor(typeof(Timer))]
@@ -17,6 +17,7 @@ public class Timer : MonoBehaviour
         SerializedProperty needleProp;
         SerializedProperty dayFloatingTextProp;
         SerializedProperty dayTextProp;
+        SerializedProperty windowUIObjectProp;
 
         private void OnEnable()
         {
@@ -26,6 +27,7 @@ public class Timer : MonoBehaviour
             needleProp = serializedObject.FindProperty("needle");
             dayFloatingTextProp = serializedObject.FindProperty("dayFloatingText");
             dayTextProp = serializedObject.FindProperty("dayText");
+            windowUIObjectProp = serializedObject.FindProperty("windowUIObject");
         }
 
         public override void OnInspectorGUI()
@@ -38,6 +40,8 @@ public class Timer : MonoBehaviour
                 OpenSaveFilePanel();
             }
 
+            GUILayout.Space(5f);
+            EditorGUILayout.PropertyField(windowUIObjectProp);
             GUILayout.Space(1.25f);
             EditorGUILayout.PropertyField(redZoneProp);
             EditorGUILayout.PropertyField(needleProp);
@@ -289,6 +293,7 @@ public class Timer : MonoBehaviour
         if (countTimeCouroutine != null)
         {
             StopCoroutine(countTimeCouroutine);
+            countTimeCouroutine = null;
         }
 
         maxTime = timeStatus.GetValue;

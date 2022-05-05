@@ -1526,6 +1526,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 665170381}
+        m_TargetAssemblyTypeName: WindowUIBase, Assembly-CSharp
+        m_MethodName: ShowWindow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDayEnded:
     m_PersistentCalls:
       m_Calls:
@@ -1544,6 +1556,18 @@ MonoBehaviour:
       - m_Target: {fileID: 300104297}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: DisableMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 665170381}
+        m_TargetAssemblyTypeName: WindowUIBase, Assembly-CSharp
+        m_MethodName: HideWindow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3372,6 +3396,10 @@ PrefabInstance:
     - target: {fileID: 1892445611599563756, guid: e36b3197e7ba09d40ad3c337d450f28c, type: 3}
       propertyPath: m_Name
       value: Timer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2201846348901005175, guid: e36b3197e7ba09d40ad3c337d450f28c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6137979197615333453, guid: e36b3197e7ba09d40ad3c337d450f28c, type: 3}
       propertyPath: m_IsActive
