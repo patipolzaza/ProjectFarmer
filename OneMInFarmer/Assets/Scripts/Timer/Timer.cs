@@ -314,6 +314,11 @@ public class Timer : WindowUIBase
         GameManager.Instance.EndDay();
     }
 
+    public void Stop()
+    {
+        StopAllCoroutines();
+    }
+
     private void UpdateTimerUI()
     {
         UpdateText();
