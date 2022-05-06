@@ -50,6 +50,8 @@ public class Interactable : MonoBehaviour
 
     }
 
+    public GameObject GetInteractObject => interactableObject;
+
     public void SetInteractable(bool isInteractable)
     {
         this.isInteractable = isInteractable;
@@ -76,6 +78,16 @@ public class Interactable : MonoBehaviour
         OnHighlightShowed?.Invoke();
     }
 
+    public virtual void HideObjectHighlight()
+    {
+        foreach (var sr in spriteRenderers)
+        {
+            sr.color = defaultColor;
+        }
+
+        OnHighlightHided?.Invoke();
+    }
+
     public virtual void SetScale(Vector3 newScale)
     {
         Vector3 scale = new Vector3(objectDefaultScale * newScale.x, objectDefaultScale * newScale.y, 1);
@@ -90,16 +102,6 @@ public class Interactable : MonoBehaviour
         {
             sr.color = defaultColor;
         }
-    }
-
-    public virtual void HideObjectHighlight()
-    {
-        foreach (var sr in spriteRenderers)
-        {
-            sr.color = defaultColor;
-        }
-
-        OnHighlightHided?.Invoke();
     }
 
     public virtual void SetObjectSpriteRenderer(bool isRender)
