@@ -5,5 +5,5 @@ using UnityEngine;
 [System.Serializable]
 public class ObjectSaveData
 {
-    protected int indexInContainer = -1;
+    [SerializeField] protected int indexInContainer = -1;
 }

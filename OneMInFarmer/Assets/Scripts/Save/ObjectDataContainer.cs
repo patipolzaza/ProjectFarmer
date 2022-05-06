@@ -2,36 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public static class ObjectDataContainer
 {
     private static int lastIndex = 0;
-    private static Dictionary<int, ObjectSaveData> objectSaveDatas = new Dictionary<int, ObjectSaveData>();
+    [SerializeField]
+    private static List<AnimalSaveData> animalSaveDatas = new List<AnimalSaveData>();
 
-    public static Dictionary<int, ObjectSaveData> GetDatas => objectSaveDatas;
+    private static string animalSaveDatasKey = "animalSaveDatas";
 
-    public static void UpdateData(int index, ObjectSaveData newData)
+    public static List<AnimalSaveData> GetDatas => animalSaveDatas;
+
+    public static void UpdateAnimalSaveData(int index, AnimalSaveData newData)
     {
-        objectSaveDatas[index] = newData;
+        animalSaveDatas[index] = newData;
     }
 
-    public static int AddData(ObjectSaveData data)
+    public static int AddAnimalSaveData(AnimalSaveData data)
     {
-        objectSaveDatas.Add(lastIndex++, data);
+        animalSaveDatas.Add(data);
+        lastIndex++;
         return lastIndex;
     }
 
     public static void Remove(int index)
     {
-        objectSaveDatas.Remove(index);
+        animalSaveDatas.RemoveAt(index);
     }
 
     public static void ClearDatas()
     {
-        objectSaveDatas.Clear();
+        animalSaveDatas.Clear();
     }
 
     public static void SaveDatas()
     {
-        SaveManager.Save("saveDatas", objectSaveDatas);
+        AnimalSaveDataList animalSaveList = new AnimalSaveDataList(animalSaveDatas);
+        SaveManager.Save(animalSaveDatasKey, animalSaveList);
+    }
+
+    public static void LoadData()
+    {
+        var animalLoadedJson = SaveManager.Load(animalSaveDatasKey);
+        if (animalLoadedJson != null && animalLoadedJson != string.Empty)
+        {
+            var animalSaveDataList = JsonUtility.FromJson<AnimalSaveDataList>(animalLoadedJson);
+            animalSaveDatas = animalSaveDataList.GetAnimalSaveDatas;
+        }
+        //.......//
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[System.Serializable]
 public static class SaveManager
 {
     public static void Save(string key, object dataToSave)
@@ -10,18 +11,17 @@ public static class SaveManager
         PlayerPrefs.SetString(key, dataJson);
     }
 
-    public static object Load(string key)
+    public static string Load(string key)
     {
         if (PlayerPrefs.HasKey(key))
         {
             string objectJson = PlayerPrefs.GetString(key);
-            object obj = JsonUtility.FromJson<object>(objectJson);
             PlayerPrefs.DeleteKey(key);
-            return obj;
+            return objectJson;
         }
         else
         {
-            return null;
+            return "";
         }
     }
 }

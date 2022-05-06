@@ -7,6 +7,7 @@ using TMPro;
 public class Animal : PickableObject, IBuyable, ISellable
 {
     private AnimalSaveData _saveData;
+
     public Rigidbody2D rb { get; private set; }
     public Animator anim { get; private set; }
 
@@ -67,6 +68,16 @@ public class Animal : PickableObject, IBuyable, ISellable
     }
     public int GetLifespan => animalData.lifespan;
     public List<FoodType> GetEdibleFoods => animalData.edibleFoods;
+
+    public void LoadAnimalData(AnimalSaveData saveData)
+    {
+        SetScale(saveData.GetAnimalScale);
+        age = saveData.GetAge;
+        weight = saveData.GetWeight;
+        lifePoint = saveData.GetLifePoint;
+        currentAgeSpan = (AgeSpan)saveData.GetAgeSpan;
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -117,11 +128,6 @@ public class Animal : PickableObject, IBuyable, ISellable
     {
         base.Update();
         stateMachine.currentState.LogicUpdate();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log(ObjectDataContainer.GetDatas);
-        }
     }
 
     public void FixedUpdate()
@@ -350,6 +356,7 @@ public class Animal : PickableObject, IBuyable, ISellable
 
     private void UpdateDataInContainer()
     {
+        _saveData.UpdateData(this);
         _saveData.UpdateDataInContainer();
     }
 }
