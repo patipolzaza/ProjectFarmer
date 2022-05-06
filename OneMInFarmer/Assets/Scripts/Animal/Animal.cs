@@ -6,6 +6,7 @@ using TMPro;
 
 public class Animal : PickableObject, IBuyable, ISellable
 {
+    private AnimalSaveData _saveData;
     public Rigidbody2D rb { get; private set; }
     public Animator anim { get; private set; }
 
@@ -79,6 +80,7 @@ public class Animal : PickableObject, IBuyable, ISellable
         grabbedState = new GrabbedState(this, stateMachine, "grabbed");
         dieState = new DieState(this, stateMachine, "die");
 
+
         stateMachine.InitializeState(idleState);
         currentAgeSpan = 0;
     }
@@ -106,12 +108,20 @@ public class Animal : PickableObject, IBuyable, ISellable
         SetScale(newScale);
 
         weight = animalData.startWeight;
+
+        _saveData = new AnimalSaveData(this);
+        UpdateDataInContainer();
     }
 
     protected override void Update()
     {
         base.Update();
         stateMachine.currentState.LogicUpdate();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log(ObjectDataContainer.GetDatas);
+        }
     }
 
     public void FixedUpdate()
@@ -138,6 +148,8 @@ public class Animal : PickableObject, IBuyable, ISellable
         float size = GetSize;
         Vector3 newScale = new Vector3(size, size, 1);
         SetScale(newScale);
+
+        UpdateDataInContainer();
     }
 
     private void DigestFoods()
@@ -334,5 +346,10 @@ public class Animal : PickableObject, IBuyable, ISellable
     private void HideDetail()
     {
         AnimalDetailDisplayer.Instance.HideWindow();
+    }
+
+    private void UpdateDataInContainer()
+    {
+        _saveData.UpdateDataInContainer();
     }
 }
