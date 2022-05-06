@@ -46,19 +46,14 @@ public class PlotManager : MonoBehaviour, IContainStatus
         if (startIndex < 0) { startIndex = 0; }
         if (endIndex >= plots.Count) { endIndex = plots.Count - 1; }
 
-        int loopCount = 1 + endIndex - startIndex;
+        int loopCount = endIndex - startIndex;
         int start = startIndex;
 
         if (startIndex > latestUnlockedPlotIndex) { start -= startIndex - latestUnlockedPlotIndex; }
-
-        for (int i = start; i < loopCount; i++)
+        for (int i = start; i < start + loopCount; i++)
         {
-            if (i > plotSizeStatus.GetValue - 1)
-            {
-                break;
-            }
-
             plots[i].Unlock();
+            latestUnlockedPlotIndex++;
         }
     }
 
@@ -77,19 +72,15 @@ public class PlotManager : MonoBehaviour, IContainStatus
         if (startIndex < 0) { startIndex = 0; }
         if (endIndex >= plots.Count) { endIndex = plots.Count - 1; }
 
-        int loopCount = 1 + endIndex - startIndex;
+        int loopCount = endIndex - startIndex;
         int start = startIndex;
 
         if (startIndex > latestUnlockedPlotIndex) { start -= startIndex - latestUnlockedPlotIndex; }
 
-        for (int i = start; i < loopCount; i++)
+        for (int i = start; i < start + loopCount; i++)
         {
-            if (i > plotSizeStatus.GetValue - 1)
-            {
-                break;
-            }
-
             plots[i].Lock();
+            latestUnlockedPlotIndex--;
         }
     }
 }
