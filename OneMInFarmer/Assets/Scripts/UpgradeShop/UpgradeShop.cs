@@ -77,7 +77,6 @@ public class UpgradeShop : MonoBehaviour
         isOpenedShop = true;
         ui.ShowWindow();
         ChangePanel(0);
-        GameManager.Instance.SetTimeScale(0);
         UShopButtonInputManager.Instance.UpdateButtonSelection();
     }
 
