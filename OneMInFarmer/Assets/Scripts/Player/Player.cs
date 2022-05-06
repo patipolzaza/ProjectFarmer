@@ -129,6 +129,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PercentStatusData moveSpeedData;
     private Vector2 moveInput;
     private bool canMove = true;
+    private bool canInteract = false;
 
     [SerializeField] private GameObject characterObject;
 
@@ -190,7 +191,6 @@ public class Player : MonoBehaviour
             {
                 playerHand.DropObject();
             }
-
             return;
         }
 
@@ -222,51 +222,39 @@ public class Player : MonoBehaviour
 
         CheckMoveInput();
 
-        if (isDetectInteractable && targetInteractable)
+        if (Input.GetKeyDown(KeyCode.J) && isDetectInteractable && targetInteractable)
         {
-            if (Input.GetKeyDown(KeyCode.J))
+            if (playerHand.holdingObject)
             {
-                if (playerHand.holdingObject)
+                if (playerHand.holdingObject is ISellable && targetInteractable is ShopForSell)
                 {
-                    if (playerHand.holdingObject is ISellable && targetInteractable is ShopForSell)
+                    ISellable sellable = playerHand.holdingObject as ISellable;
+                    ShopForSell shop = targetInteractable as ShopForSell;
+                    if (shop.PutItemInContainer(sellable))
                     {
-                        ISellable sellable = playerHand.holdingObject as ISellable;
-                        ShopForSell shop = targetInteractable as ShopForSell;
-                        if (shop.PutItemInContainer(sellable))
-                        {
-                            playerHand.SetInHandItemToNull();
-                        }
+                        playerHand.SetInHandItemToNull();
                     }
-                    else if (playerHand.holdingObject is IUsable && ItemUseMatcher.isMatch((IUsable)playerHand.holdingObject, targetInteractable))
+                }
+                else if (playerHand.holdingObject is IUsable && ItemUseMatcher.isMatch((IUsable)playerHand.holdingObject, targetInteractable))
+                {
+                    UseItem();
+                    if (playerHand.holdingObject is WateringPot && targetInteractable is Pool)
                     {
-                        UseItem();
-                        if (playerHand.holdingObject is WateringPot && targetInteractable is Pool)
-                        {
-                            PlayerAnimation.SetRefillingAnimation(true);
-                            return;
-                        }
-                        else
-                            OnInteractEvent.Invoke();
-
-                    }
-                    else if (playerHand.holdingObject is IAnimalEdible && targetInteractable is Animal)
-                    {
-                        IAnimalEdible animalEdible = (IAnimalEdible)playerHand.holdingObject;
-                        Animal animal = targetInteractable as Animal;
-
-                        if (animalEdible.Feed(animal))
-                        {
-                            playerHand.SetInHandItemToNull();
-                        }
-                    }
-                    else if (targetInteractable is PickableObject)
-                    {
-                        playerHand.PickUpObject((PickableObject)targetInteractable);
-                        OnPickingEvent.Invoke();
+                        PlayerAnimation.SetRefillingAnimation(true);
+                        return;
                     }
                     else
+                        OnInteractEvent.Invoke();
+
+                }
+                else if (playerHand.holdingObject is IAnimalEdible && targetInteractable is Animal)
+                {
+                    IAnimalEdible animalEdible = (IAnimalEdible)playerHand.holdingObject;
+                    Animal animal = targetInteractable as Animal;
+
+                    if (animalEdible.Feed(animal))
                     {
-                        Interact();
+                        playerHand.SetInHandItemToNull();
                     }
                 }
                 else if (targetInteractable is PickableObject)
@@ -279,7 +267,15 @@ public class Player : MonoBehaviour
                     Interact();
                 }
             }
-
+            else if (targetInteractable is PickableObject)
+            {
+                playerHand.PickUpObject((PickableObject)targetInteractable);
+                OnPickingEvent.Invoke();
+            }
+            else
+            {
+                Interact();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.K))
@@ -295,12 +291,18 @@ public class Player : MonoBehaviour
         {
             wallet.EarnCoin(5);
         }
+
+        if (Input.GetButtonUp("Submit"))
+        {
+            canInteract = true;
+        }
     }
 
     public void FixedUpdate()
     {
         Move();
     }
+
     private void CheckMoveInput()
     {
         if (!canMove)
@@ -369,7 +371,7 @@ public class Player : MonoBehaviour
 
     private void Interact()
     {
-        if (isDetectInteractable && targetInteractable)
+        if (isDetectInteractable && targetInteractable && canInteract)
         {
             targetInteractable.Interact(this);
         }
@@ -431,17 +433,9 @@ public class Player : MonoBehaviour
 
     private void ChangeTargetInteractable(Interactable newInteractable)
     {
-        if (targetInteractable)
-        {
-            targetInteractable.HideObjectHighlight();
-        }
-
+        targetInteractable?.HideObjectHighlight();
         targetInteractable = newInteractable;
-
-        if (targetInteractable)
-        {
-            targetInteractable.ShowObjectHighlight();
-        }
+        targetInteractable?.ShowObjectHighlight();
     }
 
     public void EnableMove()
@@ -455,6 +449,8 @@ public class Player : MonoBehaviour
         moveInput = Vector3.zero;
         rb.velocity = Vector3.zero;
         PlayerAnimation.SetRunningAnimation(Vector2.zero);
+
+        canInteract = false;
     }
 
     private void OnDrawGizmos()

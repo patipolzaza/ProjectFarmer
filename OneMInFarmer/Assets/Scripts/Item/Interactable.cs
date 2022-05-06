@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Interactable : MonoBehaviour
 {
     public bool isInteractable { get; protected set; }
+
     [SerializeField] protected UnityEvent<Player> interactEvent;
     [SerializeField] protected GameObject interactableObject;
     protected float objectDefaultScale;
@@ -18,7 +19,6 @@ public class Interactable : MonoBehaviour
     [Header("On Highlight Events")]
     public UnityEvent OnHighlightShowed;
     public UnityEvent OnHighlightHided;
-
 
     protected virtual void Awake()
     {
@@ -68,20 +68,11 @@ public class Interactable : MonoBehaviour
     {
         defaultColor = spriteRenderers[0].color;
 
-        if (isInteractable)
+        foreach (var sr in spriteRenderers)
         {
-            foreach (var sr in spriteRenderers)
-            {
-                sr.color = highlightColor;
-            }
+            sr.color = highlightColor;
         }
-        else
-        {
-            foreach (var sr in spriteRenderers)
-            {
-                sr.color = defaultColor;
-            }
-        }
+
         OnHighlightShowed?.Invoke();
     }
 

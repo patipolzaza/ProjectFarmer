@@ -31,11 +31,6 @@ public class UShopButtonInputManager : MonoBehaviour
         {
             UpdateButtonSelection();
         }
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            currentSelected?.GetComponent<Button>().onClick.Invoke();
-        }
     }
 
     public void UpdateButtonSelection()
