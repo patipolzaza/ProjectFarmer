@@ -76,6 +76,8 @@ public class Animal : PickableObject, IBuyable, ISellable
         weight = saveData.GetWeight;
         lifePoint = saveData.GetLifePoint;
         currentAgeSpan = (AgeSpan)saveData.GetAgeSpan;
+
+        _saveData = saveData;
     }
 
     protected override void Awake()
@@ -357,6 +359,6 @@ public class Animal : PickableObject, IBuyable, ISellable
     private void UpdateDataInContainer()
     {
         _saveData.UpdateData(this);
-        _saveData.UpdateDataInContainer();
+        _saveData.UpdateDataOnContainer();
     }
 }

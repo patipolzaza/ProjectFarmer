@@ -5,49 +5,83 @@ using UnityEngine;
 [System.Serializable]
 public static class ObjectDataContainer
 {
-    private static int lastIndex = 0;
+    private static string _gameSaveKey = "gameSave";
     [SerializeField]
-    private static List<AnimalSaveData> animalSaveDatas = new List<AnimalSaveData>();
+    private static List<AnimalSaveData> _animalSaveDatas = new List<AnimalSaveData>();
+    [SerializeField] private static List<PlotSaveData> _plotSaveDatas = new List<PlotSaveData>();
 
-    private static string animalSaveDatasKey = "animalSaveDatas";
+    public static List<AnimalSaveData> GetAnimalDatas => _animalSaveDatas;
+    public static List<PlotSaveData> GetPlotDatas => _plotSaveDatas;
 
-    public static List<AnimalSaveData> GetDatas => animalSaveDatas;
-
-    public static void UpdateAnimalSaveData(int index, AnimalSaveData newData)
+    public static void UpdateAnimalSaveData(AnimalSaveData data)
     {
-        animalSaveDatas[index] = newData;
+        if (data != null)
+        {
+            if (_animalSaveDatas.Contains(data))
+            {
+                int index = _animalSaveDatas.IndexOf(data);
+                _animalSaveDatas[index] = data;
+            }
+            else
+            {
+                AddAnimalSaveData(data);
+            }
+        }
+    }
+    public static void AddAnimalSaveData(AnimalSaveData data)
+    {
+        _animalSaveDatas.Add(data);
+    }
+    public static void RemoveAnimalSaveData(AnimalSaveData data)
+    {
+        _animalSaveDatas.Remove(data);
+    }
+    public static void ClearAnimalSaveDatas()
+    {
+        _animalSaveDatas.Clear();
     }
 
-    public static int AddAnimalSaveData(AnimalSaveData data)
+    public static void AddPlotSaveData(PlotSaveData data)
     {
-        animalSaveDatas.Add(data);
-        lastIndex++;
-        return lastIndex;
+        _plotSaveDatas.Add(data);
     }
-
-    public static void Remove(int index)
+    public static void UpdatePlotSaveData(PlotSaveData data)
     {
-        animalSaveDatas.RemoveAt(index);
+        if (data != null)
+        {
+            if (_plotSaveDatas.Contains(data))
+            {
+                int index = _plotSaveDatas.IndexOf(data);
+                _plotSaveDatas[index] = data;
+            }
+            else
+            {
+                AddPlotSaveData(data);
+            }
+        }
     }
-
-    public static void ClearDatas()
+    public static void RemovePlotSaveData(PlotSaveData data)
     {
-        animalSaveDatas.Clear();
+        _plotSaveDatas.Remove(data);
+    }
+    public static void ClearPlotSaveDatas()
+    {
+        _plotSaveDatas.Clear();
     }
 
     public static void SaveDatas()
     {
-        AnimalSaveDataList animalSaveList = new AnimalSaveDataList(animalSaveDatas);
-        SaveManager.Save(animalSaveDatasKey, animalSaveList);
+        /*AnimalSaveDataList animalSaveList = new AnimalSaveDataList(animalSaveDatas);
+        SaveManager.Save(animalSaveDatasKey, animalSaveList);*/
     }
 
     public static void LoadData()
     {
-        var animalLoadedJson = SaveManager.Load(animalSaveDatasKey);
-        if (animalLoadedJson != null && animalLoadedJson != string.Empty)
+        var saveLoadedJson = SaveManager.Load(_gameSaveKey);
+        if (saveLoadedJson != null && saveLoadedJson != string.Empty)
         {
-            var animalSaveDataList = JsonUtility.FromJson<AnimalSaveDataList>(animalLoadedJson);
-            animalSaveDatas = animalSaveDataList.GetAnimalSaveDatas;
+            /*var animalSaveDataList = JsonUtility.FromJson<AnimalSaveDataList>(animalLoadedJson);
+            animalSaveDatas = animalSaveDataList.GetAnimalSaveDatas;*/
         }
         //.......//
     }

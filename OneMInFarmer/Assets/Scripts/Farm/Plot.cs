@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Plot : Interactable
 {
+    private PlotSaveData _saveData;
+
     private bool isPlanted = false;
     private SpriteRenderer spriteRenderer;
     [SerializeField] private GameObject plantObject;
@@ -14,12 +14,12 @@ public class Plot : Interactable
     [SerializeField] private Sprite SpriteWet;
 
     public SeedData seed;
-    int plantStage = 0;
-    int countHarvest;
-    int agePlant = 0;
-    int dehydration = 0;
+    public int plantStage { get; private set; } = 0;
+    public int countHarvest { get; private set; }
+    public int agePlant { get; private set; } = 0;
+    public int dehydration { get; private set; } = 0;
     bool isDry = true;
-    bool isWither = false;
+    public bool isWither { get; private set; } = false;
 
     protected override void Awake()
     {
@@ -43,6 +43,30 @@ public class Plot : Interactable
     {
         OnHighlightShowed.RemoveListener(ShowProductDetail);
         OnHighlightHided.RemoveListener(HideProductDetail);
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        _saveData = new PlotSaveData(this);
+        UpdateSaveDataOnContainer();
+    }
+
+    public void LoadSaveData(PlotSaveData saveData)
+    {
+        seed = saveData.GetSeed;
+        isPlanted = seed == null ? false : true;
+
+        plantStage = saveData.GetPlantStage;
+        countHarvest = saveData.GetHarvestCount;
+        agePlant = saveData.GetAgePlant;
+        dehydration = saveData.GetDehydration;
+        isWither = saveData.GetWitherStatus;
+
+        _saveData = saveData;
+
+        UpdatePlant();
     }
 
     public void PlayerInteract(Player player)
@@ -171,8 +195,10 @@ public class Plot : Interactable
             Debug.Log("Update not Dry");
             GetComponent<SpriteRenderer>().sprite = SpriteWet;
         }
+
         if (isPlanted)
         {
+            plantObject.SetActive(true);
             plantSpriteRenderer.sprite = seed.plantStages[plantStage];
             if (isWither)
             {
@@ -182,6 +208,10 @@ public class Plot : Interactable
             {
                 plantSpriteRenderer.color = new Color32(255, 255, 255, 255);
             }
+        }
+        else
+        {
+            plantObject.SetActive(false);
         }
     }
 
@@ -236,5 +266,11 @@ public class Plot : Interactable
     private void HideProductDetail()
     {
         seed?.product.HideDetail();
+    }
+
+    public void UpdateSaveDataOnContainer()
+    {
+        _saveData.UpdateData(this);
+        _saveData.UpdateDataOnContainer();
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class AnimalSaveData : ObjectSaveData
+public class AnimalSaveData
 {
     [SerializeField] private int age;
     [SerializeField] private int currentAgeSpan;
@@ -32,15 +32,8 @@ public class AnimalSaveData : ObjectSaveData
         animalScale = animal.GetInteractObject.transform.localScale;
     }
 
-    public void UpdateDataInContainer()
+    public void UpdateDataOnContainer()
     {
-        if (indexInContainer < 0)
-        {
-            indexInContainer = ObjectDataContainer.AddAnimalSaveData(this);
-        }
-        else
-        {
-            ObjectDataContainer.UpdateAnimalSaveData(indexInContainer, this);
-        }
+        ObjectDataContainer.UpdateAnimalSaveData(this);
     }
 }
