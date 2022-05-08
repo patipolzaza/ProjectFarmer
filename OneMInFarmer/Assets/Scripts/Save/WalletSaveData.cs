@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [System.Serializable]
@@ -11,7 +12,14 @@ public class WalletSaveData
 
     public WalletSaveData(Wallet wallet)
     {
+        UpdateData(wallet);
+    }
+
+    public void UpdateData(Wallet wallet)
+    {
         _walletStatusLevel = wallet.GetStatus.currentLevel;
         _coinInWallet = wallet.coin;
+
+        ObjectDataContainer.UpdateWalletSaveData(this);
     }
 }

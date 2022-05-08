@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Wallet : MonoBehaviour, IContainStatus
 {
+    private WalletSaveData _saveData;
+
     private Status _bonusCoinStatus;
     [SerializeField] private StatusData _bonusCoinStatusData;
 
@@ -19,6 +21,20 @@ public class Wallet : MonoBehaviour, IContainStatus
     }
 
     public Status GetStatus => _bonusCoinStatus;
+
+    private void Start()
+    {
+        _saveData = new WalletSaveData(this);
+        UpdateSaveData();
+    }
+
+    public void LoadSaveData(WalletSaveData saveData)
+    {
+        coin = saveData.GetCoinInWallet;
+        _bonusCoinStatus.SetLevel(saveData.GetWalletStatusLevel);
+
+        _saveData = saveData;
+    }
 
     public void EarnCoin(int amount)
     {
@@ -40,5 +56,17 @@ public class Wallet : MonoBehaviour, IContainStatus
         }
 
         OnCoinChanged?.Invoke(oldCoinValue, coin);
+    }
+
+    private void SetCoin(int amount)
+    {
+        int oldValue = coin;
+        coin = Mathf.Clamp(coin, 0, amount);
+        OnCoinChanged.Invoke(oldValue, coin);
+    }
+
+    public void UpdateSaveData()
+    {
+        _saveData.UpdateData(this);
     }
 }

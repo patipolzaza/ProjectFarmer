@@ -6,6 +6,8 @@ public class PlotManager : MonoBehaviour, IContainStatus
 {
     public static PlotManager Instance;
 
+    private PlotStatusSaveData _saveData;
+
     public Status plotSizeStatus { get; private set; }
     [SerializeField] private StatusData plotSizeStatusData;
     [SerializeField] private List<Plot> plots = new List<Plot>();
@@ -21,6 +23,8 @@ public class PlotManager : MonoBehaviour, IContainStatus
     private void Start()
     {
         UnlockPlots(0, plotSizeStatus.GetBaseValue);
+
+        _saveData = new PlotStatusSaveData(plotSizeStatus);
     }
 
     public Status GetStatus
@@ -29,6 +33,11 @@ public class PlotManager : MonoBehaviour, IContainStatus
         {
             return plotSizeStatus;
         }
+    }
+
+    public void LoadSaveData(PlotStatusSaveData saveData)
+    {
+
     }
 
     /// <summary>
@@ -82,5 +91,19 @@ public class PlotManager : MonoBehaviour, IContainStatus
             plots[i].Lock();
             latestUnlockedPlotIndex--;
         }
+    }
+
+    public void LoadPlotsSaveData(List<PlotSaveData> plotSaveDatas)
+    {
+        foreach (var saveData in plotSaveDatas)
+        {
+            int plotIndex = saveData.GetPlotIndex;
+            plots[plotIndex].LoadSaveData(saveData);
+        }
+    }
+
+    public void UpdateSaveData()
+    {
+        _saveData.UpdateSaveData(plotSizeStatus);
     }
 }

@@ -30,10 +30,7 @@ public class AnimalSaveData
         weight = animal.weight;
         lifePoint = animal.lifePoint;
         animalScale = animal.GetInteractObject.transform.localScale;
-    }
 
-    public void UpdateDataOnContainer()
-    {
         ObjectDataContainer.UpdateAnimalSaveData(this);
     }
 }

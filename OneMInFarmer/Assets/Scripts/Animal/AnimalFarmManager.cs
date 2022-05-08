@@ -32,6 +32,11 @@ public class AnimalFarmManager : MonoBehaviour, IContainStatus
         }
     }
 
+    public void LoadSaveData()
+    {
+
+    }
+
     public bool AddAnimal(Animal animalToAdd)
     {
         if (animals.Count >= maxAnimalStatus.GetValue || !animalToAdd)
@@ -60,5 +65,10 @@ public class AnimalFarmManager : MonoBehaviour, IContainStatus
         {
             animal.IncreaseAge();
         }
+    }
+
+    public void LoadAnimalDatas(List<AnimalSaveData> animalSaveDatas)
+    {
+
     }
 }

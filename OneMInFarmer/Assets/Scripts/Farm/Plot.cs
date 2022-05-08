@@ -3,6 +3,7 @@ using UnityEngine;
 public class Plot : Interactable
 {
     private PlotSaveData _saveData;
+    [SerializeField] private int _plotIndex;
 
     private bool isPlanted = false;
     private SpriteRenderer spriteRenderer;
@@ -14,6 +15,7 @@ public class Plot : Interactable
     [SerializeField] private Sprite SpriteWet;
 
     public SeedData seed;
+    public int GetPlotIndex => _plotIndex;
     public int plantStage { get; private set; } = 0;
     public int countHarvest { get; private set; }
     public int agePlant { get; private set; } = 0;
@@ -58,6 +60,7 @@ public class Plot : Interactable
         seed = saveData.GetSeed;
         isPlanted = seed == null ? false : true;
 
+        _plotIndex = saveData.GetPlotIndex;
         plantStage = saveData.GetPlantStage;
         countHarvest = saveData.GetHarvestCount;
         agePlant = saveData.GetAgePlant;
@@ -271,6 +274,5 @@ public class Plot : Interactable
     public void UpdateSaveDataOnContainer()
     {
         _saveData.UpdateData(this);
-        _saveData.UpdateDataOnContainer();
     }
 }

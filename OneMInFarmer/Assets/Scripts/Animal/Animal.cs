@@ -359,6 +359,5 @@ public class Animal : PickableObject, IBuyable, ISellable
     private void UpdateDataInContainer()
     {
         _saveData.UpdateData(this);
-        _saveData.UpdateDataOnContainer();
     }
 }

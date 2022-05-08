@@ -11,6 +11,13 @@ public class PlotStatusSaveData
 
     public PlotStatusSaveData(Status plotStatus)
     {
+        UpdateSaveData(plotStatus);
+    }
+
+    public void UpdateSaveData(Status plotStatus)
+    {
         _plotStatusLevel = plotStatus.currentLevel;
+
+        ObjectDataContainer.UpdatePlotStatusSaveData(this);
     }
 }

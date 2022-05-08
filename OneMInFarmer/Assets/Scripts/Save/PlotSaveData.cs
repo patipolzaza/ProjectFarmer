@@ -4,6 +4,7 @@ using UnityEditor;
 [System.Serializable]
 public class PlotSaveData
 {
+    [SerializeField] private int _plotIndex;
     [SerializeField] private string _seedPath;
     [SerializeField] private int _plantStage;
     [SerializeField] private int _harvestCount;
@@ -27,7 +28,7 @@ public class PlotSaveData
             }
         }
     }
-
+    public int GetPlotIndex => _plotIndex;
     public int GetPlantStage => _plantStage;
     public int GetHarvestCount => _harvestCount;
     public int GetAgePlant => _agePlant;
@@ -41,16 +42,14 @@ public class PlotSaveData
 
     public void UpdateData(Plot plot)
     {
+        _plotIndex = plot.GetPlotIndex;
         _seedPath = plot.seed?.GetPath;
         _plantStage = plot.plantStage;
         _harvestCount = plot.countHarvest;
         _agePlant = plot.agePlant;
         _dehydration = plot.dehydration;
         _isWither = plot.isWither;
-    }
 
-    public void UpdateDataOnContainer()
-    {
         ObjectDataContainer.UpdatePlotSaveData(this);
     }
 }
