@@ -216,13 +216,7 @@ public class Animal : PickableObject, IBuyable, ISellable
 
     public override void Drop()
     {
-        /*if (transform.lossyScale.x < 0)
-        {
-            Flip();
-        }*/
-
         base.Drop();
-
         grabbedState.Unleash();
     }
 
@@ -287,9 +281,8 @@ public class Animal : PickableObject, IBuyable, ISellable
     private void FacingToDirection(float velocityX)
     {
         int direction = (int)(velocityX > 0 ? 1 : velocityX < 0 ? -1 : facingDirection);
-        Debug.Log("Direction: " + direction);
         Vector3 newScale = interactableObject.transform.localScale;
-        if (direction > facingDirection || direction < facingDirection)
+        if ((direction > facingDirection) || (direction < facingDirection))
         {
             newScale.x = newScale.x * -1;
         }
