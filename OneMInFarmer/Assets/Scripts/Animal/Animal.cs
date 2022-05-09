@@ -197,6 +197,11 @@ public class Animal : PickableObject, IBuyable, ISellable
         SetColor(newColor);
     }
 
+    public void ClearEatenFoods()
+    {
+        foodsEaten.Clear();
+    }
+
     public override Transform Pick()
     {
         base.Pick();
@@ -211,10 +216,10 @@ public class Animal : PickableObject, IBuyable, ISellable
 
     public override void Drop()
     {
-        if (transform.lossyScale.x < 0)
+        /*if (transform.lossyScale.x < 0)
         {
             Flip();
-        }
+        }*/
 
         base.Drop();
 
@@ -272,18 +277,25 @@ public class Animal : PickableObject, IBuyable, ISellable
 
     public void SetVelocity(float x, float y)
     {
-        if (x > 0 && facingDirection < 0 && interactableObject.transform.localScale.x < 0)
-        {
-            Flip();
-        }
-        else if (x < 0 && facingDirection > 0 && interactableObject.transform.localScale.x > 0)
-        {
-            Flip();
-        }
+        FacingToDirection(x);
 
         velocityWorkspace.Set(x, y);
 
         rb.velocity = velocityWorkspace;
+    }
+
+    private void FacingToDirection(float velocityX)
+    {
+        int direction = (int)(velocityX > 0 ? 1 : velocityX < 0 ? -1 : facingDirection);
+        Debug.Log("Direction: " + direction);
+        Vector3 newScale = interactableObject.transform.localScale;
+        if (direction > facingDirection || direction < facingDirection)
+        {
+            newScale.x = newScale.x * -1;
+        }
+
+        interactableObject.transform.localScale = newScale;
+        facingDirection = direction;
     }
 
     public void Flip()
