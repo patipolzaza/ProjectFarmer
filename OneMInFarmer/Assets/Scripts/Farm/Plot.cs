@@ -239,6 +239,8 @@ public class Plot : Interactable
             Grow();
             Dring();
         }
+
+        UpdateSaveDataOnContainer();
     }
 
     public void Lock()

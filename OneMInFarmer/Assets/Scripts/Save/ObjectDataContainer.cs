@@ -11,10 +11,12 @@ public static class ObjectDataContainer
     [SerializeField] private static List<PlotSaveData> _plotSaveDatas = new List<PlotSaveData>();
     [SerializeField] private static WalletSaveData _walletSaveData;
     [SerializeField] private static PlotStatusSaveData _plotStatusSaveData;
+    [SerializeField] private static MaxAnimalStatusSaveData _maxAnimalStatusSaveData;
     public static List<AnimalSaveData> GetAnimalDatas => _animalSaveDatas;
     public static List<PlotSaveData> GetPlotDatas => _plotSaveDatas;
     public static WalletSaveData GetWalletSaveData => _walletSaveData;
     public static PlotStatusSaveData GetPlotStatusSaveData => _plotStatusSaveData;
+    public static MaxAnimalStatusSaveData GetMaxAnimalStatusSaveData => _maxAnimalStatusSaveData;
 
     public static void UpdateAnimalSaveData(AnimalSaveData data)
     {
@@ -92,13 +94,23 @@ public static class ObjectDataContainer
         _plotStatusSaveData = null;
     }
 
+    public static void UpdateMaxAnimalStatusSaveData(MaxAnimalStatusSaveData maxAnimalStatusSaveData)
+    {
+        _maxAnimalStatusSaveData = maxAnimalStatusSaveData;
+    }
+
+    public static void ClearMaxAnimalStatusSaveData()
+    {
+        _maxAnimalStatusSaveData = null;
+    }
+
     public static void SaveDatas()
     {
-        GameSaveData saveData = new GameSaveData(_animalSaveDatas, _walletSaveData, _plotStatusSaveData, _plotSaveDatas);
+        GameSaveData saveData = new GameSaveData(_maxAnimalStatusSaveData, _animalSaveDatas, _walletSaveData, _plotStatusSaveData, _plotSaveDatas);
         SaveManager.Save(_gameSaveKey, saveData);
     }
 
-    public static void LoadData()
+    public static void LoadDatas()
     {
         var saveLoadedJson = SaveManager.Load(_gameSaveKey);
         if (saveLoadedJson != null && saveLoadedJson != string.Empty)
@@ -108,10 +120,13 @@ public static class ObjectDataContainer
             _plotSaveDatas = new List<PlotSaveData>(saveData.GetPlotSaveDatas);
             _plotStatusSaveData = saveData.GetPlotStatusSaveData;
             _walletSaveData = saveData.GetWalletSaveData;
+            _maxAnimalStatusSaveData = saveData.GetMaxAnimalStatusSaveData;
 
             Player.Instance.wallet.LoadSaveData(_walletSaveData);
             PlotManager.Instance.LoadSaveData(_plotStatusSaveData);
             PlotManager.Instance.LoadPlotsSaveData(_plotSaveDatas);
+            AnimalFarmManager.Instance.LoadSaveData(_maxAnimalStatusSaveData);
+            AnimalFarmManager.Instance.LoadAnimalDatas(_animalSaveDatas);
         }
         //.......//
     }

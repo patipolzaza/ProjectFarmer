@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.Events;
 using TMPro;
 
 public class Animal : PickableObject, IBuyable, ISellable
 {
     private AnimalSaveData _saveData;
+    public string prefabPath { get; private set; } = "";
 
     public Rigidbody2D rb { get; private set; }
     public Animator anim { get; private set; }
@@ -21,9 +23,8 @@ public class Animal : PickableObject, IBuyable, ISellable
     private Vector2 velocityWorkspace = new Vector2();
 
     public int age { get; protected set; } = 1;
-    public AgeSpan currentAgeSpan;
+    public AgeSpan currentAgeSpan { get; protected set; }
     public int lifePoint { get; protected set; } = 2;
-
     public bool isHungry { get; private set; } = true;
     private List<IAnimalEdible> foodsEaten = new List<IAnimalEdible>();
     public float weight { get; protected set; }
@@ -69,6 +70,16 @@ public class Animal : PickableObject, IBuyable, ISellable
     }
     public int GetLifespan => animalData.lifespan;
     public List<FoodType> GetEdibleFoods => animalData.edibleFoods;
+    public string GetPrefabPath
+    {
+        get
+        {
+            var guids = AssetDatabase.FindAssets($"{gameObject.name} t:GameObject", new[] { $"Assets/Resources/Prefabs/Animals/{gameObject.name}/" });
+            string path = AssetDatabase.GUIDToAssetPath(guids[0]);
+
+            return path;
+        }
+    }
 
     public void LoadAnimalData(AnimalSaveData saveData)
     {
@@ -115,13 +126,16 @@ public class Animal : PickableObject, IBuyable, ISellable
     {
         base.Start();
 
-        facingDirection = interactableObject.transform.localScale.x / interactableObject.transform.localScale.x;
+        facingDirection = interactableObject.transform.localScale.x > 0 ? 1 : -1;
+        Debug.Log($"Start facing direction: {facingDirection}");
 
         float size = GetSize;
         Vector3 newScale = new Vector3(size, size, 1);
         SetScale(newScale);
 
         weight = animalData.startWeight;
+
+        prefabPath = GetPrefabPath;
 
         _saveData = new AnimalSaveData(this);
         UpdateDataInContainer();
@@ -220,6 +234,11 @@ public class Animal : PickableObject, IBuyable, ISellable
         grabbedState.Unleash();
     }
 
+    public void SetWeight(int value)
+    {
+        weight = Mathf.Clamp(value, animalData.startWeight, float.PositiveInfinity);
+    }
+
     public virtual bool TakeFood(IAnimalEdible food)
     {
         if (isDie)
@@ -274,7 +293,6 @@ public class Animal : PickableObject, IBuyable, ISellable
         FacingToDirection(x);
 
         velocityWorkspace.Set(x, y);
-
         rb.velocity = velocityWorkspace;
     }
 
@@ -337,14 +355,14 @@ public class Animal : PickableObject, IBuyable, ISellable
     {
         return gameObject;
     }
-
+    /*
     public void PutInShopStash(ShopForSell targetShop)
     {
         targetShop.PutItemInContainer(this);
         SetLocalPosition(Vector3.zero, false, false, false, false);
         SetObjectSpriteRenderer(false);
         SetInteractable(false);
-    }
+    }*/
 
     private void ShowDetail()
     {

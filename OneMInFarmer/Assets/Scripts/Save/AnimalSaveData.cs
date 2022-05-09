@@ -5,18 +5,22 @@ using UnityEngine;
 [System.Serializable]
 public class AnimalSaveData
 {
-    [SerializeField] private int age;
-    [SerializeField] private int currentAgeSpan;
-    [SerializeField] private float weight;
-    [SerializeField] private int lifePoint;
+    [SerializeField] private string _animalPrefabPath;
+    [SerializeField] private int _age;
+    [SerializeField] private int _currentAgeSpan;
+    [SerializeField] private float _weight;
+    [SerializeField] private int _lifePoint;
 
-    [SerializeField] private Vector3 animalScale;
+    [SerializeField] private Vector3 _animalScale;
+    [SerializeField] private Vector2 _animalPosition;
 
-    public int GetAge => age;
-    public float GetWeight => weight;
-    public int GetLifePoint => lifePoint;
-    public int GetAgeSpan => currentAgeSpan;
-    public Vector3 GetAnimalScale => animalScale;
+    public int GetAge => _age;
+    public float GetWeight => _weight;
+    public int GetLifePoint => _lifePoint;
+    public int GetAgeSpan => _currentAgeSpan;
+    public Vector3 GetAnimalScale => _animalScale;
+    public Vector3 GetAnimalPosition => _animalPosition;
+    public string GetAnimalPrefabPath => _animalPrefabPath;
 
     public AnimalSaveData(Animal animal)
     {
@@ -25,12 +29,15 @@ public class AnimalSaveData
 
     public void UpdateData(Animal animal)
     {
-        age = animal.age;
-        currentAgeSpan = (int)animal.currentAgeSpan;
-        weight = animal.weight;
-        lifePoint = animal.lifePoint;
-        animalScale = animal.GetInteractObject.transform.localScale;
+        _animalPrefabPath = animal.prefabPath;
+        _age = animal.age;
+        _currentAgeSpan = (int)animal.currentAgeSpan;
+        _weight = animal.weight;
+        _lifePoint = animal.lifePoint;
+        _animalScale = animal.GetInteractObject.transform.localScale;
+        _animalPosition = animal.GetInteractObject.transform.position;
 
+        Debug.Log(_weight);
         ObjectDataContainer.UpdateAnimalSaveData(this);
     }
 }

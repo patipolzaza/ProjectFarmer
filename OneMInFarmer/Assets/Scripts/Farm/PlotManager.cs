@@ -37,7 +37,9 @@ public class PlotManager : MonoBehaviour, IContainStatus
 
     public void LoadSaveData(PlotStatusSaveData saveData)
     {
+        plotSizeStatus.SetLevel(saveData.GetPlotStatusLevel);
 
+        _saveData = saveData;
     }
 
     /// <summary>
@@ -93,6 +95,16 @@ public class PlotManager : MonoBehaviour, IContainStatus
         }
     }
 
+    public void ResetPlotsStatus()
+    {
+        UpdatePlotStatusSaveData();
+
+        foreach (Plot plot in plots)
+        {
+            plot.ResetPlotStatus();
+        }
+    }
+
     public void LoadPlotsSaveData(List<PlotSaveData> plotSaveDatas)
     {
         foreach (var saveData in plotSaveDatas)
@@ -102,7 +114,7 @@ public class PlotManager : MonoBehaviour, IContainStatus
         }
     }
 
-    public void UpdateSaveData()
+    public void UpdatePlotStatusSaveData()
     {
         _saveData.UpdateSaveData(plotSizeStatus);
     }

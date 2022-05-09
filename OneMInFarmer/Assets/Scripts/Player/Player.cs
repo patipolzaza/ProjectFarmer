@@ -292,11 +292,6 @@ public class Player : MonoBehaviour
             wallet.EarnCoin(5);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ObjectDataContainer.SaveDatas();
-        }
-
         if (Input.GetButtonUp("Submit"))
         {
             canInteract = true;

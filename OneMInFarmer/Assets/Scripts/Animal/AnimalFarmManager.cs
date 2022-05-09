@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using System.Linq;
 
 public class AnimalFarmManager : MonoBehaviour, IContainStatus
 {
     public static AnimalFarmManager Instance { get; private set; }
 
+    private MaxAnimalStatusSaveData _saveData;
     public Status maxAnimalStatus { get; private set; }
     [SerializeField] private StatusData maxAnimalStatusData;
     private List<Animal> animals = new List<Animal>();
@@ -32,9 +34,11 @@ public class AnimalFarmManager : MonoBehaviour, IContainStatus
         }
     }
 
-    public void LoadSaveData()
+    public void LoadSaveData(MaxAnimalStatusSaveData saveData)
     {
+        maxAnimalStatus.SetLevel(saveData.GetStatusLevel);
 
+        _saveData = saveData;
     }
 
     public bool AddAnimal(Animal animalToAdd)
@@ -61,14 +65,32 @@ public class AnimalFarmManager : MonoBehaviour, IContainStatus
 
     public void GrowUpAnimals()
     {
+        UpdateStatusSaveDataOnContainer();
+
         foreach (var animal in animals)
         {
             animal.IncreaseAge();
         }
     }
 
+    private void UpdateStatusSaveDataOnContainer()
+    {
+        ObjectDataContainer.UpdateMaxAnimalStatusSaveData(_saveData);
+    }
+
     public void LoadAnimalDatas(List<AnimalSaveData> animalSaveDatas)
     {
+        foreach (var saveData in animalSaveDatas)
+        {
+            var animalPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(saveData.GetAnimalPrefabPath);
+            var spawnedPosition = saveData.GetAnimalPosition;
 
+            GameObject instantiatedAnimal = Instantiate(animalPrefab, spawnedPosition, Quaternion.identity);
+            instantiatedAnimal.name = animalPrefab.name;
+            Animal animalComponent = instantiatedAnimal.GetComponent<Animal>();
+            animalComponent.LoadAnimalData(saveData);
+
+            AddAnimal(animalComponent);
+        }
     }
 }

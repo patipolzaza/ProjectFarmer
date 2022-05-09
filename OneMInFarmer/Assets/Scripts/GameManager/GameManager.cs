@@ -28,12 +28,25 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartGameFirstDay());
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Keypad0))
+        {
+            LoadGameProgress();
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            SaveGameProgress();
+        }
+    }
+
     private IEnumerator StartGameFirstDay()
     {
         yield return new WaitUntil(() => isCompletedAllSetup());
         yield return new WaitUntil(() => Input.anyKeyDown && !TuTorialManager.Instance._isInProcess);
         TuTorialManager.Instance.CloseWindow();
         FindObjectOfType<SoundEffectsController>().PlaySoundEffect("BGM");
+        SaveGameProgress();
         StartDay();
     }
 
@@ -63,15 +76,6 @@ public class GameManager : MonoBehaviour
         dayResultManager.ShowDayResult();
     }
 
-    private void ResetPlotsStatus()
-    {
-        var plots = FindObjectsOfType<Plot>();
-        foreach (Plot plot in plots)
-        {
-            plot.ResetPlotStatus();
-        }
-    }
-
     public void ToNextDay()
     {
         currentDay++;
@@ -81,7 +85,7 @@ public class GameManager : MonoBehaviour
         DebtManager.Instance.ResetParameters();
 
         AnimalFarmManager.Instance.GrowUpAnimals();
-        ResetPlotsStatus();
+        PlotManager.Instance.ResetPlotsStatus();
         ShopBuyManager.Instance.RestockShops();
 
         UpgradeShop.Instance.OpenWindow();
@@ -91,6 +95,18 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game is O V E R.");
         OnGameEnded?.Invoke();
+    }
+
+    public void SaveGameProgress()
+    {
+        Debug.Log("Game saved.");
+        ObjectDataContainer.SaveDatas();
+    }
+
+    public void LoadGameProgress()
+    {
+        Debug.Log("Game loaded.");
+        ObjectDataContainer.LoadDatas();
     }
 
     public void SetTimeScale(float value)
