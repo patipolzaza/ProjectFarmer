@@ -864,6 +864,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4205238667441044017, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
   m_PrefabInstance: {fileID: 2110873671}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &197064093 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4710408907117703281, guid: 4ed97d3bc3c457044a614e51d63070a6, type: 3}
+  m_PrefabInstance: {fileID: 398959689}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9820b10a2d796404f84c0e96a788c7ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &200484136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1325,7 +1336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4710408907663093385, guid: 4ed97d3bc3c457044a614e51d63070a6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4710408908014329756, guid: 4ed97d3bc3c457044a614e51d63070a6, type: 3}
       propertyPath: m_Name
@@ -2385,6 +2396,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c7f43938b6f80488c9c1f5767b0801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnSaveLoaded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 197064093}
+        m_TargetAssemblyTypeName: TuTorialManager, Assembly-CSharp
+        m_MethodName: CloseWindow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1081820951}
+        m_TargetAssemblyTypeName: UpgradeShop, Assembly-CSharp
+        m_MethodName: OpenWindow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDayStarted:
     m_PersistentCalls:
       m_Calls:
@@ -2438,7 +2476,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1765059210}
         m_TargetAssemblyTypeName: Wallet, Assembly-CSharp
-        m_MethodName: UpdateSaveData
+        m_MethodName: UpdateSaveDataOnContainer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3890,6 +3928,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4d140fdfb68b764fa13806b2c42ec81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1081820951 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5243712791023657383, guid: 723aa240e3be7da40a2d0a2b2eecbd0b, type: 3}
+  m_PrefabInstance: {fileID: 934379359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 523286a35ab172a4487a3590de96e91c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1123339603
