@@ -27,8 +27,9 @@ public class Animal : PickableObject, IBuyable, ISellable
     public bool isHungry { get; private set; } = true;
     private List<IAnimalEdible> foodsEaten = new List<IAnimalEdible>();
     public float weight { get; protected set; }
-    public UnityEvent<float, float> OnEatenFood;
 
+    public UnityEvent<float, float> OnEatenFood;
+    public UnityEvent OnClearEatenFoods;
     public bool isDie { get; private set; } = false;
 
     #region State Machine
@@ -167,7 +168,7 @@ public class Animal : PickableObject, IBuyable, ISellable
             IncreaseWeight(food.GetWeightGain);
         }
 
-        foodsEaten.Clear();
+        OnClearEatenFoods?.Invoke();
     }
 
     private void IncreaseWeight(float amount)
