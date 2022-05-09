@@ -70,6 +70,8 @@ public class Plot : Interactable
         _saveData = saveData;
 
         UpdatePlant();
+
+        UpdateSaveDataOnContainer();
     }
 
     public void PlayerInteract(Player player)

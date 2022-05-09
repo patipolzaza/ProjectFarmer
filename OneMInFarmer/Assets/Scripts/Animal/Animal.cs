@@ -83,13 +83,15 @@ public class Animal : PickableObject, IBuyable, ISellable
 
     public void LoadAnimalData(AnimalSaveData saveData)
     {
-        SetScale(saveData.GetAnimalScale);
+        interactableObject.transform.localScale = saveData.GetAnimalScale;
         age = saveData.GetAge;
         weight = saveData.GetWeight;
         lifePoint = saveData.GetLifePoint;
         currentAgeSpan = (AgeSpan)saveData.GetAgeSpan;
 
         _saveData = saveData;
+
+        UpdateDataOnContainer();
     }
 
     protected override void Awake()
@@ -127,18 +129,21 @@ public class Animal : PickableObject, IBuyable, ISellable
         base.Start();
 
         facingDirection = interactableObject.transform.localScale.x > 0 ? 1 : -1;
-        Debug.Log($"Start facing direction: {facingDirection}");
 
-        float size = GetSize;
-        Vector3 newScale = new Vector3(size, size, 1);
-        SetScale(newScale);
+        if (_saveData == null)
+        {
+            float size = GetSize;
+            Vector3 newScale = new Vector3(size, size, 1);
+            SetScale(newScale);
 
-        weight = animalData.startWeight;
+            weight = animalData.startWeight;
 
-        prefabPath = GetPrefabPath;
+            prefabPath = GetPrefabPath;
 
-        _saveData = new AnimalSaveData(this);
-        UpdateDataInContainer();
+            _saveData = new AnimalSaveData(this);
+        }
+
+        UpdateDataOnContainer();
     }
 
     protected override void Update()
@@ -172,7 +177,7 @@ public class Animal : PickableObject, IBuyable, ISellable
         Vector3 newScale = new Vector3(size, size, 1);
         SetScale(newScale);
 
-        UpdateDataInContainer();
+        UpdateDataOnContainer();
     }
 
     private void DigestFoods()
@@ -300,9 +305,10 @@ public class Animal : PickableObject, IBuyable, ISellable
     {
         int direction = (int)(velocityX > 0 ? 1 : velocityX < 0 ? -1 : facingDirection);
         Vector3 newScale = interactableObject.transform.localScale;
-        if ((direction > facingDirection) || (direction < facingDirection))
+
+        if ((direction > 0 && interactableObject.transform.localScale.x < 0) || (direction < 0 && interactableObject.transform.localScale.x > 0))
         {
-            newScale.x = newScale.x * -1;
+            newScale.x *= -1;
         }
 
         interactableObject.transform.localScale = newScale;
@@ -355,14 +361,6 @@ public class Animal : PickableObject, IBuyable, ISellable
     {
         return gameObject;
     }
-    /*
-    public void PutInShopStash(ShopForSell targetShop)
-    {
-        targetShop.PutItemInContainer(this);
-        SetLocalPosition(Vector3.zero, false, false, false, false);
-        SetObjectSpriteRenderer(false);
-        SetInteractable(false);
-    }*/
 
     private void ShowDetail()
     {
@@ -380,7 +378,7 @@ public class Animal : PickableObject, IBuyable, ISellable
         AnimalDetailDisplayer.Instance.HideWindow();
     }
 
-    private void UpdateDataInContainer()
+    private void UpdateDataOnContainer()
     {
         _saveData.UpdateData(this);
     }

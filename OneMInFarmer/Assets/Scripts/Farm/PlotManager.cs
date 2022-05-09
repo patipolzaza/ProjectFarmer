@@ -40,6 +40,8 @@ public class PlotManager : MonoBehaviour, IContainStatus
         plotSizeStatus.SetLevel(saveData.GetPlotStatusLevel);
 
         _saveData = saveData;
+
+        UpdatePlotStatusSaveDataOnContainer();
     }
 
     /// <summary>
@@ -97,7 +99,7 @@ public class PlotManager : MonoBehaviour, IContainStatus
 
     public void ResetPlotsStatus()
     {
-        UpdatePlotStatusSaveData();
+        UpdatePlotStatusSaveDataOnContainer();
 
         foreach (Plot plot in plots)
         {
@@ -114,7 +116,7 @@ public class PlotManager : MonoBehaviour, IContainStatus
         }
     }
 
-    public void UpdatePlotStatusSaveData()
+    public void UpdatePlotStatusSaveDataOnContainer()
     {
         _saveData.UpdateSaveData(plotSizeStatus);
     }

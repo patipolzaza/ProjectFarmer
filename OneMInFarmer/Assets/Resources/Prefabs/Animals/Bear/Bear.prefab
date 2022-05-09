@@ -892,7 +892,6 @@ MonoBehaviour:
         m_CallState: 2
   animalData: {fileID: 11400000, guid: 25b2cdd24fa1eb24f98a087de1a1b340, type: 2}
   messageText: {fileID: 2519934270554106255}
-  currentAgeSpan: 0
   OnEatenFood:
     m_PersistentCalls:
       m_Calls:

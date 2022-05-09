@@ -39,6 +39,8 @@ public class AnimalFarmManager : MonoBehaviour, IContainStatus
         maxAnimalStatus.SetLevel(saveData.GetStatusLevel);
 
         _saveData = saveData;
+
+        UpdateStatusSaveDataOnContainer();
     }
 
     public bool AddAnimal(Animal animalToAdd)
@@ -84,13 +86,18 @@ public class AnimalFarmManager : MonoBehaviour, IContainStatus
         {
             var animalPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(saveData.GetAnimalPrefabPath);
             var spawnedPosition = saveData.GetAnimalPosition;
-
             GameObject instantiatedAnimal = Instantiate(animalPrefab, spawnedPosition, Quaternion.identity);
             instantiatedAnimal.name = animalPrefab.name;
             Animal animalComponent = instantiatedAnimal.GetComponent<Animal>();
-            animalComponent.LoadAnimalData(saveData);
 
-            AddAnimal(animalComponent);
+            if (AddAnimal(animalComponent))
+            {
+                animalComponent.LoadAnimalData(saveData);
+            }
+            else
+            {
+                Destroy(instantiatedAnimal);
+            }
         }
     }
 }

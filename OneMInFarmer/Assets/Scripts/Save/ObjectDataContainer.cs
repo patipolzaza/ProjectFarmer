@@ -5,13 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public static class ObjectDataContainer
 {
-    private static string _gameSaveKey = "gameSave";
     [SerializeField]
     private static List<AnimalSaveData> _animalSaveDatas = new List<AnimalSaveData>();
     [SerializeField] private static List<PlotSaveData> _plotSaveDatas = new List<PlotSaveData>();
     [SerializeField] private static WalletSaveData _walletSaveData;
     [SerializeField] private static PlotStatusSaveData _plotStatusSaveData;
     [SerializeField] private static MaxAnimalStatusSaveData _maxAnimalStatusSaveData;
+    [SerializeField] private static ScoreSaveData _scoreSaveData;
     public static List<AnimalSaveData> GetAnimalDatas => _animalSaveDatas;
     public static List<PlotSaveData> GetPlotDatas => _plotSaveDatas;
     public static WalletSaveData GetWalletSaveData => _walletSaveData;
@@ -104,15 +104,40 @@ public static class ObjectDataContainer
         _maxAnimalStatusSaveData = null;
     }
 
-    public static void SaveDatas()
+    public static void UpdateScoreSaveData(ScoreSaveData scoreSaveData)
     {
-        GameSaveData saveData = new GameSaveData(_maxAnimalStatusSaveData, _animalSaveDatas, _walletSaveData, _plotStatusSaveData, _plotSaveDatas);
-        SaveManager.Save(_gameSaveKey, saveData);
+        _scoreSaveData = scoreSaveData;
     }
 
-    public static void LoadDatas()
+    public static void ClearScoreSaveData()
     {
-        var saveLoadedJson = SaveManager.Load(_gameSaveKey);
+        _scoreSaveData = null;
+    }
+
+    public static void ClearAllSaveData(string saveKey)
+    {
+        ClearAnimalSaveDatas();
+        ClearMaxAnimalStatusSaveData();
+        ClearPlotSaveDatas();
+        ClearPlotStatusSaveData();
+        ClearScoreSaveData();
+        ClearWalletSaveData();
+
+        PlayerPrefs.DeleteKey(saveKey);
+        PlayerPrefs.Save();
+    }
+
+    public static void SaveDatas(string saveKey, int day)
+    {
+        GameSaveData saveData = new GameSaveData(day, _maxAnimalStatusSaveData, _animalSaveDatas, _walletSaveData, _plotStatusSaveData, _plotSaveDatas, _scoreSaveData);
+        SaveManager.Save(saveKey, saveData);
+    }
+
+    public static void LoadDatas(string saveKey)
+    {
+        ClearAllSaveData(saveKey);
+
+        var saveLoadedJson = SaveManager.Load(saveKey);
         if (saveLoadedJson != null && saveLoadedJson != string.Empty)
         {
             GameSaveData saveData = JsonUtility.FromJson<GameSaveData>(saveLoadedJson);
@@ -121,13 +146,14 @@ public static class ObjectDataContainer
             _plotStatusSaveData = saveData.GetPlotStatusSaveData;
             _walletSaveData = saveData.GetWalletSaveData;
             _maxAnimalStatusSaveData = saveData.GetMaxAnimalStatusSaveData;
+            _scoreSaveData = saveData.GetScoreSaveData;
 
             Player.Instance.wallet.LoadSaveData(_walletSaveData);
             PlotManager.Instance.LoadSaveData(_plotStatusSaveData);
             PlotManager.Instance.LoadPlotsSaveData(_plotSaveDatas);
             AnimalFarmManager.Instance.LoadSaveData(_maxAnimalStatusSaveData);
             AnimalFarmManager.Instance.LoadAnimalDatas(_animalSaveDatas);
+            ScoreManager.Instance.LoadSaveData(_scoreSaveData);
         }
-        //.......//
     }
 }

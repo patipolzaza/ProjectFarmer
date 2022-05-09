@@ -89,9 +89,6 @@ public class UShopButtonInputManager : MonoBehaviour
         {
             if (btn.transform.parent.gameObject.activeSelf && btn.interactable)
             {
-                Debug.Log(btn.transform.parent.gameObject.activeSelf);
-                Debug.Log(btn.interactable);
-
                 target = btn;
                 break;
             }

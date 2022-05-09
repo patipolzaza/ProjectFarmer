@@ -25,15 +25,17 @@ public class Wallet : MonoBehaviour, IContainStatus
     private void Start()
     {
         _saveData = new WalletSaveData(this);
-        UpdateSaveData();
+        UpdateSaveDataOnContainer();
     }
 
     public void LoadSaveData(WalletSaveData saveData)
     {
-        coin = saveData.GetCoinInWallet;
+        SetCoin(saveData.GetCoinInWallet);
         _bonusCoinStatus.SetLevel(saveData.GetWalletStatusLevel);
 
         _saveData = saveData;
+
+        UpdateSaveDataOnContainer();
     }
 
     public void EarnCoin(int amount)
@@ -65,7 +67,7 @@ public class Wallet : MonoBehaviour, IContainStatus
         OnCoinChanged.Invoke(oldValue, coin);
     }
 
-    public void UpdateSaveData()
+    public void UpdateSaveDataOnContainer()
     {
         _saveData.UpdateData(this);
     }

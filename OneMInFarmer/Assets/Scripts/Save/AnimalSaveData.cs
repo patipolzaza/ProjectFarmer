@@ -37,7 +37,11 @@ public class AnimalSaveData
         _animalScale = animal.GetInteractObject.transform.localScale;
         _animalPosition = animal.GetInteractObject.transform.position;
 
-        Debug.Log(_weight);
         ObjectDataContainer.UpdateAnimalSaveData(this);
+    }
+
+    public override string ToString()
+    {
+        return $"Animal(prefabPath: {_animalPrefabPath}, age: {_age}, ageSpan: {_currentAgeSpan}, weight: {_weight}, lifePoint: {_lifePoint}, scale: {_animalScale}, position: {_animalPosition})";
     }
 }

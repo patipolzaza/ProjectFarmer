@@ -22,4 +22,9 @@ public class WalletSaveData
 
         ObjectDataContainer.UpdateWalletSaveData(this);
     }
+
+    public override string ToString()
+    {
+        return $"WalletSaveData(extraCoinStatusLevel: {_walletStatusLevel}, coinInWallet: {_coinInWallet})";
+    }
 }

@@ -609,7 +609,6 @@ MonoBehaviour:
         m_CallState: 2
   animalData: {fileID: 11400000, guid: 1726f98d8f6019d4989c28b1d348aa1d, type: 2}
   messageText: {fileID: 8380040658228030847}
-  currentAgeSpan: 0
   OnEatenFood:
     m_PersistentCalls:
       m_Calls:
@@ -741,6 +740,14 @@ PrefabInstance:
     - target: {fileID: 4907300486889845096, guid: 17883d3377f927a478746ec1415d611f, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907300486889845096, guid: 17883d3377f927a478746ec1415d611f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907300486889845096, guid: 17883d3377f927a478746ec1415d611f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4907300486889845096, guid: 17883d3377f927a478746ec1415d611f, type: 3}
       propertyPath: m_LocalPosition.x

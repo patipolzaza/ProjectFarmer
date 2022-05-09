@@ -9,6 +9,7 @@ public static class SaveManager
 
         string dataJson = JsonUtility.ToJson(dataToSave);
         PlayerPrefs.SetString(key, dataJson);
+        PlayerPrefs.Save();
     }
 
     public static string Load(string key)
@@ -17,6 +18,7 @@ public static class SaveManager
         {
             string objectJson = PlayerPrefs.GetString(key);
             PlayerPrefs.DeleteKey(key);
+            PlayerPrefs.Save();
             return objectJson;
         }
         else

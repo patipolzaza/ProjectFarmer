@@ -7,11 +7,14 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-
+    private string _gameSaveKey = "gameSave";
     public int currentDay { get; private set; } = 1;
     public int defaultTimePerDay { get; private set; } = 5;
 
     public Player player { get; private set; }
+
+    public UnityEvent OnSaveLoaded;
+    private bool isSaveLoaded;
 
     public UnityEvent OnDayStarted;
     public UnityEvent OnDayEnded;
@@ -28,31 +31,29 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartGameFirstDay());
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Keypad0))
-        {
-            LoadGameProgress();
-        }
-        else if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            SaveGameProgress();
-        }
-    }
-
     private IEnumerator StartGameFirstDay()
     {
         yield return new WaitUntil(() => isCompletedAllSetup());
-        yield return new WaitUntil(() => Input.anyKeyDown && !TuTorialManager.Instance._isInProcess);
-        TuTorialManager.Instance.CloseWindow();
         FindObjectOfType<SoundEffectsController>().PlaySoundEffect("BGM");
-        SaveGameProgress();
-        StartDay();
+        if (PlayerPrefs.HasKey(_gameSaveKey))
+        {
+            LoadGameProgress();
+            isSaveLoaded = true;
+            OnSaveLoaded?.Invoke();
+        }
+        else
+        {
+            yield return new WaitUntil(() => Input.anyKeyDown && !TuTorialManager.Instance._isInProcess);
+            TuTorialManager.Instance.CloseWindow();
+            SaveGameProgress();
+            StartDay();
+        }
     }
 
     public void StartDay()
     {
         StatusUpgradeManager.Instance.ClearUpgradeHistory();
+        SaveGameProgress();
         OnDayStarted?.Invoke();
     }
 
@@ -95,18 +96,19 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game is O V E R.");
         OnGameEnded?.Invoke();
+        ObjectDataContainer.ClearAllSaveData(_gameSaveKey);
     }
 
     public void SaveGameProgress()
     {
         Debug.Log("Game saved.");
-        ObjectDataContainer.SaveDatas();
+        ObjectDataContainer.SaveDatas(_gameSaveKey, currentDay);
     }
 
     public void LoadGameProgress()
     {
         Debug.Log("Game loaded.");
-        ObjectDataContainer.LoadDatas();
+        ObjectDataContainer.LoadDatas(_gameSaveKey);
     }
 
     public void SetTimeScale(float value)
@@ -152,5 +154,13 @@ public class GameManager : MonoBehaviour
 
         }
         return true;
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (!isSaveLoaded)
+        {
+            SaveGameProgress();
+        }
     }
 }
