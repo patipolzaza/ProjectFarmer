@@ -12,7 +12,8 @@ public class Item : PickableObject
     [SerializeField] private TextMeshProUGUI currentStackDisplayer;
 
     [SerializeField] protected ItemData ItemData;
-    public int currentStack { get; protected set; }
+    //public int currentStack { get; protected set; }
+    public int currentStack = 1 ;
     public string GetItemId => ItemData.ID;
 
     public ItemData GetItemData
@@ -41,10 +42,9 @@ public class Item : PickableObject
         }
     }
 
-    public void SetCurrentStackNumber(int newNum)
+    public void addItemStack(Item otherItem)
     {
-        currentStack = newNum;
+        currentStack += otherItem.currentStack;
     }
-
     public int GetCurrentNumber => currentStack;
 }

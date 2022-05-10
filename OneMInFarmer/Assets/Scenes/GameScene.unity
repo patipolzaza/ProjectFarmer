@@ -2497,6 +2497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c7f43938b6f80488c9c1f5767b0801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _quitGameConfirmWindow: {fileID: 0}
   OnSaveLoaded:
     m_PersistentCalls:
       m_Calls:
@@ -2834,7 +2835,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4205238667441044017, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4205238667441044017, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2878,7 +2879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4205238667441044029, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: m_Name
-      value: ShopBuy (1)
+      value: ShopBuyPlantFood
       objectReference: {fileID: 0}
     - target: {fileID: 4205238667441044030, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: possibleProducts.Array.size
@@ -3041,7 +3042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4205238667441044017, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4205238667441044017, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3085,7 +3086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4205238667441044029, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: m_Name
-      value: ShopBuy (3)
+      value: ShopSeed-2
       objectReference: {fileID: 0}
     - target: {fileID: 4205238667441044030, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: possibleProducts.Array.size
@@ -3094,15 +3095,15 @@ PrefabInstance:
     - target: {fileID: 4205238667441044030, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: possibleProducts.Array.data[0]
       value: 
-      objectReference: {fileID: 2824363190880485987, guid: cd3832f0f6a8a63499d489164d21caf4, type: 3}
+      objectReference: {fileID: 1324681536278006415, guid: 9f69d52e06c5f814c9f27c8bb3a1e979, type: 3}
     - target: {fileID: 4205238667441044030, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: possibleProducts.Array.data[1]
       value: 
-      objectReference: {fileID: 1324681536278006415, guid: 9f69d52e06c5f814c9f27c8bb3a1e979, type: 3}
+      objectReference: {fileID: 656790016651445565, guid: 309d7049a51a525489d2c28eb447dd83, type: 3}
     - target: {fileID: 4205238667441044030, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: possibleProducts.Array.data[2]
       value: 
-      objectReference: {fileID: 656790016651445565, guid: 309d7049a51a525489d2c28eb447dd83, type: 3}
+      objectReference: {fileID: 6898806656672788802, guid: cd3832f0f6a8a63499d489164d21caf4, type: 3}
     - target: {fileID: 7784426349916879725, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -3238,7 +3239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4205238667441044017, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4205238667441044017, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3282,7 +3283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4205238667441044029, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: m_Name
-      value: ShopBuy (2)
+      value: ShopBuyMeatFood
       objectReference: {fileID: 0}
     - target: {fileID: 4205238667441044030, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: possibleProducts.Array.size
@@ -4128,7 +4129,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4205238667441044017, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4205238667441044017, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4172,7 +4173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4205238667441044029, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: m_Name
-      value: ShopBuy (4)
+      value: ShopBuyAnimal
       objectReference: {fileID: 0}
     - target: {fileID: 4205238667441044030, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: possibleProducts.Array.size
@@ -10913,10 +10914,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 175977024}
+  - {fileID: 790851829}
   - {fileID: 1606526646}
   - {fileID: 840745036}
   - {fileID: 1177623072}
-  - {fileID: 790851829}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11359,7 +11360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4205238667441044029, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: m_Name
-      value: ShopBuy
+      value: ShopSeed-1
       objectReference: {fileID: 0}
     - target: {fileID: 4205238667441044030, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: possibleProducts.Array.size
@@ -11368,15 +11369,15 @@ PrefabInstance:
     - target: {fileID: 4205238667441044030, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: possibleProducts.Array.data[0]
       value: 
-      objectReference: {fileID: 2824363190880485987, guid: cd3832f0f6a8a63499d489164d21caf4, type: 3}
+      objectReference: {fileID: 656790016651445565, guid: 309d7049a51a525489d2c28eb447dd83, type: 3}
     - target: {fileID: 4205238667441044030, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: possibleProducts.Array.data[1]
       value: 
-      objectReference: {fileID: 656790016651445565, guid: 309d7049a51a525489d2c28eb447dd83, type: 3}
+      objectReference: {fileID: 1324681536278006415, guid: 9f69d52e06c5f814c9f27c8bb3a1e979, type: 3}
     - target: {fileID: 4205238667441044030, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: possibleProducts.Array.data[2]
       value: 
-      objectReference: {fileID: 1324681536278006415, guid: 9f69d52e06c5f814c9f27c8bb3a1e979, type: 3}
+      objectReference: {fileID: 6898806656672788802, guid: cd3832f0f6a8a63499d489164d21caf4, type: 3}
     - target: {fileID: 7784426349916879725, guid: 28c3a7a9969c07f4d956fe71dfaee874, type: 3}
       propertyPath: m_Sprite
       value: 
