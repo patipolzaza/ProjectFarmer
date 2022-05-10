@@ -118,8 +118,8 @@ public class GameManager : MonoBehaviour
     public void LoadGameProgress()
     {
         Debug.Log("Game loaded.");
-        ObjectDataContainer.LoadDatas(_gameSaveKey);
-        ObjectDataContainer.ClearAllSaveData(_gameSaveKey);
+        int dayPlayed = ObjectDataContainer.LoadDatas(_gameSaveKey);
+        currentDay = dayPlayed;
     }
 
     public void SetTimeScale(float value)

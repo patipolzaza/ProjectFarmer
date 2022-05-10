@@ -19,6 +19,7 @@ public class GameSaveData
     public PlotStatusSaveData GetPlotStatusSaveData => _plotStatusSaveData;
     public MaxAnimalStatusSaveData GetMaxAnimalStatusSaveData => _maxAnimalStatusSaveData;
     public ScoreSaveData GetScoreSaveData => _scoreSaveData;
+    public int GetDayPlayed => _dayPlayed;
 
     public GameSaveData(int dayPlayed, MaxAnimalStatusSaveData maxAnimalStatusSaveData, List<AnimalSaveData> animalSaveDatas, WalletSaveData walletSaveData, PlotStatusSaveData plotStatusSaveData, List<PlotSaveData> plotSaveDatas, ScoreSaveData scoreSaveData)
     {

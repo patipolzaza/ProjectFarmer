@@ -133,7 +133,12 @@ public static class ObjectDataContainer
         SaveManager.Save(saveKey, saveData);
     }
 
-    public static void LoadDatas(string saveKey)
+    /// <summary>
+    /// Load all save data by key.
+    /// </summary>
+    /// <param name="saveKey"></param>
+    /// <returns>Day played in save data.</returns>
+    public static int LoadDatas(string saveKey)
     {
         ClearAllSaveData(saveKey);
 
@@ -154,6 +159,10 @@ public static class ObjectDataContainer
             AnimalFarmManager.Instance.LoadSaveData(_maxAnimalStatusSaveData);
             AnimalFarmManager.Instance.LoadAnimalDatas(_animalSaveDatas);
             ScoreManager.Instance.LoadSaveData(_scoreSaveData);
+
+            return saveData.GetDayPlayed;
         }
+
+        return 1;
     }
 }
