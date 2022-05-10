@@ -6,16 +6,12 @@ public class TuTorialManager : MonoBehaviour
 {
     public static TuTorialManager Instance { get; private set; }
     [SerializeField] private TutorialUI _TutorialUI;
-    public bool _isInProcess  { get; private set; }
+    public bool _isInProcess { get; private set; }
 
     private void Awake()
     {
         Instance = this;
         _TutorialUI.SetActiveStartGameText(false);
-    }
-    private void Start()
-    {
-        ShowTutorial();
     }
 
     public void ShowTutorial()

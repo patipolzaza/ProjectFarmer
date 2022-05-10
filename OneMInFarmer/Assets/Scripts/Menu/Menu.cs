@@ -8,10 +8,11 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour
 {
     //private string _gameSaveKey = "gameSave";
-    private string _gameSaveKey = "testSave";
+    private string _gameSaveKey = "gameSave";
     [SerializeField] private Button _continueButton;
 
     [SerializeField] private GameObject _startNewGameConfirmWindow;
+    [SerializeField] private GameObject _mainEventSystem;
     private void Update()
     {
         if (PlayerPrefs.HasKey(_gameSaveKey))
@@ -32,6 +33,7 @@ public class Menu : MonoBehaviour
         }
         else
         {
+            _mainEventSystem.SetActive(false);
             _startNewGameConfirmWindow?.gameObject.SetActive(true);
         }
     }

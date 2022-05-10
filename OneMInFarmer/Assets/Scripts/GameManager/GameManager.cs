@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     public UnityEvent OnSaveLoaded;
     private bool isSaveLoaded;
+    private bool isHaveMoreProgress;
 
     public UnityEvent OnDayStarted;
     public UnityEvent OnDayEnded;
@@ -41,10 +42,12 @@ public class GameManager : MonoBehaviour
         {
             LoadGameProgress();
             isSaveLoaded = true;
+            isHaveMoreProgress = false;
             OnSaveLoaded?.Invoke();
         }
         else
         {
+            TuTorialManager.Instance.ShowTutorial();
             yield return new WaitUntil(() => Input.anyKeyDown && !TuTorialManager.Instance._isInProcess);
             TuTorialManager.Instance.CloseWindow();
             StartDay();
@@ -89,6 +92,9 @@ public class GameManager : MonoBehaviour
         AnimalFarmManager.Instance.GrowUpAnimals();
         PlotManager.Instance.ResetPlotsStatus();
         ShopBuyManager.Instance.RestockShops();
+        player.wallet.UpdateSaveDataOnContainer();
+
+        isHaveMoreProgress = true;
 
         UpgradeShop.Instance.OpenWindow();
     }
@@ -102,14 +108,18 @@ public class GameManager : MonoBehaviour
 
     public void SaveGameProgress()
     {
-        Debug.Log("Game saved.");
-        ObjectDataContainer.SaveDatas(_gameSaveKey, currentDay);
+        if (isHaveMoreProgress)
+        {
+            Debug.Log("Game saved.");
+            ObjectDataContainer.SaveDatas(_gameSaveKey, currentDay);
+        }
     }
 
     public void LoadGameProgress()
     {
         Debug.Log("Game loaded.");
         ObjectDataContainer.LoadDatas(_gameSaveKey);
+        ObjectDataContainer.ClearAllSaveData(_gameSaveKey);
     }
 
     public void SetTimeScale(float value)
