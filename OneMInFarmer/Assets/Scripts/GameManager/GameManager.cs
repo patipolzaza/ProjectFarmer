@@ -130,6 +130,12 @@ public class GameManager : MonoBehaviour
             return false;
 
         }
+        if (!LightingController.Instance)
+        {
+            Debug.Log("LightingController");
+            return false;
+
+        }
         if (!Timer.Instance)
         {
             Debug.Log("Timer");
