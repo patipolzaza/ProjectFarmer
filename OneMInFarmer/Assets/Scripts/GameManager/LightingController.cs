@@ -8,12 +8,15 @@ public class LightingController : WindowUIBase
     public static LightingController Instance { get; private set; }
 
     [SerializeField] private Image _LightingPanel;
+    [SerializeField] private Color _SunriseLight;
     [SerializeField] private Color _DayLight;
+    [SerializeField] private Color _SunsetLight;
     [SerializeField] private Color _NightLight;
-    public float cycleCurrentTime = 0;
-    public float cycleMaxTime = 60;
+    private float cycleCurrentTime = 0;
+    private float cycleMaxTime = 60;
     private int dayCycle = 0;
-    public bool isLoopCycle = false;
+    private bool isProcess = false;
+    [SerializeField] private bool isLoopCycle = false;
     // Update is called once per frame
     void Awake()
     {
@@ -22,13 +25,23 @@ public class LightingController : WindowUIBase
 
     void Update()
     {
-
-        UpdateLighting();
+        if (isLoopCycle)
+            UpdateLighting(20);
+        if (isProcess)
+            UpdateLighting(4);
     }
 
-    private void UpdateLighting()
+    public void StartLighting(int SetCycleMaxTime)
     {
-        cycleCurrentTime += Time.deltaTime * 10;
+        ResetDayLight();
+        cycleMaxTime = SetCycleMaxTime;
+        isProcess = true;
+    }
+
+
+    private void UpdateLighting(int speed)
+    {
+        cycleCurrentTime += Time.deltaTime * speed;
         if (cycleCurrentTime >= cycleMaxTime)
         {
             if (isLoopCycle)
@@ -36,11 +49,23 @@ public class LightingController : WindowUIBase
                 cycleCurrentTime = 0; // back to 0 (restarting cycle time)
                 dayCycle++; // change cycle state
             }
+            isProcess = false;
         }
         float percent = cycleCurrentTime / cycleMaxTime;
-        if (dayCycle % 2 == 0)
-            _LightingPanel.color = Color.Lerp(_DayLight, _NightLight, percent);
-        if (dayCycle % 2 != 0)
-            _LightingPanel.color = Color.Lerp(_NightLight, _DayLight, percent);
+        if (dayCycle % 4 == 0)
+            _LightingPanel.color = Color.Lerp(_SunriseLight, _DayLight, percent);
+        if (dayCycle % 4 == 1)
+            _LightingPanel.color = Color.Lerp(_DayLight, _SunsetLight, percent);
+        if (dayCycle % 4 == 2)
+            _LightingPanel.color = Color.Lerp(_SunsetLight, _NightLight, percent);
+        if (dayCycle % 4 == 3)
+            _LightingPanel.color = Color.Lerp(_NightLight, _SunriseLight, percent);
+    }
+    private void ResetDayLight()
+    {
+        _LightingPanel.color = _DayLight;
+        cycleCurrentTime = 0;
+        dayCycle = 0;
+
     }
 }

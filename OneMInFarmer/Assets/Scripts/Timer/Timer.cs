@@ -305,7 +305,7 @@ public class Timer : WindowUIBase
         {
             dayFloatingText.Show();
         }
-
+        LightingController.Instance.StartLighting(maxTime);
         countTimeCouroutine = StartCoroutine(CountTime());
     }
 
