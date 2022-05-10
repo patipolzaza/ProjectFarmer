@@ -175,7 +175,7 @@ public class GameManager : MonoBehaviour
 
     public void QuitGame()
     {
-        if (isSaveLoaded)
+        if (!isHaveMoreProgress && isSaveLoaded)
         {
             _quitGameConfirmWindow.SetActive(true);
         }
@@ -185,13 +185,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ConfirmQuitGame()
+    {
+        ObjectDataContainer.ClearAllSaveData(_gameSaveKey);
+        GoToMainMenuScene();
+    }
+
     public void GoToMainMenuScene()
     {
-        if (isSaveLoaded)
-        {
-            ObjectDataContainer.ClearAllSaveData(_gameSaveKey);
-        }
-
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Main Menu");
     }
 }

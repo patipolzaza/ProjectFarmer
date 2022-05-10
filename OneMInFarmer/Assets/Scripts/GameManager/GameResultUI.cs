@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameResultUI : WindowUIBase
 {
     [SerializeField] private Text _dayPlayedText;
     [SerializeField] private Text _totalScoresText;
-    [SerializeField] private Button _backToTitleButton;
+    [SerializeField] private TMP_Text _toMainMenuText;
 
     private bool _canSkip = false;
 
@@ -16,6 +17,11 @@ public class GameResultUI : WindowUIBase
 
     private void Update()
     {
+        if (_toMainMenuText.gameObject.activeSelf && Input.GetButtonDown("ActionA") && Input.GetButtonDown("ActionB"))
+        {
+            GameManager.Instance.GoToMainMenuScene();
+        }
+
         if (_canSkip && _showResultCoroutine != null && Input.anyKeyDown)
         {
             ShowSkippedGameResult();
@@ -29,6 +35,7 @@ public class GameResultUI : WindowUIBase
         SetDayPlayedText("0");
         SetTotalScoreText("0");
         HideBackToTitleButton();
+        SetToMainMenuInputText(Input.GetButtonDown("ActionA").ToString().ToUpper());
     }
 
 
@@ -44,11 +51,16 @@ public class GameResultUI : WindowUIBase
 
     public void ShowBackToTitleButton()
     {
-        _backToTitleButton.gameObject.SetActive(true);
+        _toMainMenuText.gameObject.SetActive(true);
     }
     public void HideBackToTitleButton()
     {
-        _backToTitleButton.gameObject.SetActive(false);
+        _toMainMenuText.gameObject.SetActive(false);
+    }
+
+    private void SetToMainMenuInputText(string inputKeyText)
+    {
+        _toMainMenuText.text = $"Press {inputKeyText} to go to main menu";
     }
 
     public void ShowGameResult()
