@@ -28,7 +28,15 @@ public class Hand : MonoBehaviour
     {
         if (holdingObject)
         {
-            DropObject();
+            if (holdingObject.name != pickableObject.name)
+            {
+                DropObject();
+            }
+            else if (pickableObject is Item && holdingObject is Item)
+            {
+                pickableObject.GetComponent<Item>().addItemStack(holdingObject.GetComponent<Item>());
+                Destroy(holdingObject.gameObject);
+            }
         }
 
         pickableObject.Pick();
