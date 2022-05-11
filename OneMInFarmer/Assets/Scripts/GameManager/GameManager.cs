@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour
     {
         StatusUpgradeManager.Instance.ClearUpgradeHistory();
         OnDayStarted?.Invoke();
-        SaveGameProgress();
     }
 
     public void EndDay()
@@ -95,6 +94,7 @@ public class GameManager : MonoBehaviour
         player.wallet.UpdateSaveDataOnContainer();
 
         isHaveMoreProgress = true;
+        SaveGameProgress();
 
         UpgradeShop.Instance.OpenWindow();
     }
@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
         currentDay = dayPlayed;
     }
 
-    public void SetTimeScale(float value)
+    private void SetTimeScale(float value)
     {
         Time.timeScale = value;
     }
@@ -194,5 +194,15 @@ public class GameManager : MonoBehaviour
     public void GoToMainMenuScene()
     {
         SceneManager.LoadScene("Main Menu");
+    }
+
+    public void PauseGame()
+    {
+        SetTimeScale(0);
+    }
+
+    public void UnpauseGame()
+    {
+        SetTimeScale(1);
     }
 }
