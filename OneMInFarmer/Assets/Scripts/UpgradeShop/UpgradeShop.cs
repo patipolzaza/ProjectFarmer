@@ -51,12 +51,9 @@ public class UpgradeShop : MonoBehaviour
 
         UpdateUI();
 
-        if (isReadied && Player.Instance && playerCoinInMemory != Player.Instance.wallet.coin)
-        {
-            playerCoinInMemory = Player.Instance.wallet.coin;
-            extraTimeShop.UpdateShopUpgradeButtons();
-            moveSpeedUpgradeShop.UpdateShopButtons();
-        }
+        playerCoinInMemory = Player.Instance.wallet.coin;
+        extraTimeShop.UpdateShopUpgradeButtons();
+        moveSpeedUpgradeShop.UpdateShopButtons();
     }
 
     private IEnumerator InitialSetUp()
