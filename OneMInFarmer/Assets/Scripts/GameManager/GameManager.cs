@@ -16,8 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _quitGameConfirmWindow;
 
     public UnityEvent OnSaveLoaded;
-    private bool isSaveLoaded;
-    private bool isHaveMoreProgress;
+    public bool isSaveLoaded { get; private set; }
+    public bool isHaveMoreProgress { get; private set; }
 
     public UnityEvent OnDayStarted;
     public UnityEvent OnDayEnded;
@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         else
         {
             TuTorialManager.Instance.ShowTutorial();
-            yield return new WaitUntil(() => Input.anyKeyDown && !TuTorialManager.Instance._isInProcess);
+            yield return new WaitUntil(() => Input.GetButtonDown("ActionA") && !TuTorialManager.Instance._isInProcess);
             TuTorialManager.Instance.CloseWindow();
             StartDay();
         }
@@ -175,25 +175,17 @@ public class GameManager : MonoBehaviour
 
     public void QuitGame()
     {
-        if (!isHaveMoreProgress && isSaveLoaded)
+        if (isSaveLoaded && !isHaveMoreProgress)
         {
-            _quitGameConfirmWindow.SetActive(true);
+            ObjectDataContainer.ClearAllSaveData(_gameSaveKey);
         }
-        else
-        {
-            GoToMainMenuScene();
-        }
-    }
 
-    public void ConfirmQuitGame()
-    {
-        ObjectDataContainer.ClearAllSaveData(_gameSaveKey);
         GoToMainMenuScene();
     }
 
-    public void GoToMainMenuScene()
+    private void GoToMainMenuScene()
     {
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void PauseGame()

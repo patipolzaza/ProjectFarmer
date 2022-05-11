@@ -187,10 +187,6 @@ public class Player : MonoBehaviour
 
         if (!canMove)
         {
-            if (playerHand.holdingObject)
-            {
-                playerHand.DropObject();
-            }
             return;
         }
 

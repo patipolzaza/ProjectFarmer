@@ -17,9 +17,9 @@ public class GameResultUI : WindowUIBase
 
     private void Update()
     {
-        if (_toMainMenuText.gameObject.activeSelf && Input.GetButtonDown("ActionA") && Input.GetButtonDown("ActionB"))
+        if (_toMainMenuText.gameObject.activeSelf && Input.GetButtonDown("ActionA"))
         {
-            GameManager.Instance.GoToMainMenuScene();
+            GameManager.Instance.QuitGame();
         }
 
         if (_canSkip && _showResultCoroutine != null && Input.anyKeyDown)
