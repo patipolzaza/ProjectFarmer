@@ -24,11 +24,13 @@ public class WalletUI : WindowUIBase
         CoinText.text = _playerWallet.coin.ToString();
 
         _playerWallet.OnCoinChanged += UpdateCoinTextToTarget;
+        _playerWallet.OnCoinSetted += SetCoinText;
     }
 
     private void OnDisable()
     {
         _playerWallet.OnCoinChanged -= UpdateCoinTextToTarget;
+        _playerWallet.OnCoinSetted -= SetCoinText;
     }
 
     private IEnumerator InitialSetUp()
@@ -39,6 +41,7 @@ public class WalletUI : WindowUIBase
 
     public void SetCoinText(int coin)
     {
+        Debug.Log("Set coin text to " + coin);
         CoinText.text = coin.ToString();
     }
 
@@ -58,7 +61,7 @@ public class WalletUI : WindowUIBase
         float slideSpeed = 0.15f;
         do
         {
-            currentValue = Mathf.Lerp(currentValue, target, (currentValue / target) * slideSpeed);
+            currentValue = Mathf.Lerp(currentValue, target, slideSpeed);
             int currentRoundedValue = Mathf.RoundToInt(currentValue);
             SetCoinText(currentRoundedValue);
             yield return new WaitForFixedUpdate();
