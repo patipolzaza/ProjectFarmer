@@ -82,7 +82,6 @@ public class UpgradeShop : MonoBehaviour
         isOpenedShop = false;
         ui.HideWindow();
         UShopButtonInputManager.Instance.DeselectCurrentButton();
-        GameManager.Instance.StartDay();
     }
 
     private void UpdateUI()

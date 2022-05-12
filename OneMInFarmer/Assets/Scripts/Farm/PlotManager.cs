@@ -109,8 +109,10 @@ public class PlotManager : MonoBehaviour, IContainStatus
 
     public void LoadPlotsSaveData(List<PlotSaveData> plotSaveDatas)
     {
-        foreach (var saveData in plotSaveDatas)
+        int loopCount = plotSaveDatas.Count;
+        for (int i = 0; i < loopCount; i++)
         {
+            PlotSaveData saveData = plotSaveDatas[i];
             int plotIndex = saveData.GetPlotIndex;
             plots[plotIndex].LoadSaveData(saveData);
         }

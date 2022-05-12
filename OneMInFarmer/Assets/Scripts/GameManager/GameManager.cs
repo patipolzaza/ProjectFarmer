@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
 
     public void StartDay()
     {
+        Debug.Log("Start day [" + currentDay + "]");
         StatusUpgradeManager.Instance.ClearUpgradeHistory();
         OnDayStarted?.Invoke();
     }
@@ -119,6 +120,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game loaded.");
         int dayPlayed = ObjectDataContainer.LoadDatas(_gameSaveKey);
+        Debug.Log("Load data " + dayPlayed + " days played.");
         currentDay = dayPlayed;
     }
 
@@ -190,11 +192,13 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        Debug.Log("Pause Game.");
         SetTimeScale(0);
     }
 
     public void UnpauseGame()
     {
+        Debug.Log("Unpause Game.");
         SetTimeScale(1);
     }
 }

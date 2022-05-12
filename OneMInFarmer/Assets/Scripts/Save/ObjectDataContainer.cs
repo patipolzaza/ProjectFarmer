@@ -140,8 +140,6 @@ public static class ObjectDataContainer
     /// <returns>Day played in save data.</returns>
     public static int LoadDatas(string saveKey)
     {
-        ClearAllSaveData(saveKey);
-
         var saveLoadedJson = SaveManager.Load(saveKey);
         if (saveLoadedJson != null && saveLoadedJson != string.Empty)
         {
@@ -163,6 +161,7 @@ public static class ObjectDataContainer
             return saveData.GetDayPlayed;
         }
 
+        ClearAllSaveData(saveKey);
         return 1;
     }
 }

@@ -88,10 +88,10 @@ public class Animal : PickableObject, IBuyable, ISellable
         weight = saveData.GetWeight;
         lifePoint = saveData.GetLifePoint;
         currentAgeSpan = (AgeSpan)saveData.GetAgeSpan;
+        prefabPath = saveData.GetAnimalPrefabPath;
 
+        //_saveData = new AnimalSaveData(saveData);
         _saveData = saveData;
-
-        UpdateDataOnContainer();
     }
 
     protected override void Awake()

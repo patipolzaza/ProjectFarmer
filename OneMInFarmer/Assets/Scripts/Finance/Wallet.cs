@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Wallet : MonoBehaviour, IContainStatus
 {
@@ -11,6 +12,9 @@ public class Wallet : MonoBehaviour, IContainStatus
 
     public delegate void CoinChangedDelegate(int oldValue, int newValue);
     public CoinChangedDelegate OnCoinChanged;
+
+    public delegate void CoinSettedDelegate(int settedValue);
+    public CoinSettedDelegate OnCoinSetted;
 
     public int coin { get; private set; } = 10;
 
@@ -24,8 +28,11 @@ public class Wallet : MonoBehaviour, IContainStatus
 
     private void Start()
     {
-        _saveData = new WalletSaveData(this);
-        UpdateSaveDataOnContainer();
+        if (_saveData == null)
+        {
+            _saveData = new WalletSaveData(this);
+            UpdateSaveDataOnContainer();
+        }
     }
 
     public void LoadSaveData(WalletSaveData saveData)
@@ -33,9 +40,8 @@ public class Wallet : MonoBehaviour, IContainStatus
         SetCoin(saveData.GetCoinInWallet);
         _bonusCoinStatus.SetLevel(saveData.GetWalletStatusLevel);
 
+        //_saveData = new WalletSaveData(saveData);
         _saveData = saveData;
-
-        UpdateSaveDataOnContainer();
     }
 
     public void EarnCoin(int amount)
@@ -62,9 +68,8 @@ public class Wallet : MonoBehaviour, IContainStatus
 
     private void SetCoin(int amount)
     {
-        int oldValue = coin;
         coin = Mathf.Clamp(coin, 0, amount);
-        OnCoinChanged.Invoke(oldValue, coin);
+        OnCoinSetted?.Invoke(coin);
     }
 
     public void UpdateSaveDataOnContainer()
