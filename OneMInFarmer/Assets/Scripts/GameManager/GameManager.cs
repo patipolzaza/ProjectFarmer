@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour
 
     public void StartDay()
     {
-        Debug.Log("Start day [" + currentDay + "]");
         StatusUpgradeManager.Instance.ClearUpgradeHistory();
         OnDayStarted?.Invoke();
     }
@@ -92,7 +91,6 @@ public class GameManager : MonoBehaviour
         AnimalFarmManager.Instance.GrowUpAnimals();
         PlotManager.Instance.ResetPlotsStatus();
         ShopBuyManager.Instance.RestockShops();
-        player.wallet.UpdateSaveDataOnContainer();
 
         isHaveMoreProgress = true;
         SaveGameProgress();
@@ -111,16 +109,13 @@ public class GameManager : MonoBehaviour
     {
         if (isHaveMoreProgress)
         {
-            Debug.Log("Game saved.");
             ObjectDataContainer.SaveDatas(_gameSaveKey, currentDay);
         }
     }
 
     public void LoadGameProgress()
     {
-        Debug.Log("Game loaded.");
         int dayPlayed = ObjectDataContainer.LoadDatas(_gameSaveKey);
-        Debug.Log("Load data " + dayPlayed + " days played.");
         currentDay = dayPlayed;
     }
 
@@ -136,42 +131,44 @@ public class GameManager : MonoBehaviour
             Debug.Log("DayResultManager");
             return false;
         }
-        if (!UpgradeShop.Instance || !UpgradeShop.Instance.isReadied)
+        else if (!UpgradeShop.Instance || !UpgradeShop.Instance.isReadied)
         {
             Debug.Log("UpgradeShop");
             return false;
 
         }
-        if (!LightingController.Instance)
+        else if (!LightingController.Instance)
         {
             Debug.Log("LightingController");
             return false;
 
         }
-        if (!Timer.Instance)
+        else if (!Timer.Instance)
         {
             Debug.Log("Timer");
             return false;
 
         }
-        if (!TuTorialManager.Instance)
+        else if (!TuTorialManager.Instance)
         {
             Debug.Log("TuTorialManager");
             return false;
 
         }
-        if (!StatusUpgradeManager.Instance || !StatusUpgradeManager.Instance.isReadied)
+        else if (!StatusUpgradeManager.Instance || !StatusUpgradeManager.Instance.isReadied)
         {
             Debug.Log("StatusUpgradeManager");
             return false;
 
         }
-        if (!Player.Instance)
+        else if (!Player.Instance)
         {
             Debug.Log("Player");
             return false;
 
         }
+
+        SetTimeScale(1);
         return true;
     }
 
@@ -192,13 +189,11 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        Debug.Log("Pause Game.");
         SetTimeScale(0);
     }
 
     public void UnpauseGame()
     {
-        Debug.Log("Unpause Game.");
         SetTimeScale(1);
     }
 }
