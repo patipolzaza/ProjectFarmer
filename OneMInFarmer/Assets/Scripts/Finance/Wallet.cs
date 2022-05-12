@@ -68,7 +68,7 @@ public class Wallet : MonoBehaviour, IContainStatus
 
     private void SetCoin(int amount)
     {
-        coin = Mathf.Clamp(coin, 0, amount);
+        coin = Mathf.Clamp(amount, 0, int.MaxValue);
         OnCoinSetted?.Invoke(coin);
     }
 
