@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
 
         ShopForSell.Instance.ResetTotalSoldPrice();
         StatusUpgradeManager.Instance.ResetDailyUpgradeStatus();
+        UpgradeShop.Instance.ResetDailyUpgrade();
         DebtManager.Instance.ResetParameters();
 
         AnimalFarmManager.Instance.GrowUpAnimals();

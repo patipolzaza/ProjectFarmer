@@ -3181,18 +3181,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1765059210}
-        m_TargetAssemblyTypeName: Wallet, Assembly-CSharp
-        m_MethodName: UpdateSaveDataOnContainer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   OnGameEnded:
     m_PersistentCalls:
       m_Calls:
@@ -12708,17 +12696,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8248408768506119012, guid: a7e09b0c1ae88f34da923fe4fa1f663c, type: 3}
   m_PrefabInstance: {fileID: 402471412}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1765059210 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8248408768506119013, guid: a7e09b0c1ae88f34da923fe4fa1f663c, type: 3}
-  m_PrefabInstance: {fileID: 402471412}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1765059209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daf295eb0468ebd4099ba3b61d966f53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1766567185
 GameObject:
   m_ObjectHideFlags: 0
