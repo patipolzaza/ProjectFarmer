@@ -26,7 +26,7 @@ public class Product : Item, ISellable
     public int Sell()
     {
         Wallet playerWallet = Player.Instance.wallet;
-        int price = GetSellPrice;
+        int price = GetSellPrice * currentStack;
         playerWallet.EarnCoin(price);
         Destroy(gameObject);
 
