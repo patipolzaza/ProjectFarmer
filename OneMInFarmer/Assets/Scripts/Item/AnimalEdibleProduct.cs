@@ -8,6 +8,8 @@ public class AnimalEdibleProduct : Product, IAnimalEdible
 
     public float GetWeightGain => ((AnimalEdibleProductData)ItemData).weightGain;
 
+    public Food GetFood => new Food(GetFoodType, GetWeightGain);
+
     private void OnEnable()
     {
         OnHighlightShowed.AddListener(ShowDetail);
@@ -22,14 +24,18 @@ public class AnimalEdibleProduct : Product, IAnimalEdible
 
     public bool Feed(Animal targetToFeed)
     {
-        if (targetToFeed.TakeFood(this))
+        if (targetToFeed.TakeFood(GetFood))
         {
             currentStack--;
-            SetParent(targetToFeed.transform);
-            SetLocalPosition(Vector3.zero, false, false, false, false);
-            gameObject.SetActive(false);
-
-            return true;
+            if (currentStack <= 0)
+            {
+                Destroy(gameObject);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         return false;

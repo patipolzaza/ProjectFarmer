@@ -13,6 +13,14 @@ public class AnimalFood : Item, IBuyable, IAnimalEdible
     public GameObject GetObject() => gameObject;
     public Sprite GetIcon => ItemData.Icon;
 
+    public Food GetFood
+    {
+        get
+        {
+            return new Food(GetFoodType, GetWeightGain);
+        }
+    }
+
     private void OnValidate()
     {
         if (ItemData != null && ItemData.GetType() != typeof(AnimalFoodData))
@@ -42,14 +50,18 @@ public class AnimalFood : Item, IBuyable, IAnimalEdible
 
     public bool Feed(Animal targetToFeed)
     {
-        if (targetToFeed.TakeFood(this))
+        if (targetToFeed.TakeFood(GetFood))
         {
             currentStack--;
-            SetParent(targetToFeed.transform);
-            SetLocalPosition(Vector3.zero, false, false, false, false);
-            gameObject.SetActive(false);
-
-            return true;
+            if (currentStack <= 0)
+            {
+                Destroy(gameObject);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         return false;

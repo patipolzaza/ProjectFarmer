@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Items/ItemDatas/AnimalFoodData")]
 public class AnimalFoodData : ItemData

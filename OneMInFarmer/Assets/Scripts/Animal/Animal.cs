@@ -26,7 +26,7 @@ public class Animal : PickableObject, IBuyable, ISellable
     public AgeSpan currentAgeSpan { get; protected set; }
     public int lifePoint { get; protected set; } = 2;
     public bool isHungry { get; private set; } = true;
-    private List<IAnimalEdible> foodsEaten = new List<IAnimalEdible>();
+    private List<Food> foodsEaten = new List<Food>();
     public float weight { get; protected set; }
 
     public UnityEvent<float, float> OnEatenFood;
@@ -244,13 +244,13 @@ public class Animal : PickableObject, IBuyable, ISellable
         weight = Mathf.Clamp(value, animalData.startWeight, float.PositiveInfinity);
     }
 
-    public virtual bool TakeFood(IAnimalEdible food)
+    public virtual bool TakeFood(Food food)
     {
-        if (isDie)
+        if (food == null || isDie)
         {
             return false;
         }
-        else if (food == null || foodsEaten.Count >= animalData.stomachSize)
+        else if (foodsEaten.Count >= animalData.stomachSize)
         {
             if (showTextCoroutine != null)
             {

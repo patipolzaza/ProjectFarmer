@@ -6,6 +6,7 @@ public interface IAnimalEdible
 {
     public FoodType GetFoodType { get; }
     public float GetWeightGain { get; }
+    public Food GetFood { get; }
     /// <summary>
     /// Feed target animal with this consumable.
     /// </summary>
