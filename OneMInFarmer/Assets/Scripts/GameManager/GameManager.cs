@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
     {
         if (isHaveMoreProgress)
         {
-            ObjectDataContainer.SaveDatas(_gameSaveKey, currentDay);
+            ObjectDataContainer.SaveDatas(_gameSaveKey, currentDay, DebtManager.Instance.debtPaidCount);
         }
     }
 

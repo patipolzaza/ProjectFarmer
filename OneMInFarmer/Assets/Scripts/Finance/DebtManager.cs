@@ -66,6 +66,15 @@ public class DebtManager : MonoBehaviour
         }
     }
 
+    public void LoadData(int countPayDebt, int currentDay)
+    {
+        debtPaidCount = countPayDebt;
+        dayForNextDebtPayment = 5 - (currentDay % 5);
+        Debug.Log("dayForNextDebtPayment" +dayForNextDebtPayment);
+        Debug.Log("countPayDebt" + countPayDebt);
+        Debug.Log("debtPaidCount" + debtPaidCount);
+    } 
+
     public void ShowResultUI()
     {
         _isUIShowed = true;

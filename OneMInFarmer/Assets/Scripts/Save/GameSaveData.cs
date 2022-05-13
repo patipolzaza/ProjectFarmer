@@ -12,6 +12,7 @@ public class GameSaveData
     [SerializeField] private PlotStatusSaveData _plotStatusSaveData;
     [SerializeField] private MaxAnimalStatusSaveData _maxAnimalStatusSaveData;
     [SerializeField] private ScoreSaveData _scoreSaveData;
+    [SerializeField] private int _debtPaidCount;
 
     public List<AnimalSaveData> GetAnimalSaveDatas => _animalDatas;
     public WalletSaveData GetWalletSaveData => _walletSaveData;
@@ -20,8 +21,8 @@ public class GameSaveData
     public MaxAnimalStatusSaveData GetMaxAnimalStatusSaveData => _maxAnimalStatusSaveData;
     public ScoreSaveData GetScoreSaveData => _scoreSaveData;
     public int GetDayPlayed => _dayPlayed;
-
-    public GameSaveData(int dayPlayed, MaxAnimalStatusSaveData maxAnimalStatusSaveData, List<AnimalSaveData> animalSaveDatas, WalletSaveData walletSaveData, PlotStatusSaveData plotStatusSaveData, List<PlotSaveData> plotSaveDatas, ScoreSaveData scoreSaveData)
+    public int GetDebtPaidCount => _debtPaidCount;
+    public GameSaveData(int dayPlayed,int debtPaidCount, MaxAnimalStatusSaveData maxAnimalStatusSaveData, List<AnimalSaveData> animalSaveDatas, WalletSaveData walletSaveData, PlotStatusSaveData plotStatusSaveData, List<PlotSaveData> plotSaveDatas, ScoreSaveData scoreSaveData)
     {
         _dayPlayed = dayPlayed;
         _maxAnimalStatusSaveData = maxAnimalStatusSaveData;
@@ -30,5 +31,6 @@ public class GameSaveData
         _plotDatas = new List<PlotSaveData>(plotSaveDatas);
         _plotStatusSaveData = plotStatusSaveData;
         _scoreSaveData = scoreSaveData;
+        _debtPaidCount = debtPaidCount;
     }
 }

@@ -12,11 +12,6 @@ public static class ObjectDataContainer
     [SerializeField] private static PlotStatusSaveData _plotStatusSaveData;
     [SerializeField] private static MaxAnimalStatusSaveData _maxAnimalStatusSaveData;
     [SerializeField] private static ScoreSaveData _scoreSaveData;
-    public static List<AnimalSaveData> GetAnimalDatas => _animalSaveDatas;
-    public static List<PlotSaveData> GetPlotDatas => _plotSaveDatas;
-    public static WalletSaveData GetWalletSaveData => _walletSaveData;
-    public static PlotStatusSaveData GetPlotStatusSaveData => _plotStatusSaveData;
-    public static MaxAnimalStatusSaveData GetMaxAnimalStatusSaveData => _maxAnimalStatusSaveData;
 
     public static void UpdateAnimalSaveData(AnimalSaveData data)
     {
@@ -127,9 +122,9 @@ public static class ObjectDataContainer
         PlayerPrefs.Save();
     }
 
-    public static void SaveDatas(string saveKey, int day)
+    public static void SaveDatas(string saveKey, int day, int debtPaidCount)
     {
-        GameSaveData saveData = new GameSaveData(day, _maxAnimalStatusSaveData, _animalSaveDatas, _walletSaveData, _plotStatusSaveData, _plotSaveDatas, _scoreSaveData);
+        GameSaveData saveData = new GameSaveData(day, debtPaidCount, _maxAnimalStatusSaveData, _animalSaveDatas, _walletSaveData, _plotStatusSaveData, _plotSaveDatas, _scoreSaveData);
         SaveManager.Save(saveKey, saveData);
     }
 
@@ -157,6 +152,7 @@ public static class ObjectDataContainer
             AnimalFarmManager.Instance.LoadSaveData(_maxAnimalStatusSaveData);
             AnimalFarmManager.Instance.LoadAnimalDatas(_animalSaveDatas);
             ScoreManager.Instance.LoadSaveData(_scoreSaveData);
+            DebtManager.Instance.LoadData(saveData.GetDebtPaidCount,saveData.GetDayPlayed);
 
             return saveData.GetDayPlayed;
         }
@@ -164,4 +160,7 @@ public static class ObjectDataContainer
         ClearAllSaveData(saveKey);
         return 1;
     }
+
+
+
 }
