@@ -152,7 +152,7 @@ public static class ObjectDataContainer
             AnimalFarmManager.Instance.LoadSaveData(_maxAnimalStatusSaveData);
             AnimalFarmManager.Instance.LoadAnimalDatas(_animalSaveDatas);
             ScoreManager.Instance.LoadSaveData(_scoreSaveData);
-            DebtManager.Instance.LoadData(saveData.GetDebtPaidCount,saveData.GetDayPlayed);
+            DebtManager.Instance.LoadData(saveData.GetDebtPaidCount);
 
             return saveData.GetDayPlayed;
         }

@@ -92,6 +92,8 @@ public class GameManager : MonoBehaviour
         PlotManager.Instance.ResetPlotsStatus();
         ShopBuyManager.Instance.RestockShops();
 
+        player.wallet.UpdateSaveDataOnContainer();
+
         isHaveMoreProgress = true;
         SaveGameProgress();
 

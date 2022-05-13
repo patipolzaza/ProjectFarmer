@@ -62,18 +62,15 @@ public class DebtManager : MonoBehaviour
     {
         get
         {
-            return dayForNextDebtPayment - GameManager.Instance.currentDay;
+            int dayRemain = 5 - (GameManager.Instance.currentDay % 5);
+            return dayRemain == 5 ? 0 : dayRemain;
         }
     }
 
-    public void LoadData(int countPayDebt, int currentDay)
+    public void LoadData(int countPayDebt)
     {
         debtPaidCount = countPayDebt;
-        dayForNextDebtPayment = 5 - (currentDay % 5);
-        Debug.Log("dayForNextDebtPayment" +dayForNextDebtPayment);
-        Debug.Log("countPayDebt" + countPayDebt);
-        Debug.Log("debtPaidCount" + debtPaidCount);
-    } 
+    }
 
     public void ShowResultUI()
     {
