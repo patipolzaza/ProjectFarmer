@@ -20,6 +20,6 @@ MonoBehaviour:
   - {fileID: -2291327162845407921, guid: 62ddfa0624b18c449a712595fb08d283, type: 3}
   - {fileID: -818924116813736698, guid: 62ddfa0624b18c449a712595fb08d283, type: 3}
   - {fileID: -7306684562267301292, guid: 62ddfa0624b18c449a712595fb08d283, type: 3}
-  purchasePrice: 2
-  countHarvest: 3
+  purchasePrice: 20
+  countHarvest: 4
   product: {fileID: 7493002209278107430, guid: af0b34f1f70a1234197bcf6c45e71164, type: 3}

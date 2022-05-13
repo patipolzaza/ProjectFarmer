@@ -15,13 +15,12 @@ MonoBehaviour:
   id: 574e8b743439db9478ab7d637c04ae44
   ItemName: SeedPumpkin
   Icon: {fileID: -3623384430876270892, guid: a292749176f36624f99ca43ae30a324f, type: 3}
-  purchasePrice: 5
-  sellPrice: 7
   plantStages:
   - {fileID: 7888834856925509076, guid: a292749176f36624f99ca43ae30a324f, type: 3}
   - {fileID: -3900114895449015119, guid: a292749176f36624f99ca43ae30a324f, type: 3}
   - {fileID: -5009908170398746744, guid: a292749176f36624f99ca43ae30a324f, type: 3}
   - {fileID: -233692697513194122, guid: a292749176f36624f99ca43ae30a324f, type: 3}
   - {fileID: 3423023186317645769, guid: a292749176f36624f99ca43ae30a324f, type: 3}
+  purchasePrice: 20
   countHarvest: 1
   product: {fileID: 7900874241460951836, guid: ac451e92546f19147b41c166f627409d, type: 3}

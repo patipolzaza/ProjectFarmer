@@ -16,7 +16,7 @@ public class Wallet : MonoBehaviour, IContainStatus
     public delegate void CoinSettedDelegate(int settedValue);
     public CoinSettedDelegate OnCoinSetted;
 
-    public int coin { get; private set; } = 10;
+    public int coin { get; private set; } = 100;
 
 
     private void Awake()

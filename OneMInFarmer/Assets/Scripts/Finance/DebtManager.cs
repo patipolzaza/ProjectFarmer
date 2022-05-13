@@ -8,8 +8,8 @@ public class DebtManager : MonoBehaviour
     public static DebtManager Instance { get; private set; }
     public int dayForNextDebtPayment { get; private set; } = 5;
     public int debtPaidCount { get; private set; }
-    private float _debtMultiplierPerPeriod = 1.4f;
-    private int _startDebt = 10;
+    private float _debtMultiplierPerPeriod = 10f;
+    private int _startDebt = 70;
     public int remainingDebt { get; private set; } = 0;
 
     private Coroutine _delayPayDebtCoroutine = null;

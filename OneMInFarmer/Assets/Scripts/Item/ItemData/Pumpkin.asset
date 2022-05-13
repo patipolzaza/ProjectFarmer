@@ -15,5 +15,5 @@ MonoBehaviour:
   id: c3386c3cef2fe5541bcfb260f3a34185
   ItemName: Pumpkin
   Icon: {fileID: -8729130480934669583, guid: a292749176f36624f99ca43ae30a324f, type: 3}
-  sellPrice: 5
-  weightGain: 1
+  sellPrice: 60
+  weightGain: 4

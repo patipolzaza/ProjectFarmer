@@ -2632,7 +2632,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 1266592078366760081}
+    m_SelectOnDown: {fileID: 4855637479078294884}
     m_SelectOnLeft: {fileID: 2079986030629094070}
     m_SelectOnRight: {fileID: 4803716015089575560}
   m_Transition: 1
@@ -5779,6 +5779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windowUIObject: {fileID: 5243712789994532761}
+  isHaveOwnEventSystem: 0
   playerCoinText: {fileID: 5243712791496058414}
   changeTabButtons:
   - {fileID: 6249367480405288839}

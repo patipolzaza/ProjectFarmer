@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animalName: Bear
   inShopIcon: {fileID: 21300000, guid: 9296afc7cd4df2a4aa5fef1c2165fa60, type: 3}
-  sellPricePerKilo: 1
-  bonusSellPriceForAdult: 6
-  bonusSellPriceForElder: 10
-  purchasePrice: 35
-  lifespan: 15
-  stomachSize: 4
-  startWeight: 4
+  sellPricePerKilo: 20
+  bonusSellPriceForAdult: 10
+  bonusSellPriceForElder: 15
+  purchasePrice: 50
+  lifespan: 10
+  stomachSize: 1
+  startWeight: 1
   edibleFoods: 00000000
