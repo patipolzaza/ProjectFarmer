@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusName: Plot Count
   maxLevel: 11
-  baseValue: 2
+  baseValue: 6
   extraValuePerLevel: 1
   upgradeCostPerLevel: 15
   extraCostPercentage: 25
