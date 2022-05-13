@@ -29,9 +29,14 @@ public class WateringPot : PickableObject, IUsable
     {
         if (targetToUse is Plot)
         {
-            Plot plot = targetToUse as Plot;
-            SoundEffectsController.Instance.PlaySoundEffect("Watering");
-            WateringOnPlot(plot);
+            if (remaining >= waterPerUse)
+            {
+
+                Plot plot = targetToUse as Plot;
+               
+                WateringOnPlot(plot);
+                //return true;
+            }
         }
         if (targetToUse is Pool)
         {
@@ -44,6 +49,7 @@ public class WateringPot : PickableObject, IUsable
     {
         if (remaining >= waterPerUse)
         {
+            SoundEffectsController.Instance.PlaySoundEffect("Watering");
             playWaterParticle(plot);
             remaining -= waterPerUse;
             plot.Watering();

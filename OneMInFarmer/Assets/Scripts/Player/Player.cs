@@ -124,7 +124,7 @@ public class Player : MonoBehaviour
                         return;
                     }
                     else
-                        OnInteractEvent.Invoke();
+                        OnInteractEvent?.Invoke();
 
                 }
                 else if (playerHand.holdingObject is IAnimalEdible && targetInteractable is Animal)
