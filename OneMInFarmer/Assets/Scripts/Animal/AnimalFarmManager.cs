@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEditor;
-using System.Linq;
 
 public class AnimalFarmManager : MonoBehaviour, IContainStatus
 {
@@ -12,18 +12,27 @@ public class AnimalFarmManager : MonoBehaviour, IContainStatus
     public Status maxAnimalStatus { get; private set; }
     [SerializeField] private StatusData maxAnimalStatusData;
     private List<Animal> animals = new List<Animal>();
-    public int GetCurrentAnimalCount
-    {
-        get
-        {
-            return animals.Count;
-        }
-    }
+
+    private int _currentLevelInMem;
+
+    public delegate void OnValueChangedDelegate(int currentAnimalCount, int maxAnimal);
+    public OnValueChangedDelegate OnValueChanged;
+
+    public int GetCurrentAnimalCount => animals.Count;
 
     private void Awake()
     {
         maxAnimalStatus = new Status("Max Animal", maxAnimalStatusData);
+        _currentLevelInMem = maxAnimalStatus.currentLevel;
         Instance = this;
+    }
+
+    private void Update()
+    {
+        if (maxAnimalStatus.currentLevel != _currentLevelInMem)
+        {
+            InvokeOnValueChangedDelegate(animals.Count, maxAnimalStatus.GetValue);
+        }
     }
 
     public Status GetStatus
@@ -37,7 +46,7 @@ public class AnimalFarmManager : MonoBehaviour, IContainStatus
     public void LoadSaveData(MaxAnimalStatusSaveData saveData)
     {
         maxAnimalStatus.SetLevel(saveData.GetStatusLevel);
-
+        _currentLevelInMem = maxAnimalStatus.currentLevel;
         _saveData = saveData;
 
         UpdateStatusSaveDataOnContainer();
@@ -51,6 +60,7 @@ public class AnimalFarmManager : MonoBehaviour, IContainStatus
         }
 
         animals.Add(animalToAdd);
+        InvokeOnValueChangedDelegate(animals.Count, maxAnimalStatus.GetValue);
         return true;
     }
 
@@ -62,6 +72,7 @@ public class AnimalFarmManager : MonoBehaviour, IContainStatus
         }
 
         animals.Remove(animalToRemove);
+        InvokeOnValueChangedDelegate(animals.Count, maxAnimalStatus.GetValue);
         return true;
     }
 
@@ -87,10 +98,7 @@ public class AnimalFarmManager : MonoBehaviour, IContainStatus
         {
             var saveData = animalSaveDatas[i];
             var animalPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(saveData.GetAnimalPrefabPath);
-            if (!animalPrefab)
-            {
-                Debug.Log($"Prefab path = {saveData.GetAnimalPrefabPath}");
-            }
+
             var spawnedPosition = saveData.GetAnimalPosition;
             GameObject instantiatedAnimal = Instantiate(animalPrefab, spawnedPosition, Quaternion.identity);
             instantiatedAnimal.name = animalPrefab.name;
@@ -105,5 +113,10 @@ public class AnimalFarmManager : MonoBehaviour, IContainStatus
                 Destroy(instantiatedAnimal);
             }
         }
+    }
+
+    private void InvokeOnValueChangedDelegate(int currentAnimalCount, int maxAnimal)
+    {
+        OnValueChanged?.Invoke(currentAnimalCount, maxAnimal);
     }
 }
