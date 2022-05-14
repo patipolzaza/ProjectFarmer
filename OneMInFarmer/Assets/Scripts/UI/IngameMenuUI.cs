@@ -19,14 +19,9 @@ public class IngameMenuUI : WindowUIBase
             }
             else
             {
-                if (!EventSystem.current.currentSelectedGameObject)
+                if (EventSystem.current.currentSelectedGameObject?.activeInHierarchy == false)
                 {
                     ShowWindow();
-                }
-                else
-                {
-                    Debug.Log(EventSystem.current.currentSelectedGameObject);
-                    Debug.Log(EventSystem.current.alreadySelecting);
                 }
             }
         }

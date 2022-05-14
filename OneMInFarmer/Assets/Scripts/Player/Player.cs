@@ -164,7 +164,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonUp("Submit"))
         {
-            canInteract = true;
+            SetCanInteract(true);
         }
     }
 
@@ -197,6 +197,11 @@ public class Player : MonoBehaviour
         }
 
         moveInput.Set(inputX, inputY);
+    }
+
+    public void SetCanInteract(bool value)
+    {
+        canInteract = value;
     }
 
     public void UseItem()

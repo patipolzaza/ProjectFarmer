@@ -21,7 +21,7 @@ public class ButtonSelectionIgnoreMouse : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && _latestSelected)
         {
             _eventSystem.SetSelectedGameObject(_latestSelected.gameObject);
         }
