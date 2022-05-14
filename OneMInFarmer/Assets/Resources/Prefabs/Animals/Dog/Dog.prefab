@@ -308,6 +308,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  prefabPath: Prefabs/Animals/Dog/Dog
   animalData: {fileID: 11400000, guid: 5a67b4e17572d5d49a81ff1f233f39f8, type: 2}
   messageText: {fileID: 6078003355091629761}
   OnEatenFood:

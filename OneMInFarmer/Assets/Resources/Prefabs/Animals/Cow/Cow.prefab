@@ -607,6 +607,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  prefabPath: Prefabs/Animals/Cow/Cow
   animalData: {fileID: 11400000, guid: 1726f98d8f6019d4989c28b1d348aa1d, type: 2}
   messageText: {fileID: 8380040658228030847}
   OnEatenFood:
