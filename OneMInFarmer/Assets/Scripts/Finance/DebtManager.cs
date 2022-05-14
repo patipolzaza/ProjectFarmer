@@ -40,7 +40,7 @@ public class DebtManager : MonoBehaviour
             return;
         }
 
-        if (Input.anyKeyDown && _isUIShowed && _canSkip)
+        if (Input.GetButtonDown("ActionA") && _isUIShowed && _canSkip)
         {
             SkipProcess();
         }
@@ -95,6 +95,7 @@ public class DebtManager : MonoBehaviour
         }
         Wallet playerWallet = Player.Instance.wallet;
         int playerCoin = playerWallet.coin;
+        remainingDebt = GetDebt;
         int debt = remainingDebt;
 
         if (playerCoin < debt)

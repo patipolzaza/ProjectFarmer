@@ -35,7 +35,7 @@ public class GameResultUI : WindowUIBase
         SetDayPlayedText("0");
         SetTotalScoreText("0");
         HideBackToTitleButton();
-        SetToMainMenuInputText(Input.GetButtonDown("ActionA").ToString().ToUpper());
+        SetToMainMenuInputText("J");
     }
 
 

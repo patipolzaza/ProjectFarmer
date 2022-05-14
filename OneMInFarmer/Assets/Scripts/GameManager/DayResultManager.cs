@@ -41,7 +41,7 @@ public class DayResultManager : MonoBehaviour
 
         ui.SetActiveContinueText(true);
 
-        if (Input.anyKeyDown)
+        if (Input.GetButtonDown("ActionA"))
         {
             if (DebtManager.Instance.GetDayRemainForDebtPayment < 1)
             {

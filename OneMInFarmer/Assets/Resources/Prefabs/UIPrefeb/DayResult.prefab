@@ -192,6 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windowUIObject: {fileID: 475866285950873138}
+  isHaveOwnEventSystem: 0
   currentDayText: {fileID: 475866286872905826}
   totalSoldPriceText: {fileID: 475866286480227546}
   deptText: {fileID: 475866286825500183}
@@ -1416,7 +1417,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press any key to continue.
+  m_Text: Press J to continue.
 --- !u!1 &8230916031574319921
 GameObject:
   m_ObjectHideFlags: 0

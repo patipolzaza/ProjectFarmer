@@ -29,18 +29,19 @@ public class DebtResultUI : WindowUIBase
             return;
         }
 
-        if (Input.anyKeyDown && _canContinue)
+        if (Input.GetButtonDown("ActionA") && _canContinue)
         {
             if (DebtManager.Instance.remainingDebt == 0)
             {
                 GameManager.Instance.ToNextDay();
-                DebtManager.Instance.HideResultUI();
-                _canContinue = false;
             }
             else
             {
                 GameManager.Instance.GameOver();
             }
+
+            _canContinue = false;
+            DebtManager.Instance.HideResultUI();
         }
 
         _canContinue = true;

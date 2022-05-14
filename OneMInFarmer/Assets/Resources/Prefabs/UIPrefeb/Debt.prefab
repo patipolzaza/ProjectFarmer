@@ -404,6 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windowUIObject: {fileID: 3888817912694627838}
+  isHaveOwnEventSystem: 0
   _debtCostText: {fileID: 3888817912553565157}
   _playerCoinText: {fileID: 3888817912645979234}
   _continueTextObject: {fileID: 3888817913926120811}
@@ -918,7 +919,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press any key to continue
+  m_Text: Press J to continue
 --- !u!1 &3888817913951752802
 GameObject:
   m_ObjectHideFlags: 0

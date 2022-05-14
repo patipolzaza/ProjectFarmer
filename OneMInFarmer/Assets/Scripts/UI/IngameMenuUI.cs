@@ -38,6 +38,11 @@ public class IngameMenuUI : WindowUIBase
         _isEnableToShow = true;
     }
 
+    public void DisableToShowWindow()
+    {
+        _isEnableToShow = false;
+    }
+
     public override void ShowWindow()
     {
         OnUIShowed?.Invoke();
