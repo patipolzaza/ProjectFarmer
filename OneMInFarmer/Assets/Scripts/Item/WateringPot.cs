@@ -11,7 +11,7 @@ public class WateringPot : PickableObject, IUsable
     [SerializeField] private Sprite _icon;
     public float valence { get; private set; } = 20;
     public float remaining { get; private set; } = 20;
-    public float RefillPerSeconds { get; private set; } = 1;
+    public float RefillPerSeconds { get; private set; } = 5f;
     public float waterPerUse { get; private set; } = 5;
 
     public Sprite GetIcon => _icon;
@@ -33,7 +33,7 @@ public class WateringPot : PickableObject, IUsable
             {
 
                 Plot plot = targetToUse as Plot;
-               
+
                 WateringOnPlot(plot);
                 //return true;
             }
@@ -64,7 +64,7 @@ public class WateringPot : PickableObject, IUsable
     {
         if (remaining < 20)
         {
-            remaining += RefillPerSeconds * Time.fixedDeltaTime;
+            remaining += RefillPerSeconds * Time.deltaTime;
             sliderWaterBar.value = remaining;
         }
     }
