@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class ShopProductDetailDisplayer : WindowUIBase
 {
@@ -36,6 +37,10 @@ public class ShopProductDetailDisplayer : WindowUIBase
     [Header("Plant Harvest Field")]
     [SerializeField] private GameObject _plantHarvestField;
     [SerializeField] private TMP_Text _plantHarvestCountText;
+
+    [Header("Plant Full Grown Field")]
+    [SerializeField] private GameObject _plantFullGrownField;
+    [SerializeField] private TMP_Text _plantDayFullGrownText;
 
     private void Awake()
     {
@@ -83,6 +88,9 @@ public class ShopProductDetailDisplayer : WindowUIBase
 
                     SetActivePlantHarvestField(true);
                     SetPlantHarvestCountText(seedData.countHarvest);
+
+                    SetActivePlantFullGrownField(true);
+                    SetPlantFullGrownText(seedData.plantStages.Length);
                 }
                 else if (product is AnimalFood)
                 {
@@ -167,9 +175,18 @@ public class ShopProductDetailDisplayer : WindowUIBase
         _plantHarvestField.SetActive(value);
     }
 
+    private void SetPlantFullGrownText(int plantStageCount)
+    {
+        _plantDayFullGrownText.text = $"{plantStageCount} {(plantStageCount > 1 ? "days" : "day")}";
+    }
+
+    private void SetActivePlantFullGrownField(bool value)
+    {
+        _plantFullGrownField.SetActive(value);
+    }
     private void SetPlantHarvestCountText(int harvestCount)
     {
-        _plantHarvestCountText.text = harvestCount.ToString();
+        _plantHarvestCountText.text = $"x {harvestCount}";
     }
 
     private void SetActiveWeightGainField(bool value)
