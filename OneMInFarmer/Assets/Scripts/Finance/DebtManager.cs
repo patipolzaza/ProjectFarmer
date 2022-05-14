@@ -108,7 +108,7 @@ public class DebtManager : MonoBehaviour
             playerWallet.LoseCoin(debt);
             remainingDebt = 0;
 
-            int score = debt * debtPaidCount;
+            int score = debt * (debtPaidCount + 1);
 
             dayForNextDebtPayment += 5;
             debtPaidCount++;

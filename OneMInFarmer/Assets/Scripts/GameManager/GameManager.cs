@@ -179,6 +179,7 @@ public class GameManager : MonoBehaviour
     {
         if (isSaveLoaded && !isHaveMoreProgress)
         {
+            ScoreManager.Instance.ResetScore();
             ObjectDataContainer.ClearAllSaveData(_gameSaveKey);
         }
 

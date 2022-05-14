@@ -7,9 +7,9 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
     private ScoreSaveData _saveData;
-    [SerializeField] private PlayScoreSO scoreSO;
+    private int _score;
 
-    public int GetScore => scoreSO.score;
+    public int GetScore => _score;
     private void Awake()
     {
         Instance = this;
@@ -19,7 +19,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (_saveData == null)
         {
-            _saveData = new ScoreSaveData(GetScore);
+            _saveData = new ScoreSaveData(0);
         }
 
         UpdateScoreSaveDataOnContainer();
@@ -36,24 +36,24 @@ public class ScoreManager : MonoBehaviour
 
     private void SetScore(int score)
     {
-        scoreSO.SetScore(score);
+        _score = score;
 
         UpdateScoreSaveDataOnContainer();
     }
 
     public void AddScore(int amount)
     {
-        scoreSO.AddScore(amount);
+        _score += amount;
 
         UpdateScoreSaveDataOnContainer();
     }
     private void UpdateScoreSaveDataOnContainer()
     {
-        ObjectDataContainer.UpdateScoreSaveData(_saveData);
+        _saveData.UpdateData(_score);
     }
 
     public void ResetScore()
     {
-        scoreSO.ResetScore();
+        _score = 0;
     }
 }

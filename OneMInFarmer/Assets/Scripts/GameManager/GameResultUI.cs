@@ -19,10 +19,11 @@ public class GameResultUI : WindowUIBase
     {
         if (_toMainMenuText.gameObject.activeSelf && Input.GetButtonDown("ActionA"))
         {
+            ScoreManager.Instance.ResetScore();
             GameManager.Instance.QuitGame();
         }
 
-        if (_canSkip && _showResultCoroutine != null && Input.anyKeyDown)
+        if (_canSkip && _showResultCoroutine != null && Input.GetButtonDown("ActionA"))
         {
             ShowSkippedGameResult();
         }
