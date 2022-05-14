@@ -210,6 +210,7 @@ public class ShopProductDetailDisplayer : WindowUIBase
         SetActivePlantFoodTypeField(false);
         SetActiveMeatFoodTypeField(false);
         SetActivePlantHarvestField(false);
+        SetActivePlantFullGrownField(false);
         SetActiveLifespanField(false);
         SetActiveWeightGainField(false);
 
