@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.Events;
 using TMPro;
 
 public class Animal : PickableObject, IBuyable, ISellable
 {
     private AnimalSaveData _saveData;
-    public string prefabPath { get; private set; } = "";
+    [SerializeField] private string prefabPath = "";
 
     public Rigidbody2D rb { get; private set; }
     public Animator anim { get; private set; }
@@ -45,6 +44,7 @@ public class Animal : PickableObject, IBuyable, ISellable
     public DieState dieState { get; private set; }
     #endregion
 
+    public string GetPrefabPath => prefabPath;
     public string GetAnimalName => animalData.animalName;
     public Sprite GetIcon => animalData.inShopIcon;
     public int GetSellPricePerKilo => animalData.sellPricePerKilo;
@@ -70,16 +70,6 @@ public class Animal : PickableObject, IBuyable, ISellable
     }
     public int GetLifespan => animalData.lifespan;
     public List<FoodType> GetEdibleFoods => animalData.edibleFoods;
-    public string GetPrefabPath
-    {
-        get
-        {
-            var guids = AssetDatabase.FindAssets($"{gameObject.name} t:GameObject", new[] { $"Assets/Resources/Prefabs/Animals/{gameObject.name}/" });
-            string path = AssetDatabase.GUIDToAssetPath(guids[0]);
-
-            return path;
-        }
-    }
 
     public void LoadAnimalData(AnimalSaveData saveData)
     {
@@ -90,7 +80,6 @@ public class Animal : PickableObject, IBuyable, ISellable
         currentAgeSpan = (AgeSpan)saveData.GetAgeSpan;
         prefabPath = saveData.GetAnimalPrefabPath;
 
-        //_saveData = new AnimalSaveData(saveData);
         _saveData = saveData;
     }
 

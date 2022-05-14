@@ -29,7 +29,7 @@ public class AnimalSaveData
 
     public void UpdateData(Animal animal)
     {
-        _animalPrefabPath = animal.prefabPath;
+        _animalPrefabPath = animal.GetPrefabPath;
         _age = animal.age;
         _currentAgeSpan = (int)animal.currentAgeSpan;
         _weight = animal.weight;

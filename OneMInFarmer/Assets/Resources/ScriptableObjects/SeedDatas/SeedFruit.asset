@@ -23,3 +23,4 @@ MonoBehaviour:
   purchasePrice: 20
   countHarvest: 4
   product: {fileID: 7493002209278107430, guid: af0b34f1f70a1234197bcf6c45e71164, type: 3}
+  seelResourcePath: ScriptableObjects/SeedDatas/SeedFruit
