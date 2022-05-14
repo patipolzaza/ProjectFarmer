@@ -79,7 +79,7 @@ MonoBehaviour:
   OnInteractEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8248408768026336200}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerAnimationController, Assembly-CSharp
         m_MethodName: InteractAnimation
         m_Mode: 1
@@ -94,7 +94,7 @@ MonoBehaviour:
   OnPickingEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8248408768026336200}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerAnimationController, Assembly-CSharp
         m_MethodName: pickUpAnimation
         m_Mode: 1
@@ -109,7 +109,7 @@ MonoBehaviour:
   OnDropingEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8248408768026336200}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerAnimationController, Assembly-CSharp
         m_MethodName: pickUpAnimation
         m_Mode: 1
@@ -136,7 +136,7 @@ MonoBehaviour:
   OnRefillingEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8248408768026336200}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerAnimationController, Assembly-CSharp
         m_MethodName: InteractAnimation
         m_Mode: 1
@@ -472,17 +472,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7784595747468089136, guid: 48b56809550a56442823a9d5cd9999da, type: 3}
   m_PrefabInstance: {fileID: 2193337152121878881}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8248408768026336200 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7784595747412468393, guid: 48b56809550a56442823a9d5cd9999da, type: 3}
-  m_PrefabInstance: {fileID: 2193337152121878881}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8248408768073576016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8a1c5fe0519b6341ba9e99c842addcf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &8248408768146636820 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7784595747529111925, guid: 48b56809550a56442823a9d5cd9999da, type: 3}
