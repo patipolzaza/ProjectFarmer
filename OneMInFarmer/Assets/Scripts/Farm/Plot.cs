@@ -197,7 +197,6 @@ public class Plot : Interactable
         }
         else
         {
-            Debug.Log("Update not Dry");
             GetComponent<SpriteRenderer>().sprite = SpriteWet;
         }
 

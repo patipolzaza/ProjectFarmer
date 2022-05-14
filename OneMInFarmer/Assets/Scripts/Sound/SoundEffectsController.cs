@@ -19,8 +19,7 @@ public class SoundEffectsController : MonoBehaviour
             s.audioSource.loop = s.Loop;
         }
     }
-
-    public void PlaySoundEffect(string name)
+    public void PlaySuccessionSoundEffect(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.GetSoundName() == name);
         if (s == null)
@@ -30,6 +29,20 @@ public class SoundEffectsController : MonoBehaviour
         }
         if (!s.audioSource.isPlaying)
             s.audioSource.Play();
+
+    }
+    public void PlaySoundEffect(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.GetSoundName() == name);
+        if (s == null)
+        {
+            Debug.LogWarning("Not have sound : " + name);
+            return;
+        }
+        if (!s.audioSource.isPlaying)
+            s.audioSource.Stop();
+        s.audioSource.Play();
+
     }
     public void StopSoundEffect(string name)
     {

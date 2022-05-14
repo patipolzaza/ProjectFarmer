@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
                         if (playerHand.holdingObject is WateringPot && targetInteractable is Pool)
                         {
                             PlayerAnimation.SetRefillingAnimation(true);
-                            SoundEffectsController.Instance.PlaySoundEffect("Refilling");
+                            SoundEffectsController.Instance.PlaySuccessionSoundEffect("Refilling");
                             UseItem();
                         }
                     }
@@ -155,11 +155,6 @@ public class Player : MonoBehaviour
                 OnDropingEvent.Invoke();
             }
 
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            wallet.EarnCoin(5);
         }
 
         if (Input.GetButtonUp("Submit") || Input.GetButtonUp("Cancel"))
