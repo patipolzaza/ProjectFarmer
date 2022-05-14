@@ -34,7 +34,6 @@ public class Player : MonoBehaviour
     [SerializeField] private UnityEvent OnInteractEvent;
     [SerializeField] private UnityEvent OnPickingEvent;
     [SerializeField] private UnityEvent OnDropingEvent;
-    [SerializeField] private UnityEvent OnRefillingEvent;
     private Vector2 velocityWorkspace;
 
     private void Awake()
