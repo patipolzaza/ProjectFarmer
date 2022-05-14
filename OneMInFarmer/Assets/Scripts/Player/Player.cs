@@ -162,9 +162,9 @@ public class Player : MonoBehaviour
             wallet.EarnCoin(5);
         }
 
-        if (Input.GetButtonUp("Submit"))
+        if (Input.GetButtonUp("Submit") || Input.GetButtonUp("Cancel"))
         {
-            SetCanInteract(true);
+            canInteract = true;
         }
     }
 
@@ -197,11 +197,6 @@ public class Player : MonoBehaviour
         }
 
         moveInput.Set(inputX, inputY);
-    }
-
-    public void SetCanInteract(bool value)
-    {
-        canInteract = value;
     }
 
     public void UseItem()

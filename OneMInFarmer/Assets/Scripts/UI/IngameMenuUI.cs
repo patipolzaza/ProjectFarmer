@@ -7,10 +7,16 @@ public class IngameMenuUI : WindowUIBase
     public UnityEvent OnUIShowed;
     public UnityEvent OnUIHided;
 
-    private bool _isShowed;
+    private bool _isShowed = false;
+    private bool _isEnableToShow = false;
 
     void Update()
     {
+        if (!_isEnableToShow)
+        {
+            return;
+        }
+
         if (Input.GetButtonDown("Cancel"))
         {
             if (_isShowed)
@@ -19,12 +25,17 @@ public class IngameMenuUI : WindowUIBase
             }
             else
             {
-                if (EventSystem.current.currentSelectedGameObject?.activeInHierarchy == false)
+                if (!EventSystem.current.currentSelectedGameObject || (EventSystem.current.currentSelectedGameObject && EventSystem.current.currentSelectedGameObject.activeInHierarchy == false))
                 {
                     ShowWindow();
                 }
             }
         }
+    }
+
+    public void EnableToShowWindow()
+    {
+        _isEnableToShow = true;
     }
 
     public override void ShowWindow()

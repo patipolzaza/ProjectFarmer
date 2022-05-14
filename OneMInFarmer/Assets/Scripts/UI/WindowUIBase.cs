@@ -20,6 +20,7 @@ public class WindowUIBase : MonoBehaviour
             _mainEventSystem.gameObject.SetActive(false);
         }
 
+        PlayerPrefs.SetInt("isUIOpened", 1);
         windowUIObject.SetActive(true);
     }
 
@@ -30,6 +31,7 @@ public class WindowUIBase : MonoBehaviour
             _mainEventSystem.gameObject.SetActive(true);
         }
 
+        PlayerPrefs.DeleteKey("isUIOpened");
         windowUIObject.SetActive(false);
     }
 }
