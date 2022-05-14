@@ -5,10 +5,11 @@ using UnityEngine;
 [System.Serializable]
 public class Sound
 {
-    [SerializeField]private string _soundName;
+    [SerializeField] private string _soundName;
     [SerializeField] private AudioClip _clip;
     [SerializeField] private bool _loop;
-    [Range(0f,1f)]
+    public bool Loop => _loop;
+    [Range(0f, 1f)]
     public float volume;
 
     public AudioClip GetAudioClip()

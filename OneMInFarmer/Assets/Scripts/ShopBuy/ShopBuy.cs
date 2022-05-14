@@ -59,11 +59,12 @@ public class ShopBuy : Interactable
     public void BuyProduct(Player player)
     {
         PickableObject product = Instantiate(productInStock.GetObject().GetComponent<PickableObject>());
+        product.name = productInStock.GetObject().name;
         if (((IBuyable)product).Buy(player))
         {
             product.gameObject.SetActive(true);
             player.playerHand.PickUpObject(product);
-             SoundEffectsController.Instance.PlaySoundEffect("ClinkingCoin");
+            SoundEffectsController.Instance.PlaySoundEffect("ClinkingCoin");
         }
         else
         {
@@ -83,7 +84,9 @@ public class ShopBuy : Interactable
         {
             int randomedIndex = Random.Range(0, possibleProducts.Count);
             PickableObject product = possibleProducts[randomedIndex];
+            name = product.name;
             product = Instantiate(product);
+            product.name = name;
             product.gameObject.SetActive(false);
 
             productInStock = product as IBuyable;
@@ -96,7 +99,7 @@ public class ShopBuy : Interactable
     {
         if (productInStock != null)
         {
-            ProductDetailDisplayer productDetailDisplayer = ProductDetailDisplayer.Instance;
+            ShopProductDetailDisplayer productDetailDisplayer = ShopProductDetailDisplayer.Instance;
             productDetailDisplayer.SetUpUI(productInStock);
             productDetailDisplayer.ShowWindow();
         }
@@ -104,6 +107,6 @@ public class ShopBuy : Interactable
 
     private void HideProductDetail()
     {
-        ProductDetailDisplayer.Instance.HideWindow();
+        ShopProductDetailDisplayer.Instance.HideWindow();
     }
 }

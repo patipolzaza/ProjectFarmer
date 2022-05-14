@@ -22,7 +22,7 @@ public class DebtResultUI : WindowUIBase
         HideContinueText();
     }
 
-    protected override void Update()
+    private void Update()
     {
         if (!DebtManager.Instance || !DebtManager.Instance.isAllProcessFinished || !_continueTextObject.activeSelf)
         {
@@ -93,17 +93,24 @@ public class DebtResultUI : WindowUIBase
 
     private IEnumerator SlidePlayerCoinTextToTarget(float currentValue, float target)
     {
-        float slideSpeed = 0.15f;
-        float maxDistance = target > currentValue ? (target - currentValue) : (currentValue - target);
-        float distanceFromStart = 0;
-        do
+        if (currentValue == target)
         {
-            currentValue = Mathf.Lerp(currentValue, target, Mathf.Clamp((distanceFromStart / maxDistance) * slideSpeed, 0.2f, 1.5f));
-            string currentValueText = Mathf.RoundToInt(currentValue).ToString();
-            SetPlayerCoinText(currentValueText);
-            yield return new WaitForFixedUpdate();
-        } while (Mathf.RoundToInt(currentValue) != target);
+            SetPlayerCoinText(currentValue.ToString());
+        }
+        else
+        {
+            float slideSpeed = 0.15f;
+            float maxDistance = target > currentValue ? (target - currentValue) : (currentValue - target);
+            float distanceFromStart = 0;
+            do
+            {
+                currentValue = Mathf.Lerp(currentValue, target, Mathf.Clamp((distanceFromStart / maxDistance) * slideSpeed, 0.2f, 1.5f));
+                string currentValueText = Mathf.RoundToInt(currentValue).ToString();
+                SetPlayerCoinText(currentValueText);
+                yield return new WaitForFixedUpdate();
+            } while (Mathf.RoundToInt(currentValue) != target);
 
+        }
         ShowContinueText();
     }
 

@@ -50,6 +50,11 @@ public class AnimalHungryBar : MonoBehaviour
 
     public void ShowBar()
     {
+        if (slideBarCoroutine == null)
+        {
+            SetBarFillAmount(currentValue);
+        }
+
         gameObject.SetActive(true);
     }
 

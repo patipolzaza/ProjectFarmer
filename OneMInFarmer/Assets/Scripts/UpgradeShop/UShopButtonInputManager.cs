@@ -9,9 +9,7 @@ public class UShopButtonInputManager : MonoBehaviour
     public static UShopButtonInputManager Instance { get; private set; }
     public Selectable currentSelected { get; private set; }
 
-    [SerializeField] private Selectable _startDayButton;
-
-    [SerializeField] private List<Selectable> _startDayUpNavigationButtons = new List<Selectable>();
+    [SerializeField] private List<Selectable> _startDayButtons = new List<Selectable>();
     private void Awake()
     {
         Instance = this;
@@ -19,7 +17,7 @@ public class UShopButtonInputManager : MonoBehaviour
 
     private void Update()
     {
-        if (!UpgradeShop.Instance && !UpgradeShop.Instance.isOpenedShop)
+        if (!UpgradeShop.Instance || !UpgradeShop.Instance.isOpenedShop)
         {
             return;
         }
@@ -32,11 +30,6 @@ public class UShopButtonInputManager : MonoBehaviour
         if ((Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical")))
         {
             UpdateButtonSelection();
-        }
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            currentSelected?.GetComponent<Button>().onClick.Invoke();
         }
     }
 
@@ -52,15 +45,16 @@ public class UShopButtonInputManager : MonoBehaviour
             int index = 0;
             foreach (var bn in buttonNavigators)
             {
-                if (bn.IsStartButton)
+                if (bn.IsStartButton && bn.GetButton.interactable)
                 {
                     ChangeSelectedButton(bn.GetButton);
                     break;
                 }
                 else if (index == buttonNavigators.Length - 1 && !currentSelected)
                 {
-                    ChangeSelectedButton(bn.GetButton);
+                    ChangeSelectedButtonToStartButton();
                 }
+
                 index++;
             }
         }
@@ -79,17 +73,27 @@ public class UShopButtonInputManager : MonoBehaviour
 
     public void DeselectCurrentButton()
     {
+        currentSelected = null;
+
         var currentSelectedObject = EventSystem.current.currentSelectedGameObject;
         if (currentSelectedObject)
         {
             currentSelectedObject = null;
-            currentSelected = null;
         }
     }
 
     public void ChangeSelectedButtonToStartButton()
     {
-        ChangeSelectedButton(_startDayButton);
+        Selectable target = null;
+        foreach (var btn in _startDayButtons)
+        {
+            if (btn.transform.parent.gameObject.activeSelf && btn.interactable)
+            {
+                target = btn;
+                break;
+            }
+        }
+        ChangeSelectedButton(target);
     }
 
     public void SetCurrentButtonSelected(Selectable selectable)

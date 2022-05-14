@@ -7,128 +7,13 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
-
-    #region Custom Inepector
-    [CustomEditor(typeof(Player))]
-    [CanEditMultipleObjects]
-    class CustomInspector : Editor
-    {
-        SerializedProperty interactableDetectorProp;
-        SerializedProperty interactableDetectorRangeProp;
-        SerializedProperty characterObjectProp;
-
-        SerializedProperty moveSpeedDataProp;
-
-        SerializedProperty OnInteractEventProp;
-        SerializedProperty OnPickingEventProp;
-        SerializedProperty OnDropingEventProp;
-        SerializedProperty OnRefillingEventProp;
-
-        private void OnEnable()
-        {
-            interactableDetectorProp = serializedObject.FindProperty("interactableDetector");
-            interactableDetectorRangeProp = serializedObject.FindProperty("interactableDetectRange");
-            characterObjectProp = serializedObject.FindProperty("characterObject");
-
-            moveSpeedDataProp = serializedObject.FindProperty("moveSpeedData");
-
-            OnInteractEventProp = serializedObject.FindProperty("OnInteractEvent");
-            OnPickingEventProp = serializedObject.FindProperty("OnPickingEvent");
-            OnDropingEventProp = serializedObject.FindProperty("OnDropingEvent");
-            OnRefillingEventProp = serializedObject.FindProperty("OnRefillingEvent");
-        }
-
-        public override void OnInspectorGUI()
-        {
-            serializedObject.Update();
-
-            GUILayout.Label("Character Object.");
-            EditorGUILayout.PropertyField(characterObjectProp);
-            GUILayout.Space(2f);
-
-            GUILayout.Label("Status Data.");
-            EditorGUILayout.PropertyField(moveSpeedDataProp);
-            if (GUILayout.Button("Generate data file"))
-            {
-                OpenSaveFilePanel();
-            }
-            GUILayout.Space(1.25f);
-            GUILayout.Label("Interactable Detection.");
-            EditorGUILayout.PropertyField(interactableDetectorProp);
-            EditorGUILayout.PropertyField(interactableDetectorRangeProp);
-            GUILayout.Space(1.25f);
-
-            GUILayout.Label("Unity Envent.");
-            EditorGUILayout.PropertyField(OnInteractEventProp);
-            EditorGUILayout.PropertyField(OnPickingEventProp);
-            EditorGUILayout.PropertyField(OnDropingEventProp);
-            EditorGUILayout.PropertyField(OnRefillingEventProp);
-
-            serializedObject.ApplyModifiedProperties();
-        }
-
-        private void OpenSaveFilePanel()
-        {
-            string startPath = Application.dataPath;
-            string filePath = EditorUtility.SaveFilePanel("Choose path to place file.", startPath, "Data_MoveSpeedStatus", "asset");
-
-            if (filePath.Length > 0)
-            {
-                GenerateMoveSpeedData(filePath);
-            }
-        }
-
-        private void GenerateMoveSpeedData(string filePath)
-        {
-            string[] paths = filePath.Split('/');
-
-            string realPath = "";
-            bool isFoundAssetsAtPath = false;
-            int index = 0;
-            string appendingPath;
-            foreach (var splittedPath in paths)
-            {
-                if (splittedPath.Equals("Assets"))
-                {
-                    isFoundAssetsAtPath = true;
-                }
-
-                if (isFoundAssetsAtPath)
-                {
-                    appendingPath = splittedPath;
-
-                    realPath += appendingPath;
-
-                    if (index < paths.Length - 1)
-                    {
-                        realPath += "/";
-                    }
-                }
-
-                index++;
-            }
-
-            PercentStatusData moveSpeedData = CreateInstance<PercentStatusData>();
-            moveSpeedData.Init("Move Speed", 4, 250, 30, 10, 5);
-
-            AssetDatabase.CreateAsset(moveSpeedData, realPath);
-            AssetDatabase.SaveAssets();
-
-            SetMoveSpeedStatusData(moveSpeedData);
-        }
-
-        private void SetMoveSpeedStatusData(PercentStatusData newData)
-        {
-            moveSpeedDataProp.objectReferenceValue = newData;
-        }
-    }
-    #endregion
     public static Player Instance { get; private set; }
 
     public PercentStatus moveSpeedStatus { get; private set; }
     [SerializeField] private PercentStatusData moveSpeedData;
     private Vector2 moveInput;
     private bool canMove = true;
+    private bool canInteract = false;
 
     [SerializeField] private GameObject characterObject;
 
@@ -186,11 +71,6 @@ public class Player : MonoBehaviour
 
         if (!canMove)
         {
-            if (playerHand.holdingObject)
-            {
-                playerHand.DropObject();
-            }
-
             return;
         }
 
@@ -222,41 +102,39 @@ public class Player : MonoBehaviour
 
         CheckMoveInput();
 
-        if (isDetectInteractable && targetInteractable)
+        if (Input.GetKeyDown(KeyCode.J) && isDetectInteractable && targetInteractable)
         {
-            if (Input.GetKeyDown(KeyCode.J))
+            if (playerHand.holdingObject)
             {
-                if (playerHand.holdingObject)
+                if (playerHand.holdingObject is ISellable && targetInteractable is ShopForSell)
                 {
-                    if (playerHand.holdingObject is ISellable && targetInteractable is ShopForSell)
+                    ISellable sellable = playerHand.holdingObject as ISellable;
+                    ShopForSell shop = targetInteractable as ShopForSell;
+                    if (shop.PutItemInContainer(sellable))
                     {
-                        ISellable sellable = playerHand.holdingObject as ISellable;
-                        ShopForSell shop = targetInteractable as ShopForSell;
-                        if (shop.PutItemInContainer(sellable))
-                        {
-                            playerHand.SetInHandItemToNull();
-                        }
+                        playerHand.SetInHandItemToNull();
                     }
-                    else if (playerHand.holdingObject is IUsable && ItemUseMatcher.isMatch((IUsable)playerHand.holdingObject, targetInteractable))
+                }
+                else if (playerHand.holdingObject is IUsable && ItemUseMatcher.isMatch((IUsable)playerHand.holdingObject, targetInteractable))
+                {
+                    UseItem();
+                    if (playerHand.holdingObject is WateringPot && targetInteractable is Pool)
                     {
-                        UseItem();
-                        if (playerHand.holdingObject is WateringPot && targetInteractable is Pool)
-                        {
-                            PlayerAnimation.SetRefillingAnimation(true);
-                            return;
-                        }
-                        else
-                            OnInteractEvent.Invoke();
-
-                    }
-                    else if (targetInteractable is PickableObject)
-                    {
-                        playerHand.PickUpObject((PickableObject)targetInteractable);
-                        OnPickingEvent.Invoke();
+                        PlayerAnimation.SetRefillingAnimation(true);
+                        return;
                     }
                     else
+                        OnInteractEvent?.Invoke();
+
+                }
+                else if (playerHand.holdingObject is IAnimalEdible && targetInteractable is Animal)
+                {
+                    IAnimalEdible animalEdible = (IAnimalEdible)playerHand.holdingObject;
+                    Animal animal = targetInteractable as Animal;
+
+                    if (animalEdible.Feed(animal))
                     {
-                        Interact();
+                        playerHand.SetInHandItemToNull();
                     }
                 }
                 else if (targetInteractable is PickableObject)
@@ -269,7 +147,15 @@ public class Player : MonoBehaviour
                     Interact();
                 }
             }
-
+            else if (targetInteractable is PickableObject)
+            {
+                playerHand.PickUpObject((PickableObject)targetInteractable);
+                OnPickingEvent.Invoke();
+            }
+            else
+            {
+                Interact();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.K))
@@ -277,7 +163,6 @@ public class Player : MonoBehaviour
             if (playerHand.holdingObject)
             {
                 OnDropingEvent.Invoke();
-
             }
 
         }
@@ -286,12 +171,18 @@ public class Player : MonoBehaviour
         {
             wallet.EarnCoin(5);
         }
+
+        if (Input.GetButtonUp("Submit"))
+        {
+            canInteract = true;
+        }
     }
 
     public void FixedUpdate()
     {
         Move();
     }
+
     private void CheckMoveInput()
     {
         if (!canMove)
@@ -360,7 +251,7 @@ public class Player : MonoBehaviour
 
     private void Interact()
     {
-        if (isDetectInteractable && targetInteractable)
+        if (isDetectInteractable && targetInteractable && canInteract)
         {
             targetInteractable.Interact(this);
         }
@@ -422,17 +313,9 @@ public class Player : MonoBehaviour
 
     private void ChangeTargetInteractable(Interactable newInteractable)
     {
-        if (targetInteractable)
-        {
-            targetInteractable.HideObjectHighlight();
-        }
-
+        targetInteractable?.HideObjectHighlight();
         targetInteractable = newInteractable;
-
-        if (targetInteractable)
-        {
-            targetInteractable.ShowObjectHighlight();
-        }
+        targetInteractable?.ShowObjectHighlight();
     }
 
     public void EnableMove()
@@ -443,7 +326,11 @@ public class Player : MonoBehaviour
     public void DisableMove()
     {
         canMove = false;
+        moveInput = Vector3.zero;
         rb.velocity = Vector3.zero;
+        PlayerAnimation.SetRunningAnimation(Vector2.zero);
+
+        canInteract = false;
     }
 
     private void OnDrawGizmos()

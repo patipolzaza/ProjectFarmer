@@ -5,7 +5,7 @@ using System;
 
 public class Seed : Item, IBuyable, IUsable
 {
-    public int GetBuyPrice => ItemData.purchasePrice;
+    public int GetBuyPrice => ((SeedData)ItemData).purchasePrice;
     public Sprite GetIcon => ItemData.Icon;
     public GameObject GetObject() => gameObject;
     public Product GetProduct => ((SeedData)ItemData).product;

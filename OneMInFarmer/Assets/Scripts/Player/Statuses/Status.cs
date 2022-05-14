@@ -46,6 +46,10 @@ public class Status : IUpgradable
         currentLevel = 1;
     }
 
+    public void SetLevel(int level)
+    {
+        currentLevel = Mathf.Clamp(level, 0, statusData.maxLevel);
+    }
 
     public int GetUpgradeCost
     {

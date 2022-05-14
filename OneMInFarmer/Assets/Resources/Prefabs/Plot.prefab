@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 870083822207488247}
   - component: {fileID: 3515325481904339622}
+  - component: {fileID: 1934560964323281379}
   m_Layer: 6
   m_Name: Plant
   m_TagString: Untagged
@@ -82,6 +83,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1934560964323281379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909002920848576239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd23118f44fddb84dab8e9f4bf008b64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj: {fileID: 1909002920848576239}
+  offsetY: -0.5
 --- !u!1 &2462687588505583701
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +172,7 @@ SpriteRenderer:
   m_SortingLayerID: 223974721
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 165240979840018154, guid: a06636c5ea423334aac09e1005e56e12, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8bc668d8db4e4684c999eb0bc6408cfc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -192,8 +207,8 @@ MonoBehaviour:
       m_Calls: []
   plantObject: {fileID: 1909002920848576239}
   lockedSign: {fileID: 3920867688730202926}
-  SpriteDry: {fileID: 165240979840018154, guid: a06636c5ea423334aac09e1005e56e12, type: 3}
-  SpriteWet: {fileID: -1571907141483303039, guid: 212facc78115cdd46b0f59ab44119313, type: 3}
+  SpriteDry: {fileID: 21300000, guid: 8bc668d8db4e4684c999eb0bc6408cfc, type: 3}
+  SpriteWet: {fileID: 21300000, guid: e676dbca589c39949aeb7f9f1885e5e1, type: 3}
   seed: {fileID: 0}
 --- !u!60 &6119803323363319864
 PolygonCollider2D:
@@ -212,7 +227,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 0.32, y: 0.32}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -220,10 +235,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.08, y: 0.08}
-      - {x: -0.08, y: -0.08}
-      - {x: 0.08, y: -0.08}
-      - {x: 0.08, y: 0.08}
+    - - {x: -0.15971784, y: 0.15881951}
+      - {x: -0.15913706, y: -0.16251406}
+      - {x: 0.16107269, y: -0.16187233}
+      - {x: 0.1588195, y: 0.15935986}
 --- !u!1 &3920867688730202926
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,13 +249,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2297509644849260676}
   - component: {fileID: 1339591568560670064}
+  - component: {fileID: 2688624438169984433}
   m_Layer: 6
   m_Name: LockedSign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2297509644849260676
 Transform:
   m_ObjectHideFlags: 0
@@ -249,7 +265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3920867688730202926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.001, y: 0.149, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7961000039931890336}
@@ -295,7 +311,7 @@ SpriteRenderer:
   m_SortingLayerID: 2121655513
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f9e12b67474a85a45bd882f9eebe6e5b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d0d1e84f2a49b0d4295333f96a6fd556, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -306,3 +322,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2688624438169984433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3920867688730202926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd23118f44fddb84dab8e9f4bf008b64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj: {fileID: 3920867688730202926}
+  offsetY: 0

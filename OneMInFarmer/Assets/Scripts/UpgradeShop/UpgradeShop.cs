@@ -51,12 +51,9 @@ public class UpgradeShop : MonoBehaviour
 
         UpdateUI();
 
-        if (isReadied && Player.Instance && playerCoinInMemory != Player.Instance.wallet.coin)
-        {
-            playerCoinInMemory = Player.Instance.wallet.coin;
-            extraTimeShop.UpdateShopUpgradeButtons();
-            moveSpeedUpgradeShop.UpdateShopButtons();
-        }
+        playerCoinInMemory = Player.Instance.wallet.coin;
+        extraTimeShop.UpdateShopUpgradeButtons();
+        moveSpeedUpgradeShop.UpdateShopButtons();
     }
 
     private IEnumerator InitialSetUp()
@@ -77,7 +74,6 @@ public class UpgradeShop : MonoBehaviour
         isOpenedShop = true;
         ui.ShowWindow();
         ChangePanel(0);
-        GameManager.Instance.SetTimeScale(0);
         UShopButtonInputManager.Instance.UpdateButtonSelection();
     }
 
@@ -86,8 +82,6 @@ public class UpgradeShop : MonoBehaviour
         isOpenedShop = false;
         ui.HideWindow();
         UShopButtonInputManager.Instance.DeselectCurrentButton();
-        GameManager.Instance.SetTimeScale(1);
-        GameManager.Instance.StartDay();
     }
 
     private void UpdateUI()

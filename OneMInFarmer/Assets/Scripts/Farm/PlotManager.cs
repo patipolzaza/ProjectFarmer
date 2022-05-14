@@ -6,6 +6,8 @@ public class PlotManager : MonoBehaviour, IContainStatus
 {
     public static PlotManager Instance;
 
+    private PlotStatusSaveData _saveData;
+
     public Status plotSizeStatus { get; private set; }
     [SerializeField] private StatusData plotSizeStatusData;
     [SerializeField] private List<Plot> plots = new List<Plot>();
@@ -21,6 +23,8 @@ public class PlotManager : MonoBehaviour, IContainStatus
     private void Start()
     {
         UnlockPlots(0, plotSizeStatus.GetBaseValue);
+
+        _saveData = new PlotStatusSaveData(plotSizeStatus);
     }
 
     public Status GetStatus
@@ -29,6 +33,15 @@ public class PlotManager : MonoBehaviour, IContainStatus
         {
             return plotSizeStatus;
         }
+    }
+
+    public void LoadSaveData(PlotStatusSaveData saveData)
+    {
+        plotSizeStatus.SetLevel(saveData.GetPlotStatusLevel);
+
+        _saveData = saveData;
+
+        UpdatePlotStatusSaveDataOnContainer();
     }
 
     /// <summary>
@@ -46,19 +59,14 @@ public class PlotManager : MonoBehaviour, IContainStatus
         if (startIndex < 0) { startIndex = 0; }
         if (endIndex >= plots.Count) { endIndex = plots.Count - 1; }
 
-        int loopCount = 1 + endIndex - startIndex;
+        int loopCount = endIndex - startIndex;
         int start = startIndex;
 
         if (startIndex > latestUnlockedPlotIndex) { start -= startIndex - latestUnlockedPlotIndex; }
-
-        for (int i = start; i < loopCount; i++)
+        for (int i = start; i < start + loopCount; i++)
         {
-            if (i > plotSizeStatus.GetValue - 1)
-            {
-                break;
-            }
-
             plots[i].Unlock();
+            latestUnlockedPlotIndex++;
         }
     }
 
@@ -77,19 +85,41 @@ public class PlotManager : MonoBehaviour, IContainStatus
         if (startIndex < 0) { startIndex = 0; }
         if (endIndex >= plots.Count) { endIndex = plots.Count - 1; }
 
-        int loopCount = 1 + endIndex - startIndex;
+        int loopCount = endIndex - startIndex;
         int start = startIndex;
 
         if (startIndex > latestUnlockedPlotIndex) { start -= startIndex - latestUnlockedPlotIndex; }
 
-        for (int i = start; i < loopCount; i++)
+        for (int i = start; i < start + loopCount; i++)
         {
-            if (i > plotSizeStatus.GetValue - 1)
-            {
-                break;
-            }
-
             plots[i].Lock();
+            latestUnlockedPlotIndex--;
         }
+    }
+
+    public void ResetPlotsStatus()
+    {
+        UpdatePlotStatusSaveDataOnContainer();
+
+        foreach (Plot plot in plots)
+        {
+            plot.ResetPlotStatus();
+        }
+    }
+
+    public void LoadPlotsSaveData(List<PlotSaveData> plotSaveDatas)
+    {
+        int loopCount = plotSaveDatas.Count;
+        for (int i = 0; i < loopCount; i++)
+        {
+            PlotSaveData saveData = plotSaveDatas[i];
+            int plotIndex = saveData.GetPlotIndex;
+            plots[plotIndex].LoadSaveData(saveData);
+        }
+    }
+
+    public void UpdatePlotStatusSaveDataOnContainer()
+    {
+        _saveData.UpdateSaveData(plotSizeStatus);
     }
 }

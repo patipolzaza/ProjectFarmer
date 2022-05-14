@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6942748964088367470}
   - component: {fileID: 2491107288961736634}
+  - component: {fileID: 2564319207874549381}
   m_Layer: 0
   m_Name: WateringPotSR
   m_TagString: Untagged
@@ -25,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474465494200919902}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -32.091125}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 6769883534014683614}
   m_RootOrder: 0
@@ -71,17 +72,31 @@ SpriteRenderer:
   m_SortingLayerID: 2121655513
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2948254225124216898, guid: cd7b60281623de140bb7d4a9069ae99d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d6b0380ecec4ece48a2a8c354bcfe4b8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2564319207874549381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474465494200919902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd23118f44fddb84dab8e9f4bf008b64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj: {fileID: 474465494200919902}
+  offsetY: -0.5
 --- !u!1 &6769883533272338596
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +132,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.095}
   m_SizeDelta: {x: 0, y: 0.17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6769883533272338598
@@ -133,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -256,7 +271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6769883534014683614}
   - component: {fileID: 5432077876269127782}
-  - component: {fileID: 8918172129929335609}
+  - component: {fileID: 4710637508620845148}
   m_Layer: 6
   m_Name: WateringPot
   m_TagString: Untagged
@@ -272,7 +287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6769883534014683613}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.25, y: 0.094, z: 150.06367}
+  m_LocalPosition: {x: 2.0601406, y: -2.4982085, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6942748964088367470}
@@ -316,8 +331,9 @@ MonoBehaviour:
       m_Calls: []
   sliderWaterBar: {fileID: 6769883533272338598}
   WaterParticle: {fileID: 0}
---- !u!60 &8918172129929335609
-PolygonCollider2D:
+  _icon: {fileID: 21300000, guid: d6b0380ecec4ece48a2a8c354bcfe4b8, type: 3}
+--- !u!61 &4710637508620845148
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -329,24 +345,19 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.1458273, y: 0.02861464}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.06, y: 0.08}
-      - {x: -0.07, y: 0.06}
-      - {x: -0.08, y: 0}
-      - {x: -0.08, y: -0.08}
-      - {x: 0.08, y: -0.08}
-      - {x: 0.08, y: 0.08}
+  serializedVersion: 2
+  m_Size: {x: 0.35076904, y: 0.4205668}
+  m_EdgeRadius: 0
 --- !u!1 &6769883534016835580
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,8 +395,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.35}
-  m_SizeDelta: {x: 1.22, y: 0.19}
+  m_AnchoredPosition: {x: 0.105, y: 0.425}
+  m_SizeDelta: {x: 1, y: 0.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6769883534016835568
 Canvas:
@@ -405,7 +416,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1974793335
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &6769883534016835583

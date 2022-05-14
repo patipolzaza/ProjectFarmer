@@ -8,10 +8,13 @@ public class WateringPot : PickableObject, IUsable
 {
     [SerializeField] private Slider sliderWaterBar;
     [SerializeField] private ParticleSystem WaterParticle;
+    [SerializeField] private Sprite _icon;
     public float valence { get; private set; } = 20;
     public float remaining { get; private set; } = 20;
     public float RefillPerSeconds { get; private set; } = 1;
     public float waterPerUse { get; private set; } = 5;
+
+    public Sprite GetIcon => _icon;
 
     protected override void Awake()
     {
@@ -26,9 +29,14 @@ public class WateringPot : PickableObject, IUsable
     {
         if (targetToUse is Plot)
         {
-            Plot plot = targetToUse as Plot;
-            SoundEffectsController.Instance.PlaySoundEffect("Watering");
-            WateringOnPlot(plot);
+            if (remaining >= waterPerUse)
+            {
+
+                Plot plot = targetToUse as Plot;
+               
+                WateringOnPlot(plot);
+                //return true;
+            }
         }
         if (targetToUse is Pool)
         {
@@ -41,6 +49,7 @@ public class WateringPot : PickableObject, IUsable
     {
         if (remaining >= waterPerUse)
         {
+            SoundEffectsController.Instance.PlaySoundEffect("Watering");
             playWaterParticle(plot);
             remaining -= waterPerUse;
             plot.Watering();

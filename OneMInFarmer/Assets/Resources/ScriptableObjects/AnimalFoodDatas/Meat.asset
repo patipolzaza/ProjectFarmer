@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac9c11f4b19380245b9aa167e1487cd2, type: 3}
   m_Name: Meat
   m_EditorClassIdentifier: 
+  id: adf1d8f50fa3b974793f4f9da461af51
+  ItemName: 
+  Icon: {fileID: 21300000, guid: e6ad5f095b9f2264783ac51595237070, type: 3}
+  purchasePrice: 5
+  sellPrice: 7
   foodType: 0
   weightGain: 1

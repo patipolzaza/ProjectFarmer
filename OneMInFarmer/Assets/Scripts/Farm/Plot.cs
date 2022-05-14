@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Plot : Interactable
 {
+    private PlotSaveData _saveData;
+    [SerializeField] private int _plotIndex;
+
     private bool isPlanted = false;
     private SpriteRenderer spriteRenderer;
     [SerializeField] private GameObject plantObject;
@@ -14,12 +15,13 @@ public class Plot : Interactable
     [SerializeField] private Sprite SpriteWet;
 
     public SeedData seed;
-    int plantStage = 0;
-    int countHarvest;
-    int agePlant = 0;
-    int dehydration = 0;
+    public int GetPlotIndex => _plotIndex;
+    public int plantStage { get; private set; } = 0;
+    public int countHarvest { get; private set; }
+    public int agePlant { get; private set; } = 0;
+    public int dehydration { get; private set; } = 0;
     bool isDry = true;
-    bool isWither = false;
+    public bool isWither { get; private set; } = false;
 
     protected override void Awake()
     {
@@ -31,6 +33,45 @@ public class Plot : Interactable
         interactEvent.AddListener(PlayerInteract);
 
         Lock();
+    }
+
+    private void OnEnable()
+    {
+        OnHighlightShowed.AddListener(ShowProductDetail);
+        OnHighlightHided.AddListener(HideProductDetail);
+    }
+
+    private void OnDisable()
+    {
+        OnHighlightShowed.RemoveListener(ShowProductDetail);
+        OnHighlightHided.RemoveListener(HideProductDetail);
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        _saveData = new PlotSaveData(this);
+        UpdateSaveDataOnContainer();
+    }
+
+    public void LoadSaveData(PlotSaveData saveData)
+    {
+        seed = saveData.GetSeed;
+        isPlanted = seed == null ? false : true;
+
+        _plotIndex = saveData.GetPlotIndex;
+        plantStage = saveData.GetPlantStage;
+        countHarvest = saveData.GetHarvestCount;
+        agePlant = saveData.GetAgePlant;
+        dehydration = saveData.GetDehydration;
+        isWither = saveData.GetWitherStatus;
+
+        _saveData = saveData;
+
+        UpdatePlant();
+
+        UpdateSaveDataOnContainer();
     }
 
     public void PlayerInteract(Player player)
@@ -66,6 +107,7 @@ public class Plot : Interactable
             plantStage--;
             UpdatePlant();
             player.playerHand.PickUpObject(Instantiate(seed.product, new Vector3(0, 0, 0), Quaternion.identity));
+            SoundEffectsController.Instance.PlaySoundEffect("Harvesting");
             return;
         }
         else
@@ -73,6 +115,7 @@ public class Plot : Interactable
             player.playerHand.PickUpObject(Instantiate(seed.product, new Vector3(0, 0, 0), Quaternion.identity));
             isPlanted = false;
             seed = null;
+            SoundEffectsController.Instance.PlaySoundEffect("Harvesting");
             plantObject.SetActive(false);
 
         }
@@ -157,8 +200,10 @@ public class Plot : Interactable
             Debug.Log("Update not Dry");
             GetComponent<SpriteRenderer>().sprite = SpriteWet;
         }
+
         if (isPlanted)
         {
+            plantObject.SetActive(true);
             plantSpriteRenderer.sprite = seed.plantStages[plantStage];
             if (isWither)
             {
@@ -168,6 +213,10 @@ public class Plot : Interactable
             {
                 plantSpriteRenderer.color = new Color32(255, 255, 255, 255);
             }
+        }
+        else
+        {
+            plantObject.SetActive(false);
         }
     }
 
@@ -192,6 +241,8 @@ public class Plot : Interactable
             Grow();
             Dring();
         }
+
+        UpdateSaveDataOnContainer();
     }
 
     public void Lock()
@@ -206,5 +257,26 @@ public class Plot : Interactable
         lockedSign.SetActive(false);
         spriteRenderer.color = Color.white;
         SetInteractable(true);
+    }
+
+    private void ShowProductDetail()
+    {
+
+        if (!seed || plantStage < seed.plantStages.Length - 1)
+        {
+            return;
+        }
+
+        seed.product.ShowDetail();
+    }
+
+    private void HideProductDetail()
+    {
+        seed?.product.HideDetail();
+    }
+
+    public void UpdateSaveDataOnContainer()
+    {
+        _saveData.UpdateData(this);
     }
 }

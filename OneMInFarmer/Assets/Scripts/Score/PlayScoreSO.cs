@@ -7,6 +7,11 @@ public class PlayScoreSO : ScriptableObject
 {
     public int score { get; private set; } = 0;
 
+    public void SetScore(int score)
+    {
+        this.score = score;
+    }
+
     public void AddScore(int amount)
     {
         score += amount;

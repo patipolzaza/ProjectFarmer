@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class AnimalFood : Item, IBuyable, IUsable
+public class AnimalFood : Item, IBuyable, IAnimalEdible
 {
     public FoodType GetFoodType => ((AnimalFoodData)ItemData).foodType;
 
     public float GetWeightGain => ((AnimalFoodData)ItemData).weightGain;
 
-    public int GetBuyPrice => ItemData.purchasePrice;
+    public int GetBuyPrice => ((AnimalFoodData)ItemData).purchasePrice;
     public GameObject GetObject() => gameObject;
     public Sprite GetIcon => ItemData.Icon;
+
+    public Food GetFood
+    {
+        get
+        {
+            return new Food(GetFoodType, GetWeightGain);
+        }
+    }
 
     private void OnValidate()
     {
@@ -25,43 +33,34 @@ public class AnimalFood : Item, IBuyable, IUsable
     {
         base.Awake();
 
-        AddTargetType(typeof(Animal));
+        //AddTargetType(typeof(Animal));
     }
 
-    public bool Use(Interactable targetToUse)
+    private void OnEnable()
     {
-        if (targetToUse is Animal)
+        OnHighlightShowed.AddListener(ShowDetail);
+        OnHighlightHided.AddListener(HideDetail);
+    }
+
+    private void OnDisable()
+    {
+        OnHighlightShowed.RemoveListener(ShowDetail);
+        OnHighlightHided.RemoveListener(HideDetail);
+    }
+
+    public bool Feed(Animal targetToFeed)
+    {
+        if (targetToFeed.TakeFood(GetFood))
         {
-            Animal animal = targetToUse as Animal;
-
-            if (currentStack > 1)
+            currentStack--;
+            if (currentStack <= 0)
             {
-                AnimalFood instantiatedFood = Instantiate(this);
-                instantiatedFood.currentStack = 1;
-
-                if (animal.TakeFood(instantiatedFood))
-                {
-                    currentStack--;
-                    instantiatedFood.SetParent(animal.transform);
-                    instantiatedFood.SetLocalPosition(Vector3.zero, false, false, false, false);
-                    instantiatedFood.gameObject.SetActive(false);
-                }
-                else
-                {
-                    Destroy(instantiatedFood.gameObject);
-                }
+                Destroy(gameObject);
+                return true;
             }
             else
             {
-                if (animal.TakeFood(this))
-                {
-                    currentStack--;
-                    SetParent(animal.transform);
-                    SetLocalPosition(Vector3.zero, false, false, false, false);
-                    gameObject.SetActive(false);
-
-                    return true;
-                }
+                return false;
             }
         }
 
@@ -84,8 +83,15 @@ public class AnimalFood : Item, IBuyable, IUsable
         }
     }
 
-    public void AddTargetType(Type targetType)
+    private void ShowDetail()
     {
-        ItemUseMatcher.AddUseItemPair(GetType(), targetType);
+        AnimalFoodDetailDisplayer foodDetailDisplayer = AnimalFoodDetailDisplayer.Instance;
+        foodDetailDisplayer.ShowUI(this);
+    }
+
+    private void HideDetail()
+    {
+        AnimalFoodDetailDisplayer foodDetailDisplayer = AnimalFoodDetailDisplayer.Instance;
+        foodDetailDisplayer.HideWindow();
     }
 }

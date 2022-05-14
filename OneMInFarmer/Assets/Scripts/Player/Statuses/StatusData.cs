@@ -6,20 +6,6 @@ using UnityEditor;
 [CreateAssetMenu(menuName = "ScriptableObjects/Status/FlatStatusData")]
 public class StatusData : ScriptableObject
 {
-    [CustomEditor(typeof(StatusData))]
-    [CanEditMultipleObjects]
-    class CustomInspector : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            base.OnInspectorGUI();
-
-            serializedObject.Update();
-
-            EditorGUILayout.HelpBox("Cost will calculate by: \n[ upgradeCost + ((level - 1) * upgradeCost * extraCostMultiplier) ]", MessageType.Info);
-        }
-    }
-
     public string statusName;
     public int maxLevel = 5;
     public int baseValue = 1;

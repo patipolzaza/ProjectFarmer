@@ -2,15 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-
+    private string _gameSaveKey = "gameSave";
     public int currentDay { get; private set; } = 1;
     public int defaultTimePerDay { get; private set; } = 5;
 
     public Player player { get; private set; }
+
+    [SerializeField] private GameObject _quitGameConfirmWindow;
+
+    public UnityEvent OnSaveLoaded;
+    public bool isSaveLoaded { get; private set; }
+    public bool isHaveMoreProgress { get; private set; }
 
     public UnityEvent OnDayStarted;
     public UnityEvent OnDayEnded;
@@ -22,30 +29,34 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start()
-    { 
-        StartCoroutine(StartGameFirstDay());
-    }
-
-    void Update()
     {
-        if (!player)
-        {
-            player = FindObjectOfType<Player>();
-        }
+        player = FindObjectOfType<Player>();
+        StartCoroutine(StartGameFirstDay());
     }
 
     private IEnumerator StartGameFirstDay()
     {
         yield return new WaitUntil(() => isCompletedAllSetup());
-        yield return new WaitUntil(() => Input.anyKeyDown && !TuTorialManager.Instance._isInProcess);
-        TuTorialManager.Instance.CloseWindow();
-        StartDay();
+        FindObjectOfType<SoundEffectsController>().PlaySoundEffect("BGM");
+        if (PlayerPrefs.HasKey(_gameSaveKey))
+        {
+            LoadGameProgress();
+            isSaveLoaded = true;
+            isHaveMoreProgress = false;
+            OnSaveLoaded?.Invoke();
+        }
+        else
+        {
+            TuTorialManager.Instance.ShowTutorial();
+            yield return new WaitUntil(() => Input.GetButtonDown("ActionA") && !TuTorialManager.Instance._isInProcess);
+            TuTorialManager.Instance.CloseWindow();
+            StartDay();
+        }
     }
 
     public void StartDay()
     {
         StatusUpgradeManager.Instance.ClearUpgradeHistory();
-
         OnDayStarted?.Invoke();
     }
 
@@ -69,26 +80,23 @@ public class GameManager : MonoBehaviour
         dayResultManager.ShowDayResult();
     }
 
-    private void ResetPlotsStatus()
-    {
-        var plots = FindObjectsOfType<Plot>();
-        foreach (Plot plot in plots)
-        {
-            plot.ResetPlotStatus();
-        }
-    }
-
     public void ToNextDay()
     {
         currentDay++;
 
         ShopForSell.Instance.ResetTotalSoldPrice();
         StatusUpgradeManager.Instance.ResetDailyUpgradeStatus();
+        UpgradeShop.Instance.ResetDailyUpgrade();
         DebtManager.Instance.ResetParameters();
-        AnimalFarmManager.Instance.GrowUpAnimals();
 
-        //ResetPlotsStatus();
-        //ShopBuyManager.Instance.RestockShops();
+        AnimalFarmManager.Instance.GrowUpAnimals();
+        PlotManager.Instance.ResetPlotsStatus();
+        ShopBuyManager.Instance.RestockShops();
+
+        player.wallet.UpdateSaveDataOnContainer();
+
+        isHaveMoreProgress = true;
+        SaveGameProgress();
 
         UpgradeShop.Instance.OpenWindow();
     }
@@ -97,9 +105,24 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game is O V E R.");
         OnGameEnded?.Invoke();
+        ObjectDataContainer.ClearAllSaveData(_gameSaveKey);
     }
 
-    public void SetTimeScale(float value)
+    public void SaveGameProgress()
+    {
+        if (isHaveMoreProgress)
+        {
+            ObjectDataContainer.SaveDatas(_gameSaveKey, currentDay, DebtManager.Instance.debtPaidCount);
+        }
+    }
+
+    public void LoadGameProgress()
+    {
+        int dayPlayed = ObjectDataContainer.LoadDatas(_gameSaveKey);
+        currentDay = dayPlayed;
+    }
+
+    private void SetTimeScale(float value)
     {
         Time.timeScale = value;
     }
@@ -111,36 +134,69 @@ public class GameManager : MonoBehaviour
             Debug.Log("DayResultManager");
             return false;
         }
-        if (!UpgradeShop.Instance || !UpgradeShop.Instance.isReadied)
+        else if (!UpgradeShop.Instance || !UpgradeShop.Instance.isReadied)
         {
             Debug.Log("UpgradeShop");
             return false;
 
         }
-        if (!Timer.Instance)
+        else if (!LightingController.Instance)
+        {
+            Debug.Log("LightingController");
+            return false;
+
+        }
+        else if (!Timer.Instance)
         {
             Debug.Log("Timer");
             return false;
 
         }
-        if (!TuTorialManager.Instance)
+        else if (!TuTorialManager.Instance)
         {
             Debug.Log("TuTorialManager");
             return false;
 
         }
-        if (!StatusUpgradeManager.Instance || !StatusUpgradeManager.Instance.isReadied)
+        else if (!StatusUpgradeManager.Instance || !StatusUpgradeManager.Instance.isReadied)
         {
             Debug.Log("StatusUpgradeManager");
             return false;
 
         }
-        if (!Player.Instance)
+        else if (!Player.Instance)
         {
             Debug.Log("Player");
             return false;
 
         }
+
+        SetTimeScale(1);
         return true;
+    }
+
+    public void QuitGame()
+    {
+        if (isSaveLoaded && !isHaveMoreProgress)
+        {
+            ObjectDataContainer.ClearAllSaveData(_gameSaveKey);
+        }
+
+        GoToMainMenuScene();
+    }
+
+    private void GoToMainMenuScene()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void PauseGame()
+    {
+        SetTimeScale(0);
+    }
+
+    public void UnpauseGame()
+    {
+        SetTimeScale(1);
     }
 }

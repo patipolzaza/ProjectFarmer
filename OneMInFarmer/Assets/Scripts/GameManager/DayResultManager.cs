@@ -12,7 +12,6 @@ public class DayResultManager : MonoBehaviour
 
     public int totalSoldPrice { get; private set; }
     public int debt { get; private set; }
-    public int dayRemainForNextDebtPaymentInMem { get; private set; }
 
     public bool isFinishedAllProcess { get; private set; }
     private bool finishedUpdateTotalPriceText;
@@ -44,7 +43,7 @@ public class DayResultManager : MonoBehaviour
 
         if (Input.anyKeyDown)
         {
-            if (dayRemainForNextDebtPaymentInMem < 1)
+            if (DebtManager.Instance.GetDayRemainForDebtPayment < 1)
             {
                 DebtManager.Instance.ShowResultUI();
             }
@@ -75,7 +74,6 @@ public class DayResultManager : MonoBehaviour
         yield return new WaitUntil(() => ShopForSell.Instance != null);
         shop = ShopForSell.Instance;
         yield return new WaitUntil(() => DebtManager.Instance);
-        dayRemainForNextDebtPaymentInMem = DebtManager.Instance.dayForNextDebtPayment;
         isReadied = true;
     }
 
@@ -96,7 +94,7 @@ public class DayResultManager : MonoBehaviour
 
         ui.SetDayText(GameManager.Instance.currentDay.ToString());
         ui.SetDeptText(DebtManager.Instance.GetDebt.ToString());
-        ui.SetDayRemainingForNextDebtPaymentText(dayRemainForNextDebtPaymentInMem.ToString());
+        ui.SetDayRemainingForNextDebtPaymentText(dayRemainForNextDebtPayment.ToString());
 
         yield return new WaitForSeconds(1.25f);
 
@@ -106,7 +104,6 @@ public class DayResultManager : MonoBehaviour
         yield return new WaitForSeconds(0.75f);
 
         ui.SetDayRemainingForNextDebtPaymentText(dayRemainForNextDebtPayment.ToString());
-        dayRemainForNextDebtPaymentInMem = dayRemainForNextDebtPayment;
 
         yield return new WaitForSeconds(1.25f);
 
@@ -136,10 +133,9 @@ public class DayResultManager : MonoBehaviour
         StopAllCoroutines();
 
         totalSoldPrice = shop.totalSoldPrice;
-        dayRemainForNextDebtPaymentInMem = DebtManager.Instance.GetDayRemainForDebtPayment;
         ui.SetDayText(GameManager.Instance.currentDay.ToString());
         ui.SetDeptText(DebtManager.Instance.GetDebt.ToString());
-        ui.SetDayRemainingForNextDebtPaymentText(dayRemainForNextDebtPaymentInMem.ToString());
+        ui.SetDayRemainingForNextDebtPaymentText(DebtManager.Instance.GetDayRemainForDebtPayment.ToString());
 
         isFinishedAllProcess = true;
     }

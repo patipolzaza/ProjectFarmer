@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 506212d09f0c14b4e91bf48de4708286, type: 3}
+  m_Script: {fileID: 11500000, guid: 82f36d0aad2f9264ba2dd004cd5bf5f3, type: 3}
   m_Name: Fruit
   m_EditorClassIdentifier: 
   id: b26c55bee4a32d840ac2ee9a623a53bf
   ItemName: Fruit
-  Icon: {fileID: 5822373649741285269, guid: c91296ee2af1d8e4ab38dc90b100e61b, type: 3}
-  canSell: 1
-  IsConsumable: 0
-  MaximumStacks: 1
-  purchasePrice: 0
-  sellingPrice: 2
+  Icon: {fileID: 73779382302904024, guid: 62ddfa0624b18c449a712595fb08d283, type: 3}
+  sellPrice: 20
+  weightGain: 2

@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: D_Cow
   m_EditorClassIdentifier: 
   animalName: Cow
-  inShopIcon: {fileID: 1201215636998452967, guid: 7ae8c846d6a54fe428bba1d8aef60abc, type: 3}
-  sellPricePerKilo: 1
-  bonusSellPriceForAdult: 1
-  bonusSellPriceForElder: 2
-  purchasePrice: 5
-  lifespan: 6
-  stomachSize: 2
+  inShopIcon: {fileID: 21300000, guid: a171e6cb4f1edbe40abbf59ba2ec7ac4, type: 3}
+  sellPricePerKilo: 15
+  bonusSellPriceForAdult: 5
+  bonusSellPriceForElder: 10
+  purchasePrice: 35
+  lifespan: 8
+  stomachSize: 1
   startWeight: 1
   edibleFoods: 01000000

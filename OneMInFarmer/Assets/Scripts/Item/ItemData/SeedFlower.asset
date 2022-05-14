@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de0730b2e0dad774fb8760878083eb67, type: 3}
+  m_Name: SeedFlower
+  m_EditorClassIdentifier: 
+  id: cb36ce230c4627b4f882c82cd33339cf
+  ItemName: SeedWheat
+  Icon: {fileID: 5904380790476458904, guid: e8641b59e8e6f024a9a8987a8b4123f1, type: 3}
+  plantStages:
+  - {fileID: -5845100677813727930, guid: e8641b59e8e6f024a9a8987a8b4123f1, type: 3}
+  - {fileID: -2746803152207943108, guid: e8641b59e8e6f024a9a8987a8b4123f1, type: 3}
+  - {fileID: 303406728344876438, guid: e8641b59e8e6f024a9a8987a8b4123f1, type: 3}
+  - {fileID: 1821224440823606121, guid: e8641b59e8e6f024a9a8987a8b4123f1, type: 3}
+  purchasePrice: 10
+  countHarvest: 1
+  product: {fileID: 344818779878053713, guid: 6d41612133ad029408a769aeb969f591, type: 3}

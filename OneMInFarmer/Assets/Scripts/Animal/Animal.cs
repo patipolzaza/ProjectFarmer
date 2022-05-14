@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.Events;
 using TMPro;
 
 public class Animal : PickableObject, IBuyable, ISellable
 {
+    private AnimalSaveData _saveData;
+    public string prefabPath { get; private set; } = "";
+
     public Rigidbody2D rb { get; private set; }
     public Animator anim { get; private set; }
 
@@ -19,14 +23,14 @@ public class Animal : PickableObject, IBuyable, ISellable
     private Vector2 velocityWorkspace = new Vector2();
 
     public int age { get; protected set; } = 1;
-    public AgeSpan currentAgeSpan;
+    public AgeSpan currentAgeSpan { get; protected set; }
     public int lifePoint { get; protected set; } = 2;
-
     public bool isHungry { get; private set; } = true;
-    private List<AnimalFood> foodsEaten = new List<AnimalFood>();
+    private List<Food> foodsEaten = new List<Food>();
     public float weight { get; protected set; }
-    public UnityEvent<float, float> OnEatenFood;
 
+    public UnityEvent<float, float> OnEatenFood;
+    public UnityEvent OnClearEatenFoods;
     public bool isDie { get; private set; } = false;
 
     #region State Machine
@@ -45,7 +49,7 @@ public class Animal : PickableObject, IBuyable, ISellable
     public Sprite GetIcon => animalData.inShopIcon;
     public int GetSellPricePerKilo => animalData.sellPricePerKilo;
     public int GetBuyPrice => animalData.purchasePrice;
-    public float GetSize => Mathf.Clamp(0.45f + (((float)age / (float)animalData.lifespan) * 0.55f), 0.45f, 1);
+    public float GetSize => Mathf.Clamp(0.45f + (((float)age / (float)animalData.lifespan) * 0.4f), 0.6f, 1);
     public int GetSellPrice
     {
         get
@@ -66,6 +70,30 @@ public class Animal : PickableObject, IBuyable, ISellable
     }
     public int GetLifespan => animalData.lifespan;
     public List<FoodType> GetEdibleFoods => animalData.edibleFoods;
+    public string GetPrefabPath
+    {
+        get
+        {
+            var guids = AssetDatabase.FindAssets($"{gameObject.name} t:GameObject", new[] { $"Assets/Resources/Prefabs/Animals/{gameObject.name}/" });
+            string path = AssetDatabase.GUIDToAssetPath(guids[0]);
+
+            return path;
+        }
+    }
+
+    public void LoadAnimalData(AnimalSaveData saveData)
+    {
+        interactableObject.transform.localScale = saveData.GetAnimalScale;
+        age = saveData.GetAge;
+        weight = saveData.GetWeight;
+        lifePoint = saveData.GetLifePoint;
+        currentAgeSpan = (AgeSpan)saveData.GetAgeSpan;
+        prefabPath = saveData.GetAnimalPrefabPath;
+
+        //_saveData = new AnimalSaveData(saveData);
+        _saveData = saveData;
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -78,6 +106,7 @@ public class Animal : PickableObject, IBuyable, ISellable
         idleState = new IdleState(this, stateMachine, "idle", idleStateData);
         grabbedState = new GrabbedState(this, stateMachine, "grabbed");
         dieState = new DieState(this, stateMachine, "die");
+
 
         stateMachine.InitializeState(idleState);
         currentAgeSpan = 0;
@@ -99,13 +128,22 @@ public class Animal : PickableObject, IBuyable, ISellable
     {
         base.Start();
 
-        facingDirection = interactableObject.transform.localScale.x / interactableObject.transform.localScale.x;
+        facingDirection = interactableObject.transform.localScale.x > 0 ? 1 : -1;
 
-        float size = GetSize;
-        Vector3 newScale = new Vector3(size, size, 1);
-        SetScale(newScale);
+        if (_saveData == null)
+        {
+            float size = GetSize;
+            Vector3 newScale = new Vector3(size, size, 1);
+            SetScale(newScale);
 
-        weight = animalData.startWeight;
+            weight = animalData.startWeight;
+
+            prefabPath = GetPrefabPath;
+
+            _saveData = new AnimalSaveData(this);
+        }
+
+        UpdateDataOnContainer();
     }
 
     protected override void Update()
@@ -138,6 +176,8 @@ public class Animal : PickableObject, IBuyable, ISellable
         float size = GetSize;
         Vector3 newScale = new Vector3(size, size, 1);
         SetScale(newScale);
+
+        UpdateDataOnContainer();
     }
 
     private void DigestFoods()
@@ -147,7 +187,7 @@ public class Animal : PickableObject, IBuyable, ISellable
             IncreaseWeight(food.GetWeightGain);
         }
 
-        foodsEaten.Clear();
+        OnClearEatenFoods?.Invoke();
     }
 
     private void IncreaseWeight(float amount)
@@ -176,6 +216,11 @@ public class Animal : PickableObject, IBuyable, ISellable
         SetColor(newColor);
     }
 
+    public void ClearEatenFoods()
+    {
+        foodsEaten.Clear();
+    }
+
     public override Transform Pick()
     {
         base.Pick();
@@ -190,23 +235,22 @@ public class Animal : PickableObject, IBuyable, ISellable
 
     public override void Drop()
     {
-        if (transform.lossyScale.x < 0)
-        {
-            Flip();
-        }
-
         base.Drop();
-
         grabbedState.Unleash();
     }
 
-    public virtual bool TakeFood(AnimalFood food)
+    public void SetWeight(int value)
     {
-        if (isDie)
+        weight = Mathf.Clamp(value, animalData.startWeight, float.PositiveInfinity);
+    }
+
+    public virtual bool TakeFood(Food food)
+    {
+        if (food == null || isDie)
         {
             return false;
         }
-        else if (food == null || foodsEaten.Count >= animalData.stomachSize)
+        else if (foodsEaten.Count >= animalData.stomachSize)
         {
             if (showTextCoroutine != null)
             {
@@ -251,18 +295,24 @@ public class Animal : PickableObject, IBuyable, ISellable
 
     public void SetVelocity(float x, float y)
     {
-        if (x > 0 && facingDirection < 0)
-        {
-            Flip();
-        }
-        else if (x < 0 && facingDirection > 0)
-        {
-            Flip();
-        }
+        FacingToDirection(x);
 
         velocityWorkspace.Set(x, y);
-
         rb.velocity = velocityWorkspace;
+    }
+
+    private void FacingToDirection(float velocityX)
+    {
+        int direction = (int)(velocityX > 0 ? 1 : velocityX < 0 ? -1 : facingDirection);
+        Vector3 newScale = interactableObject.transform.localScale;
+
+        if ((direction > 0 && interactableObject.transform.localScale.x < 0) || (direction < 0 && interactableObject.transform.localScale.x > 0))
+        {
+            newScale.x *= -1;
+        }
+
+        interactableObject.transform.localScale = newScale;
+        facingDirection = direction;
     }
 
     public void Flip()
@@ -312,14 +362,6 @@ public class Animal : PickableObject, IBuyable, ISellable
         return gameObject;
     }
 
-    public void PutInShopStash(ShopForSell targetShop)
-    {
-        targetShop.PutItemInContainer(this);
-        SetLocalPosition(Vector3.zero, false, false, false, false);
-        SetObjectSpriteRenderer(false);
-        SetInteractable(false);
-    }
-
     private void ShowDetail()
     {
         List<FoodType> edibleFoods = animalData.edibleFoods;
@@ -334,5 +376,10 @@ public class Animal : PickableObject, IBuyable, ISellable
     private void HideDetail()
     {
         AnimalDetailDisplayer.Instance.HideWindow();
+    }
+
+    private void UpdateDataOnContainer()
+    {
+        _saveData.UpdateData(this);
     }
 }

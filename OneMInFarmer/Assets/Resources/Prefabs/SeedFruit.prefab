@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7999257106874825312}
   - component: {fileID: 3722006779616697360}
   - component: {fileID: 6439343182913293360}
+  - component: {fileID: 279412387427524589}
   m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
@@ -57,7 +58,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1974793335
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &3722006779616697360
@@ -100,6 +101,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &279412387427524589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4648611564583518790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c439b46e2eaf764baf7d4e21021c465, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8260505215912968701
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +140,7 @@ Transform:
   m_GameObject: {fileID: 8260505215912968701}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4323990725083594167}
   m_Father: {fileID: 0}
@@ -157,6 +170,7 @@ MonoBehaviour:
       m_Calls: []
   currentStackDisplayer: {fileID: 2191041777002838408}
   ItemData: {fileID: 11400000, guid: 4d9c362b1cb876b4fa6b06ee11ef4da6, type: 2}
+  currentStack: 1
 --- !u!60 &1854594760010787332
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -350,7 +364,7 @@ Transform:
   m_GameObject: {fileID: 8653886652334660418}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 5485843573547300649}
   m_Father: {fileID: 600190267877262362}
@@ -393,10 +407,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2121655513
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -386788524301670192, guid: c91296ee2af1d8e4ab38dc90b100e61b, type: 3}
+  m_Sprite: {fileID: 3084384797209614426, guid: 62ddfa0624b18c449a712595fb08d283, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

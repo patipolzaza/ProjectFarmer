@@ -5,17 +5,12 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-[CreateAssetMenu(menuName = "Items/ItemData")]
 public class ItemData : ScriptableObject
 {
     [SerializeField] string id;
     public string ID { get { return id; } }
     public string ItemName;
     public Sprite Icon;
-
-    public int purchasePrice = 5;
-    public int sellPrice = 7;
-
 
 #if UNITY_EDITOR
     protected virtual void OnValidate()

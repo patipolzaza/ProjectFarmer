@@ -71,7 +71,7 @@ public class UShopButtonInputNavigator : MonoBehaviour, ISelectHandler
         }
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (!gameObject.activeSelf)
         {
@@ -103,11 +103,26 @@ public class UShopButtonInputNavigator : MonoBehaviour, ISelectHandler
 
             if (!target)
             {
-                target = FindInteractableUp();
+                if (FindInteractableRight())
+                {
+                    target = FindInteractableRight();
+                }
+                else if (FindInteractableUp())
+                {
+                    target = FindInteractableUp();
+                }
+                else if (FindInteractableDown())
+                {
+                    target = FindInteractableDown();
+                }
 
                 if (!target)
                 {
                     UShopButtonInputManager.Instance.ChangeSelectedButtonToStartButton();
+                }
+                else
+                {
+                    UShopButtonInputManager.Instance.ChangeSelectedButton(target);
                 }
             }
             else
@@ -143,7 +158,8 @@ public class UShopButtonInputNavigator : MonoBehaviour, ISelectHandler
         else
         {
             Navigation navigation = button.navigation;
-            while (navigation.selectOnUp && (selectable && !selectable.interactable))
+            int index = 0;
+            while ((selectable && !selectable.interactable) && index <= 10)
             {
                 navigation = selectable.navigation;
 
@@ -154,6 +170,21 @@ public class UShopButtonInputNavigator : MonoBehaviour, ISelectHandler
                     while (navigation2.selectOnLeft && (selectable && !selectable.interactable))
                     {
                         selectable2 = navigation2.selectOnLeft;
+
+                        if (selectable2 && selectable2.interactable)
+                        {
+                            selectable = selectable2;
+                        }
+                        else
+                        {
+                            navigation2 = selectable2.navigation;
+                        }
+                    }
+
+                    navigation2 = navigation;
+                    while (navigation2.selectOnRight && (selectable && !selectable.interactable))
+                    {
+                        selectable2 = navigation2.selectOnRight;
 
                         if (selectable2 && selectable2.interactable)
                         {
@@ -170,6 +201,8 @@ public class UShopButtonInputNavigator : MonoBehaviour, ISelectHandler
                 {
                     selectable = navigation.selectOnUp;
                 }
+
+                index++;
             }
 
             return selectable && selectable.interactable ? selectable : null;
@@ -186,7 +219,8 @@ public class UShopButtonInputNavigator : MonoBehaviour, ISelectHandler
         else
         {
             Navigation navigation = button.navigation;
-            while (navigation.selectOnDown && (selectable && !selectable.interactable))
+            int index = 0;
+            while ((selectable && !selectable.interactable) && index <= 10)
             {
                 navigation = selectable.navigation;
 
@@ -207,12 +241,29 @@ public class UShopButtonInputNavigator : MonoBehaviour, ISelectHandler
                             navigation2 = selectable2.navigation;
                         }
                     }
+
+                    navigation2 = navigation;
+                    while ((selectable && !selectable.interactable) && navigation2.selectOnRight)
+                    {
+                        selectable2 = navigation2.selectOnRight;
+
+                        if (selectable2 && selectable2.interactable)
+                        {
+                            selectable = selectable2;
+                        }
+                        else
+                        {
+                            navigation2 = selectable2.navigation;
+                        }
+                    }
                 }
 
                 if (selectable && !selectable.interactable)
                 {
                     selectable = navigation.selectOnDown;
                 }
+
+                index++;
             }
 
             return selectable && selectable.interactable ? selectable : null;
