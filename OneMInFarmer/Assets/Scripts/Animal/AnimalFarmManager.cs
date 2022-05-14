@@ -21,8 +21,12 @@ public class AnimalFarmManager : MonoBehaviour, IContainStatus
 
     private void Awake()
     {
-        maxAnimalStatus = new Status("Max Animal", maxAnimalStatusData);
-        _currentLevelInMem = maxAnimalStatus.currentLevel;
+        if (maxAnimalStatus == null)
+        {
+            maxAnimalStatus = new Status("Max Animal", maxAnimalStatusData);
+            _currentLevelInMem = maxAnimalStatus.currentLevel;
+            _saveData = new MaxAnimalStatusSaveData(maxAnimalStatus);
+        }
         Instance = this;
     }
 
@@ -44,11 +48,11 @@ public class AnimalFarmManager : MonoBehaviour, IContainStatus
 
     public void LoadSaveData(MaxAnimalStatusSaveData saveData)
     {
+        maxAnimalStatus = new Status("Max Animal", maxAnimalStatusData);
+
         maxAnimalStatus.SetLevel(saveData.GetStatusLevel);
         _currentLevelInMem = maxAnimalStatus.currentLevel;
         _saveData = saveData;
-
-        UpdateStatusSaveDataOnContainer();
     }
 
     public bool AddAnimal(Animal animalToAdd)
@@ -87,7 +91,7 @@ public class AnimalFarmManager : MonoBehaviour, IContainStatus
 
     private void UpdateStatusSaveDataOnContainer()
     {
-        ObjectDataContainer.UpdateMaxAnimalStatusSaveData(_saveData);
+        _saveData.UpdateSaveData(maxAnimalStatus);
     }
 
     public void LoadAnimalDatas(List<AnimalSaveData> animalSaveDatas)
