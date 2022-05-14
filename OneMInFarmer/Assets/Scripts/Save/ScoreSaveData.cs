@@ -4,7 +4,7 @@ public class ScoreSaveData
 {
     [SerializeField] private int _score;
 
-    public int GetScore;
+    public int GetScore => _score;
 
     public ScoreSaveData(int score)
     {
