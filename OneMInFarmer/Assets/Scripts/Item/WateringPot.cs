@@ -9,8 +9,8 @@ public class WateringPot : PickableObject, IUsable
     [SerializeField] private Slider sliderWaterBar;
     [SerializeField] private ParticleSystem WaterParticle;
     [SerializeField] private Sprite _icon;
-    public float valence { get; private set; } = 20;
-    public float remaining { get; private set; } = 20;
+    public float capacity { get; private set; } = 20;
+    public float remaining { get; private set; } = 0;
     public float RefillPerSeconds { get; private set; } = 5f;
     public float waterPerUse { get; private set; } = 5;
 
@@ -25,6 +25,14 @@ public class WateringPot : PickableObject, IUsable
 
         //interactEvent.AddListener(PickUp);
     }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        remaining = capacity;
+    }
+
     public bool Use(Interactable targetToUse)
     {
         if (targetToUse is Plot)
