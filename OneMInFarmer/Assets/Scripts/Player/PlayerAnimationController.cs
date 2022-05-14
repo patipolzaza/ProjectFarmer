@@ -5,15 +5,12 @@ using UnityEngine.Events;
 
 public class PlayerAnimationController : MonoBehaviour
 {
-    
+
     private Animator anim;
     public bool isPlayingAnimation { get; private set; }
-    private void OnValidate()
+    private void Awake()
     {
-        if (!anim)
-        {
-            anim = GetComponent<Animator>();
-        }
+        anim = GetComponent<Animator>();
     }
 
     public void InteractAnimation()
@@ -39,7 +36,7 @@ public class PlayerAnimationController : MonoBehaviour
     {
         string AnimationName = "Refilling";
         anim.SetBool(AnimationName, value);
-    }  
+    }
 
 
     public void SetIsHoldItemBoolean(bool value)
