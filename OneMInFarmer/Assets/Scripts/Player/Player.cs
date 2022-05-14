@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         playerHand = GetComponent<Hand>();
+        rb = GetComponent<Rigidbody2D>();
         moveSpeedStatus = new PercentStatus(moveSpeedData.statusName, moveSpeedData);
 
         facingDirection = transform.localScale.x / Mathf.Abs(transform.localScale.x);
@@ -52,16 +53,6 @@ public class Player : MonoBehaviour
     private void Start()
     {
         DisableMove();
-    }
-
-    private void OnValidate()
-    {
-        if (!rb && GetComponent<Rigidbody2D>())
-        {
-            rb = GetComponent<Rigidbody2D>();
-            rb.isKinematic = false;
-            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        }
     }
 
     private void Update()
