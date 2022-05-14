@@ -164,7 +164,7 @@ MonoBehaviour:
     m_Center: {x: -0.000000004656613, y: 0.000000007450581, z: 0}
     m_Extent: {x: 0.010000005, y: 0.025000002, z: 0}
   m_UseBatching: 1
-  m_AlwaysUpdate: 1
+  m_AlwaysUpdate: 0
 --- !u!1 &509164924937105944
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,7 +267,7 @@ MonoBehaviour:
     m_Center: {x: 0.000000014901161, y: -0.000000007450581, z: 0}
     m_Extent: {x: 0.010000001, y: 0.02, z: 0}
   m_UseBatching: 1
-  m_AlwaysUpdate: 1
+  m_AlwaysUpdate: 0
 --- !u!1 &1530226599264179324
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,7 +371,7 @@ MonoBehaviour:
     m_Center: {x: 0.00000007264316, y: -0.00000004284084, z: 0}
     m_Extent: {x: 0.010000007, y: 0.02500002, z: 0}
   m_UseBatching: 1
-  m_AlwaysUpdate: 1
+  m_AlwaysUpdate: 0
 --- !u!1 &1606047883084579981
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,7 +474,7 @@ MonoBehaviour:
     m_Center: {x: 0.000000014901161, y: 0.000000014901161, z: 0}
     m_Extent: {x: 0.065, y: 0.05, z: 0}
   m_UseBatching: 1
-  m_AlwaysUpdate: 1
+  m_AlwaysUpdate: 0
 --- !u!1 &1619329299552635763
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,7 +638,7 @@ MonoBehaviour:
     m_Center: {x: 0.000000026077032, y: 0.000000014901161, z: 0}
     m_Extent: {x: 0.010000002, y: 0.020000001, z: 0}
   m_UseBatching: 1
-  m_AlwaysUpdate: 1
+  m_AlwaysUpdate: 0
 --- !u!1 &2591300240142188057
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,7 +804,7 @@ MonoBehaviour:
     m_Center: {x: 0.000000013969839, y: 0.000000024214387, z: 0}
     m_Extent: {x: 0.010000006, y: 0.025, z: 0}
   m_UseBatching: 1
-  m_AlwaysUpdate: 1
+  m_AlwaysUpdate: 0
 --- !u!1 &3095264599765659633
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,7 +999,7 @@ MonoBehaviour:
     m_Center: {x: 0.000000016763806, y: 0.000000009313226, z: 0}
     m_Extent: {x: 0.0100000035, y: 0.024999999, z: 0}
   m_UseBatching: 1
-  m_AlwaysUpdate: 1
+  m_AlwaysUpdate: 0
 --- !u!1 &3729920684379366609
 GameObject:
   m_ObjectHideFlags: 0
@@ -1103,7 +1103,7 @@ MonoBehaviour:
     m_Center: {x: -0.034699976, y: -0.00976, z: 0}
     m_Extent: {x: 0.07030001, y: 0.055239998, z: 0}
   m_UseBatching: 1
-  m_AlwaysUpdate: 1
+  m_AlwaysUpdate: 0
 --- !u!1 &4184717012562113522
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,7 +1208,7 @@ MonoBehaviour:
     m_Center: {x: 0.032308623, y: -0.039168723, z: 0}
     m_Extent: {x: 0.010899938, y: 0.041379794, z: 0}
   m_UseBatching: 1
-  m_AlwaysUpdate: 1
+  m_AlwaysUpdate: 0
 --- !u!1 &4527922856378901157
 GameObject:
   m_ObjectHideFlags: 0
@@ -1311,7 +1311,7 @@ MonoBehaviour:
     m_Center: {x: 0.000000007450581, y: 0.000000029802322, z: 0}
     m_Extent: {x: 0.045, y: 0.05, z: 0}
   m_UseBatching: 1
-  m_AlwaysUpdate: 1
+  m_AlwaysUpdate: 0
 --- !u!1 &4576865518374933292
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,7 +1588,7 @@ MonoBehaviour:
     m_Center: {x: 0.000000026077032, y: 0.000000007450581, z: 0}
     m_Extent: {x: 0.010000003, y: 0.020000001, z: 0}
   m_UseBatching: 1
-  m_AlwaysUpdate: 1
+  m_AlwaysUpdate: 0
 --- !u!1 &6050166797896423491
 GameObject:
   m_ObjectHideFlags: 0
@@ -1814,7 +1814,7 @@ MonoBehaviour:
     m_Center: {x: 0.000000011175871, y: 0.000000007450581, z: 0}
     m_Extent: {x: 0.010000003, y: 0.020000005, z: 0}
   m_UseBatching: 1
-  m_AlwaysUpdate: 1
+  m_AlwaysUpdate: 0
 --- !u!1 &9212591255000349226
 GameObject:
   m_ObjectHideFlags: 0
