@@ -22,3 +22,4 @@ MonoBehaviour:
   stomachSize: 1
   startWeight: 1
   edibleFoods: 01000000
+  prefabPath: Prefabs/Animals/Cow/Cow

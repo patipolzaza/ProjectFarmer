@@ -97,7 +97,7 @@ public class AnimalFarmManager : MonoBehaviour, IContainStatus
         for (int i = 0; i < loopCount; i++)
         {
             var saveData = animalSaveDatas[i];
-            var animalPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(saveData.GetAnimalPrefabPath);
+            var animalPrefab = Resources.Load<GameObject>(saveData.GetAnimalPrefabPath);
 
             var spawnedPosition = saveData.GetAnimalPosition;
             GameObject instantiatedAnimal = Instantiate(animalPrefab, spawnedPosition, Quaternion.identity);

@@ -19,7 +19,7 @@ public class PlotSaveData
         {
             if (_seedPath != null && _seedPath != string.Empty)
             {
-                SeedData seedData = AssetDatabase.LoadAssetAtPath<SeedData>(_seedPath);
+                SeedData seedData = Resources.Load<SeedData>(_seedPath);
                 return seedData;
             }
             else
@@ -43,7 +43,7 @@ public class PlotSaveData
     public void UpdateData(Plot plot)
     {
         _plotIndex = plot.GetPlotIndex;
-        _seedPath = plot.seed?.GetPath;
+        _seedPath = plot.seed?.path;
         _plantStage = plot.plantStage;
         _harvestCount = plot.countHarvest;
         _agePlant = plot.agePlant;
