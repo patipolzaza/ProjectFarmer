@@ -20,7 +20,7 @@ public class PercentStatus : Status
             PercentStatusData msData = statusData as PercentStatusData;
             int baseValue = msData.baseValue;
 
-            float statusValue = baseValue + ((currentLevel - 1) * baseValue * msData.extraValuePerLevel);
+            float statusValue = baseValue + ((currentLevel - 1) * msData.extraValuePerLevel);
 
             return Mathf.FloorToInt(statusValue);
         }

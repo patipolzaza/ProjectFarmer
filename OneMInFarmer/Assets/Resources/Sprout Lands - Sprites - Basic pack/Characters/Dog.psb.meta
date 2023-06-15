@@ -25,6 +25,7 @@ ScriptedImporter:
     streamingMipmaps: 1
     streamingMipmapsPriority: 0
     vTOnly: 0
+    ignoreMasterTextureLimit: 0
     nPOTScale: 1
     sRGBTexture: 1
     spriteMode: 2
@@ -46,6 +47,7 @@ ScriptedImporter:
     flipbookRows: 0
     flipbookColumns: 0
     ignorePngGamma: 0
+    cookieMode: 0
     filterMode: 0
     aniso: 1
     mipBias: 0
@@ -79,7 +81,6 @@ ScriptedImporter:
       width: 0
       height: 0
     spriteID: 
-    internalID: 0
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -89,6 +90,7 @@ ScriptedImporter:
     tessellationDetail: 0
     parentGroupIndex: -1
     uvTransform: {x: 0, y: 0}
+    spritePosition: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
   - name: BFU_Leg
@@ -103,13 +105,16 @@ ScriptedImporter:
       width: 2
       height: 4
     spriteID: e73797b80899de542baf5d5920bab4d2
-    internalID: 0
     spriteBone:
     - name: Back_UF_Leg
+      guid: 
       position: {x: 0.9551964, y: 3.7298698, z: 0}
       rotation: {x: 0, y: 0, z: -0.7034174, w: 0.710777}
       length: 3.9395084
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 2, y: 4}
@@ -203,7 +208,8 @@ ScriptedImporter:
     - {x: 5, y: 3}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -2, y: 51}
+    uvTransform: {x: 23, y: 56}
+    spritePosition: {x: 25, y: 5}
   - name: BFL_Leg
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -216,18 +222,25 @@ ScriptedImporter:
       width: 3
       height: 5
     spriteID: a7c59ef9f5af7a74c8a0a33371e82b47
-    internalID: 0
     spriteBone:
     - name: Back_LF_Leg
+      guid: 
       position: {x: 3.9395077, y: -0.00000036672378, z: 0}
       rotation: {x: 0, y: 0, z: -0.0029650903, w: 0.9999956}
       length: 4.777354
       parentId: 1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: Back_UF_Leg
+      guid: 
       position: {x: 0.9551964, y: 8.729869, z: 0}
       rotation: {x: 0, y: 0, z: -0.7034174, w: 0.710777}
       length: 3.9395084
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 3, y: 1.0400001}
@@ -375,7 +388,8 @@ ScriptedImporter:
     - {x: 12, y: 10}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -2, y: 4}
+    uvTransform: {x: 23, y: 4}
+    spritePosition: {x: 25, y: 0}
   - name: FFU_Leg
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -388,13 +402,16 @@ ScriptedImporter:
       width: 2
       height: 4
     spriteID: ae4714658a3ed854f87edaeec858f6cc
-    internalID: 0
     spriteBone:
     - name: Front_UF_Leg
+      guid: 
       position: {x: 0.95420074, y: 3.785861, z: 0}
       rotation: {x: 0, y: 0, z: -0.6964667, w: 0.71758914}
       length: 3.9499962
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 2, y: 4}
@@ -488,7 +505,8 @@ ScriptedImporter:
     - {x: 5, y: 3}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -3, y: -1}
+    uvTransform: {x: 34, y: 4}
+    spritePosition: {x: 37, y: 5}
   - name: FFL_Leg
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -501,18 +519,25 @@ ScriptedImporter:
       width: 3
       height: 5
     spriteID: ca706e28a2588b84fbc3fc562c5447d9
-    internalID: 0
     spriteBone:
     - name: Front_LF_Leg
+      guid: 
       position: {x: 3.9499974, y: 0.0000014113755, z: 0}
       rotation: {x: 0, y: 0, z: -0.003875639, w: 0.99999255}
       length: 4.765511
       parentId: 1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: Front_UF_Leg
+      guid: 
       position: {x: 0.95420074, y: 8.785862, z: 0}
       rotation: {x: 0, y: 0, z: -0.6964667, w: 0.71758914}
       length: 3.9499962
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 3, y: 1}
@@ -682,7 +707,8 @@ ScriptedImporter:
     - {x: 13, y: 14}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -14, y: 17}
+    uvTransform: {x: 23, y: 17}
+    spritePosition: {x: 37, y: 0}
   - name: Head
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -695,13 +721,16 @@ ScriptedImporter:
       width: 10
       height: 10
     spriteID: 9a845075d6e04f04d911cee033556f49
-    internalID: 0
     spriteBone:
     - name: Head
+      guid: 
       position: {x: 4.0188103, y: 2.031479, z: 0}
       rotation: {x: 0, y: 0, z: 0.69645625, w: 0.7175993}
       length: 5.3710313
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 9.0199995, y: 5.62}
@@ -1045,7 +1074,8 @@ ScriptedImporter:
     - {x: 2, y: 30}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -34, y: 11}
+    uvTransform: {x: 4, y: 24}
+    spritePosition: {x: 38, y: 13}
   - name: U_Body
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -1058,23 +1088,34 @@ ScriptedImporter:
       width: 11
       height: 12
     spriteID: 0fb7c6323c66d7d459e89aaf226093c2
-    internalID: 0
     spriteBone:
     - name: Neck
+      guid: 
       position: {x: 5.316175, y: -0.000050591865, z: 0}
       rotation: {x: 0, y: 0, z: 0.3612242, w: 0.9324791}
       length: 3.5486999
       parentId: 1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: U_Body
+      guid: 
       position: {x: 9.265808, y: -0.00006105893, z: 0}
       rotation: {x: 0, y: 0, z: 0.003150266, w: 0.99999505}
       length: 5.316174
       parentId: 2
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: L_Body
+      guid: 
       position: {x: -9.192961, y: 7.754262, z: 0}
       rotation: {x: 0, y: 0, z: -0.0047466364, w: 0.99998873}
       length: 9.265808
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 11, y: 5}
@@ -1449,7 +1490,8 @@ ScriptedImporter:
     - {x: 32, y: 33}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -30, y: -1}
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 34, y: 5}
   - name: L_Body
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -1462,18 +1504,25 @@ ScriptedImporter:
       width: 11
       height: 7
     spriteID: d48d3843daee95344beb0330fcbeb6ff
-    internalID: 0
     spriteBone:
     - name: L_Body
+      guid: 
       position: {x: 1.8070393, y: 5.754261, z: 0}
       rotation: {x: 0, y: 0, z: -0.0047466364, w: 0.99998873}
       length: 9.265808
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: U_Tail
+      guid: 
       position: {x: -2.1553345, y: -1.1456188, z: 0}
       rotation: {x: 0, y: 0, z: -0.99960846, w: 0.02798138}
       length: 2.6260486
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 11, y: 6}
@@ -1718,7 +1767,8 @@ ScriptedImporter:
     - {x: 18, y: 21}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -19, y: 35}
+    uvTransform: {x: 4, y: 42}
+    spritePosition: {x: 23, y: 7}
   - name: FBU_Leg
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -1731,13 +1781,16 @@ ScriptedImporter:
       width: 2
       height: 4
     spriteID: 20e8c81f333511d45a6e3c09811328e2
-    internalID: 0
     spriteBone:
     - name: Front_UB_Leg
+      guid: 
       position: {x: 1.0634537, y: 3.8848534, z: 0}
       rotation: {x: 0, y: 0, z: -0.7034133, w: 0.7107811}
       length: 4.0324755
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 2, y: 4}
@@ -1831,7 +1884,8 @@ ScriptedImporter:
     - {x: 5, y: 3}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -6, y: 11}
+    uvTransform: {x: 34, y: 16}
+    spritePosition: {x: 40, y: 5}
   - name: FBL_Leg
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -1844,18 +1898,25 @@ ScriptedImporter:
       width: 3
       height: 5
     spriteID: dc3019fced716d449a4d42fdd1b61fb4
-    internalID: 0
     spriteBone:
     - name: Front_LB_Leg
+      guid: 
       position: {x: 4.032469, y: -0.000001702404, z: 0}
       rotation: {x: 0, y: 0, z: 0.004391095, w: 0.9999904}
       length: 4.8002
       parentId: 1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: Front_UB_Leg
+      guid: 
       position: {x: 1.0634537, y: 8.884853, z: 0}
       rotation: {x: 0, y: 0, z: -0.7034133, w: 0.7107811}
       length: 4.0324755
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 3, y: 1}
@@ -2035,7 +2096,8 @@ ScriptedImporter:
     - {x: 14, y: 15}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -17, y: 30}
+    uvTransform: {x: 23, y: 30}
+    spritePosition: {x: 40, y: 0}
   - name: BBU_Leg
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -2048,13 +2110,16 @@ ScriptedImporter:
       width: 2
       height: 4
     spriteID: a318093c3379a22448964cded5a86e20
-    internalID: 0
     spriteBone:
     - name: Back_UB_Leg
+      guid: 
       position: {x: 1.0854416, y: 3.947857, z: 0}
       rotation: {x: 0, y: 0, z: -0.7051838, w: 0.7090246}
       length: 4.0543394
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 2, y: 4}
@@ -2148,7 +2213,8 @@ ScriptedImporter:
     - {x: 5, y: 3}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 6, y: 23}
+    uvTransform: {x: 34, y: 28}
+    spritePosition: {x: 28, y: 5}
   - name: BBL_Leg
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -2161,18 +2227,25 @@ ScriptedImporter:
       width: 3
       height: 5
     spriteID: 666e929b2dca66e40983eef2a177c0f1
-    internalID: 0
     spriteBone:
     - name: Back_LB_Leg
+      guid: 
       position: {x: 4.0543327, y: 0.0000030616054, z: 0}
       rotation: {x: 0, y: 0, z: 0.0045248456, w: 0.99998975}
       length: 4.840814
       parentId: 1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: Back_UB_Leg
+      guid: 
       position: {x: 1.0854435, y: 8.947857, z: 0}
       rotation: {x: 0, y: 0, z: -0.7051838, w: 0.7090246}
       length: 4.0543394
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 3, y: 1.02}
@@ -2352,7 +2425,8 @@ ScriptedImporter:
     - {x: 13, y: 14}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -5, y: 43}
+    uvTransform: {x: 23, y: 43}
+    spritePosition: {x: 28, y: 0}
   - name: Tail
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -2365,23 +2439,34 @@ ScriptedImporter:
       width: 6
       height: 2
     spriteID: ef8611cc5198de0489c8378decf4157d
-    internalID: 0
     spriteBone:
     - name: U_Tail
+      guid: 
       position: {x: -2.1553342, y: -1.1456206, z: 0}
       rotation: {x: 0, y: 0, z: -0.99960846, w: 0.02798138}
       length: 2.6260486
       parentId: 2
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: L_Tail
+      guid: 
       position: {x: 2.6260457, y: -0.0000031333268, z: 0}
       rotation: {x: 0, y: 0, z: -0.012127425, w: 0.99992645}
       length: 2.7459004
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: L_Body
+      guid: 
       position: {x: 7.8070393, y: 1.754261, z: 0}
       rotation: {x: 0, y: 0, z: -0.0047466364, w: 0.99998873}
       length: 9.265808
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 6, y: 2}
@@ -2616,305 +2701,136 @@ ScriptedImporter:
     - {x: 1, y: 20}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -13, y: 46}
-  platformSettings:
-  - name: DefaultTexturePlatform
-    overridden: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 2
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: Standalone
-    overridden: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 2
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: iPhone
-    overridden: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 2
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: Lumin
-    overridden: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 2
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: WebGL
-    overridden: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 2
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: tvOS
-    overridden: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 2
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: Windows Store Apps
-    overridden: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 2
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: Android
-    overridden: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 2
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  mosaicLayers: 1
-  documentPivot: {x: 0, y: 0}
-  documentAlignment: 7
-  importHiddenLayers: 0
-  importedTextureWidth: 64
-  importedTextureHeight: 64
-  documentSize: {x: 64, y: 64}
-  paperDollMode: 0
-  keepDupilcateSpriteName: 0
-  spriteCategoryList:
-    categories: []
-  textureActualWidth: 64
-  textureActualHeight: 64
-  spritePackingTag: 
-  resliceFromLayer: 0
-  characterMode: 1
-  mosaicPSDLayers: []
-  rigPSDLayers:
-  - name: Back_F_Leg
-    spriteName: 
-    isGroup: 1
-    parentIndex: -1
-    spriteID: 00000000000000000000000000000000
-    layerID: 12
-    mosaicPosition: {x: 0, y: 0}
-  - name: BFU_Leg
-    spriteName: BFU_Leg
-    isGroup: 0
-    parentIndex: 0
-    spriteID: e73797b80899de542baf5d5920bab4d2
-    layerID: 19
-    mosaicPosition: {x: 23, y: 56}
-  - name: BFL_Leg
-    spriteName: BFL_Leg
-    isGroup: 0
-    parentIndex: 0
-    spriteID: a7c59ef9f5af7a74c8a0a33371e82b47
-    layerID: 18
-    mosaicPosition: {x: 23, y: 4}
-  - name: Front_F_Leg
-    spriteName: 
-    isGroup: 1
-    parentIndex: -1
-    spriteID: 00000000000000000000000000000000
-    layerID: 26
-    mosaicPosition: {x: 0, y: 0}
-  - name: FFU_Leg
-    spriteName: FFU_Leg
-    isGroup: 0
-    parentIndex: 3
-    spriteID: ae4714658a3ed854f87edaeec858f6cc
-    layerID: 25
-    mosaicPosition: {x: 34, y: 4}
-  - name: FFL_Leg
-    spriteName: FFL_Leg
-    isGroup: 0
-    parentIndex: 3
-    spriteID: ca706e28a2588b84fbc3fc562c5447d9
-    layerID: 24
-    mosaicPosition: {x: 23, y: 17}
-  - name: Head
-    spriteName: Head
-    isGroup: 0
-    parentIndex: -1
-    spriteID: 9a845075d6e04f04d911cee033556f49
-    layerID: 32
-    mosaicPosition: {x: 4, y: 24}
-  - name: Body
-    spriteName: 
-    isGroup: 1
-    parentIndex: -1
-    spriteID: 00000000000000000000000000000000
-    layerID: 4
-    mosaicPosition: {x: 0, y: 0}
-  - name: U_Body
-    spriteName: U_Body
-    isGroup: 0
-    parentIndex: 7
-    spriteID: 0fb7c6323c66d7d459e89aaf226093c2
-    layerID: 7
-    mosaicPosition: {x: 4, y: 4}
-  - name: L_Body
-    spriteName: L_Body
-    isGroup: 0
-    parentIndex: 7
-    spriteID: d48d3843daee95344beb0330fcbeb6ff
-    layerID: 6
-    mosaicPosition: {x: 4, y: 42}
-  - name: Front_B_Leg
-    spriteName: 
-    isGroup: 1
-    parentIndex: -1
-    spriteID: 00000000000000000000000000000000
-    layerID: 30
-    mosaicPosition: {x: 0, y: 0}
-  - name: FBU_Leg
-    spriteName: FBU_Leg
-    isGroup: 0
-    parentIndex: 10
-    spriteID: 20e8c81f333511d45a6e3c09811328e2
-    layerID: 29
-    mosaicPosition: {x: 34, y: 16}
-  - name: FBL_Leg
-    spriteName: FBL_Leg
-    isGroup: 0
-    parentIndex: 10
-    spriteID: dc3019fced716d449a4d42fdd1b61fb4
-    layerID: 28
-    mosaicPosition: {x: 23, y: 30}
-  - name: Back_B_Leg
-    spriteName: 
-    isGroup: 1
-    parentIndex: -1
-    spriteID: 00000000000000000000000000000000
-    layerID: 14
-    mosaicPosition: {x: 0, y: 0}
-  - name: BBU_Leg
-    spriteName: BBU_Leg
-    isGroup: 0
-    parentIndex: 13
-    spriteID: a318093c3379a22448964cded5a86e20
-    layerID: 17
-    mosaicPosition: {x: 34, y: 28}
-  - name: BBL_Leg
-    spriteName: BBL_Leg
-    isGroup: 0
-    parentIndex: 13
-    spriteID: 666e929b2dca66e40983eef2a177c0f1
-    layerID: 16
-    mosaicPosition: {x: 23, y: 43}
-  - name: Tail
-    spriteName: Tail
-    isGroup: 0
-    parentIndex: -1
-    spriteID: ef8611cc5198de0489c8378decf4157d
-    layerID: 33
-    mosaicPosition: {x: 4, y: 57}
+    uvTransform: {x: 4, y: 57}
+    spritePosition: {x: 17, y: 11}
   characterData:
     bones:
     - name: L_Body
+      guid: 
       position: {x: 24.80704, y: 12.754262, z: 0}
       rotation: {x: 0, y: 0, z: -0.0047466364, w: 0.99998873}
       length: 9.265808
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: U_Body
+      guid: 
       position: {x: 9.265808, y: -0.00006113077, z: 0}
       rotation: {x: 0, y: 0, z: 0.003150266, w: 0.99999505}
       length: 5.316174
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: Neck
+      guid: 
       position: {x: 5.3161726, y: -0.000050413983, z: 0}
       rotation: {x: 0, y: 0, z: 0.36122417, w: 0.932479}
       length: 3.5487
       parentId: 1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: Head
+      guid: 
       position: {x: 3.548705, y: 0.0000006065041, z: 0}
       rotation: {x: 0, y: 0, z: 0.39168596, w: 0.920099}
       length: 5.3710318
       parentId: 2
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: U_Tail
+      guid: 
       position: {x: -2.1553345, y: -1.1456192, z: 0}
       rotation: {x: 0, y: 0, z: -0.99960846, w: 0.02798138}
       length: 2.6260486
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: L_Tail
+      guid: 
       position: {x: 2.626046, y: 0.00000018694776, z: 0}
       rotation: {x: 0, y: 0, z: -0.0121274255, w: 0.9999265}
       length: 2.7459002
       parentId: 4
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: Back_UF_Leg
+      guid: 
       position: {x: 1.1863097, y: -4.013312, z: 0}
       rotation: {x: 0, y: 0, z: -0.7000357, w: 0.7141079}
       length: 3.9395077
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: Back_LF_Leg
+      guid: 
       position: {x: 3.9395072, y: 0.0000005242155, z: 0}
       rotation: {x: 0, y: 0, z: -0.0029650775, w: 0.9999956}
       length: 4.7773533
       parentId: 6
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: Back_UB_Leg
+      guid: 
       position: {x: 4.3143463, y: -3.765617, z: 0}
       rotation: {x: 0, y: 0, z: -0.70181036, w: 0.7123639}
       length: 4.05434
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: Back_LB_Leg
+      guid: 
       position: {x: 4.05434, y: 0.0000018013851, z: 0}
       rotation: {x: 0, y: 0, z: 0.0045248424, w: 0.99998975}
       length: 4.8408146
       parentId: 8
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: Front_UF_Leg
+      guid: 
       position: {x: 3.8941388, y: -3.867965, z: 0}
       rotation: {x: 0, y: 0, z: -0.69532025, w: 0.71870005}
       length: 3.949996
       parentId: 1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: Front_LF_Leg
+      guid: 
       position: {x: 3.949996, y: -0.00000035487375, z: 0}
       rotation: {x: 0, y: 0, z: -0.0038756125, w: 0.9999925}
       length: 4.765511
       parentId: 10
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: Front_UB_Leg
+      guid: 
       position: {x: 7.00306, y: -3.7590451, z: 0}
       rotation: {x: 0, y: 0, z: -0.7022777, w: 0.7119031}
       length: 4.0324755
       parentId: 1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: Front_LB_Leg
+      guid: 
       position: {x: 4.0324755, y: -0.0000025894801, z: 0}
       rotation: {x: 0, y: 0, z: 0.0043911394, w: 0.99999034}
       length: 4.8002
       parentId: 12
+      color:
+        serializedVersion: 2
+        rgba: 0
     parts:
     - spritePosition:
         x: 25
@@ -3026,8 +2942,294 @@ ScriptedImporter:
       order: 0
     dimension: {x: 0, y: 0}
     characterGroups: []
+    boneReadOnly: 0
+  sharedRigSpriteImportData: []
+  sharedRigCharacterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    boneReadOnly: 0
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: iPhone
+    overridden: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Lumin
+    overridden: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: WebGL
+    overridden: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: tvOS
+    overridden: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Windows Store Apps
+    overridden: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Android
+    overridden: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  mosaicLayers: 1
+  characterMode: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  layerMappingOption: 2
+  generatePhysicsShape: 0
+  paperDollMode: 0
+  keepDupilcateSpriteName: 0
+  skeletonAssetReferenceID: 
+  spriteCategoryList:
+    categories: []
+  spritePackingTag: 
+  resliceFromLayer: 0
+  mosaicPSDLayers: []
+  rigPSDLayers:
+  - name: Back_F_Leg
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 41f1461859eedf64ca0a6c77b73d0e07
+    layerID: 12
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: BFU_Leg
+    spriteName: BFU_Leg
+    isGroup: 0
+    parentIndex: 0
+    spriteID: e73797b80899de542baf5d5920bab4d2
+    layerID: 19
+    mosaicPosition: {x: 23, y: 56}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: BFL_Leg
+    spriteName: BFL_Leg
+    isGroup: 0
+    parentIndex: 0
+    spriteID: a7c59ef9f5af7a74c8a0a33371e82b47
+    layerID: 18
+    mosaicPosition: {x: 23, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Front_F_Leg
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 184c7a373a21806439cb0f266157ba11
+    layerID: 26
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: FFU_Leg
+    spriteName: FFU_Leg
+    isGroup: 0
+    parentIndex: 3
+    spriteID: ae4714658a3ed854f87edaeec858f6cc
+    layerID: 25
+    mosaicPosition: {x: 34, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: FFL_Leg
+    spriteName: FFL_Leg
+    isGroup: 0
+    parentIndex: 3
+    spriteID: ca706e28a2588b84fbc3fc562c5447d9
+    layerID: 24
+    mosaicPosition: {x: 23, y: 17}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Head
+    spriteName: Head
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 9a845075d6e04f04d911cee033556f49
+    layerID: 32
+    mosaicPosition: {x: 4, y: 24}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Body
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 80d62e2e605dfa74eae2134172074010
+    layerID: 4
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: U_Body
+    spriteName: U_Body
+    isGroup: 0
+    parentIndex: 7
+    spriteID: 0fb7c6323c66d7d459e89aaf226093c2
+    layerID: 7
+    mosaicPosition: {x: 4, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: L_Body
+    spriteName: L_Body
+    isGroup: 0
+    parentIndex: 7
+    spriteID: d48d3843daee95344beb0330fcbeb6ff
+    layerID: 6
+    mosaicPosition: {x: 4, y: 42}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Front_B_Leg
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 79b19ef355974654d88e3bf8eac5d923
+    layerID: 30
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: FBU_Leg
+    spriteName: FBU_Leg
+    isGroup: 0
+    parentIndex: 10
+    spriteID: 20e8c81f333511d45a6e3c09811328e2
+    layerID: 29
+    mosaicPosition: {x: 34, y: 16}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: FBL_Leg
+    spriteName: FBL_Leg
+    isGroup: 0
+    parentIndex: 10
+    spriteID: dc3019fced716d449a4d42fdd1b61fb4
+    layerID: 28
+    mosaicPosition: {x: 23, y: 30}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Back_B_Leg
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 3ca057f3c3b859f469baaacee7bdee01
+    layerID: 14
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: BBU_Leg
+    spriteName: BBU_Leg
+    isGroup: 0
+    parentIndex: 13
+    spriteID: a318093c3379a22448964cded5a86e20
+    layerID: 17
+    mosaicPosition: {x: 34, y: 28}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: BBL_Leg
+    spriteName: BBL_Leg
+    isGroup: 0
+    parentIndex: 13
+    spriteID: 666e929b2dca66e40983eef2a177c0f1
+    layerID: 16
+    mosaicPosition: {x: 23, y: 43}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Tail
+    spriteName: Tail
+    isGroup: 0
+    parentIndex: -1
+    spriteID: ef8611cc5198de0489c8378decf4157d
+    layerID: 33
+    mosaicPosition: {x: 4, y: 57}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  sharedRigPSDLayers: []
+  pSDLayerImportSetting: []
   generateGOHierarchy: 0
   textureAssetName: Dog Texture
   prefabAssetName: Dog Prefab
   spriteLibAssetName: Dog Sprite Lib
+  skeletonAssetName: 
   secondarySpriteTextures: []
