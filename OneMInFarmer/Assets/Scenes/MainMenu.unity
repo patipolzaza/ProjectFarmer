@@ -2879,6 +2879,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7784595747412468393, guid: 48b56809550a56442823a9d5cd9999da, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 2011907991}
     - target: {fileID: 7784595747468089136, guid: 48b56809550a56442823a9d5cd9999da, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2937,3 +2941,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48b56809550a56442823a9d5cd9999da, type: 3}
+--- !u!95 &2011907991 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7784595747468089143, guid: 48b56809550a56442823a9d5cd9999da, type: 3}
+  m_PrefabInstance: {fileID: 2011907990}
+  m_PrefabAsset: {fileID: 0}

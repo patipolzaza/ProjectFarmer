@@ -5,16 +5,8 @@ using UnityEngine.Events;
 
 public class PlayerAnimationController : MonoBehaviour
 {
-    
-    private Animator anim;
+    [SerializeField] private Animator anim;
     public bool isPlayingAnimation { get; private set; }
-    private void OnValidate()
-    {
-        if (!anim)
-        {
-            anim = GetComponent<Animator>();
-        }
-    }
 
     public void InteractAnimation()
     {

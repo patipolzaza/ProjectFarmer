@@ -17,8 +17,12 @@ public class Player : MonoBehaviour
 
   [SerializeField] private GameObject characterObject;
 
-  public Wallet wallet { get; private set; }
-  public PlayerAnimationController PlayerAnimation { get; private set; }
+  [SerializeField]
+  private Wallet _wallet = default;
+  public Wallet wallet => _wallet;
+  [SerializeField]
+  private PlayerAnimationController _playerAnimation = default;
+  public PlayerAnimationController PlayerAnimation => _playerAnimation;
 
   [SerializeField] private Transform interactableDetector;
   [SerializeField] private float interactableDetectRange = 0.85f;
@@ -28,7 +32,9 @@ public class Player : MonoBehaviour
 
   public float facingDirection { get; private set; }
 
-  public Hand playerHand { get; private set; }
+  [SerializeField]
+  private Hand _hand = default;
+  public Hand playerHand => _hand;
 
   private Rigidbody2D rb;
   [SerializeField] private UnityEvent OnInteractEvent;
@@ -39,13 +45,9 @@ public class Player : MonoBehaviour
 
   private void Awake()
   {
-    playerHand = GetComponent<Hand>();
     moveSpeedStatus = new PercentStatus(moveSpeedData.statusName, moveSpeedData);
-
     facingDirection = transform.localScale.x / Mathf.Abs(transform.localScale.x);
-
-    wallet = transform.Find("Wallet").GetComponent<Wallet>();
-    PlayerAnimation = transform.Find("PlayerCharacter").GetComponent<PlayerAnimationController>();
+    rb = GetComponent<Rigidbody2D>();
     Instance = this;
   }
 
@@ -54,25 +56,14 @@ public class Player : MonoBehaviour
     DisableMove();
   }
 
-  private void OnValidate()
-  {
-    if (!rb && GetComponent<Rigidbody2D>())
-    {
-      rb = GetComponent<Rigidbody2D>();
-      rb.isKinematic = false;
-      rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-    }
-  }
-
   private void Update()
   {
-
-    isDetectInteractable = CheckInteractableInRange();
-
     if (!canMove)
     {
       return;
     }
+
+    isDetectInteractable = CheckInteractableInRange();
 
     if (PlayerAnimation.isPlayingAnimation)
     {
@@ -232,8 +223,8 @@ public class Player : MonoBehaviour
       float velocityY = moveInput.y * moveSpeed * Time.fixedDeltaTime;
 
       velocityWorkspace.Set(velocityX, velocityY);
-      PlayerAnimation.SetRunningAnimation(velocityWorkspace);
-      rb.velocity = velocityWorkspace;
+      if(PlayerAnimation) PlayerAnimation.SetRunningAnimation(velocityWorkspace);
+      if(rb) rb.velocity = velocityWorkspace;
       if (Mathf.Abs(velocityWorkspace.magnitude) > 0.1)
       {
         SoundEffectsController.Instance.PlaySoundEffect("Walk");

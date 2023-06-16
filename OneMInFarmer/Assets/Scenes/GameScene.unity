@@ -1257,6 +1257,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterPool
       objectReference: {fileID: 0}
+    - target: {fileID: 3587019178979755763, guid: cd7a59e531a863b45a676e29ad0d3def, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3587019178979755764, guid: cd7a59e531a863b45a676e29ad0d3def, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -2540,6 +2544,10 @@ PrefabInstance:
     - target: {fileID: 8248408767884713708, guid: a7e09b0c1ae88f34da923fe4fa1f663c, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8248408767884713708, guid: a7e09b0c1ae88f34da923fe4fa1f663c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8248408767884713709, guid: a7e09b0c1ae88f34da923fe4fa1f663c, type: 3}
       propertyPath: m_RootOrder
@@ -4001,6 +4009,10 @@ PrefabInstance:
     - target: {fileID: 6769883534014683613, guid: e436a463f60a2d142b8d3e2500844f4f, type: 3}
       propertyPath: m_Name
       value: WateringPot
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769883534014683613, guid: e436a463f60a2d142b8d3e2500844f4f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6769883534014683614, guid: e436a463f60a2d142b8d3e2500844f4f, type: 3}
       propertyPath: m_RootOrder
@@ -6408,6 +6420,10 @@ PrefabInstance:
     - target: {fileID: 7641322465874520170, guid: 8fbe30feb9b505446a49ec73c356c624, type: 3}
       propertyPath: m_Name
       value: ShopForSell
+      objectReference: {fileID: 0}
+    - target: {fileID: 7641322465874520170, guid: 8fbe30feb9b505446a49ec73c356c624, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7641322465874520171, guid: 8fbe30feb9b505446a49ec73c356c624, type: 3}
       propertyPath: m_Color.b
@@ -14805,6 +14821,10 @@ PrefabInstance:
     - target: {fileID: 376363145090816847, guid: 3665162f9ded7a746ba7e7ca49fd1efe, type: 3}
       propertyPath: m_Name
       value: WaterParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 376363145090816847, guid: 3665162f9ded7a746ba7e7ca49fd1efe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 376363145090816850, guid: 3665162f9ded7a746ba7e7ca49fd1efe, type: 3}
       propertyPath: m_RootOrder
