@@ -8,8 +8,6 @@ using TMPro;
 public class Animal : PickableObject, IBuyable, ISellable
 {
     private AnimalSaveData _saveData;
-    public string prefabPath { get; private set; } = "";
-
     public Rigidbody2D rb { get; private set; }
     public Animator anim { get; private set; }
 
@@ -70,16 +68,6 @@ public class Animal : PickableObject, IBuyable, ISellable
     }
     public int GetLifespan => animalData.lifespan;
     public List<FoodType> GetEdibleFoods => animalData.edibleFoods;
-    public string GetPrefabPath
-    {
-        get
-        {
-            var guids = AssetDatabase.FindAssets($"{gameObject.name} t:GameObject", new[] { $"Assets/Resources/Prefabs/Animals/{gameObject.name}/" });
-            string path = AssetDatabase.GUIDToAssetPath(guids[0]);
-
-            return path;
-        }
-    }
 
     public void LoadAnimalData(AnimalSaveData saveData)
     {
@@ -88,7 +76,6 @@ public class Animal : PickableObject, IBuyable, ISellable
         weight = saveData.GetWeight;
         lifePoint = saveData.GetLifePoint;
         currentAgeSpan = (AgeSpan)saveData.GetAgeSpan;
-        prefabPath = saveData.GetAnimalPrefabPath;
 
         //_saveData = new AnimalSaveData(saveData);
         _saveData = saveData;
@@ -137,9 +124,6 @@ public class Animal : PickableObject, IBuyable, ISellable
             SetScale(newScale);
 
             weight = animalData.startWeight;
-
-            prefabPath = GetPrefabPath;
-
             _saveData = new AnimalSaveData(this);
         }
 

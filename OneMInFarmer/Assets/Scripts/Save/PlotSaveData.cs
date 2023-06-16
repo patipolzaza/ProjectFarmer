@@ -5,7 +5,7 @@ using UnityEditor;
 public class PlotSaveData
 {
     [SerializeField] private int _plotIndex;
-    [SerializeField] private string _seedPath;
+    [SerializeField] private string _seedName;
     [SerializeField] private int _plantStage;
     [SerializeField] private int _harvestCount;
     [SerializeField] private int _agePlant;
@@ -17,9 +17,9 @@ public class PlotSaveData
     {
         get
         {
-            if (_seedPath != null && _seedPath != string.Empty)
+            if (_seedName != null && _seedName != string.Empty)
             {
-                SeedData seedData = AssetDatabase.LoadAssetAtPath<SeedData>(_seedPath);
+                SeedData seedData = Resources.Load<SeedData>($"ItemData/{_seedName}");
                 return seedData;
             }
             else
@@ -43,7 +43,7 @@ public class PlotSaveData
     public void UpdateData(Plot plot)
     {
         _plotIndex = plot.GetPlotIndex;
-        _seedPath = plot.seed?.GetPath;
+        _seedName = plot.seed?.ItemName ?? "";
         _plantStage = plot.plantStage;
         _harvestCount = plot.countHarvest;
         _agePlant = plot.agePlant;

@@ -71,7 +71,7 @@ public class DayResultManager : MonoBehaviour
     private IEnumerator InitialSetup()
     {
         Instance = this;
-        yield return new WaitUntil(() => ShopForSell.Instance != null);
+        yield return new WaitUntil(() => ShopForSell.Instance);
         shop = ShopForSell.Instance;
         yield return new WaitUntil(() => DebtManager.Instance);
         isReadied = true;

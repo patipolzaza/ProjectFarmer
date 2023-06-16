@@ -13,6 +13,4 @@ public class SeedData : ItemData
     public int countHarvest = 1;
     [Min(1)]
     public Product product;
-
-    public string GetPath => AssetDatabase.GetAssetPath(this);
 }
